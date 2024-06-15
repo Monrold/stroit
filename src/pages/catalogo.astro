@@ -1,0 +1,570 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { contentfulClient } from "../lib/contentful";
+import type { Surfaces } from "../lib/contentful";
+import dektonLogo from "../images/dekton-logo.png";
+import silestoneLogo from "../images/silestone-logo.svg";
+import sensaLogo from "../images/sensa-logo.png";
+import pulidoAcabado from "../images/catalogo/filters/acabados/pulido.jpg";
+import suedeAcabado from "../images/catalogo/filters/acabados/suede.jpg";
+import mateAcabado from "../images/catalogo/filters/acabados/mate.jpg";
+import velvetAcabado from "../images/catalogo/filters/acabados/velvet.jpg";
+import gripAcabado from "../images/catalogo/filters/acabados/grip.jpg";
+import otroAcabado from "../images/catalogo/filters/acabados/other.jpg";
+import naturalveteadoEstilo from "../images/catalogo/filters/estilos/natural-veteado.jpg";
+import naturalirregularEstilo from "../images/catalogo/filters/estilos/natural-irregular.jpg";
+import naturalgranuladoEstilo from "../images/catalogo/filters/estilos/natural-granulado.jpg";
+import metalicoEstilo from "../images/catalogo/filters/estilos/metalico.jpg";
+import solidoEstilo from "../images/catalogo/filters/estilos/solido.jpg";
+import industrialEstilo from "../images/catalogo/filters/estilos/industrial.jpg";
+import otherEstilo from "../images/catalogo/filters/estilos/organico.jpg";
+import bgSomnia from "../images/somnia.jpg";
+
+const entries = await contentfulClient.getEntries<Surfaces>({
+    content_type: "stroit",
+});
+
+const posts = entries.items.map((item) => {
+    const {
+        nombre,
+        marca,
+        coleccion,
+        espesores,
+        acabados,
+        medidas,
+        tonos,
+        estilo,
+        imagen,
+        promocion,
+    } = item.fields;
+
+    // Convertir el valor booleano a cadena "true" o "false"
+    const promocionStr = promocion ? "true" : "false";
+
+    return {
+        nombre,
+        marca,
+        coleccion,
+        espesores,
+        acabados,
+        medidas,
+        tonos,
+        estilo,
+        imagen,
+        promocion: promocionStr, // Usar la cadena en lugar del booleano
+        slug: `${item.fields.nombre}`,
+    };
+});
+
+const somnia = "https://pub-81aca52011284a96b910aedeefde00fe.r2.dev/somnia.webp";
+---
+
+<style define:vars={{ 
+	somnia: `url("${somnia}")`,
+	}}>
+    .block {
+        display: block;
+    }
+    .hidden {
+        display: none;
+    }
+    .rotate-180 {
+        transform: rotate(180deg);
+        transition: transform 0.3s;
+    }
+    #filters {
+        width: calc(130px * 6);
+    }
+    .arrowRight {
+        animation: 1.2s infinite ease arrowRight;
+    }
+    @keyframes arrowRight {
+        0% {
+            transform: translateX(0);
+        }
+        100% {
+            transform: translateX(5px);
+        }
+    }
+
+    @media screen and (max-width: 640px) {
+    #marcasFilters {
+        width: calc(205px * 3);
+    }
+}
+
+@media screen and (max-width:  1080px) {
+    #tonosFilters {
+        width: calc(147px * 8);
+    }
+}
+
+@media screen and (max-width:  1080px) {
+    #acabadosFilters {
+        width: calc(146px * 6);
+    }
+}
+
+@media screen and (max-width:  1080px) {
+    #estiloFilters {
+        width: calc(146px * 7);
+    }
+}
+
+.bgImage{
+    background-image: var(--somnia);
+    background-size: cover;
+    background-position: center;
+}
+
+</style>
+<Layout>
+    <main class="">
+        <section class="bgImage h-56 md:h-72 w-full mb-4"></section>
+        <section
+            class="mx-2 bg-zinc-900 px-8 py-4 rounded-full md:mx-auto max-w-max"
+        >
+            <div class="overflow-x-scroll snap-x snap-mandatory">
+                <div
+                    class="flex justify-center space-x-8 text-white"
+                    id="filters"
+                >
+                    <p>Filtros |</p>
+                    <button
+                        class="flex items-center space-x-1 hover:opacity-75"
+                        id="marcaBtn"
+                    >
+                        <p>Marcas</p>
+                        <svg
+                            class="fill-white w-3 h-3"
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 448 512"
+                            ><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                            <path
+                                d="M201.4 137.4c12.5-12.5 32.8-12.5 45.3 0l160 160c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L224 205.3 86.6 342.6c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l160-160z"
+                            ></path></svg
+                        >
+                    </button>
+                    <button
+                        class="flex space-x-1 items-center hover:opacity-75"
+                        id="tonoBtn"
+                    >
+                        <p>Tonos</p><svg
+                            class="fill-white w-3 h-3"
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 448 512"
+                            ><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                            <path
+                                d="M201.4 137.4c12.5-12.5 32.8-12.5 45.3 0l160 160c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L224 205.3 86.6 342.6c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l160-160z"
+                            ></path></svg
+                        >
+                    </button>
+                    <button
+                        class="flex space-x-1 items-center hover:opacity-75"
+                        id="acabadoBtn"
+                        ><p>Acabados</p><svg
+                            class="fill-white w-3 h-3"
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 448 512"
+                            ><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                            <path
+                                d="M201.4 137.4c12.5-12.5 32.8-12.5 45.3 0l160 160c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L224 205.3 86.6 342.6c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l160-160z"
+                            ></path></svg
+                        ></button
+                    >
+                    <button
+                        class="flex space-x-1 items-center hover:opacity-75"
+                        id="estiloBtn"
+                        ><p>Estilos</p><svg
+                            class="fill-white w-3 h-3"
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 448 512"
+                            ><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                            <path
+                                d="M201.4 137.4c12.5-12.5 32.8-12.5 45.3 0l160 160c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L224 205.3 86.6 342.6c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l160-160z"
+                            ></path></svg
+                        ></button
+                    >
+                    <button class="hover:opacity-75" id="promocionBtn"
+                        >🔥 Promociones</button
+                    >
+                    <button class="hover:opacity-75" id="resetBtn"
+                        >Mostrar todo</button
+                    >
+                </div>
+            </div>
+        </section>
+        <div
+            class="flex justify-center text-white text-xs space-x-2 mb-4 mt-4 lg:hidden"
+        >
+            <p>Desliza para ver todos los filtros</p>
+            <p class="arrowRight">&rarr;</p>
+        </div>
+        <section class="flex justify-center text-zinc-300 pb-5">     
+        <div
+            class="dropdown-list button-list  md:space-x-12 hidden  overflow-x-scroll snap-x md:overflow-auto md:snap-none mt-4"
+            id="marcaButtonList"
+        >
+        <div id="marcasFilters">
+            <button class="marca-filter hover:opacity-75 px-8 bg-zinc-900 p-14 md:p-20 mx-2 focus:opacity-70" data-marca="dekton">
+                <img class="w-32" src={dektonLogo.src} alt="Logo dekton">
+            </button>
+            <button class="marca-filter hover:opacity-75 px-8 bg-zinc-900 p-14 md:p-20 mx-2 focus:opacity-70" data-marca="silestone"
+                >
+                <img class="w-32" src={silestoneLogo.src} alt="Logotipo silestone">
+                </button
+            >
+            <button class="marca-filter hover:opacity-75 px-8 bg-zinc-900 p-14 md:p-20 mx-2 focus:opacity-70" data-marca="sensa">
+                <img class="w-28"src={sensaLogo.src} alt="Logotipo Sensa">
+            </button>
+        </div>
+        </div>
+        <div
+            class="dropdown-list button-list overflow-x-scroll snap-x hidden mt-4"
+            id="tonoButtonList"
+        >
+            <div id="tonosFilters">
+                <button class="tono-filter hover:opacity-75 focus:opacity-75 mx-2" data-tono="Crema">
+                    <div class="bg-amber-50 w-32 h-32"></div>
+                    <p>Crema</p>
+
+                </button>
+                <button class="tono-filter hover:opacity-75 focus:opacity-75 mx-2" data-tono="Blanco">
+                    <div class="bg-white w-32 h-32"></div>
+                    <p>Blanco</p>
+                </button>
+                <button class="tono-filter hover:opacity-75 focus:opacity-75 mx-2" data-tono="Gris">
+                    <div class="bg-zinc-300 w-32 h-32"></div>
+                    <p>Gris</p>
+                </button>
+                <button class="tono-filter hover:opacity-75 focus:opacity-75 mx-2" data-tono="Azul">
+                    <div class="bg-cyan-800 w-32 h-32"></div>
+                    <p>Azul</p>
+                </button>
+                <button class="tono-filter hover:opacity-75 focus:opacity-75 mx-2" data-tono="Negro">
+                    <div class="bg-black w-32 h-32"></div>
+                    <p>Negro</p>
+                </button>
+                <button class="tono-filter hover:opacity-75 focus:opacity-75 mx-2" data-tono="Marrón">
+                    <div class="bg-[#6e5c4c] w-32 h-32"></div>
+                    <p>Marrón</p>
+                </button>
+                <button class="tono-filter hover:opacity-75 focus:opacity-75 mx-2" data-tono="Rojo">
+                    <div class="bg-rose-900 w-32 h-32"></div>
+                    <p>Rojo</p>
+                </button>
+                <button class="tono-filter hover:opacity-75 focus:opacity-75 mx-2" data-tono="Otro">
+                    <div class="border border-gray-200 w-32 h-32"></div>
+                    <p>Otro</p>
+                </button>
+            </div>
+        </div>
+        <div
+            class="dropdown-list button-list overflow-x-scroll snap-x space-x-4 hidden mt-4"
+            id="acabadoButtonList"
+        >
+            <div id="acabadosFilters">
+                <button class="acabado-filter mx-2 hover:opacity-75 focus:opacity-75" data-acabado="Pulido">
+                <img class="w-32 h-32" src={pulidoAcabado.src} alt="">
+                <p>Pulido</p>
+                </button>
+                <button class="acabado-filter mx-2 hover:opacity-75 focus:opacity-75" data-acabado="Suede">
+                <img class="w-32 h-32" src={suedeAcabado.src} alt="">
+                <p>Suede</p>
+                </button>
+                <button class="acabado-filter mx-2 hover:opacity-75 focus:opacity-75" data-acabado="Mate">
+                <img class="w-32 h-32" src={mateAcabado.src} alt="">
+                <p>Mate</p>
+                </button>
+                <button class="acabado-filter mx-2 hover:opacity-75 focus:opacity-75" data-acabado="Velvet">
+                <img class="w-32 h-32" src={velvetAcabado.src} alt="">
+                <p>Velvet</p>
+                </button>
+                <button class="acabado-filter mx-2 hover:opacity-75 focus:opacity-75" data-acabado="Grip">
+                <img class="w-32 h-32" src={gripAcabado.src} alt="">
+                <p>Grip</p>
+                </button>
+                <button class="acabado-filter mx-2 hover:opacity-75 focus:opacity-75" data-acabado="Otros">
+                <img class="w-32 h-32" src={otroAcabado.src} alt="">
+                <p>Otros</p>
+                </button>
+            </div>
+        </div>
+        <div
+            class="dropdown-list button-list space-x-4 hidden mt-4 overflow-x-scroll snap-x"
+            id="estiloButtonList"
+        >
+        <div id="estiloFilters">
+            <button class="estilo-filter hover:opacity-75 focus:opacity-75 mx-2" data-estilo="Natural veteado"
+                >
+                <img class="w-32 h-32" src={naturalveteadoEstilo.src} alt="">
+                <p>Natural veteado</p>
+                </button
+            >
+            <button class="estilo-filter hover:opacity-75 focus:opacity-75 mx-2" data-estilo="Natural granulado"
+                >
+                <img class="w-32 h-32" src={naturalgranuladoEstilo.src} alt="">
+                <p>Natural granulado</p>
+                </button
+            >
+            <button class="estilo-filter hover:opacity-75 focus:opacity-75 mx-2" data-estilo="Natural irregular"
+                >
+                <img class="w-32 h-32" src={naturalirregularEstilo.src} alt="">
+                <p>Natural irregular</p>
+                </button
+            >
+            <button class="estilo-filter hover:opacity-75 focus:opacity-75 mx-2" data-estilo="Industrial"
+                >
+                <img class="w-32 h-32" src={industrialEstilo.src} alt="">
+                <p>Industrial</p>
+                </button
+            >
+            <button class="estilo-filter hover:opacity-75 focus:opacity-75 mx-2" data-estilo="Sólido"
+                >
+                <img class="w-32 h-32" src={solidoEstilo.src} alt="">
+                <p>Sólido</p>
+                </button
+            >
+            <button class="estilo-filter hover:opacity-75 focus:opacity-75 mx-2" data-estilo="Metálico"
+                >
+                <img class="w-32 h-32" src={metalicoEstilo.src} alt="">
+                <p>Metálico</p>
+                </button
+            >
+            <button class="estilo-filter hover:opacity-75 focus:opacity-75 mx-2" data-estilo="Otro"
+                >
+                <img class="w-32 h-32" src={otherEstilo.src} alt="">
+                <p>Otro</p>
+                </button
+            >
+        </div>
+        </div>
+    </section>
+    </main>
+    <section class="max-w-screen-xl mx-auto">
+        <ul id="all" class="flex flex-wrap">
+            {
+                posts.map((item) => (
+                    <li
+                        class="w-1/2 sm:w-1/3 lg:w-1/4 px-2 my-4 post-item"
+                        data-marca={item.marca}
+                        data-tono={item.tonos[0]}
+                        data-acabado={item.acabados[0]}
+                        data-estilo={item.estilo[0]}
+                        data-promocion={item.promocion}
+                    >
+                        {item.imagen?.[0]?.fields?.file?.url && (
+                            <a class="text-white hover:opacity-80" href={`/posts/${item.slug}/`}>
+                                <img
+                                    class="object-cover h-40 md:h-72 w-72"
+                                    src={item.imagen[0].fields.file.url}
+                                    alt=`textura de ${item.marca} ${item.nombre}`
+                                />
+                                <div class="mt-2">
+                                    <div class="flex space-x-2">
+                                        {item.promocion === "true" && <p>🔥</p>}
+                                        <h3 class="">{item.nombre}</h3>
+                                    </div>
+                                    <div class="flex text-[10px] md:text-xs ">
+                                        <p class="capitalize mr-1">{item.marca}</p>
+                                        <p>|</p>
+                                        <p class="ml-1">{item.coleccion}</p>
+                                    </div>
+                                </div>
+                            </a>
+                        )}
+                    </li>
+                ))
+            }
+        </ul>
+    </section>
+</Layout>
+<script>
+    window.addEventListener("DOMContentLoaded", function () {
+        const marcaBtn = document.getElementById("marcaBtn");
+        const tonoBtn = document.getElementById("tonoBtn");
+        const acabadoBtn = document.getElementById("acabadoBtn");
+        const estiloBtn = document.getElementById("estiloBtn");
+        const promocionBtn = document.getElementById("promocionBtn");
+
+        const marcaListButtons = document.getElementById("marcaButtonList");
+        const tonoListButtons = document.getElementById("tonoButtonList");
+        const acabadoListButtons = document.getElementById("acabadoButtonList");
+        const estiloListButtons = document.getElementById("estiloButtonList");
+
+        const dropdownOne = (list, svg) => {
+            const isOpen = !list.classList.contains("hidden");
+
+            // Cierra todos los dropdowns si el actual no está abierto
+            if (!isOpen) {
+                closeAllDropdowns();
+            }
+
+            // Abre o cierra el dropdown actual
+            list.classList.toggle("hidden");
+            svg.classList.toggle("rotate-180");
+
+            // Cierra todos los dropdowns si el actual ya estaba abierto
+            if (isOpen) {
+                closeAllDropdowns();
+            }
+        };
+
+        const closeAllDropdowns = () => {
+            const dropdownLists = document.querySelectorAll(".dropdown-list");
+            const svgs = document.querySelectorAll("svg.rotate-180");
+            dropdownLists.forEach((list) => list.classList.add("hidden"));
+            svgs.forEach((svg) => svg.classList.remove("rotate-180"));
+        };
+
+        marcaListButtons.classList.add("dropdown-list");
+        tonoListButtons.classList.add("dropdown-list");
+        acabadoListButtons.classList.add("dropdown-list");
+        estiloListButtons.classList.add("dropdown-list");
+
+        marcaBtn.addEventListener("click", (event) => {
+            event.stopPropagation();
+            const svg = marcaBtn.querySelector("svg");
+            dropdownOne(marcaListButtons, svg);
+        });
+
+        tonoBtn.addEventListener("click", (event) => {
+            event.stopPropagation();
+            const svg = tonoBtn.querySelector("svg");
+            dropdownOne(tonoListButtons, svg);
+        });
+
+        acabadoBtn.addEventListener("click", (event) => {
+            event.stopPropagation();
+            const svg = acabadoBtn.querySelector("svg");
+            dropdownOne(acabadoListButtons, svg);
+        });
+
+        estiloBtn.addEventListener("click", (event) => {
+            event.stopPropagation();
+            const svg = estiloBtn.querySelector("svg");
+            dropdownOne(estiloListButtons, svg);
+        });
+
+        // Evitar que se cierre el dropdown al hacer clic en elementos de la lista
+        marcaListButtons.addEventListener("click", (event) => {
+            event.stopPropagation();
+        });
+
+        tonoListButtons.addEventListener("click", (event) => {
+            event.stopPropagation();
+        });
+
+        acabadoListButtons.addEventListener("click", (event) => {
+            event.stopPropagation();
+        });
+
+        estiloListButtons.addEventListener("click", (event) => {
+            event.stopPropagation();
+        });
+
+        // Cerrar los dropdowns cuando se hace clic en cualquier otra parte de la página
+        document.addEventListener("click", () => {
+            closeAllDropdowns();
+        });
+
+        const filterPosts = (filters) => {
+            const postItems = document.querySelectorAll(".post-item");
+            postItems.forEach((item) => {
+                const marca = item.getAttribute("data-marca");
+                const tono = item.getAttribute("data-tono");
+                const acabado = item.getAttribute("data-acabado");
+                const estilo = item.getAttribute("data-estilo");
+                const promocionStr = item.getAttribute("data-promocion");
+
+                // Convertir la cadena de texto a un valor booleano
+                const promocion = promocionStr === "true";
+
+                if (
+                    (filters.marca === "all" || marca === filters.marca) &&
+                    (filters.tono === "all" || tono === filters.tono) &&
+                    (filters.acabado === "all" ||
+                        acabado === filters.acabado) &&
+                    (filters.estilo === "all" || estilo === filters.estilo) &&
+                    (filters.promocion === "all" ||
+                        (filters.promocion === "true" && promocion) ||
+                        (filters.promocion === "false" && !promocion))
+                ) {
+                    item.classList.add("flex");
+                    item.classList.remove("hidden");
+                } else {
+                    item.classList.remove("flex");
+                    item.classList.add("hidden");
+                }
+            });
+        };
+
+        let selectedFilters = {
+            marca: "all",
+            tono: "all",
+            acabado: "all",
+            estilo: "all",
+            promocion: "all",
+        };
+
+        const marcaButtons = document.querySelectorAll(".marca-filter");
+        const tonoButtons = document.querySelectorAll(".tono-filter");
+        const acabadoButtons = document.querySelectorAll(".acabado-filter");
+        const estiloButtons = document.querySelectorAll(".estilo-filter");
+
+        marcaButtons.forEach((button) => {
+            button.addEventListener("click", function () {
+                selectedFilters.marca = this.getAttribute("data-marca");
+                filterPosts(selectedFilters);
+            });
+        });
+
+        tonoButtons.forEach((button) => {
+            button.addEventListener("click", function () {
+                selectedFilters.tono = this.getAttribute("data-tono");
+                filterPosts(selectedFilters);
+            });
+        });
+
+        acabadoButtons.forEach((button) => {
+            button.addEventListener("click", function () {
+                selectedFilters.acabado = this.getAttribute("data-acabado");
+                filterPosts(selectedFilters);
+            });
+        });
+
+        estiloButtons.forEach((button) => {
+            button.addEventListener("click", function () {
+                selectedFilters.estilo = this.getAttribute("data-estilo");
+                filterPosts(selectedFilters);
+            });
+        });
+
+        promocionBtn.addEventListener("click", function () {
+            console.log("Botón de promociones clicado");
+            selectedFilters.promocion =
+                selectedFilters.promocion === "all" ? "true" : "all";
+            filterPosts(selectedFilters);
+        });
+
+        const resetBtn = document.getElementById("resetBtn");
+
+        resetBtn.addEventListener("click", function () {
+            // Restablecer los filtros seleccionados a "all"
+            selectedFilters = {
+                marca: "all",
+                tono: "all",
+                acabado: "all",
+                estilo: "all",
+                promocion: "all",
+            };
+
+            // Mostrar todos los elementos ocultos
+            const postItems = document.querySelectorAll(".post-item");
+            postItems.forEach((item) => {
+                item.classList.add("block");
+                item.classList.remove("hidden");
+            });
+        });
+    });
+</script>

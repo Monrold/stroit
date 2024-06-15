@@ -1,0 +1,218 @@
+---
+import Layout from "../layouts/Layout.astro";
+import silestoneVideo from "../images/silestone/silestone-texture.mp4";
+import logoSilestone from "../images/silestone-logo.svg";
+import bosque from "../images/silestone/planet.png";
+import innovador from "../images/silestone/innovador.png";
+import hybridq from "../images/silestone/hybriq.png";
+import silestoneIcon from "../images/silestone/what-is-hibriq-dk.avif";
+import solarImage from "../images/silestone/silestone-solar-plant.avif";
+import wcImage from "../images/silestone/wc-sliestone.avif";
+import kitchen from "../images/silestone/silestone-kitchen.avif";
+import hybridqTec from "../images/silestone/silestone-hybriq.jpg";
+import format from "../images/silestone/silestone-format.png";
+import crystaline from "../images/silestone/icon-crystalline-silica.avif";
+import water from "../images/silestone/icon-reused-water.avif";
+import electric from "../images/silestone/icon-electric-energy.avif";
+import recicled from "../images/silestone/icon-recicled-materials.avif";
+import cocina from '../images/silestone/cocinas.avif';
+import banos from '../images/silestone/banos.avif';
+import mobiliario from '../images/silestone/mobiliario.avif';
+---
+
+<style define:vars={{ hybriq: `url("${hybridq.src}")` }}>
+    body {
+        background-color: black;
+    }
+    .hyq {
+        background-image: var(--hybriq);
+        background-size: cover;
+        background-position: top;
+        height: 50vh;
+        width: 90%;
+        margin: auto;
+    }
+</style>
+<Layout title="">
+    <main class="text-white">
+        <section>
+            <div class="relative">
+                <video
+                    autoplay
+                    muted
+                    loop
+                    width="100%"
+                    height="100px"
+                    src={silestoneVideo}></video>
+                <div
+                    class="absolute inset-0 m-auto flex flex-col justify-center items-center text-white text-center py-20"
+                >
+                    <img class="w-48 lg:w-72" src={logoSilestone.src} alt="" />
+                    <h3 class="text-2xl md:text-3xl pt-4">
+                        La superficie híbrida de minerales premiun
+                    </h3>
+                    <p class="hidden sm:block">
+                        fabricada con la exclusiva e innovadora tecnología
+                        HybriQ®.
+                    </p>
+                </div>
+            </div>
+        </section>
+        <section class="my-12 max-w-screen-xl mx-auto">
+            <h2 class="text-4xl text-white text-center">
+                Sostenible y pionera
+            </h2>
+            <div class="flex flex-col md:flex-row mt-6">
+                <div class="basis-1/2 flex flex-col px-2 py-2 items-center">
+                    <img src={bosque.src} alt="" />
+                    <div class="text-white text-center py-2">
+                        <h3 class="text-2xl">Cuidando el planeta</h3>
+                        <p class="mx-6">
+                            Sostenibilidad e innovación en una superficie de
+                            minerales y materiales reciclados, de gran
+                            profundidad de color y rendimiento.
+                        </p>
+                    </div>
+                </div>
+                <div class="basis-1/2 flex flex-col px-2 py-2 items-center">
+                    <img src={innovador.src} alt="" />
+                    <div class="text-white text-center py-2">
+                        <h3 class="text-2xl">Innovadora</h3>
+                        <p class="mx-6">
+                            Silestone ha marcado hitos de innovación a lo largo
+                            de su historia y continuamos mejorando para llevar
+                            inspiración a tu vida.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section>
+            <div class="hyq"></div>
+            <div class="mx-4">
+                <div class="mt-14 mb-6">
+                    <h2 class="text-2xl text-left sm:text-center md:text-4xl">
+                        Diseños de cocinas, baños y superficies para el hogar
+                    </h2>
+                </div>
+                <div
+                    class="text-white max-w-screen-xl mx-auto px-5 flex overflow-x-scroll snap-x snap-mandatory"
+                >
+                    <div class="w-[400wv] sm:w-[250vw] md:w-[w-100] flex">
+                        <div
+                            class="w-[90vw] sm:w-[70vw] md:w-[50vw] lg:w-[25vw] snap-center mx-2"
+                        >
+                            <img
+                                class="w-full"
+                                src={solarImage.src}
+                                alt=""
+                            /><div class="pr-4">
+                                <h3 class="text-2xl my-4">
+                                    Innovación sostenible
+                                </h3>
+                                <p>
+                                    Sostenibilidad e innovación se unen en
+                                    superficies compuestas de minerales y
+                                    materiales reciclados.
+                                </p>
+                            </div>
+                        </div>
+                        <div
+                            class="w-[90vw] sm:w-[70vw] md:w-[50vw] lg:w-[25vw] snap-center mx-2"
+                        >
+                            <img class="w-full" src={wcImage.src} alt="" /><div
+                                class="pr-4"
+                            >
+                                <h3 class="text-2xl my-4">
+                                    Baños que inspiran
+                                </h3>
+                                <p>
+                                    Espacios únicos y personalizados dotados de
+                                    colores y texturas en perfecto equilibrio,
+                                    en los que prima la calidad.
+                                </p>
+                            </div>
+                        </div>
+                        <div
+                            class="w-[90vw] sm:w-[70vw] md:w-[50vw] lg:w-[25vw] snap-center mx-2"
+                        >
+                            <img class="w-full" src={kitchen.src} alt="" /><div
+                                class="pr-4"
+                            >
+                                <h3 class="text-2xl my-4">
+                                    Cocinas para vivir
+                                </h3>
+                                <p>
+                                    Hemos llegado a millones de hogares en más
+                                    de 100 países, creando experiencias que
+                                    mejoran la vida de las personas.
+                                </p>
+                            </div>
+                        </div>
+                        <div
+                            class="w-[90vw] sm:w-[70vw] md:w-[50vw] lg:w-[25vw] snap-center mx-2"
+                        >
+                            <img
+                                class="w-full"
+                                src={hybridqTec.src}
+                                alt=""
+                            /><div class="pr-4">
+                                <h3 class="text-2xl my-4">
+                                    Tecnología revolucionaria
+                                </h3>
+                                <p>
+                                    Hybriq+® reduce drásticamente el contenido
+                                    de sílice cristalina en la composición de
+                                    Silestone®, mezclando minerales de primera
+                                    calidad con materiales reciclados para crear
+                                    una nueva categoría de producto: Superficies
+                                    Minerales Hybriq®.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section>
+            <div class="max-w-screen-xl mx-auto">
+                <div class="flex-col py-8 sm:flex-row md:flex">
+                    <div class="basis-1/2">
+                        <img class="px-4" src={format.src} alt="" />
+                    </div>
+                    <div class="basis-1/2 mx-auto my-auto lg:pl-20 px-4">
+                        <h3 class="text-2xl py-4">
+                            Características de la tecnología Hybriq+®
+                        </h3>
+                        <div class="">
+                            <div class="flex py-2">
+                                <img class="object-contain w-2.5 mr-5" src={crystaline.src} alt="" />
+                                <p>Hasta un 10% / 40% de sílice cristalina</p>
+                            </div>
+                            <div class="flex py-2">
+                                <img class="object-contain w-4 mr-4" src={water.src} alt="" />
+                                <p>100% agua reciclada</p>
+                            </div>
+                            <div class="flex py-2">
+                                <img class="object-contain w-3 mr-4" src={electric.src} alt="" />
+                                <p>100 % Energía eléctrica renovable</p>
+                            </div>
+                            <div class="flex py-2">
+                                <img class="object-contain w-2 mr-5" src={recicled.src} alt="" />
+                                <p>Mínimo 20% de materiales reciclados</p>
+                            </div>
+                        </div>
+                        <div class="pt-6">
+                            <h3 class="text-2xl">Formatos que se adaptan a tu vida</h3>
+                            <div class="py-4">
+                                <p class="py-2">Jumbo: 3250 x 1590 mm Estándar: 3060 x 1440 mm</p>
+                                <p>Grosores: 12mm, 20mm y 30mm</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </section>
+    </main>
+</Layout>

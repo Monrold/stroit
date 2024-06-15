@@ -1,0 +1,305 @@
+---
+import { contentfulClient } from "../../lib/contentful";
+import type { Surfaces } from "../../lib/contentful";
+import Layout from "../../layouts/Layout.astro";
+import Silestone from "../silestone.astro";
+
+export async function getStaticPaths() {
+  const entries = await contentfulClient.getEntries<Surfaces>({
+    content_type: "stroit",
+  });
+
+  const pages = entries.items.map((item) => ({
+    params: { slug: item.fields.nombre },
+    props: {
+      nombre: item.fields.nombre,
+      marca: item.fields.marca,
+      coleccion: item.fields.coleccion,
+      acabados: item.fields.acabados,
+      medidas: item.fields.medidas,
+      estilo: item.fields.estilo,
+      tonos: item.fields.tonos,
+      espesores: item.fields.espesores,
+      imagen: item.fields.imagen,
+      promocion: item.fields.promocion,
+    },
+  }));
+  return pages;
+}
+
+const {
+  nombre,
+  marca,
+  coleccion,
+  acabados,
+  medidas,
+  estilo,
+  tonos,
+  espesores,
+  imagen,
+  promocion,
+} = Astro.props;
+---
+
+<style>
+  .circle-button.active {
+    background-color: white;
+  }
+  @media screen and (max-width: 768px) {
+    #silestoneVentajas {
+      width: calc(300px * 4);
+    }
+  }
+</style>
+
+<Layout>
+  <main class="max-w-screen-xl mx-auto">
+    <section class="text-white lg:flex lg:px-8 pb-4 lg:pb-0 lg:py-10 relative">
+      <div class="lg:w-2/3 relative">
+        <div
+          class="relative overflow-x-scroll scroll-container snap-x snap-mandatory"
+        >
+          <div class="flex" id="photosItems">
+            {
+              imagen[1].fields.file.url && (
+                <img
+                  class="snap-center mx-1"
+                  src={imagen[1].fields.file.url}
+                  alt=""
+                />
+              )
+            }
+            {
+              imagen[0].fields.file.url && (
+                <img
+                  class="snap-center mx-1"
+                  src={imagen[0].fields.file.url}
+                  alt=""
+                />
+              )
+            }
+          </div>
+        </div>
+        <div
+          class="absolute bottom-6 left-1/2 transform -translate-x-1/2 flex space-x-2"
+        >
+          <button
+            class="circle-button w-4 h-4 rounded-full border border-white cursor-pointer"
+            onclick="changeImage(0)"></button>
+          <button
+            class="circle-button w-4 h-4 rounded-full border border-white cursor-pointer"
+            onclick="changeImage(1)"></button>
+        </div>
+      </div>
+      <div
+        class="w-full lg:w-1/3 px-8 mt-4 lg:mt-0 flex flex-col justify-center"
+      >
+        <div class="hidden lg:flex text-zinc-400 space-x-1 text-xs mb-2">
+          <a href="/" class="hover:text-zinc-200">Stroit Surfaces</a>
+          <p>></p>
+          <a href="/catalogo" class="hover:text-zinc-200">Catálogo</a>
+          <p>></p>
+          <p>{marca}</p>
+          <p>></p>
+          <p>{nombre}</p>
+        </div>
+        {promocion && <p>🔥 En promoción</p>}
+        <h1 class="text-4xl">{nombre}</h1>
+        <div class="flex space-x-1">
+          <p class="capitalize">{marca}</p>
+          <p>|</p>
+          <p>{coleccion}</p>
+        </div>
+        <div class="mt-4">
+          <h3 class="text-xl border-blue-50 border-b pb-1">
+            Acabados disponibles
+          </h3>
+          <ul class="flex space-x-1 font-thin my-2">
+            {acabados[0] && <li>{acabados[0]} </li>}
+            {acabados[1] && <li>| {acabados[1]}</li>}
+            {acabados[2] && <li>| {acabados[2]}</li>}
+            {acabados[3] && <li>| {acabados[3]}</li>}
+            {acabados[4] && <li>| {acabados[4]}</li>}
+          </ul>
+        </div>
+        <div class="mt-4">
+          <h3 class="text-xl border-blue-50 border-b pb-1">
+            Espesores disponibles
+          </h3>
+          <ul class="font-thin my-2">
+            {espesores[0] && <li>{espesores[0]}</li>}
+            {espesores[1] && <li>{espesores[1]}</li>}
+            {espesores[2] && <li>{espesores[2]}</li>}
+            {espesores[3] && <li>{espesores[3]}</li>}
+          </ul>
+        </div>
+        <div class="mt-4">
+          <h3 class="text-xl border-blue-50 border-b pb-1">
+            Formatos disponibles
+          </h3>
+          <ul class="font-thin my-2">
+            {medidas[0] && <li>{medidas[0]}</li>}
+            {medidas[1] && <li>{medidas[1]}</li>}
+            {medidas[2] && <li>{medidas[2]}</li>}
+            {medidas[3] && <li>{medidas[3]}</li>}
+          </ul>
+        </div>
+        <div class="mt-4">
+          <a
+            class="flex ring-1 p-4 justify-center ring-zinc-400 space-x-1"
+            href=""
+          >
+            <p>Cotizar ahora</p>
+            <p>&rarr;</p></a
+          >
+          {
+            promocion && (
+              <p class="text-xs text-zinc-300 mt-2">
+                Pregunta para que formato espesor y acabado aplica la promoción.
+              </p>
+            )
+          }
+        </div>
+      </div>
+    </section>
+    <section class="px-8 my-10 space-y-3">
+      <h3 class="text-white">Detalles de la tabla completa {nombre}</h3>
+      <div class="">
+        <img
+          class="object-cover w-full sm:h-96"
+          src={imagen[0].fields.file.url}
+          alt=""
+        />
+      </div>
+    </section>
+    <section></section>
+    <section class="px-6 text-white">
+      <div class="flex space-x-1">
+        <p>¿Por qué elegir</p>
+        <p class="capitalize">{marca}</p>
+        <p>{nombre}?</p>
+      </div>
+      {
+        marca == "silestone" && (
+          <>
+            <div class="md:flex mt-4 text-zinc-200">
+              <p class="my-2 md:w-1/2 md:p-4">
+                Silestone es una superficie híbrida de minerales y materiales
+                reciclados capaz de aportar color y textura a tu espacio.
+                Gracias a su exclusiva e innovadora tecnología HybriQ +, el
+                mantenimiento es mínimo y se garantiza una alta resistencia a
+                las manchas y rayados.
+              </p>
+              <p class="my-2 md:w-1/2 md:p-4">
+                Desde su nacimiento, Silestone® ha marcado las tendencias más
+                significativas en su categoría, transformado el mundo de las
+                encimeras de cocina, siendo hoy un referente en el diseño
+                interior. Una vez más, volvemos a cambiarlo todo.
+              </p>
+            </div>
+            <div class="overflow-x-scroll snap-x snap-mandatory mt-4">
+              <div class="flex" id="silestoneVentajas">
+                <div class="w-1/4 snap-center mx-1">
+                  <img src="" alt="" />
+                  <h3>Altamente resistente al Rayado</h3>
+                  <p>El uso y el desgaste diarios no rayan a Silestone.</p>
+                </div>
+                <div class="w-1/4 snap-center mx-1">
+                  <img src="" alt="" />
+                  <h3>Resistente a las Manchas</h3>
+                  <p>
+                    Su baja porosidad hace que sea altamente resistente a las
+                    manchas.
+                  </p>
+                </div>
+                <div class="w-1/4 snap-center mx-1">
+                  <img src="" alt="" />
+                  <h3>Gran resistencia a los impactos</h3>
+                  <p>Alta resistencia a los impactos y golpes diarios.</p>
+                </div>
+                <div class="w-1/4 snap-center mx-1">
+                  <img src="" alt="" />
+                  <h3>Recistencia al Ácido</h3>
+                  <p>
+                    La baja porosidad de Silestone evita que de dañe por manchas
+                    de ácido
+                  </p>
+                </div>
+              </div>
+            </div>
+          </>
+        )
+      }
+      {
+        marca == "dekton" && (
+          <div>
+            <p>hola</p>
+            <p>dekton</p>
+          </div>
+        )
+      }
+    </section>
+  </main>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const images = document.querySelectorAll(".snap-center");
+      const buttons = document.querySelectorAll(".circle-button");
+      const container = document.querySelector(".scroll-container");
+
+      // Agregar evento de escucha para el desplazamiento
+      container.addEventListener("scroll", function () {
+        images.forEach((image, index) => {
+          const imageWidth =
+            image instanceof HTMLElement ? image.offsetWidth : 0;
+          const scrollPosition = container.scrollLeft;
+          const imagePosition = index * imageWidth;
+          if (
+            scrollPosition >= imagePosition &&
+            scrollPosition < imagePosition + imageWidth
+          ) {
+            // La imagen está en la vista, activar el botón correspondiente
+            activateButton(index);
+          }
+        });
+      });
+
+      // Agregar evento de clic a los botones
+      buttons.forEach((button, index) => {
+        button.addEventListener("click", () => {
+          changeImage(index);
+        });
+      });
+
+      // Función para activar el botón correspondiente
+      function activateButton(index) {
+        buttons.forEach((button, i) => {
+          if (i === index) {
+            button.classList.add("active");
+          } else {
+            button.classList.remove("active");
+          }
+        });
+      }
+
+      // Función para cambiar la imagen y activar el botón correspondiente
+      function changeImage(index) {
+        const image = images[index];
+
+        if (image instanceof HTMLElement) {
+          const imageWidth = image.offsetWidth;
+          const scrollLeft = imageWidth * index;
+          container.scrollTo({
+            left: scrollLeft,
+            behavior: "smooth",
+          });
+
+          activateButton(index);
+        }
+      }
+
+      // Agregar clase 'active' al primer botón cuando se carga la página
+      buttons[0].classList.add("active");
+    });
+  </script>
+</Layout>

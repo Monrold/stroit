@@ -1,0 +1,297 @@
+---
+import logo from "../images/logo-stroit-white.svg";
+import somnia from "../images/somnia.jpg";
+import dekton from "../images/dekton-logo.png";
+import sensa from "../images/sensa-logo.png";
+import silestone from "../images/silestone-logo.svg";
+---
+
+<script>
+    window.addEventListener("DOMContentLoaded", function(){
+    let button = document.getElementById("button");
+    let contain = document.getElementById("contain");
+    let angle = document.getElementById("angle");
+
+    button.addEventListener("click", function () {
+        contain.classList.toggle("show");
+        angle.classList.toggle("rotate");
+    });
+
+    document.addEventListener("click", function (event) {
+        const target = event.target as Node;
+
+        if (target) {
+            if (!button.contains(target) && !contain.contains(target)) {
+                contain.classList.remove("show");
+                angle.classList.remove("rotate");
+            }
+        }
+    });
+
+    let burgerButton = document.getElementById("burger-button");
+    let burgerContain = document.getElementById("burger-contain");
+    let burgerAngle = document.getElementById("burger-angle");
+
+    burgerButton.addEventListener("click", function () {
+        burgerContain.classList.toggle("burger-show");
+        burgerAngle.classList.toggle("burger-rotate");
+    });
+
+    let hamburgerButton = document.getElementById("hamburgerButton");
+    let closeIcon = document.getElementById("closeIcon");
+    let burgerIcon = document.getElementById("buergerIcon");
+    let menuItems = document.getElementById("menuItems");
+
+    function burger() {
+        if (menuItems.classList.contains("showMenu")) {
+            menuItems.classList.remove("showMenu");
+            closeIcon.style.display = "none";
+            burgerIcon.style.display = "block";
+        } else {
+            menuItems.classList.add("showMenu");
+            closeIcon.style.display = "block";
+            burgerIcon.style.display = "none";
+        }
+    }
+
+    hamburgerButton.addEventListener("click", burger);
+});
+</script>
+<style>
+    .burger-contain {
+        display: none;
+        position: relative;
+        margin-top: 10px;
+        left: 0;
+        background: black;
+        z-index: 1;
+    }
+    .wrapper {
+        position: relative;
+    }
+
+    .contain {
+        display: none;
+        position: absolute;
+        margin-top: 33px;
+        background: black;
+        right: 0;
+        z-index: 1;
+    }
+    .show {
+        display: flex;
+    }
+    .burger-show {
+        display: block;
+    }
+    .burger-rotate {
+        transform: rotate(180deg);
+        transition: transform 0.2s ease-in-out;
+    }
+    .rotate {
+        transform: rotate(180deg);
+        transition: transform 0.2s ease-in-out;
+    }
+    .optionli {
+        padding: 10px 30px;
+        text-align: left;
+    }
+    .optionli:hover {
+        background: rgb(31 41 55);
+    }
+    .catalogo {
+        border: 1px solid #dbd6ca;
+        border-radius: 4px;
+        padding: 8px 18px;
+        color: #dbd6ca;
+        text-align: center;
+    }
+    .catalogo:hover {
+        background-color: #dbd6ca;
+        color: black;
+        transition: all;
+        transition-duration: 300ms;
+    }
+    .principalli:hover {
+        color: rgb(229 231 235);
+    }
+    /*Burger menú*/
+    .closeIcon {
+        display: none;
+    }
+    .menuItems {
+        position: absolute;
+        transform: translateX(-100%);
+        transition:
+            0.2s ease-in-out,
+            opacity 0.3s ease-in-out,
+            filter 0.3s ease-in-out;
+        opacity: 0;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 5;
+        background-color: black;
+        margin-top: 75px;
+        padding-bottom: 15px;
+    }
+    .showMenu {
+        transform: translateX(0px);
+        opacity: 1;
+    }
+</style>
+<!--Menú desktop -->
+<div class="hidden lg:block bg-black py-6 px-10">
+    <div class="max-w-screen-xl mx-auto flex justify-between items-center">
+        <div>
+            <a aria-label="Regresa al Home" href="/">
+                <img
+                    class="w-40"
+                    src={logo.src}
+                    alt="logotipo stroit surfaces"
+                />
+            </a>
+        </div>
+        <div class="text-white">
+            <ul class="flex gap-x-10 items-center">
+                <li class="principalli"><a href="">Servicios</a></li>
+                <li class="principalli">
+                    <div class="wrapper">
+                        <div id="button" class="flex items-center gap-x-2">
+                            <button aria-label="Descubre nuestas marcas">Marcas</button>
+                            <svg
+                                class="angle"
+                                id="angle"
+                                xmlns="http://www.w3.org/2000/svg"
+                                height="16"
+                                width="14"
+                                viewBox="0 0 448 512"
+                                ><path
+                                    fill="white"
+                                    d="M201.4 137.4c12.5-12.5 32.8-12.5 45.3 0l160 160c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L224 205.3 86.6 342.6c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l160-160z"
+                                ></path></svg
+                            >
+                        </div>
+                        <div class="contain flex w-[600px]" id="contain">
+                            <ul class="w-[35%] p-8">
+                                <li class="pb-6">
+                                    <a
+                                        class="hover:opacity-80"
+                                        aria-label="Descubre todo sobre dekton"
+                                        href=""
+                                        ><img
+                                            class="w-24"
+                                            src={dekton.src}
+                                            alt="Logotipo Dekton"
+                                        /></a>
+                                </li>
+                                <li class="py-6">
+                                    <a
+                                        class="hover:opacity-80"
+                                        aria-label="Descubre todo sobre silestone"
+                                        href="/silestone"
+                                        ><img
+                                            class="w-28"
+                                            src={silestone.src}
+                                            alt="Logotipo silestone"
+                                        /></a>
+                                </li>
+                                <li class="py-6">
+                                    <a
+                                        class="hover:opacity-80"
+                                        aria-label="Descubre todo sobre sensa"
+                                        href="/sensa"
+                                        ><img
+                                            class="w-24"
+                                            src={sensa.src}
+                                            alt="Logotipo Sensa"
+                                        /></a>
+                                </li>
+                            </ul>
+                            <div class="w-[65%]">
+                                <img
+                                    class=""
+                                    src={somnia.src}
+                                    alt="Imagen de cocina con dekton somnia"
+                                />
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li class="catalogo"><a href="/catalogo">Catálogo</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!--Burger menú -->
+<div class="bgblack lg:hidden bg-black py-6 px-4 z-10">
+    <div class="mx-auto flex justify-between items-center">
+        <div>
+            <img class="w-32" aria-label="Regresa al Home" src={logo.src} alt="logotipo stroit surfaces" />
+        </div>
+        <div class="text-white">
+            <button id="hamburgerButton">
+                <svg
+                    class="burgerIcon"
+                    id="buergerIcon"
+                    xmlns="http://www.w3.org/2000/svg"
+                    height="16"
+                    width="14"
+                    viewBox="0 0 448 512"
+                    aria-label="Abrir menú"
+                    ><path
+                        fill="white"
+                        d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"
+                    ></path></svg
+                >
+                <svg
+                    class="closeIcon"
+                    id="closeIcon"
+                    xmlns="http://www.w3.org/2000/svg"
+                    height="16"
+                    width="12"
+                    viewBox="0 0 384 512"
+                    aria-label="Cerrar menú"
+                    ><path
+                        fill="white"
+                        d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"
+                    ></path></svg
+                >
+            </button>
+            <ul class="menuItems flex flex-col gap-y-4 px-4" id="menuItems">
+                <li class="principalli"><a href="">Servicios</a></li>
+                <li class="principalli">
+                    <div class="wrapper">
+                        <div
+                            id="burger-button"
+                            class="flex justify-between items-center gap-x-2"
+                        >
+                            <button aria-label="Descubre nuestras marcas">Marcas</button>
+                            <svg
+                                class="angle"
+                                id="burger-angle"
+                                xmlns="http://www.w3.org/2000/svg"
+                                height="16"
+                                width="14"
+                                viewBox="0 0 448 512"
+                                ><path
+                                    fill="white"
+                                    d="M201.4 137.4c12.5-12.5 32.8-12.5 45.3 0l160 160c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L224 205.3 86.6 342.6c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l160-160z"
+                                ></path></svg
+                            >
+                        </div>
+                        <ul class="burger-contain" id="burger-contain">
+                            <li class="py-2 opacity-80"><a href="">Dekton</a></li>
+                            <li class="py-2 opacity-80">
+                                <a href="/silestone">Silestone</a>
+                            </li>
+                            <li class="py-2 opacity-80"><a href="/sensa">Sensa</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="catalogo"><a class="" href="/catalogo">Catálogo</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
