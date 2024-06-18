@@ -18,7 +18,8 @@ import metalicoEstilo from "../images/catalogo/filters/estilos/metalico.jpg";
 import solidoEstilo from "../images/catalogo/filters/estilos/solido.jpg";
 import industrialEstilo from "../images/catalogo/filters/estilos/industrial.jpg";
 import otherEstilo from "../images/catalogo/filters/estilos/organico.jpg";
-import bgSomnia from "../images/somnia.jpg";
+import somnia from "../images/somnia.webp";
+
 
 const entries = await contentfulClient.getEntries<Surfaces>({
     content_type: "stroit",
@@ -56,11 +57,11 @@ const posts = entries.items.map((item) => {
     };
 });
 
-const somnia = "https://pub-81aca52011284a96b910aedeefde00fe.r2.dev/somnia.webp";
+
 ---
 
 <style define:vars={{ 
-	somnia: `url("${somnia}")`,
+	somnia: `url("${somnia.src}")`
 	}}>
     .block {
         display: block;

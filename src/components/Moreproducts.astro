@@ -1,0 +1,82 @@
+---
+import { contentfulClient } from "../lib/contentful";
+import type { Surfaces } from "../lib/contentful";
+
+const entries = await contentfulClient.getEntries<Surfaces>({
+    content_type: "stroit",
+});
+
+const posts = entries.items.map((item) => {
+    const {
+        nombre,
+        marca,
+        coleccion,
+        espesores,
+        acabados,
+        medidas,
+        tonos,
+        estilo,
+        imagen,
+        promocion,
+    } = item.fields;
+
+    // Convertir el valor booleano a cadena "true" o "false"
+    const promocionStr = promocion ? "true" : "false";
+
+    return {
+        nombre,
+        marca,
+        coleccion,
+        espesores,
+        acabados,
+        medidas,
+        tonos,
+        estilo,
+        imagen,
+        promocion: promocionStr, // Usar la cadena en lugar del booleano
+        slug: `${item.fields.nombre}`,
+    };
+});
+
+const shuffledPosts = posts.sort(() => Math.random() - 0.5).slice(0, 4);
+---
+
+<style>
+    #moreProducts{
+        width: calc(250px * 4);
+    }
+</style>
+
+<section class="mx-4 md:flex md:items-center md:justify-center text-white py-10">
+    <div class=" md:w-1/6">
+        <h3 class="text-2xl">Superficies que quiza te podrían interesar</h3>
+    </div>
+    <div class="overflow-x-scroll snap-x snap-mandatory mt-4">
+        <ul id="moreProducts" class="flex">
+            {shuffledPosts.map((item) => (
+                <li class="mx-2">
+                    {item.imagen?.[0]?.fields?.file?.url && (
+                        <a class="text-white hover:opacity-80" href={`/posts/${item.slug}/`}>
+                            <img
+                                class="object-cover h-40 md:h-72 w-72"
+                                src={item.imagen[0].fields.file.url}
+                                alt={`textura de ${item.marca} ${item.nombre}`}
+                            />
+                            <div class="mt-2">
+                                <div class="flex space-x-2">
+                                    {item.promocion === "true" && <p>🔥</p>}
+                                    <h3>{item.nombre}</h3>
+                                </div>
+                                <div class="flex text-[10px] md:text-xs">
+                                    <p class="capitalize mr-1">{item.marca}</p>
+                                    <p>|</p>
+                                    <p class="ml-1">{item.coleccion}</p>
+                                </div>
+                            </div>
+                        </a>
+                    )}
+                </li>
+            ))}
+        </ul>  
+      </div>     
+</section>
