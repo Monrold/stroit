@@ -47,18 +47,18 @@ const shuffledPosts = posts.sort(() => Math.random() - 0.5).slice(0, 4);
     }
 </style>
 
-<section class="mx-4 md:flex md:items-center md:justify-center text-white py-10">
+<section class="mx-4 md:flex md:items-center md:justify-center text-white pb-14 mt-5">
     <div class=" md:w-1/6">
         <h3 class="text-2xl">Superficies que quiza te podrían interesar</h3>
     </div>
-    <div class="overflow-x-scroll snap-x snap-mandatory mt-4">
+    <div class="overflow-x-scroll snap-x snap-mandatory">
         <ul id="moreProducts" class="flex">
             {shuffledPosts.map((item) => (
                 <li class="mx-2">
                     {item.imagen?.[0]?.fields?.file?.url && (
                         <a class="text-white hover:opacity-80" href={`/posts/${item.slug}/`}>
                             <img
-                                class="object-cover h-40 md:h-72 w-72"
+                                class="object-cover h-72 w-72"
                                 src={item.imagen[0].fields.file.url}
                                 alt={`textura de ${item.marca} ${item.nombre}`}
                             />

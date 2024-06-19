@@ -2,12 +2,13 @@
 import { contentfulClient } from "../../lib/contentful";
 import type { Surfaces } from "../../lib/contentful";
 import Layout from "../../layouts/Layout.astro";
-import Silestone from "../silestone.astro";
 import rayadoSilestone from "../../images/catalogo/silestone/rayado.webp";
 import impactoSilestone from "../../images/catalogo/silestone/impacto.webp";
 import manchasSilestone from "../../images/catalogo/silestone/manchas.webp";
 import acidoSilestone from "../../images/catalogo/silestone/acido.webp";
 import MoreProducts from "../../components/Moreproducts.astro";
+import moreSilestoneImage from "../../images/catalogo/silestone/more-silestone.webp";
+import silestoneLogo from "../../images/silestone-logo.svg";
 
 export async function getStaticPaths() {
   const entries = await contentfulClient.getEntries<Surfaces>({
@@ -46,9 +47,16 @@ const {
 } = Astro.props;
 ---
 
-<style>
+<style define:vars={{ 
+	moreSilestone: `url("${moreSilestoneImage.src}")`
+	}}>
   .circle-button.active {
     background-color: white;
+  }
+  #moreSilestone{
+    background-image: var(--moreSilestone);
+    background-position: center;
+    background-size: cover;
   }
   @media screen and (max-width: 1080px) {
     #silestoneVentajas {
@@ -203,12 +211,12 @@ const {
             <div class="overflow-x-scroll snap-x snap-mandatory mt-4">
               <div class="flex" id="silestoneVentajas">
                 <div class="w-1/4 snap-center mx-1 sm:mx-2 lg:mx-4">
-                  <img class="mb-4" src={rayadoSilestone.src} alt="" />
+                  <img class="mb-4 h-80 w-full object-cover" src={rayadoSilestone.src} alt="" />
                   <h3 class="text-lg font-bold mb-2">Altamente resistente al Rayado</h3>
                   <p class="text-gray-300">El uso y el desgaste diarios no rayan a Silestone.</p>
                 </div>
                 <div class="w-1/4 snap-center mx-1 sm:mx-2 lg:mx-4">
-                  <img class="mb-4" src={impactoSilestone.src} alt="" />
+                  <img class="mb-4 h-80 w-full object-cover" src={impactoSilestone.src} alt="" />
                   <h3 class="text-lg font-bold mb-2">Resistente a las Manchas</h3>
                   <p class="text-gray-300">
                     Su baja porosidad hace que sea altamente resistente a las
@@ -216,12 +224,12 @@ const {
                   </p>
                 </div>
                 <div class="w-1/4 snap-center mx-1 sm:mx-2 lg:mx-4">
-                  <img class="mb-4" src={manchasSilestone.src} alt="" />
+                  <img class="mb-4 h-80 w-full object-cover" src={manchasSilestone.src} alt="" />
                   <h3 class="text-lg font-bold mb-2">Gran resistencia a los impactos</h3>
                   <p class="text-gray-300">Alta resistencia a los impactos y golpes diarios.</p>
                 </div>
                 <div class="w-1/4 snap-center mx-1 sm:mx-2 lg:mx-4">
-                  <img class="mb-4" src={acidoSilestone.src} alt="" />
+                  <img class="mb-4 h-80 w-full object-cover" src={acidoSilestone.src} alt="" />
                   <h3 class="text-lg font-bold mb-2">Recistencia al Ácido</h3>
                   <p class="text-gray-300">
                     La baja porosidad de Silestone evita que de dañe por manchas
@@ -231,6 +239,10 @@ const {
               </div>
             </div>
           </>
+          <div class="w-full h-96 mt-20 flex flex-col justify-center items-center" id="moreSilestone">
+            <h4 class="text-2xl flex flex-wrap justify-center items-center">Conoce más sobre <img class="w-32 mx-2" src={silestoneLogo.src} alt=""></h4>
+            <a class="mt-4 hover:text-zinc-200" href="/silestone">Ver más <span>&rarr;</span></a>
+          </div>
         )
       }
       {
