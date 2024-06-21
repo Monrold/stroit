@@ -9,6 +9,18 @@ import acidoSilestone from "../../images/catalogo/silestone/acido.webp";
 import MoreProducts from "../../components/Moreproducts.astro";
 import moreSilestoneImage from "../../images/catalogo/silestone/more-silestone.webp";
 import silestoneLogo from "../../images/silestone-logo.svg";
+import dektonLogo from "../../images/logo-dekton.svg";
+import calorDekton from "../../images/catalogo/dekton/calor.mp4";
+import rayadoDekton from "../../images/catalogo/dekton/rayado.mp4";
+import impactoDekton from "../../images/catalogo/dekton/impacto.mp4";
+import manchasDekton from "../../images/catalogo/dekton/manchas.mp4";
+import moreDekton from "../../images/catalogo/dekton/dekton.avif";
+import esteticaSensa from "../../images/catalogo/sensa/estitca-inigualable.jpg";
+import antimanchasSensa from "../../images/catalogo/sensa/proteccion-antimanchas.jpg";
+import mantenimientoSensa from "../../images/catalogo/sensa/bajo-mantenimiento.jpg";
+import calidadSensa from "../../images/catalogo/sensa/calidad-maxima.jpg";
+import moreSensa from "../../images/catalogo/sensa/orinocomore.avif";
+import logoSensa from "../../images/logo-sensa.svg";
 
 export async function getStaticPaths() {
   const entries = await contentfulClient.getEntries<Surfaces>({
@@ -47,15 +59,29 @@ const {
 } = Astro.props;
 ---
 
-<style define:vars={{ 
-	moreSilestone: `url("${moreSilestoneImage.src}")`
-	}}>
+<style
+  define:vars={{
+    moreDekton: `url("${moreDekton.src}")`,
+    moreSensa:`url("${moreSensa.src}")`,
+    moreSilestone: `url("${moreSilestoneImage.src}")`,
+  }}
+>
   .circle-button.active {
     background-color: white;
   }
-  #moreSilestone{
+  #moreDekton {
+    background-image: var(--moreDekton);
+    background-position: bottom;
+    background-size: cover;
+  }
+  #moreSensa {
+    background-image: var(--moreSensa);
+    background-position: bottom;
+    background-size: cover;
+  }
+  #moreSilestone {
     background-image: var(--moreSilestone);
-    background-position: center;
+    background-position:center;
     background-size: cover;
   }
   @media screen and (max-width: 1080px) {
@@ -72,13 +98,13 @@ const {
         <div
           class="relative overflow-x-scroll scroll-container snap-x snap-mandatory"
         >
-          <div class="flex w-[200vw] lg:w-[95vw]" id="photosItems">
+          <div class="flex w-[200vw] lg:w-[100vw]" id="photosItems">
             {
               imagen[1].fields.file.url && (
                 <img
                   class="snap-start w-1/2 h-[60vh] object-cover"
                   src={imagen[1].fields.file.url}
-                  alt=""
+                  alt={`Conoce ${marca} ${nombre}`}
                 />
               )
             }
@@ -87,7 +113,7 @@ const {
                 <img
                   class="snap-start w-1/2 h-[60vh] object-cover"
                   src={imagen[0].fields.file.url}
-                  alt=""
+                  alt={`Textura de ${marca} ${nombre}`}
                 />
               )
             }
@@ -188,138 +214,377 @@ const {
     <section></section>
     <section class="px-6 py-10 text-white">
       <div class="flex space-x-1 text-2xl font-semibold">
-        <p>¿Por qué elegir <span class="capitalize">{marca}</span><span class="pl-1">{nombre}?</span></p>
+        <p>
+          ¿Por qué elegir <span class="capitalize">{marca}</span><span
+            class="pl-1">{nombre}?</span
+          >
+        </p>
       </div>
       {
         marca == "silestone" && (
           <>
-            <div class="md:flex mt-4 text-zinc-200">
-              <p class="my-2 md:w-1/2 md:p-4">
-                Silestone es una superficie híbrida de minerales y materiales
-                reciclados capaz de aportar color y textura a tu espacio.
-                Gracias a su exclusiva e innovadora tecnología HybriQ +, el
-                mantenimiento es mínimo y se garantiza una alta resistencia a
-                las manchas y rayados.
-              </p>
-              <p class="my-2 md:w-1/2 md:p-4">
-                Desde su nacimiento, Silestone® ha marcado las tendencias más
-                significativas en su categoría, transformado el mundo de las
-                encimeras de cocina, siendo hoy un referente en el diseño
-                interior. Una vez más, volvemos a cambiarlo todo.
-              </p>
-            </div>
-            <div class="overflow-x-scroll snap-x snap-mandatory mt-4">
-              <div class="flex" id="silestoneVentajas">
-                <div class="w-1/4 snap-center mx-1 sm:mx-2 lg:mx-4">
-                  <img class="mb-4 h-80 w-full object-cover" src={rayadoSilestone.src} alt="" />
-                  <h3 class="text-lg font-bold mb-2">Altamente resistente al Rayado</h3>
-                  <p class="text-gray-300">El uso y el desgaste diarios no rayan a Silestone.</p>
-                </div>
-                <div class="w-1/4 snap-center mx-1 sm:mx-2 lg:mx-4">
-                  <img class="mb-4 h-80 w-full object-cover" src={impactoSilestone.src} alt="" />
-                  <h3 class="text-lg font-bold mb-2">Resistente a las Manchas</h3>
-                  <p class="text-gray-300">
-                    Su baja porosidad hace que sea altamente resistente a las
-                    manchas.
-                  </p>
-                </div>
-                <div class="w-1/4 snap-center mx-1 sm:mx-2 lg:mx-4">
-                  <img class="mb-4 h-80 w-full object-cover" src={manchasSilestone.src} alt="" />
-                  <h3 class="text-lg font-bold mb-2">Gran resistencia a los impactos</h3>
-                  <p class="text-gray-300">Alta resistencia a los impactos y golpes diarios.</p>
-                </div>
-                <div class="w-1/4 snap-center mx-1 sm:mx-2 lg:mx-4">
-                  <img class="mb-4 h-80 w-full object-cover" src={acidoSilestone.src} alt="" />
-                  <h3 class="text-lg font-bold mb-2">Recistencia al Ácido</h3>
-                  <p class="text-gray-300">
-                    La baja porosidad de Silestone evita que de dañe por manchas
-                    de ácido
-                  </p>
+            <>
+              <div class="md:flex mt-4 text-zinc-200">
+                <p class="my-2 md:w-1/2 md:p-4">
+                  Silestone es una superficie híbrida de minerales y materiales
+                  reciclados capaz de aportar color y textura a tu espacio.
+                  Gracias a su exclusiva e innovadora tecnología HybriQ +, el
+                  mantenimiento es mínimo y se garantiza una alta resistencia a
+                  las manchas y rayados.
+                </p>
+                <p class="my-2 md:w-1/2 md:p-4">
+                  Desde su nacimiento, Silestone® ha marcado las tendencias más
+                  significativas en su categoría, transformado el mundo de las
+                  encimeras de cocina, siendo hoy un referente en el diseño
+                  interior. Una vez más, volvemos a cambiarlo todo.
+                </p>
+              </div>
+              <div class="overflow-x-scroll snap-x snap-mandatory mt-4">
+                <div class="flex" id="silestoneVentajas">
+                  <div class="w-1/4 snap-center mx-1 sm:mx-2 lg:mx-4">
+                    <img
+                      class="mb-4 h-80 w-full object-cover"
+                      src={rayadoSilestone.src}
+                      alt={`Persona trabajando con herramientas filosas sobre ${marca}`}
+                    />
+                    <h3 class="text-lg font-bold mb-2">
+                      Altamente resistente al Rayado
+                    </h3>
+                    <p class="text-gray-300">
+                      El uso y el desgaste diarios no rayan a Silestone.
+                    </p>
+                  </div>
+                  <div class="w-1/4 snap-center mx-1 sm:mx-2 lg:mx-4">
+                    <img
+                      class="mb-4 h-80 w-full object-cover"
+                      src={manchasSilestone.src}
+                      alt={`Persona manchando con chocolate una superficie ${marca}`}
+                    />
+                    <h3 class="text-lg font-bold mb-2">
+                      Resistente a las Manchas
+                    </h3>
+                    <p class="text-gray-300">
+                      Su baja porosidad hace que sea altamente resistente a las
+                      manchas.
+                    </p>
+                  </div>
+                  <div class="w-1/4 snap-center mx-1 sm:mx-2 lg:mx-4">
+                    <img
+                      class="mb-4 h-80 w-full object-cover"
+                      src={impactoSilestone.src}
+                      alt={`Persona trabajando arcilla sobre ${marca}`}
+                    />
+                    <h3 class="text-lg font-bold mb-2">
+                      Gran resistencia a los impactos
+                    </h3>
+                    <p class="text-gray-300">
+                      Alta resistencia a los impactos y golpes diarios.
+                    </p>
+                  </div>
+                  <div class="w-1/4 snap-center mx-1 sm:mx-2 lg:mx-4">
+                    <img
+                      class="mb-4 h-80 w-full object-cover"
+                      src={acidoSilestone.src}
+                      alt={`Persona picando jitomate sobre la superficie ${marca}`}
+                    />
+                    <h3 class="text-lg font-bold mb-2">Recistencia al Ácido</h3>
+                    <p class="text-gray-300">
+                      La baja porosidad de Silestone evita que de dañe por
+                      manchas de ácido
+                    </p>
+                  </div>
                 </div>
               </div>
+            </>
+            <div
+              class="w-full h-96 mt-20 flex flex-col justify-center items-center"
+              id="moreSilestone"
+            >
+              <h4 class="text-2xl flex flex-wrap justify-center items-center">
+                Conoce más sobre{" "}
+                <img
+                  class="w-32 mx-2"
+                  src={silestoneLogo.src}
+                  alt="Logotipo Silestone"
+                />
+              </h4>
+              <a class="mt-4 hover:text-zinc-200" href="/silestone">
+                Ver más <span>&rarr;</span>
+              </a>
             </div>
           </>
-          <div class="w-full h-96 mt-20 flex flex-col justify-center items-center" id="moreSilestone">
-            <h4 class="text-2xl flex flex-wrap justify-center items-center">Conoce más sobre <img class="w-32 mx-2" src={silestoneLogo.src} alt=""></h4>
-            <a class="mt-4 hover:text-zinc-200" href="/silestone">Ver más <span>&rarr;</span></a>
-          </div>
         )
       }
       {
         marca == "dekton" && (
-          <div>
-            <p>hola</p>
-            <p>dekton</p>
-          </div>
+          <>
+            <>
+              <div class="md:flex mt-4 text-zinc-200">
+                <p class="my-2 md:w-1/2 md:p-4">
+                  Dekton es la innovadora superficie ultracompacta de Cosentino,
+                  un material tecnológico compuesto por una sofisticada mezcla
+                  de minerales. Se beneficia de una alta resistencia y
+                  versatilidad, perfecto para usar tanto en aplicaciones
+                  domésticas como en proyectos más grandes.
+                </p>
+                <p class="my-2 md:w-1/2 md:p-4">
+                  Las superficies Dekton cuentan con propiedades técnicas, altas
+                  prestaciones y característicos colores y texturas para
+                  proyectos de interior y exterior: encimeras de cocina,
+                  encimeras de baño, revestimientos de paredes, fachadas
+                  residenciales, suelos, mobiliario y platos de ducha. De esta
+                  manera, es posible crear espacios con diferentes aplicaciones
+                  a juego o combinadas entre sí.
+                </p>
+              </div>
+              <div class="overflow-x-scroll snap-x snap-mandatory mt-4">
+                <div class="flex" id="silestoneVentajas">
+                  <div class="w-1/4 snap-center mx-1 sm:mx-2 lg:mx-4">
+                    <video
+                      autoplay
+                      playsinline
+                      loop
+                      muted
+                      class="h-80 w-full object-cover mb-4"
+                      src={rayadoDekton}
+                    />
+                    <h3 class="text-lg font-bold mb-2">
+                      Altamente resistente al Rayado
+                    </h3>
+                    <p class="text-gray-300">
+                      Los utencilios de cocina no rayan DEKTON
+                    </p>
+                  </div>
+                  <div class="w-1/4 snap-center mx-1 sm:mx-2 lg:mx-4">
+                    <video
+                      autoplay
+                      playsinline
+                      loop
+                      muted
+                      class="h-80 w-full object-cover mb-4"
+                      src={manchasDekton}
+                    />
+                    <h3 class="text-lg font-bold mb-2">
+                      Resistente a las Manchas
+                    </h3>
+                    <p class="text-gray-300">
+                      Las encimeras de DEKTON recisten las manchas más
+                      difíciles, permitiendo su fácil mantenimiento y limpieza.
+                    </p>
+                  </div>
+                  <div class="w-1/4 snap-center mx-1 sm:mx-2 lg:mx-4">
+                    <video
+                      autoplay
+                      playsinline
+                      loop
+                      muted
+                      class="h-80 w-full object-cover mb-4"
+                      src={calorDekton}
+                    />
+                    <h3 class="text-lg font-bold mb-2">
+                      Resiste al fuego y el calor
+                    </h3>
+                    <p class="text-gray-300">
+                      DEKTON resiste altas temperaturas evitando daños en su
+                      superficies.
+                    </p>
+                  </div>
+                  <div class="w-1/4 snap-center mx-1 sm:mx-2 lg:mx-4">
+                    <video
+                      autoplay
+                      playsinline
+                      loop
+                      muted
+                      class="h-80 w-full object-cover mb-4"
+                      src={impactoDekton}
+                    />
+                    <h3 class="text-lg font-bold mb-2">
+                      Gran resistencia a impactos
+                    </h3>
+                    <p class="text-gray-300">
+                      Alta resistencia a los impactos y golpes diarios.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </>
+            <div
+              class="w-full h-96 mt-20 flex flex-col justify-center items-center"
+              id="moreDekton"
+            >
+              <h4 class="text-2xl flex flex-wrap justify-center items-center">
+                Conoce más sobre{" "}
+                <img
+                  class="w-32 mx-2"
+                  src={dektonLogo.src}
+                  alt="Logotipo Dekton"
+                />
+              </h4>
+              <a class="mt-4 hover:text-zinc-200" href="/silestone">
+                Ver más <span>&rarr;</span>
+              </a>
+            </div>
+          </>
+        )
+      }
+      {
+        marca == "sensa" && (
+          <>
+            <>
+              <div class="md:flex mt-4 text-zinc-200">
+                <p class="my-2 md:w-1/2 md:p-4">
+                  Sensa ofrece la oportunidad de disfrutar de la piedra natural
+                  sin preocuparse por su mantenimiento. Su revolucionario
+                  tratamiento antimanchas la hace duradera para el uso diario.
+                </p>
+                <p class="my-2 md:w-1/2 md:p-4">
+                  La protección antimanchas de las piedras naturales Sensa
+                  facilita su aplicación en encimeras de cocina y revestimientos
+                  de paredes. De esta manera, es posible crear espacios con
+                  diferentes aplicaciones a juego o combinadas entre sí.
+                </p>
+              </div>
+              <div class="overflow-x-scroll snap-x snap-mandatory mt-4">
+                <div class="flex" id="silestoneVentajas">
+                  <div class="w-1/4 snap-center mx-1 sm:mx-2 lg:mx-4">
+                    <img class="h-80 w-full object-cover mb-4" src={esteticaSensa.src} alt="">
+                    <h3 class="text-lg font-bold mb-2">
+                      Estética inigualable
+                    </h3>
+                    <p class="text-gray-300">
+                      Selección exclusiva de piedras naturales con diseños únicos para crear espacios increíbles.
+                    </p>
+                  </div>
+                  <div class="w-1/4 snap-center mx-1 sm:mx-2 lg:mx-4">
+                    <img
+                      class="mb-4 h-80 w-full object-cover"
+                      src={antimanchasSensa.src}
+                      alt={`Cocina ${marca} negra`}
+                    />
+                    <h3 class="text-lg font-bold mb-2">
+                      Protección antimanchas
+                    </h3>
+                    <p class="text-gray-300">
+                      Revolucionario tratamiento integrado en la estructura molecular de la piedra.
+                    </p>
+                  </div>
+                  <div class="w-1/4 snap-center mx-1 sm:mx-2 lg:mx-4">
+                    <img
+                      class="mb-4 h-80 w-full object-cover"
+                      src={mantenimientoSensa.src}
+                      alt={`Lavabo ${marca}`}
+                    />
+                    <h3 class="text-lg font-bold mb-2">
+                      Bajo mantenimiento
+                    </h3>
+                    <p class="text-gray-300">
+                      Su mantenimiento alarga la vida útil de tu encimera, no necesita ser sellado y es fácil de limpiar.
+                    </p>
+                  </div>
+                  <div class="w-1/4 snap-center mx-1 sm:mx-2 lg:mx-4">
+                    <img
+                      class="mb-4 h-80 w-full object-cover"
+                      src={calidadSensa.src}
+                      alt={`Cocina ${marca} orinoco`}
+                    />
+                    <h3 class="text-lg font-bold mb-2">
+                      Calidad máxima
+                    </h3>
+                    <p class="text-gray-300">
+                      Garantizamos la máxima calidad durante el proceso de extracción y elaboración de la piedra natural.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </>
+            <div
+              class="w-full h-96 mt-20 flex flex-col justify-center items-center"
+              id="moreSensa"
+            >
+              <h4 class="text-2xl flex flex-wrap justify-center items-center">
+                Conoce más sobre{" "}
+                <img
+                  class="w-28 mx-2"
+                  src={logoSensa.src}
+                  alt="Logotipo Sensa"
+                />
+              </h4>
+              <a class="mt-4 hover:text-zinc-200" href="/silestone">
+                Ver más <span>&rarr;</span>
+              </a>
+            </div>
+          </>
         )
       }
     </section>
-    <MoreProducts/>
+    <MoreProducts />
   </main>
 
   <script>
     document.addEventListener("DOMContentLoaded", function () {
-  const images = document.querySelectorAll<HTMLImageElement>(".snap-start");
-  const buttons = document.querySelectorAll<HTMLButtonElement>(".circle-button");
-  const container = document.querySelector(".scroll-container") as HTMLElement;
+      const images = document.querySelectorAll<HTMLImageElement>(".snap-start");
+      const buttons =
+        document.querySelectorAll<HTMLButtonElement>(".circle-button");
+      const container = document.querySelector(
+        ".scroll-container",
+      ) as HTMLElement;
 
-  // Función para activar el botón correspondiente
-  function activateButton(index: number) {
-    buttons.forEach((button, i) => {
-      if (i === index) {
-        button.classList.add("active");
-      } else {
-        button.classList.remove("active");
+      // Función para activar el botón correspondiente
+      function activateButton(index: number) {
+        buttons.forEach((button, i) => {
+          if (i === index) {
+            button.classList.add("active");
+          } else {
+            button.classList.remove("active");
+          }
+        });
       }
-    });
-  }
 
-  // Función para cambiar la imagen y activar el botón correspondiente
-  function changeImage(index: number) {
-    const image = images[index];
+      // Función para cambiar la imagen y activar el botón correspondiente
+      function changeImage(index: number) {
+        const image = images[index];
 
-    if (image instanceof HTMLElement) {
-      const imageWidth = image.offsetWidth;
-      const scrollLeft = imageWidth * index;
-      container.scrollTo({
-        left: scrollLeft,
-        behavior: "smooth",
+        if (image instanceof HTMLElement) {
+          const imageWidth = image.offsetWidth;
+          const scrollLeft = imageWidth * index;
+          container.scrollTo({
+            left: scrollLeft,
+            behavior: "smooth",
+          });
+
+          activateButton(index);
+        }
+      }
+
+      // Agregar evento de escucha para el desplazamiento
+      container.addEventListener("scroll", function () {
+        const scrollPosition = container.scrollLeft;
+        const containerWidth = container.offsetWidth;
+
+        images.forEach((image, index) => {
+          const imageWidth = image.offsetWidth;
+          const imagePosition = index * imageWidth;
+
+          // Ajuste para la detección de la imagen en vista
+          if (
+            scrollPosition >= imagePosition - containerWidth / 4 &&
+            scrollPosition < imagePosition + imageWidth - containerWidth / 4
+          ) {
+            // La imagen está en la vista, activar el botón correspondiente
+            activateButton(index);
+          }
+        });
       });
 
-      activateButton(index);
-    }
-  }
+      // Agregar evento de clic a los botones
+      buttons.forEach((button, index) => {
+        button.addEventListener("click", () => {
+          changeImage(index);
+        });
+      });
 
-  // Agregar evento de escucha para el desplazamiento
-  container.addEventListener("scroll", function () {
-    const scrollPosition = container.scrollLeft;
-    const containerWidth = container.offsetWidth;
-
-    images.forEach((image, index) => {
-      const imageWidth = image.offsetWidth;
-      const imagePosition = index * imageWidth;
-
-      // Ajuste para la detección de la imagen en vista
-      if (
-        scrollPosition >= imagePosition - containerWidth / 4 &&
-        scrollPosition < imagePosition + imageWidth - containerWidth / 4
-      ) {
-        // La imagen está en la vista, activar el botón correspondiente
-        activateButton(index);
-      }
+      // Agregar clase 'active' al primer botón cuando se carga la página
+      buttons[0].classList.add("active");
     });
-  });
-
-  // Agregar evento de clic a los botones
-  buttons.forEach((button, index) => {
-    button.addEventListener("click", () => {
-      changeImage(index);
-    });
-  });
-
-  // Agregar clase 'active' al primer botón cuando se carga la página
-  buttons[0].classList.add("active");
-});
-
   </script>
 </Layout>

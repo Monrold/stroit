@@ -7,55 +7,55 @@ import silestone from "../images/silestone-logo.svg";
 ---
 
 <script>
-    window.addEventListener("DOMContentLoaded", function(){
-    let button = document.getElementById("button");
-    let contain = document.getElementById("contain");
-    let angle = document.getElementById("angle");
+    window.addEventListener("DOMContentLoaded", function () {
+        let button = document.getElementById("button");
+        let contain = document.getElementById("contain");
+        let angle = document.getElementById("angle");
 
-    button.addEventListener("click", function () {
-        contain.classList.toggle("show");
-        angle.classList.toggle("rotate");
-    });
+        button.addEventListener("click", function () {
+            contain.classList.toggle("show");
+            angle.classList.toggle("rotate");
+        });
 
-    document.addEventListener("click", function (event) {
-        const target = event.target as Node;
+        document.addEventListener("click", function (event) {
+            const target = event.target as Node;
 
-        if (target) {
-            if (!button.contains(target) && !contain.contains(target)) {
-                contain.classList.remove("show");
-                angle.classList.remove("rotate");
+            if (target) {
+                if (!button.contains(target) && !contain.contains(target)) {
+                    contain.classList.remove("show");
+                    angle.classList.remove("rotate");
+                }
+            }
+        });
+
+        let burgerButton = document.getElementById("burger-button");
+        let burgerContain = document.getElementById("burger-contain");
+        let burgerAngle = document.getElementById("burger-angle");
+
+        burgerButton.addEventListener("click", function () {
+            burgerContain.classList.toggle("burger-show");
+            burgerAngle.classList.toggle("burger-rotate");
+        });
+
+        let hamburgerButton = document.getElementById("hamburgerButton");
+        let closeIcon = document.getElementById("closeIcon");
+        let burgerIcon = document.getElementById("buergerIcon");
+        let menuItems = document.getElementById("menuItems");
+
+        function burger() {
+            if (menuItems.classList.contains("showMenu")) {
+                menuItems.classList.remove("showMenu");
+                closeIcon.style.display = "none";
+                burgerIcon.style.display = "block";
+            } else {
+                menuItems.classList.add("showMenu");
+                closeIcon.style.display = "block";
+                burgerIcon.style.display = "none";
             }
         }
+
+        hamburgerButton.addEventListener("click", burger);
     });
-
-    let burgerButton = document.getElementById("burger-button");
-    let burgerContain = document.getElementById("burger-contain");
-    let burgerAngle = document.getElementById("burger-angle");
-
-    burgerButton.addEventListener("click", function () {
-        burgerContain.classList.toggle("burger-show");
-        burgerAngle.classList.toggle("burger-rotate");
-    });
-
-    let hamburgerButton = document.getElementById("hamburgerButton");
-    let closeIcon = document.getElementById("closeIcon");
-    let burgerIcon = document.getElementById("buergerIcon");
-    let menuItems = document.getElementById("menuItems");
-
-    function burger() {
-        if (menuItems.classList.contains("showMenu")) {
-            menuItems.classList.remove("showMenu");
-            closeIcon.style.display = "none";
-            burgerIcon.style.display = "block";
-        } else {
-            menuItems.classList.add("showMenu");
-            closeIcon.style.display = "block";
-            burgerIcon.style.display = "none";
-        }
-    }
-
-    hamburgerButton.addEventListener("click", burger);
-});
 </script>
 <style>
     .burger-contain {
@@ -158,7 +158,9 @@ import silestone from "../images/silestone-logo.svg";
                 <li class="principalli">
                     <div class="wrapper">
                         <div id="button" class="flex items-center gap-x-2">
-                            <button aria-label="Descubre nuestas marcas">Marcas</button>
+                            <button aria-label="Descubre nuestas marcas"
+                                >Marcas</button
+                            >
                             <svg
                                 class="angle"
                                 id="angle"
@@ -183,7 +185,8 @@ import silestone from "../images/silestone-logo.svg";
                                             class="w-24"
                                             src={dekton.src}
                                             alt="Logotipo Dekton"
-                                        /></a>
+                                        /></a
+                                    >
                                 </li>
                                 <li class="py-6">
                                     <a
@@ -194,7 +197,8 @@ import silestone from "../images/silestone-logo.svg";
                                             class="w-28"
                                             src={silestone.src}
                                             alt="Logotipo silestone"
-                                        /></a>
+                                        /></a
+                                    >
                                 </li>
                                 <li class="py-6">
                                     <a
@@ -205,7 +209,8 @@ import silestone from "../images/silestone-logo.svg";
                                             class="w-24"
                                             src={sensa.src}
                                             alt="Logotipo Sensa"
-                                        /></a>
+                                        /></a
+                                    >
                                 </li>
                             </ul>
                             <div class="w-[65%]">
@@ -225,10 +230,15 @@ import silestone from "../images/silestone-logo.svg";
 </div>
 
 <!--Burger menú -->
-<div class="bgblack lg:hidden bg-black py-6 px-4 z-10">
+<nav class="bgblack lg:hidden bg-black py-6 px-4 z-10">
     <div class="mx-auto flex justify-between items-center">
         <div>
-            <img class="w-32" aria-label="Regresa al Home" src={logo.src} alt="logotipo stroit surfaces" />
+            <img
+                class="w-32"
+                aria-label="Regresa al Home"
+                src={logo.src}
+                alt="logotipo stroit surfaces"
+            />
         </div>
         <div class="text-white">
             <button id="hamburgerButton">
@@ -267,7 +277,9 @@ import silestone from "../images/silestone-logo.svg";
                             id="burger-button"
                             class="flex justify-between items-center gap-x-2"
                         >
-                            <button aria-label="Descubre nuestras marcas">Marcas</button>
+                            <button aria-label="Descubre nuestras marcas"
+                                >Marcas</button
+                            >
                             <svg
                                 class="angle"
                                 id="burger-angle"
@@ -282,16 +294,20 @@ import silestone from "../images/silestone-logo.svg";
                             >
                         </div>
                         <ul class="burger-contain" id="burger-contain">
-                            <li class="py-2 opacity-80"><a href="">Dekton</a></li>
+                            <li class="py-2 opacity-80">
+                                <a href="">Dekton</a>
+                            </li>
                             <li class="py-2 opacity-80">
                                 <a href="/silestone">Silestone</a>
                             </li>
-                            <li class="py-2 opacity-80"><a href="/sensa">Sensa</a></li>
+                            <li class="py-2 opacity-80">
+                                <a href="/sensa">Sensa</a>
+                            </li>
                         </ul>
                     </div>
                 </li>
-                <li class="catalogo"><a class="/catalogo" href="/catalogo">Catálogo</a></li>
+                <a class="catalogo" href="/catalogo">Catálogo</a>
             </ul>
         </div>
     </div>
-</div>
+</nav>
