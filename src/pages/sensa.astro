@@ -1,7 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import portada from '../images/sensa/portada-sensa.png';
-import logo from '../images/sensa/logo-sensa.svg';
+import portada from "../images/sensa/portada-sensa.png";
+import logo from "../images/sensa/logo-sensa.svg";
 import secondImage from "../images/sensa/second-image.png";
 import calidad from "../images/sensa/calidad.avif";
 import estetica from "../images/sensa/esttica-inigualable.avif";
@@ -9,52 +9,65 @@ import proteccion from "../images/sensa/proteccion.avif";
 import mantenimiento from "../images/sensa/mantenimiento.avif";
 import gustos from "../images/sensa/gustos.avif";
 import tacto from "../images/sensa/tacto.avif";
+import Moreproductssensa from "../components/Moreproductssensa.astro";
 ---
-<style define:vars={{portada: `url("${portada.src}")` }}>
-.portada{
-    background-image: var(--portada);
-    height: 50vh;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-}
-body{
-    background-color: black ;
-}
 
+<style define:vars={{ portada: `url("${portada.src}")` }}>
+    .portada {
+        background-image: var(--portada);
+        height: 50vh;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+    }
+    body {
+        background-color: black;
+    }
 </style>
 <Layout>
     <main>
         <section>
             <div class="md:flex">
                 <div class="basis-1/2 order-1 md:order-1 my-auto py-8">
-                    <img class="w-1/3 mx-auto order-1 md:order-2" src={logo.src} alt="Logotipo sensa">
+                    <img
+                        class="w-1/3 mx-auto order-1 md:order-2"
+                        src={logo.src}
+                        alt="Logotipo sensa"
+                    />
                 </div>
                 <div class="portada basis-1/2"></div>
             </div>
         </section>
         <section>
-            <div class="max-w-screen-xl mx-auto flex flex-col md:flex md:flex-row">
+            <div
+                class="max-w-screen-xl mx-auto flex flex-col md:flex md:flex-row"
+            >
                 <div class="text-white px-4 py-4 space-y-3 basis-1/2 my-auto">
                     <h2 class="text-4xl font-semibold">
-                       Naturaleza e innovación
+                        Naturaleza e innovación
                     </h2>
                     <p>
-                        Granitos y cuarcitas con protección exclusiva antimanchas para disfrutar de espacios tan estéticos como funcionales.
+                        Granitos y cuarcitas con protección exclusiva
+                        antimanchas para disfrutar de espacios tan estéticos
+                        como funcionales.
                     </p>
                     <div class="flex">
                         <div class="bg-white w-0.5"></div>
-                        <h4 class="pl-2">Protección y excelencia sobre la piedra natural</h4>
+                        <h4 class="pl-2">
+                            Protección y excelencia sobre la piedra natural
+                        </h4>
                     </div>
                 </div>
                 <div class="basis-1/2">
-                    <img src={secondImage.src} alt="">
+                    <img src={secondImage.src} alt="" />
                 </div>
             </div>
         </section>
         <section class="my-6">
             <div class="max-w-screen-xl mx-auto">
-                <div class="text-white text-4xl py-8 px-4"><h3>Ventajas Sensa</h3></div>
+                <div class="text-white text-4xl py-8 px-4">
+                    <h3>Ventajas Sensa</h3>
+                </div>
                 <div
                     class="text-white flex overflow-x-scroll snap-x snap-mandatory"
                 >
@@ -62,16 +75,14 @@ body{
                         <div
                             class="w-[90vw] sm:w-[70vw] md:w-[60vw] lg:w-[25vw] snap-center mx-2"
                         >
-                            <img
-                                class="w-full"
-                                src={calidad.src}
-                                alt=""
-                            /><div class="pr-4">
-                                <h3 class="text-2xl my-4">
-                                    Calidad máxima
-                                </h3>
+                            <img class="w-full" src={calidad.src} alt="" /><div
+                                class="pr-4"
+                            >
+                                <h3 class="text-2xl my-4">Calidad máxima</h3>
                                 <p>
-                                    La máxima calidad durante el proceso de extracción y elaboración de la piedra natural. 
+                                    La máxima calidad durante el proceso de
+                                    extracción y elaboración de la piedra
+                                    natural.
                                 </p>
                             </div>
                         </div>
@@ -85,21 +96,26 @@ body{
                                     Estética inigualable
                                 </h3>
                                 <p>
-                                    Selección exclusiva de piedras naturales con diseños únicos para crear espacios increíbles.
+                                    Selección exclusiva de piedras naturales con
+                                    diseños únicos para crear espacios
+                                    increíbles.
                                 </p>
                             </div>
                         </div>
                         <div
                             class="w-[90vw] sm:w-[70vw] md:w-[50vw] lg:w-[25vw] snap-center mx-2"
                         >
-                            <img class="w-full" src={proteccion.src} alt="" /><div
-                                class="pr-4"
-                            >
+                            <img
+                                class="w-full"
+                                src={proteccion.src}
+                                alt=""
+                            /><div class="pr-4">
                                 <h3 class="text-2xl my-4">
                                     Protección antimanchas
                                 </h3>
                                 <p>
-                                    Revolucionario tratamiento integrado en la estructura molecular de la piedra.
+                                    Revolucionario tratamiento integrado en la
+                                    estructura molecular de la piedra.
                                 </p>
                             </div>
                         </div>
@@ -115,7 +131,9 @@ body{
                                     Bajo mantenimiento
                                 </h3>
                                 <p>
-                                    Su tratamiento alarga la vida útil de tu encimera, no necesita ser sellado y es fácil de limpiar.
+                                    Su tratamiento alarga la vida útil de tu
+                                    encimera, no necesita ser sellado y es fácil
+                                    de limpiar.
                                 </p>
                             </div>
                         </div>
@@ -128,27 +146,47 @@ body{
                 <div class="flex flex-col md:flex md:flex-row">
                     <div class="basis-1/2 my-auto px-8 py-8 space-y-3">
                         <h3 class="text-4xl">Para todos los gustos</h3>
-                        <p>La piedra natural es famosa por sus colores y destellos únicos, llenos de personalidad y originalidad, capaces de adaptarse a cualquier estilo y tendencia. Tonos crema, grises y naranjas, texturas clásicas o juegos de opuestos… Cosentino ofrece en su catálogo infinitas opciones de piedra natural para abarcar todos los gustos.</p>
+                        <p>
+                            La piedra natural es famosa por sus colores y
+                            destellos únicos, llenos de personalidad y
+                            originalidad, capaces de adaptarse a cualquier
+                            estilo y tendencia. Tonos crema, grises y naranjas,
+                            texturas clásicas o juegos de opuestos… Cosentino
+                            ofrece en su catálogo infinitas opciones de piedra
+                            natural para abarcar todos los gustos.
+                        </p>
                     </div>
                     <div class="basis-1/2">
-                        <img src={gustos.src} alt="">
-                    </dir>
+                        <img src={gustos.src} alt="" />
+                    </div>
                 </div>
-                <div class="flex flex-col md:flex md:flex-row ">
-                    <div class="basis-1/2 my-auto px-8 py-8 space-y-3 order-1 md:order-2 md:ml-10">
+                <div class="flex flex-col md:flex md:flex-row">
+                    <div
+                        class="basis-1/2 my-auto px-8 py-8 space-y-3 order-1 md:order-2 md:ml-10"
+                    >
                         <h3 class="text-4xl">Una cuestión de tacto</h3>
-                        <p>La colección Premium Sensa está disponible en los acabados:</p>
+                        <p>
+                            La colección Premium Sensa está disponible en los
+                            acabados:
+                        </p>
                         <ul class="list-disc">
-                            <li>Pulido: para una superficie brillante y que juega con los reflejos.</li>
+                            <li>
+                                Pulido: para una superficie brillante y que
+                                juega con los reflejos.
+                            </li>
                             <li>Caresse: para un sofisticado plano mate.</li>
-                            <li>Leather: para quien busca un efecto diferenciado.</li>
+                            <li>
+                                Leather: para quien busca un efecto
+                                diferenciado.
+                            </li>
                         </ul>
                     </div>
                     <div class="basis-1/2 order-2 md:order-1">
-                        <img src={tacto.src} alt="">
+                        <img src={tacto.src} alt="" />
                     </div>
                 </div>
             </div>
         </section>
     </main>
+    <Moreproductssensa />
 </Layout>

@@ -15,12 +15,21 @@ import crystaline from "../images/silestone/icon-crystalline-silica.avif";
 import water from "../images/silestone/icon-reused-water.avif";
 import electric from "../images/silestone/icon-electric-energy.avif";
 import recicled from "../images/silestone/icon-recicled-materials.avif";
-import cocina from '../images/silestone/cocinas.avif';
-import banos from '../images/silestone/banos.avif';
-import mobiliario from '../images/silestone/mobiliario.avif';
+import cientifique from "../images/silestone/cientifique.avif";
+import iconLogoCertifiqueOne from "../images/silestone/icon-dnv-white.png";
+import iconLogoCertifiqueTwo from "../images/silestone/icon-sgs-white.png";
+import Moreproductssilestone from "../components/Moreproductssilestone.astro";
+import cocina from "../images/silestone/cocinas.avif";
+import banos from "../images/silestone/banos.avif";
+import mobiliario from "../images/silestone/mobiliario.avif";
 ---
 
-<style define:vars={{ hybriq: `url("${hybridq.src}")` }}>
+<style
+    define:vars={{
+        hybriq: `url("${hybridq.src}")`,
+        cientifique: `url("${cientifique.src}")`,
+    }}
+>
     body {
         background-color: black;
     }
@@ -29,8 +38,13 @@ import mobiliario from '../images/silestone/mobiliario.avif';
         background-size: cover;
         background-position: top;
         height: 50vh;
-        width: 90%;
+        width: 100%;
         margin: auto;
+    }
+    #cientifique {
+        background-image: var(--cientifique);
+        background-size: cover;
+        background-position: center;
     }
 </style>
 <Layout title="">
@@ -58,8 +72,8 @@ import mobiliario from '../images/silestone/mobiliario.avif';
                 </div>
             </div>
         </section>
-        <section class="my-12 max-w-screen-xl mx-auto">
-            <h2 class="text-4xl text-white text-center">
+        <section class="mb-12 mt-4 md:mt-12 max-w-screen-xl mx-auto">
+            <h2 class="text-2xl md:text-4xl text-white text-center">
                 Sostenible y pionera
             </h2>
             <div class="flex flex-col md:flex-row mt-6">
@@ -87,11 +101,11 @@ import mobiliario from '../images/silestone/mobiliario.avif';
                 </div>
             </div>
         </section>
-        <section>
+        <section class="max-w-screen-xl mx-auto">
             <div class="hyq"></div>
             <div class="mx-4">
                 <div class="mt-14 mb-6">
-                    <h2 class="text-2xl text-left sm:text-center md:text-4xl">
+                    <h2 class="text-2xl md:text-4xl text-left sm:text-center">
                         Diseños de cocinas, baños y superficies para el hogar
                     </h2>
                 </div>
@@ -181,38 +195,122 @@ import mobiliario from '../images/silestone/mobiliario.avif';
                         <img class="px-4" src={format.src} alt="" />
                     </div>
                     <div class="basis-1/2 mx-auto my-auto lg:pl-20 px-4">
-                        <h3 class="text-2xl py-4">
+                        <h3 class="text-2xl md:text-4xl py-4">
                             Características de la tecnología Hybriq+®
                         </h3>
                         <div class="">
                             <div class="flex py-2">
-                                <img class="object-contain w-2.5 mr-5" src={crystaline.src} alt="" />
+                                <img
+                                    class="object-contain w-2.5 mr-5"
+                                    src={crystaline.src}
+                                    alt=""
+                                />
                                 <p>Hasta un 10% / 40% de sílice cristalina</p>
                             </div>
                             <div class="flex py-2">
-                                <img class="object-contain w-4 mr-4" src={water.src} alt="" />
+                                <img
+                                    class="object-contain w-4 mr-4"
+                                    src={water.src}
+                                    alt=""
+                                />
                                 <p>100% agua reciclada</p>
                             </div>
                             <div class="flex py-2">
-                                <img class="object-contain w-3 mr-4" src={electric.src} alt="" />
+                                <img
+                                    class="object-contain w-3 mr-4"
+                                    src={electric.src}
+                                    alt=""
+                                />
                                 <p>100 % Energía eléctrica renovable</p>
                             </div>
                             <div class="flex py-2">
-                                <img class="object-contain w-2 mr-5" src={recicled.src} alt="" />
+                                <img
+                                    class="object-contain w-2 mr-5"
+                                    src={recicled.src}
+                                    alt=""
+                                />
                                 <p>Mínimo 20% de materiales reciclados</p>
                             </div>
                         </div>
                         <div class="pt-6">
-                            <h3 class="text-2xl">Formatos que se adaptan a tu vida</h3>
+                            <h3 class="text-2xl">
+                                Formatos que se adaptan a tu vida
+                            </h3>
                             <div class="py-4">
-                                <p class="py-2">Jumbo: 3250 x 1590 mm Estándar: 3060 x 1440 mm</p>
+                                <p class="py-2">Jumbo: 3250 x 1590 mm</p>
+                                <p class="pb-2">Estándar: 3060 x 1440 mm</p>
                                 <p>Grosores: 12mm, 20mm y 30mm</p>
                             </div>
                         </div>
                     </div>
-                    
                 </div>
             </div>
         </section>
+        <section class="my-10 max-w-screen-xl mx-auto">
+            <div class="mx-2">
+                <h3 class="text-2xl md:text-4xl text-center">
+                    Una tecnología certificada por prestigiosos organismos internacionales
+                </h3>
+                <div class="flex flex-wrap mt-10">
+                    <div
+                        class="bg-black md:w-1/2 flex flex-col justify-center py-20 px-10"
+                    >
+                        <p>Certified by</p>
+                        <img
+                            class="w-20 mb-6"
+                            src={iconLogoCertifiqueOne.src}
+                            alt=""
+                        />
+                        <p class="text-2xl">
+                            This Verification Statement claims that our
+                            Hybriq+® technology complies with the highest
+                            environmental standards, maintaining the same level
+                            of performance, durability and resistance properties
+                            of Silestone.
+                        </p>
+                    </div>
+                    <div
+                        id="cientifique"
+                        class="md:w-1/2 flex flex-col justify-center py-20 px-10"
+                    >
+                        <p>Certified by</p>
+                        <img
+                            class="w-20 mb-6"
+                            src={iconLogoCertifiqueTwo.src}
+                            alt=""
+                        />
+                        <p class="text-2xl">
+                            Nuestra tecnología Hybriq+® obtuvo a principios de
+                            2023 la certificación independiente de SGS Australia
+                            para toda la gama de colores Silestone por contener
+                            menos del 40 % de sílice cristalina.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="my-10 max-w-screen-xl mx-auto text-center">
+            <div class="mx-2">
+                <h3 class="text-2xl md:text-4xl mb-4">
+                    Transformamos espacios que transforman personas
+                </h3>
+                <p class="md:mx-20">
+                    Desde su creación, Silestone ha marcado las tendencias del
+                    mercado, transformando el mundo de las encimeras de cocina y
+                    hoy supone un referente en el diseño de interiores. Una vez
+                    más, evolucionamos. Disfruta creando tu propio hogar. Sé tu
+                    mejor diseñador.
+                </p>
+                <video
+                    autoplay
+                    playsinline
+                    loop
+                    muted
+                    class="my-8"
+                    src="https://pub-81aca52011284a96b910aedeefde00fe.r2.dev/silestone.mp4"
+                ></video>
+            </div>
+        </section>
     </main>
+    <Moreproductssilestone />
 </Layout>

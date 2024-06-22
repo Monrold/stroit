@@ -18,7 +18,7 @@ import metalicoEstilo from "../images/catalogo/filters/estilos/metalico.jpg";
 import solidoEstilo from "../images/catalogo/filters/estilos/solido.jpg";
 import industrialEstilo from "../images/catalogo/filters/estilos/industrial.jpg";
 import otherEstilo from "../images/catalogo/filters/estilos/organico.jpg";
-import somnia from "../images/somnia.webp";
+
 
 
 const entries = await contentfulClient.getEntries<Surfaces>({
@@ -58,10 +58,12 @@ const posts = entries.items.map((item) => {
 });
 
 
+const somnia = "https://pub-81aca52011284a96b910aedeefde00fe.r2.dev/somnia.webp";
+
 ---
 
 <style define:vars={{ 
-	somnia: `url("${somnia.src}")`
+	somnia: `url("${somnia}")`
 	}}>
     .block {
         display: block;
@@ -87,30 +89,27 @@ const posts = entries.items.map((item) => {
             transform: translateX(5px);
         }
     }
-
     @media screen and (max-width: 640px) {
     #marcasFilters {
         width: calc(205px * 3);
     }
-}
-
-@media screen and (max-width:  1080px) {
+    }
+    @media screen and (max-width:  1080px) {
     #tonosFilters {
         width: calc(147px * 8);
     }
-}
+    }
 
-@media screen and (max-width:  1080px) {
+    @media screen and (max-width:  1080px) {
     #acabadosFilters {
         width: calc(146px * 6);
     }
-}
-
-@media screen and (max-width:  1080px) {
+    }
+    @media screen and (max-width:  1080px) {
     #estiloFilters {
         width: calc(146px * 7);
     }
-}
+    }
 
 .bgImage{
     background-image: var(--somnia);
