@@ -233,12 +233,13 @@ import silestone from "../images/silestone-logo.svg";
 <nav class="bgblack lg:hidden bg-black py-6 px-4 z-10">
     <div class="mx-auto flex justify-between items-center">
         <div>
-            <img
-                class="w-32"
-                aria-label="Regresa al Home"
-                src={logo.src}
-                alt="logotipo stroit surfaces"
-            />
+            <a aria-label="Regresa al Home" href="/">
+                <img
+                    class="w-32"
+                    src={logo.src}
+                    alt="logotipo stroit surfaces"
+                />
+            </a>
         </div>
         <div class="text-white">
             <button id="hamburgerButton">
