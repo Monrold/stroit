@@ -1,0 +1,69 @@
+---
+import Layout from "../layouts/Layout.astro";
+import portada from "../images/servicios/portada.png";
+import instalacionImage from "../images/servicios/instalacion.jpg";
+import Moreproducts from "../components/Moreproducts.astro";
+---
+
+<style
+    define:vars={{
+        portada: `url("${portada.src}")`,
+    }}
+>
+    .portada {
+        background-image: var(--portada);
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        height: 50vh;
+        width: 100%;
+    }
+</style>
+<Layout>
+    <main>
+        <section class="portada hidden lg:flex items-center justify-center">
+            <h1 class="text-white text-5xl text-center">Conoce nuestros servicios y transforma tus espacios.</h1>
+        </section>
+        <section class="max-w-screen-xl mx-auto  lg:my-10">
+            <div class="lg:flex items-center justify-center">
+                <div class="">
+                    <img
+                        class="object-cover h-[90vh] w-full"
+                        src={instalacionImage.src}
+                        alt=""
+                    />
+                    <img src="" alt="" />
+                    <img src="" alt="" />
+                </div>
+                <div class="mt-5 lg:mt-0 lg:w-1/2 px-6 text-white space-y-8">
+                    <div class="border-b-2 pb-6 border-zinc-200">
+                        <h3 class="text-2xl mb-2">Transformación</h3>
+                        <p class="text-zinc-200">
+                            Transformamos superficies en cocinas, baños,
+                            revestimientos, mobiliario, fachadas y mucho más.
+                            para crear espacios únicos
+                        </p>
+                    </div>
+                    <div class="border-b-2 pb-6 border-zinc-200">
+                        <h3 class="text-2xl mb-2">Instalación</h3>
+                        <p class="text-zinc-200">
+                            En Stroit, nos especializamos en la instalación
+                            profesional de superficies, asegurando que cada
+                            proyecto se realice con la más alta calidad y
+                            atención al detalle.
+                        </p>
+                    </div>
+                    <div class="border-b-2 pb-6 border-zinc-200">
+                        <h3 class="text-2xl mb-2">Corte</h3>
+                        <p class="text-zinc-200">
+                            Ofrecemos un servicio de corte de superficies con
+                            tecnología avanzada y maestría artesanal para cortes
+                            precisos que se adapten a tus necesidades y diseño.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <Moreproducts/>
+</Layout>
