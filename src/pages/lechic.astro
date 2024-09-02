@@ -1,0 +1,455 @@
+---
+import Layout from "../layouts/Layout.astro";
+import portada from "../images/lechic/portada.jpg";
+import versalles from "../images/lechic/01-d-menu-versalles.mp4";
+import bohemian from "../images/lechic/02-d-menu-bohemian.mp4";
+import electic from "../images/lechic/03-d-menu-eclectic.mp4";
+import victorian from "../images/lechic/04-d-menu-victorian.mp4";
+import parisien from "../images/lechic/05-d-menu-parisien.mp4";
+import romantic from "../images/lechic/06-d-menu-romantic.mp4";
+import ivory1 from "../images/lechic/ivory/ivory-1.jpg";
+import ivory2 from "../images/lechic/ivory/ivory-2.jpg";
+import ivory3 from "../images/lechic/ivory/ivory-3.jpg";
+import ivory4 from "../images/lechic/ivory/ivory-4.jpg";
+import bohemian1 from "../images/lechic/bohemian/1-bohemian.jpg";
+import bohemian2 from "../images/lechic/bohemian/2-bohemian.jpg";
+import bohemian3 from "../images/lechic/bohemian/3-bohemian.jpg";
+import bohemian4 from "../images/lechic/bohemian/4-bohemian.jpg";
+import electic1 from "../images/lechic/electic/1-eclectic.jpg";
+import electic2 from "../images/lechic/electic/2-eclectic.jpg";
+import electic3 from "../images/lechic/electic/3-eclectic.jpg";
+import electic4 from "../images/lechic/electic/4-eclectic.jpg";
+import victorian1 from "../images/lechic/victorian/1-victorian.jpg";
+import victorian2 from "../images/lechic/victorian/2-victorian.jpg";
+import victorian3 from "../images/lechic/victorian/3-victorian.jpg";
+import victorian4 from "../images/lechic/victorian/4-victorian.jpg";
+import parisien1 from "../images/lechic/parisien/1-parisien.jpg";
+import parisien2 from "../images/lechic/parisien/2-parisien.jpg";
+import parisien3 from "../images/lechic/parisien/3-parisien.jpg";
+import parisien4 from "../images/lechic/parisien/4-parisien.jpg";
+import romantic1 from "../images/lechic/romantic/1-romantic.jpg";
+import romantic2 from "../images/lechic/romantic/2-romantic.jpg";
+import romantic3 from "../images/lechic/romantic/3-romantic.jpg";
+import romantic4 from "../images/lechic/romantic/4-romantic.jpg"
+---
+
+<style
+    define:vars={{
+        portada: `url("${portada.src}")`,
+    }}
+>
+    .portada {
+        background-image: linear-gradient(
+                to top,
+                rgba(0, 0, 0, 0.45),
+                rgba(0, 0, 0, 0.3)
+            ),
+            var(--portada);
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+        height: 60vh;
+    }
+</style>
+
+<Layout>
+    <main class="text-white">
+        <section class="portada flex items-center justify-center">
+            <h1 class="text-2xl lg:text-4xl text-center px-2 lg:px-96">
+                LE CHIC ES UNA COLECCIÓN ÚNICA QUE REDEFINE UN CLÁSICO
+                ATEMPORAL. UN PASO ADELANTE EN EL DISEÑO DE SUPERFICIES
+                VETEADAS.
+            </h1>
+        </section>
+        <section class="max-w-screen-xl mx-auto my-10">
+            <div class="overflow-x-scroll snap-x lg:overflow-auto">
+                <div class="flex w-[500vw] md:w-[300vw] lg:w-full">
+                    <div class="w-1/6 mx-2 snap-center">
+                        <video
+                            autoplay
+                            playsinline
+                            loop
+                            muted
+                            class="object-cover h-[50vh] w-full"
+                            src={versalles}></video>
+                        <p class="text-xl mt-2 md:text-base">
+                            VERSAILLES IVORY
+                        </p>
+                    </div>
+                    <div class="w-1/6 mx-2 snap-center">
+                        <video
+                            autoplay
+                            playsinline
+                            loop
+                            muted
+                            class="object-cover h-[50vh] w-full"
+                            src={bohemian}></video>
+                        <p class="text-xl mt-2 md:text-base">BOHEMIAN FLAME</p>
+                    </div>
+                    <div class="w-1/6 mx-2 snap-center">
+                        <video
+                            autoplay
+                            playsinline
+                            loop
+                            muted
+                            class="object-cover h-[50vh] w-full"
+                            src={electic}></video>
+                        <p class="text-xl mt-2 md:text-base">ELECTIC PEARL</p>
+                    </div>
+                    <div class="w-1/6 mx-2 snap-center">
+                        <video
+                            autoplay
+                            playsinline
+                            loop
+                            muted
+                            class="object-cover h-[50vh] w-full"
+                            src={victorian}></video>
+                        <p class="text-xl mt-2 md:text-base">
+                            VICTORIAN SILVER
+                        </p>
+                    </div>
+                    <div class="w-1/6 mx-2 snap-center">
+                        <video
+                            autoplay
+                            playsinline
+                            loop
+                            muted
+                            class="object-cover h-[50vh] w-full"
+                            src={parisien}></video>
+                        <p class="text-xl mt-2 md:text-base">PARISIEN BLEU</p>
+                    </div>
+                    <div class="w-1/6 mx-2 snap-center">
+                        <video
+                            autoplay
+                            playsinline
+                            loop
+                            muted
+                            class="object-cover h-[50vh] w-full"
+                            src={romantic}></video>
+                        <p class="text-xl mt-2 md:text-base">ROMANTIC ASH</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="max-w-screen-xl mx-auto">
+            <div class="pt-14 pb-24 px-4">
+                <p class="text-amber-500 text-xl">SILESTONE XM LE CHIC</p>
+                <h3 class="text-5xl md:text-8xl">
+                    Diseños inspirados en la piedra natural que reviven el
+                    encanto de los icónicos espacios parisinos y victorianos.
+                </h3>
+            </div>
+        </section>
+        <section class="max-w-screen-2xl mx-auto">
+            <div class="flex flex-col lg:flex-row">
+                <div
+                    class="bg-[#e8cfb0] text-black lg:w-1/2 p-8 flex flex-col justify-between"
+                >
+                    <div>
+                        <h3 class="text-4xl">VERSALLES IVORY</h3>
+                        <p>PULIDO - SUEDE</p>
+                    </div>
+                    <div class="space-y-4">
+                        <h4 class="text-2xl font-thin">
+                            Majestuosidad en oro y marfil
+                        </h4>
+                        <p class="font-thin">
+                            Es el tono más cálido de la colección. Un fondo
+                            sutil de marmoleado bicolor y degradados que
+                            hipnotizan gracias a sus llamativos destellos de
+                            incrustaciones en tonos dorados.
+                        </p>
+                        <p class="font-thin">
+                            Destila lujo y elegancia, evocando la exuberancia
+                            del Palacio de Versalles. Este exquisito tono añade
+                            un toque de sofisticación a cualquier espacio,
+                            haciendo una audaz declaración de gusto refinado.
+                        </p>
+                    </div>
+                </div>
+                <div class="overflow-x-scroll snap-x snap-mandatory lg:w-1/2">
+                    <div class="flex">
+                        <img
+                            class="lg:object-cover h-auto w-auto snap-center"
+                            src={ivory1.src}
+                            alt=""
+                        />
+                        <img
+                            class="lg:object-cover h-auto w-auto snap-center"
+                            src={ivory2.src}
+                            alt=""
+                        />
+                        <img
+                            class="lg:object-cover h-auto w-auto snap-center"
+                            src={ivory3.src}
+                            alt=""
+                        />
+                        <img
+                            class="lg:object-cover h-auto w-auto snap-center"
+                            src={ivory4.src}
+                            alt=""
+                        />
+                    </div>
+                </div>
+            </div>
+            <div class="flex flex-col lg:flex-row">
+                <div
+                    class="bg-black lg:w-1/2 p-8 flex flex-col justify-between lg:order-2"
+                >
+                    <div>
+                        <h3 class="text-4xl text-amber-500">BOHEMIAN FLAME</h3>
+                        <p class="text-amber-500">PULIDO - SUEDE</p>
+                    </div>
+                    <div class="space-y-4">
+                        <h4 class="text-2xl font-thin text-amber-500">
+                            Un volcán de energía y elegancia
+                        </h4>
+                        <p class="font-thin">
+                            Bohemian Flame. Un color atrevido y poco
+                            convencional que evoca el espíritu bohemio parisino.
+                            Invitando a la creatividad y libertad de expresión.
+                        </p>
+                        <p class="font-thin">
+                            Deja que la chispa de tu espíritu bohemio encienda
+                            una llama brillante de autoexpresión. Atrévete a
+                            explorar tu creatividad, libertad y pasión por los
+                            viajes.
+                        </p>
+                    </div>
+                </div>
+                <div
+                    class="overflow-x-scroll snap-x snap-mandatory lg:w-1/2 lg:order-1"
+                >
+                    <div class="flex">
+                        <img
+                            class="lg:object-cover h-auto w-auto snap-center"
+                            src={bohemian1.src}
+                            alt=""
+                        />
+                        <img
+                            class="lg:object-cover h-auto w-auto snap-center"
+                            src={bohemian2.src}
+                            alt=""
+                        />
+                        <img
+                            class="lg:object-cover h-auto w-auto snap-center"
+                            src={bohemian3.src}
+                            alt=""
+                        />
+                        <img
+                            class="lg:object-cover h-auto w-auto snap-center"
+                            src={bohemian4.src}
+                            alt=""
+                        />
+                    </div>
+                </div>
+            </div>
+            <div class="flex flex-col lg:flex-row">
+                <div
+                    class="bg-[#f1ede7] text-black lg:w-1/2 p-8 flex flex-col justify-between"
+                >
+                    <div>
+                        <h3 class="text-4xl">ECLECTIC PEARL</h3>
+                        <p>PULIDO - SUEDE</p>
+                    </div>
+                    <div class="space-y-4">
+                        <h4 class="text-2xl font-thin">
+                            Un destello de luz que emana del agua
+                        </h4>
+                        <p class="font-thin">
+                            Un diseño que hipnotiza por sus delicadas vetas, su
+                            fluida textura y algunos acentos metálicos como
+                            diamantes, que aportan profundidad y se interponen
+                            sobre una base cremosa y suave.
+                        </p>
+                        <p class="font-thin">
+                            Un símbolo de elegancia atemporal e individualidad.
+                            Una fusión de lo clásico y lo moderno, con un
+                            encanto único que capta la esencia de la
+                            sofisticación.
+                        </p>
+                    </div>
+                </div>
+                <div class="overflow-x-scroll snap-x snap-mandatory lg:w-1/2">
+                    <div class="flex">
+                        <img
+                            class="lg:object-cover h-auto w-auto snap-center"
+                            src={electic1.src}
+                            alt=""
+                        />
+                        <img
+                            class="lg:object-cover h-auto w-auto snap-center"
+                            src={electic2.src}
+                            alt=""
+                        />
+                        <img
+                            class="lg:object-cover h-auto w-auto snap-center"
+                            src={electic3.src}
+                            alt=""
+                        />
+                        <img
+                            class="lg:object-cover h-auto w-auto snap-center"
+                            src={electic4.src}
+                            alt=""
+                        />
+                    </div>
+                </div>
+            </div>
+            <div class="flex flex-col lg:flex-row">
+                <div
+                    class="bg-[#dddcdb] text-black lg:w-1/2 p-8 flex flex-col justify-between lg:order-2"
+                >
+                    <div>
+                        <h3 class="text-4xl">VICTORIAN SILVER</h3>
+                        <p class="">PULIDO - SUEDE</p>
+                    </div>
+                    <div class="space-y-4">
+                        <h4 class="text-2xl font-thin">
+                            Evocadores ríos nacarados
+                        </h4>
+                        <p class="font-thin">
+                            Es el color más neutro y versátil de la colección.
+                            Dos suaves tonos de marmoleados de base, con efectos
+                            degradados que generan profundidad. Vetas plateadas
+                            y grises oscuras se interponen para crear una
+                            superficie con carácter y personalidad.
+                        </p>
+                        <p class="font-thin">
+                            Encarna el encanto, la elegancia y la sofisticación
+                            del estilo victoriano. Un color esencial capaz de
+                            reinventar espacios clásicos.
+                        </p>
+                    </div>
+                </div>
+                <div
+                    class="overflow-x-scroll snap-x snap-mandatory lg:w-1/2 lg:order-1"
+                >
+                    <div class="flex">
+                        <img
+                            class="lg:object-cover h-auto w-auto snap-center"
+                            src={victorian1.src}
+                            alt=""
+                        />
+                        <img
+                            class="lg:object-cover h-auto w-auto snap-center"
+                            src={victorian2.src}
+                            alt=""
+                        />
+                        <img
+                            class="lg:object-cover h-auto w-auto snap-center"
+                            src={victorian3.src}
+                            alt=""
+                        />
+                        <img
+                            class="lg:object-cover h-auto w-auto snap-center"
+                            src={victorian4.src}
+                            alt=""
+                        />
+                    </div>
+                </div>
+            </div>
+            <div class="flex flex-col lg:flex-row">
+                <div
+                    class="bg-[#3c3c37] lg:w-1/2 p-8 flex flex-col justify-between"
+                >
+                    <div>
+                        <h3 class="text-4xl">PARISIEN BLEU</h3>
+                        <p>PULIDO</p>
+                    </div>
+                    <div class="space-y-4">
+                        <h4 class="text-2xl font-thin">
+                            Reflejos de la Ciudad de la Luz
+                        </h4>
+                        <p class="font-thin">
+                            Un profundo tono azulado con fuerte personalidad y
+                            poderoso carácter. Su majestuoso fondo, inspirado en
+                            las tonalidades de las famosas piedras de la Roma
+                            Imperial, se salpica con finas vetas e
+                            incrustaciones en tonos ocres.
+                        </p>
+                        <p class="font-thin">
+                            Es la reminiscencia de un paseo junto al río Sena en
+                            una apacible noche parisina. La ciudad de las luces,
+                            el amor y la moda aguarda con su encanto atemporal.
+                        </p>
+                    </div>
+                </div>
+                <div class="overflow-x-scroll snap-x snap-mandatory lg:w-1/2">
+                    <div class="flex">
+                        <img
+                            class="lg:object-cover h-auto w-auto snap-center"
+                            src={parisien1.src}
+                            alt=""
+                        />
+                        <img
+                            class="lg:object-cover h-auto w-auto snap-center"
+                            src={parisien2.src}
+                            alt=""
+                        />
+                        <img
+                            class="lg:object-cover h-auto w-auto snap-center"
+                            src={parisien3.src}
+                            alt=""
+                        />
+                        <img
+                            class="lg:object-cover h-auto w-auto snap-center"
+                            src={parisien4.src}
+                            alt=""
+                        />
+                    </div>
+                </div>
+            </div>
+            <div class="flex flex-col lg:flex-row">
+                <div
+                    class="bg-[#434447]  lg:w-1/2 p-8 flex flex-col justify-between lg:order-2"
+                >
+                    <div>
+                        <h3 class="text-4xl">ROMANTIC ASH</h3>
+                        <p class="">PULIDO - SUEDE</p>
+                    </div>
+                    <div class="space-y-4">
+                        <h4 class="text-2xl font-thin">
+                            Baile de plata y cristal
+                        </h4>
+                        <p class="font-thin">
+                            Fondo oscuro y azulado de gran profundidad, bañado
+                            por amplias vetas y variadas incrustaciones de
+                            colores cremas y plateados.
+                        </p>
+                        <p class="font-thin">
+                            Evoca una idílica noche estrellada a los pies de la
+                            Torre Eiffel, donde todo se impregna del
+                            romanticismo de la Ciudad de la Luz.
+                        </p>
+                    </div>
+                </div>
+                <div
+                    class="overflow-x-scroll snap-x snap-mandatory lg:w-1/2 lg:order-1"
+                >
+                    <div class="flex">
+                        <img
+                            class="lg:object-cover h-auto w-auto snap-center"
+                            src={romantic1.src}
+                            alt=""
+                        />
+                        <img
+                            class="lg:object-cover h-auto w-auto snap-center"
+                            src={romantic2.src}
+                            alt=""
+                        />
+                        <img
+                            class="lg:object-cover h-auto w-auto snap-center"
+                            src={romantic3.src}
+                            alt=""
+                        />
+                        <img
+                            class="lg:object-cover h-auto w-auto snap-center"
+                            src={romantic4.src}
+                            alt=""
+                        />
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+</Layout>
