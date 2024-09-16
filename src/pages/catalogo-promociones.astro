@@ -39,6 +39,9 @@ import salina3 from "../images/catalogo-promociones/dekton/salina/salina-3.avif"
 import salina4 from "../images/catalogo-promociones/dekton/salina/salina-4.avif";
 import salina5 from "../images/catalogo-promociones/dekton/salina/salina-5.avif";
 import stroitlogo from "../images/stroit-logo-ss.svg";
+import dektonlogo from "../images/dekton-logo.png";
+import ventajas from "../images/catalogo-promociones/ventajas-dekton.webp";
+import aplicaciones from "../images/catalogo-promociones/aplicaciones-dekton.webp";
 
 const somnia =
     "https://pub-81aca52011284a96b910aedeefde00fe.r2.dev/somnia.webp";
@@ -60,16 +63,24 @@ const somnia =
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta name="description" content="Conoce las mejores promociones para transformar tus espacios con la sofisticación y durabilidad
-            que solo Dekton puede ofrecer.">
-        <meta property="og:image" content="https://pub-81aca52011284a96b910aedeefde00fe.r2.dev/og-image%20copia.webp">
+        <meta
+            name="description"
+            content="Conoce las mejores promociones para transformar tus espacios con la sofisticación y durabilidad
+            que solo Dekton puede ofrecer."
+        />
+        <meta
+            property="og:image"
+            content="https://pub-81aca52011284a96b910aedeefde00fe.r2.dev/og-image%20copia.webp"
+        />
         <title>🔥 Promociones Dekton</title>
-        
     </head>
     <body class="bg-zinc-800">
         <main>
-            <section class="flex justify-center items-center">
-                <img class="w-52 py-8" src={stroitlogo.src} alt="" />
+            <section
+                class="max-w-screen-2xl mx-auto flex justify-center lg:justify-between items-center py-8 px-4"
+            >
+                <img class="w-48" src={stroitlogo.src} alt="" />
+                <img class="w-48 hidden lg:block" src={dektonlogo.src} alt="" />
             </section>
             <section
                 class="bgImage h-56 md:h-72 w-full flex items-center justify-center"
@@ -81,6 +92,18 @@ const somnia =
                     transformar tus espacios con la sofisticación y durabilidad
                     que solo Dekton puede ofrecer.
                 </h1>
+            </section>
+            <section class="bg-zinc-900 py-8 lg:py-14">
+                <div class="max-w-screen-xl text-white mx-auto lg:flex">
+                    <div class="px-2 py-6 lg:w-1/2 lg:px-8">
+                        <h3>Ventajas</h3>
+                        <img src={ventajas.src} alt="" />
+                    </div>
+                    <div class="px-2 py-6 lg:w-1/2 lg:px-8">
+                        <h3>Aplicaciones</h3>
+                        <img src={aplicaciones.src} alt="" />
+                    </div>
+                </div>
             </section>
             <section>
                 <div class="max-w-screen-2xl mx-auto">
