@@ -1,8 +1,9 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import leChic from '../images/main-lechic.jpeg';
-import pietra from '../images/pietrakode.jpeg';
+import earthiclogo from '../images/earthic/earthic-logo.png';
 import pietraKode from '../images/pietrakode-logo.png'
+import earthic from '../images/earthic/rawg/rawg-1.jpg'
 import leChicTwo from '../images/lechic.jpg';
 import lechicLogo from '../images/lechic-logo.png';
 import proyectos from '../images/proyectos.png';
@@ -16,7 +17,7 @@ import exteriorApp from '../images/exteriores-app.png';
 ---
 <style define:vars={{ 
 	mainLeChic: `url("${leChic.src}")`,
-	pietraKode: `url("${pietra.src}")`,
+	earthic: `url("${earthic.src}")`,
 	lechic: `url("${leChicTwo.src}")`,
 	}}> 
 
@@ -30,8 +31,8 @@ body{
 	background-position: ;
 	height: 60vh;
 }
-.pietrakode{
-	background-image: linear-gradient(to top, rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.25)), var(--pietraKode);
+.earthic{
+	background-image: linear-gradient(to top, rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.25)), var(--earthic);
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-position: center;
@@ -58,9 +59,9 @@ body{
 	   </section>
 	   <section>
 		<div class="flex flex-col md:flex-row">
-			<div class="pietrakode md:basis-1/2 flex flex-col justify-center items-center">
-				<img class="w-9/12 sm:w-1/2 " src={pietraKode.src} alt="">
-				<a href="">
+			<div class="earthic md:basis-1/2 flex flex-col justify-center items-center">
+				<img class="w-9/12 sm:w-1/2 " src={earthiclogo.src} alt="Foto de earthic ragd">
+				<a href="/earthic">
 					<div class="py-2 px-6 rounded bg-zinc-600 hover:bg-zinc-800">
 						<p class="text-white ">Ver más</p>
 					</div>
@@ -68,7 +69,7 @@ body{
 			</div>
 			<div class="lechic md:basis-1/2 flex flex-col justify-center items-center">
 				<img class="w-9/12 sm:w-1/2 " src={lechicLogo.src} alt="">
-				<a href="">
+				<a href="/lechic">
 					<div class="py-2 px-6 rounded bg-zinc-600 hover:bg-zinc-800">
 						<p class="text-white ">Ver más</p>
 					</div>

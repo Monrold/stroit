@@ -1,0 +1,510 @@
+---
+import Layout from "../layouts/Layout.astro";
+import portada from "../images/earthic/portada.jpg";
+import ffrom01 from "../images/earthic/ffrom01/ffrom01-1.jpg";
+import ffrom012 from "../images/earthic/ffrom01/ffrom01-2.jpg";
+import ffrom013 from "../images/earthic/ffrom01/ffrom01-3.jpg";
+import ffrom014 from "../images/earthic/ffrom01/ffrom01-4.jpg";
+import ffrom02 from "../images/earthic/ffrom02/ffrom02-1.jpg";
+import ffrom022 from "../images/earthic/ffrom02/ffrom02-2.jpg";
+import ffrom023 from "../images/earthic/ffrom02/ffrom02-3.jpg";
+import ffrom024 from "../images/earthic/ffrom02/ffrom02-4.avif";
+import ffrom031 from "../images/earthic/ffrom03/ffrom03-1.avif";
+import ffrom032 from "../images/earthic/ffrom03/ffrom03-2.avif";
+import ffrom033 from "../images/earthic/ffrom03/ffrom03-3.jpg";
+import ffrom034 from "../images/earthic/ffrom03/ffrom03-4.avif";
+import rawa1 from "../images/earthic/rawa/rawa-1.jpg";
+import rawa2 from "../images/earthic/rawa/rawa-2.jpg";
+import rawa3 from "../images/earthic/rawa/rawa-3.jpg";
+import rawa4 from "../images/earthic/rawa/rawa-4.jpg";
+import rawg1 from "../images/earthic/rawg/rawg-1.jpg";
+import rawg2 from "../images/earthic/rawg/rawg-2.jpg";
+import rawg3 from "../images/earthic/rawg/rawg-3.jpg";
+import rawg4 from "../images/earthic/rawg/rawg-4.avif";
+import rawd1 from "../images/earthic/rawd/rawd-1.jpg";
+import rawd2 from "../images/earthic/rawd/rawd-2.jpg";
+import rawd3 from "../images/earthic/rawd/rawd-3.jpg";
+import rawd4 from "../images/earthic/rawd/rawd-4.avif";
+import camino from "../images/earthic/camino.jpg";
+---
+
+<style
+    define:vars={{
+        portada: `url("${portada.src}")`,
+    }}
+>
+    .portada {
+        background-image: linear-gradient(
+                to top,
+                rgba(0, 0, 0, 0.45),
+                rgba(0, 0, 0, 0.3)
+            ),
+            var(--portada);
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+        height: 60vh;
+    }
+</style>
+<Layout title="earthic">
+    <main class="">
+        <section class="portada flex items-center justify-center">
+            <h1
+                class="text-2xl lg:text-4xl text-center px-2 lg:px-96 text-white"
+            >
+                EARTHIC ES UN PROYECTO SOBRE MATERIALES SOSTENIBLES
+            </h1>
+        </section>
+        <section class="bg-[#e5e5e3] py-10">
+            <div class="max-w-screen-lg mx-auto text-center mb-10 px-2">
+                <h3 class="text-4xl">FFROM THE INSIDE OUT</h3>
+                <p class="">
+                    Se ha optimizado cada etapa de nuestro proceso de
+                    producción, integrando la reutilización de desechos y el uso
+                    de materiales reciclados. Así nace Earthic, una línea de
+                    superficies más sostenibles y comprometidas con el medio
+                    ambiente.
+                </p>
+            </div>
+            <div class="max-w-screen-2xl mx-auto">
+                <div class="overflow-x-scroll snap-x">
+                    <div class="flex space-x-4 w-[450vw] lg:w-[100vw]">
+                        <div
+                            class="bg-[#5a5c62] p-4 text-[#e5e5e3] h-[55vh] flex flex-col justify-between w-1/5 px-2"
+                        >
+                            <div>
+                                <p>Fragmentos de Dekton reciclados</p>
+                                <h4 class="text-2xl text-[#e2ccd4]">
+                                    MINIMIZAMOS LOS RESIDUOS. REUTILIZAMOS
+                                </h4>
+                            </div>
+                            <p>
+                                Incorporamos el abastecimiento sostenible de
+                                materiales gracias al reciclaje de los
+                                fragmentos de Dekton desechados de nuestro
+                                proceso de producción, que representa
+                                aproximadamente el 0,125 % de su peso.
+                            </p>
+                        </div>
+                        <div
+                            class="bg-[#444549] p-4 text-[#e5e5e3] h-[55vh] flex flex-col justify-between w-1/5 px-2"
+                        >
+                            <div>
+                                <p>Bio-resina de aceite reciclada</p>
+                                <h4 class="text-2xl text-[#e2ccd4]">
+                                    FFROM THE KITCHEN TO YOUR KITCHEN
+                                </h4>
+                            </div>
+                            <p>
+                                Earthic incorpora un contenido variable del 16 %
+                                al 23 % de biorresina postconsumo en su
+                                composición total de resina. Esta biorresina,
+                                derivada del aceite vegetal y del aceite de
+                                cocina reciclado, transformando componentes que
+                                de otro modo se desecharían.
+                            </p>
+                        </div>
+                        <div
+                            class="bg-[#262629] p-4 text-[#e5e5e3] h-[55vh] flex flex-col justify-between w-1/5 px-2"
+                        >
+                            <div>
+                                <p>Vidrio reciclado</p>
+                                <h4 class="text-2xl text-[#e2ccd4]">
+                                    UN FUTURO BRILLANTE PARA EL VIDRIO
+                                </h4>
+                            </div>
+                            <p>
+                                Earthic utiliza vidrio reciclado postindustrial
+                                en su diseño, evitando la extracción de nuevas
+                                materias primas, previniendo la erosión del
+                                suelo y reduciendo las emisiones de CO2. Este
+                                componente se convierte en parte integrante de
+                                la superficie de Earthic, dando forma a su
+                                diseño desde dentro.
+                            </p>
+                        </div>
+                        <div
+                            class="bg-[#1e1f20] p-4 text-[#e5e5e3] h-[55vh] flex flex-col justify-between w-1/5 px-2"
+                        >
+                            <div>
+                                <p>PET reciclado</p>
+                                <h4 class="text-2xl text-[#e2ccd4]">
+                                    REPLANTEAMOS EL PLÁSTICO DE UN SOLO USO
+                                </h4>
+                            </div>
+                            <p>
+                                Al utilizar PET reciclado, Earthic reduce las
+                                emisiones de CO2 y los gases de efecto
+                                invernadero. Mediante un proceso innovador, las
+                                botellas de plástico se transforman en escamas
+                                distintivas que revelan sus características
+                                únicas en la superficie. De este modo, el PET
+                                reciclado sigue siendo útil durante años.
+                            </p>
+                        </div>
+                        <div
+                            class="bg-[#191a1a] p-4 text-[#e5e5e3] h-[55vh] flex flex-col justify-between w-1/5 px-2"
+                        >
+                            <div>
+                                <p>Minerales seleccionados Q10</p>
+                                <h4 class="text-2xl text-[#e2ccd4]">
+                                    MENOS SÍLICE CRISTALINA
+                                </h4>
+                            </div>
+                            <div>
+                                <p class="mb-2">
+                                    Earthic es el resultado de una nueva
+                                    combinación de componentes reciclados y
+                                    minerales premium elaborados mediante un
+                                    innovador proceso industrial.
+                                </p>
+
+                                <p>¿Adivinas qué?</p>
+                                <p>
+                                    Earthic tiene menos de un 10 % de sílice
+                                    cristalina.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section>
+            <div class="max-w-screen-2xl mx-auto text-center py-10 px-2">
+                <h3 class="text-4xl text-[#e2ccd4]">
+                    EARTHIC / FFROM X FORMAFANTASMA
+                </h3>
+                <p class="text-white">
+                    Una colección que refleja el origen y la procedencia de los
+                    materiales, así como el proceso de transformación de
+                    elementos reciclados en algo nuevo.
+                </p>
+            </div>
+        </section>
+        <section class="bg-[#a2a09f]">
+            <div class="max-w-screen-2xl mx-auto">
+                <div class="flex flex-col lg:flex-row">
+                    <div
+                        class="bg-[#a2a09f] text-white lg:w-1/3 p-8 flex flex-col justify-between"
+                    >
+                        <div>
+                            <h3 class="text-4xl lg:text-6xl">FFROM 01</h3>
+                        </div>
+                        <div class="space-y-4">
+                            <p class="font-thin">
+                                Una superficie gris moteada con fragmentos
+                                blancos de PET reciclado crea un sutil pero
+                                intrincado patrón que atrae la mirada y añade
+                                profundidad a la composición.
+                            </p>
+                        </div>
+                    </div>
+                    <div
+                        class="overflow-x-scroll snap-x snap-mandatory lg:w-2/3"
+                    >
+                        <div class="flex">
+                            <img
+                                class="lg:object-cover h-auto w-auto snap-center"
+                                src={ffrom01.src}
+                                alt=""
+                            />
+                            <img
+                                class="lg:object-cover h-auto w-auto snap-center"
+                                src={ffrom012.src}
+                                alt=""
+                            />
+                            <img
+                                class="lg:object-cover h-auto w-auto snap-center"
+                                src={ffrom013.src}
+                                alt=""
+                            />
+                            <img
+                                class="lg:object-cover h-auto w-auto snap-center"
+                                src={ffrom014.src}
+                                alt=""
+                            />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="bg-[#5a5b5c]">
+            <div class="max-w-screen-2xl mx-auto">
+                <div class="flex flex-col lg:flex-row">
+                    <div
+                        class="bg-[#5a5b5c] text-white lg:w-1/3 p-8 flex flex-col justify-between lg:order-2"
+                    >
+                        <div>
+                            <h3 class="text-4xl lg:text-6xl">FFROM 02</h3>
+                        </div>
+                        <div class="space-y-4">
+                            <p class="font-thin">
+                                Un gris más profundo y sofisticado, acentuado
+                                con delicados toques de blanco que generan un
+                                contraste visual impactante. Un tono de gris que
+                                evoca modernidad y un estilo minimalista.
+                            </p>
+                        </div>
+                    </div>
+                    <div
+                        class="overflow-x-scroll snap-x snap-mandatory lg:order-1 lg:w-2/3"
+                    >
+                        <div class="flex">
+                            <img
+                                class="lg:object-cover h-auto w-auto snap-center"
+                                src={ffrom02.src}
+                                alt=""
+                            />
+                            <img
+                                class="lg:object-cover h-auto w-auto snap-center"
+                                src={ffrom022.src}
+                                alt=""
+                            />
+                            <img
+                                class="lg:object-cover h-auto w-auto snap-center"
+                                src={ffrom023.src}
+                                alt=""
+                            />
+                            <img
+                                class="lg:object-cover h-auto w-auto snap-center"
+                                src={ffrom024.src}
+                                alt=""
+                            />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="bg-[#434345]">
+            <div class="max-w-screen-2xl mx-auto">
+                <div class="flex flex-col lg:flex-row">
+                    <div
+                        class="bg-[#434345] text-white lg:w-1/3 p-8 flex flex-col justify-between"
+                    >
+                        <div>
+                            <h3 class="text-4xl lg:text-6xl">FFROM 03</h3>
+                        </div>
+                        <div class="space-y-4">
+                            <p class="font-thin">
+                                Un fondo antracita fascinante y sofisticado,
+                                salpicado de escamas de PET reciclado que evocan
+                                la imagen de un cielo estrellado o una formación
+                                geológica única.
+                            </p>
+                        </div>
+                    </div>
+                    <div
+                        class="overflow-x-scroll snap-x snap-mandatory lg:w-2/3"
+                    >
+                        <div class="flex">
+                            <img
+                                class="lg:object-cover h-auto w-auto snap-center"
+                                src={ffrom031.src}
+                                alt=""
+                            />
+                            <img
+                                class="lg:object-cover h-auto w-auto snap-center"
+                                src={ffrom032.src}
+                                alt=""
+                            />
+                            <img
+                                class="lg:object-cover h-auto w-auto snap-center"
+                                src={ffrom033.src}
+                                alt=""
+                            />
+                            <img
+                                class="lg:object-cover h-auto w-auto snap-center"
+                                src={ffrom034.src}
+                                alt=""
+                            />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section>
+            <div class="max-w-screen-2xl mx-auto text-center py-10 px-2">
+                <h3 class="text-4xl text-[#e2ccd4]">
+                    EARTHIC / RAW X COSENTINO STUDIO
+                </h3>
+                <p class="text-white">
+                    Patrones y colores que capturan la esencia del material en
+                    su estado más auténtico, combinados con formas que expresan
+                    una nueva estética.
+                </p>
+            </div>
+        </section>
+        <section class="bg-[#e4e4e4]">
+            <div class="max-w-screen-2xl mx-auto">
+                <div class="flex flex-col lg:flex-row">
+                    <div
+                        class="bg-[#e4e4e4] lg:w-1/3 p-8 flex flex-col justify-between"
+                    >
+                        <div>
+                            <h3 class="text-4xl lg:text-6xl">RAW A</h3>
+                        </div>
+                        <div class="space-y-4">
+                            <p class="font-thin">
+                                Un color adornado con un sutil veteado oscuro
+                                sobre un fondo blanco, que despliega un diseño
+                                complejo y refinado, evocando una elegancia
+                                natural que remite a las piedras más exquisitas
+                                de la naturaleza.
+                            </p>
+                        </div>
+                    </div>
+                    <div
+                        class="overflow-x-scroll snap-x snap-mandatory lg:w-2/3"
+                    >
+                        <div class="flex">
+                            <img
+                                class="lg:object-cover h-auto w-auto snap-center"
+                                src={rawa1.src}
+                                alt=""
+                            />
+                            <img
+                                class="lg:object-cover h-auto w-auto snap-center"
+                                src={rawa2.src}
+                                alt=""
+                            />
+                            <img
+                                class="lg:object-cover h-auto w-auto snap-center"
+                                src={rawa3.src}
+                                alt=""
+                            />
+                            <img
+                                class="lg:object-cover h-auto w-auto snap-center"
+                                src={rawa4.src}
+                                alt=""
+                            />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="bg-[#54575c]">
+            <div class="max-w-screen-2xl mx-auto">
+                <div class="flex flex-col lg:flex-row">
+                    <div
+                        class="bg-[#54575c] text-white lg:w-1/3 p-8 flex flex-col justify-between lg:order-2"
+                    >
+                        <div>
+                            <h3 class="text-4xl lg:text-6xl">RAW G</h3>
+                        </div>
+                        <div class="space-y-4">
+                            <p class="font-thin">
+                                Un fondo de hormigón tranquilo y orgánico,
+                                adornado con delicados matices cobrizos y vetas
+                                suaves que aportan una sensación de movimiento y
+                                fluidez.
+                            </p>
+                        </div>
+                    </div>
+                    <div
+                        class="overflow-x-scroll snap-x snap-mandatory lg:w-2/3 lg:order-1"
+                    >
+                        <div class="flex">
+                            <img
+                                class="lg:object-cover h-auto w-auto snap-center"
+                                src={rawg1.src}
+                                alt=""
+                            />
+                            <img
+                                class="lg:object-cover h-auto w-auto snap-center"
+                                src={rawg2.src}
+                                alt=""
+                            />
+                            <img
+                                class="lg:object-cover h-auto w-auto snap-center"
+                                src={rawg3.src}
+                                alt=""
+                            />
+                            <img
+                                class="lg:object-cover h-auto w-auto snap-center"
+                                src={rawg4.src}
+                                alt=""
+                            />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="bg-[#39393e]">
+            <div class="max-w-screen-2xl mx-auto">
+                <div class="flex flex-col lg:flex-row">
+                    <div
+                        class="bg-[#39393e] text-white lg:w-1/3 p-8 flex flex-col justify-between"
+                    >
+                        <div>
+                            <h3 class="text-4xl lg:text-6xl">RAW D</h3>
+                        </div>
+                        <div class="space-y-4">
+                            <p class="font-thin">
+                                Un fondo de piedra oscura crea un entorno de
+                                serenidad y elegante solidez. Difusas vetas de
+                                bronce se entrelazan de manera aleatoria sobre
+                                un paisaje de tonos carbón.
+                            </p>
+                        </div>
+                    </div>
+                    <div
+                        class="overflow-x-scroll snap-x snap-mandatory lg:w-2/3"
+                    >
+                        <div class="flex">
+                            <img
+                                class="lg:object-cover h-auto w-auto snap-center"
+                                src={rawd1.src}
+                                alt=""
+                            />
+                            <img
+                                class="lg:object-cover h-auto w-auto snap-center"
+                                src={rawd2.src}
+                                alt=""
+                            />
+                            <img
+                                class="lg:object-cover h-auto w-auto snap-center"
+                                src={rawd3.src}
+                                alt=""
+                            />
+                            <img
+                                class="lg:object-cover h-auto w-auto snap-center"
+                                src={rawd4.src}
+                                alt=""
+                            />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section>
+            <div class="lg:flex max-w-screen-2xl mx-auto p-10">
+                <dvi class="lg:w-1/2 mx-2">
+                    <img
+                        class="h-[40vh] w-full object-cover"
+                        src={camino.src}
+                        alt=""
+                    />
+                </dvi>
+                <div class="lg:w-1/2 mx-2 text-white my-auto">
+                    <p class="opacity-80 mb-4">
+                        Earthic es una superficie sostenible con un contenido
+                        máximo de sílice del 10 % creada a partir de una
+                        innovadora composición y un complejo proceso de
+                        producción fruto de años de investigación. Utiliza una
+                        selección de minerales premium, vidrio reciclado, PET,
+                        biorresina y fragmentos de Dekton para reducir la
+                        extracción de materias primas, limitando la erosión del
+                        suelo y las emisiones de CO2. Además, se fabrica con un
+                        99 % de agua reciclada y un 100 % electricidad renovable
+                        certificada.
+                    </p>
+                    <h4 class="text-4xl">
+                        Earthic incorpora hasta un 30 % de componentes
+                        reciclados en sus superficies.
+                    </h4>
+                </div>
+            </div>
+        </section>
+    </main>
+</Layout>
