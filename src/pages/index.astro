@@ -1,159 +1,245 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import leChic from '../images/main-lechic.jpeg';
-import earthiclogo from '../images/earthic/earthic-logo.png';
-import pietraKode from '../images/pietrakode-logo.png'
-import earthic from '../images/earthic/rawg/rawg-1.jpg'
-import leChicTwo from '../images/lechic.jpg';
-import lechicLogo from '../images/lechic-logo.png';
-import proyectos from '../images/proyectos.png';
-import logoDekton from '../images/dekton-logo.png';
-import logoSilestone from '../images/silestone-logo.png';
-import logoSensa from '../images/sensa-logo.png';
-import cocinaApp from '../images/cocinas-app.png';
+import Layout from "../layouts/Layout.astro";
+import leChic from "../images/main-lechic.jpeg";
+import earthiclogo from "../images/earthic/earthic-logo.png";
+import pietraKode from "../images/pietrakode-logo.png";
+import earthic from "../images/earthic/rawg/rawg-1.jpg";
+import leChicTwo from "../images/lechic.jpg";
+import lechicLogo from "../images/lechic-logo.png";
+import proyectos from "../images/proyectos.png";
+import logoDekton from "../images/dekton-logo.png";
+import logoSilestone from "../images/silestone-logo.png";
+import logoSensa from "../images/sensa-logo.png";
+import cocinaApp from "../images/cocinas-app.png";
 import banoApp from "../images/banos-app.png";
-import salonApp from '../images/salones-app.png';
-import exteriorApp from '../images/exteriores-app.png';
+import salonApp from "../images/salones-app.png";
+import exteriorApp from "../images/exteriores-app.png";
 ---
-<style define:vars={{ 
-	mainLeChic: `url("${leChic.src}")`,
-	earthic: `url("${earthic.src}")`,
-	lechic: `url("${leChicTwo.src}")`,
-	}}> 
 
-body{
-	background-color: black;
-}		
-.mainbg{
-	background-image:linear-gradient(to top, rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.25)), var(--mainLeChic);
-	background-repeat: no-repeat;
-	background-size: cover;
-	background-position: ;
-	height: 60vh;
-}
-.earthic{
-	background-image: linear-gradient(to top, rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.25)), var(--earthic);
-	background-repeat: no-repeat;
-	background-size: cover;
-	background-position: center;
-	height: 35vh;
-}
-.lechic{
-	background-image: linear-gradient(to top, rgba(0,0,0,0.55), rgba(0,0,0,0.25)), var(--lechic);
-	background-repeat: no-repeat;
-	background-size: cover;
-	background-position: center;
-	height: 35vh;
-}
-
-
+<style
+	define:vars={{
+		mainLeChic: `url("${leChic.src}")`,
+		earthic: `url("${earthic.src}")`,
+		lechic: `url("${leChicTwo.src}")`,
+	}}
+>
+	body {
+		background-color: black;
+	}
+	.mainbg {
+		background-image: linear-gradient(
+				to top,
+				rgba(0, 0, 0, 0.55),
+				rgba(0, 0, 0, 0.25)
+			),
+			var(--mainLeChic);
+		background-repeat: no-repeat;
+		background-size: cover;
+		background-position:;
+		height: 60vh;
+	}
+	.earthic {
+		background-image: linear-gradient(
+				to top,
+				rgba(0, 0, 0, 0.55),
+				rgba(0, 0, 0, 0.25)
+			),
+			var(--earthic);
+		background-repeat: no-repeat;
+		background-size: cover;
+		background-position: center;
+		height: 35vh;
+	}
+	.lechic {
+		background-image: linear-gradient(
+				to top,
+				rgba(0, 0, 0, 0.55),
+				rgba(0, 0, 0, 0.25)
+			),
+			var(--lechic);
+		background-repeat: no-repeat;
+		background-size: cover;
+		background-position: center;
+		height: 35vh;
+	}
 </style>
-<Layout title="Conoce las mejores superficies arquitectonicas como mármol, cuarzo, granito y ultracompactos">
+<Layout
+	title="Conoce las mejores superficies arquitectonicas: mármol, cuarzo, granito y ultracompactos"
+	Descripcion="Te invitamos a conocer la gama más innovadora de superficies para arquitectura y diseño de interiores. Con materiales de alta calidad como mármol, cuarzo, granito y ultracompactos de Cosentino, tendrás las mejores soluciones para transformar cualquier espacio con estilo, durabilidad y elegancia."
+>
 	<main>
 		<section>
-		<div class="mainbg flex justify-center items-center">
-			<div class="max-w-screen-xl">
-				<h1 class="text-white text-center font-normal text-4xl md:text-5xl mx-2 lg:text-6xl lg:mx-48 ">Stroit, líder en superficies de diseño para arquitectura y hogar</h1>
+			<div class="mainbg flex justify-center items-center">
+				<div class="max-w-screen-xl">
+					<h1
+						class="text-white text-center font-normal text-4xl md:text-5xl mx-2 lg:text-6xl lg:mx-48"
+					>
+						Stroit, líder en superficies de diseño para arquitectura
+						y hogar
+					</h1>
+				</div>
 			</div>
-		</div>
-	   </section>
-	   <section>
-		<div class="flex flex-col md:flex-row">
-			<div class="earthic md:basis-1/2 flex flex-col justify-center items-center">
-				<img class="w-9/12 sm:w-1/2 " src={earthiclogo.src} alt="Foto de earthic ragd">
-				<a href="/earthic">
-					<div class="py-2 px-6 rounded bg-zinc-600 hover:bg-zinc-800">
-						<p class="text-white ">Ver más</p>
+		</section>
+		<section>
+			<div class="flex flex-col md:flex-row">
+				<div
+					class="earthic md:basis-1/2 flex flex-col justify-center items-center"
+				>
+					<img
+						class="w-9/12 sm:w-1/2"
+						src={earthiclogo.src}
+						alt="Foto de earthic ragd"
+					/>
+					<a href="/earthic">
+						<div
+							class="py-2 px-6 rounded bg-zinc-600 hover:bg-zinc-800"
+						>
+							<p class="text-white">Ver más</p>
+						</div>
+					</a>
+				</div>
+				<div
+					class="lechic md:basis-1/2 flex flex-col justify-center items-center"
+				>
+					<img class="w-9/12 sm:w-1/2" src={lechicLogo.src} alt="" />
+					<a href="/lechic">
+						<div
+							class="py-2 px-6 rounded bg-zinc-600 hover:bg-zinc-800"
+						>
+							<p class="text-white">Ver más</p>
+						</div>
+					</a>
+				</div>
+			</div>
+		</section>
+		<section class="flex justify-center items-center pb-10 lg:py-36">
+			<div
+				class="pega max-w-screen-xl text-white mx-auto flex flex-col items-center text-center px-5 lg:flex-row lg:items-start lg:text-start relative"
+			>
+				<div
+					class="basis-1/2 pegatina py-10 lg:py-0 lg:pr-52 lg:sticky lg:top-10"
+				>
+					<div class="">
+						<h2 class="text-4xl py-6">
+							Soluciones arquitectónicas sin límites
+						</h2>
+						<p>
+							STROIT es una empres Mexicana apasionada por
+							encontrar la perfección en cada espacio. Con la
+							amplia variedad de superficies que va desde Mármol
+							hasta Ultracompactos.
+						</p>
+						<div
+							class="flex gap-x-8 pt-6 justify-center lg:justify-start"
+						>
+							<a
+								aria-label="Descubre más sobre Dekton"
+								href="/dekton"
+							>
+								<img
+									class="w-24"
+									src={logoDekton.src}
+									alt="Logotipo Dekton"
+								/>
+							</a>
+							<a
+								aria-label="Descubre más sobre Silestone"
+								href="/silestone"
+							>
+								<img
+									class="w-24"
+									src={logoSilestone.src}
+									alt="Logotipo Silestone"
+								/>
+							</a>
+							<a
+								aria-label="Descubre más sobre Sensa"
+								href="/sensa"
+							>
+								<img
+									class="w-24"
+									src={logoSensa.src}
+									alt="Logotipo Sensa"
+								/>
+							</a>
+						</div>
 					</div>
-				</a>
+				</div>
+				<div class="basis-1/2">
+					<img
+						src={proyectos.src}
+						alt="Algunos proyectos de stroit surfaces"
+					/>
+				</div>
 			</div>
-			<div class="lechic md:basis-1/2 flex flex-col justify-center items-center">
-				<img class="w-9/12 sm:w-1/2 " src={lechicLogo.src} alt="">
-				<a href="/lechic">
-					<div class="py-2 px-6 rounded bg-zinc-600 hover:bg-zinc-800">
-						<p class="text-white ">Ver más</p>
+		</section>
+		<section>
+			<div class="bg-gray-200 px-4 pb-8 mx-auto">
+				<h2 class="text-4xl text-center py-8">Aplicaciones</h2>
+				<div class="flex flex-wrap justify-center sm:gap-x-8 gap-y-4">
+					<div>
+						<img
+							class="mx-auto"
+							src={cocinaApp.src}
+							alt="Cocina hecha con silestone Et noir"
+						/>
+						<h3 class="text-3xl pl-2 py-2">Cocinas</h3>
+						<div class="p-px bg-black"></div>
+						<ul class="py-2 flex flex-col gap-y-2 pl-2">
+							<li>Revestimientos de cocina</li>
+							<li>Suelos de cocina</li>
+							<li>Reformas de cocina</li>
+							<li>Fregaderos de cocina</li>
+							<li>Encimeras de cocina</li>
+						</ul>
 					</div>
-				</a>
+					<div>
+						<img
+							class="mx-auto"
+							src={banoApp.src}
+							alt="Baño hecho con dekton"
+						/>
+						<h3 class="text-3xl pl-2 py-2">Baños</h3>
+						<div class="p-px bg-black"></div>
+						<ul class="py-2 flex flex-col gap-y-2 pl-2">
+							<li>Revestimientos de baño</li>
+							<li>Suelos de baño</li>
+							<li>Reformas de baño</li>
+							<li>Encimeras de baño</li>
+							<li>Lavabos</li>
+						</ul>
+					</div>
+					<div>
+						<img
+							class="mx-auto"
+							src={salonApp.src}
+							alt="Salón con dekton y silestone"
+						/>
+						<h3 class="text-3xl pl-2 py-2">Salones</h3>
+						<div class="p-px bg-black"></div>
+						<ul class="py-2 flex flex-col gap-y-2 pl-2">
+							<li>Mobiliario</li>
+							<li>Suelos y pavimentos</li>
+							<li>Revestimientos y aplacados</li>
+						</ul>
+					</div>
+					<div>
+						<img
+							class="mx-auto"
+							src={exteriorApp.src}
+							alt="Piso y comedor con dekton orix"
+						/>
+						<h3 class="text-3xl pl-2 py-2">Exteriores</h3>
+						<div class="p-px bg-black"></div>
+						<ul class="py-2 flex flex-col gap-y-2 pl-2">
+							<li>Fachadas</li>
+							<li>Cocinas de uso exterior</li>
+							<li>Piscinas</li>
+							<li>Suelos</li>
+						</ul>
+					</div>
+				</div>
 			</div>
-		</div>
-	   </section>
-	   <section class="flex justify-center items-center pb-10 lg:py-36">
-		<div class="pega max-w-screen-xl text-white mx-auto flex flex-col items-center text-center px-5 lg:flex-row lg:items-start lg:text-start relative">
-		<div class="basis-1/2 pegatina py-10 lg:py-0 lg:pr-52 lg:sticky lg:top-10">
-			<div class="">
-			<h2 class="text-4xl py-6">Soluciones arquitectónicas sin límites</h2>
-			<p>STROIT es una empres Mexicana apasionada por encontrar la perfección en cada espacio. Con la amplia variedad de superficies que va desde Mármol hasta Ultracompactos.</p>
-			<div class="flex gap-x-8 pt-6 justify-center lg:justify-start">
-				<a aria-label="Descubre más sobre Dekton" href="/dekton">
-				<img class="w-24" src={logoDekton.src} alt="Logotipo Dekton">
-				</a>
-				<a aria-label="Descubre más sobre Silestone" href="/silestone">
-				<img class="w-24" src={logoSilestone.src} alt="Logotipo Silestone">
-				</a>
-				<a aria-label="Descubre más sobre Sensa" href="/sensa">
-				<img class="w-24" src={logoSensa.src} alt="Logotipo Sensa">
-				</a>
-			</div>
-			</div>
-		</div>
-		<div class="basis-1/2">
-			<img src={proyectos.src} alt="Algunos proyectos de stroit surfaces">
-		</div>
-		</div>
-	   </section>
-	   <section>
-		 <div class="bg-gray-200 px-4 pb-8 mx-auto">
-			<h2 class="text-4xl text-center py-8">Aplicaciones</h2>
-			<div class="flex flex-wrap justify-center sm:gap-x-8 gap-y-4">
-			<div>
-				<img class="mx-auto" src={cocinaApp.src} alt="Cocina hecha con silestone Et noir">
-				<h3 class="text-3xl pl-2 py-2">Cocinas</h3>
-				<div class="p-px bg-black"></div>
-				<ul class="py-2 flex flex-col gap-y-2 pl-2">
-					<li>Revestimientos de cocina</li>
-					<li>Suelos de cocina</li>
-					<li>Reformas de cocina</li>
-					<li>Fregaderos de cocina</li>
-					<li>Encimeras de cocina</li>
-				</ul>
-			</div>
-			<div>
-				<img class="mx-auto" src={banoApp.src} alt="Baño hecho con dekton">
-				<h3 class="text-3xl pl-2 py-2">Baños</h3>
-				<div class="p-px bg-black"></div>
-				<ul class="py-2 flex flex-col gap-y-2 pl-2">
-					<li>Revestimientos de baño</li>
-					<li>Suelos de baño</li>
-					<li>Reformas de baño</li>
-					<li>Encimeras de baño</li>
-					<li>Lavabos</li>
-				</ul>
-			</div>
-			<div>
-				<img class="mx-auto" src={salonApp.src} alt="Salón con dekton y silestone">
-				<h3 class="text-3xl pl-2 py-2">Salones</h3>
-				<div class="p-px bg-black"></div>
-				<ul class="py-2 flex flex-col gap-y-2 pl-2">
-					<li>Mobiliario</li>
-					<li>Suelos y pavimentos</li>
-					<li>Revestimientos y aplacados</li>
-				</ul>
-			</div>
-			<div>
-				<img class="mx-auto" src={exteriorApp.src} alt="Piso y comedor con dekton orix">
-				<h3 class="text-3xl pl-2 py-2">Exteriores</h3>
-				<div class="p-px bg-black"></div>
-				<ul class="py-2 flex flex-col gap-y-2 pl-2">
-					<li>Fachadas</li>
-					<li>Cocinas de uso exterior</li>
-					<li>Piscinas</li>
-					<li>Suelos</li>
-				</ul>
-			</div>
-			</div>
-		 </div>
-	   </section>
+		</section>
 	</main>
 </Layout>
-
-
