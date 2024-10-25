@@ -1,0 +1,704 @@
+---
+import Layout from "../layouts/Layout.astro";
+import bella1 from "../images/promociones-bajio/bella/etbella.jpg";
+import bella2 from "../images/promociones-bajio/bella/etbella-2.jpg";
+import bella3 from "../images/promociones-bajio/bella/etbella-3.jpg";
+import calacatta1 from "../images/promociones-bajio/calacatta/calacatta1.jpg";
+import calacatta2 from "../images/promociones-bajio/calacatta/calacatta2.jpg";
+import calacatta3 from "../images/promociones-bajio/calacatta/calacatta3.jpg";
+import noir1 from "../images/promociones-bajio/noir/noir1.jpg";
+import noir2 from "../images/promociones-bajio/noir/noir2.jpg";
+import noir3 from "../images/promociones-bajio/noir/noir3.jpg";
+import marquina1 from "../images/promociones-bajio/marquina/marquina1.jpg";
+import marquina2 from "../images/promociones-bajio/marquina/marquina2.jpg";
+import marquina3 from "../images/promociones-bajio/marquina/marquina3.jpg";
+import marquina4 from "../images/promociones-bajio/marquina/marquina4.jpg";
+import aura1 from "../images/catalogo-promociones/dekton/aura/aura-1.jpg";
+import aura2 from "../images/catalogo-promociones/dekton/aura/aura-2.avif";
+import aura3 from "../images/catalogo-promociones/dekton/aura/aura-3.avif";
+import lucid1 from "../images/catalogo-promociones/dekton/lucid/lucid-1.avif";
+import lucid2 from "../images/catalogo-promociones/dekton/lucid/lucid-2.avif";
+import lucid3 from "../images/catalogo-promociones/dekton/lucid/lucid-3.jpg";
+import lucid4 from "../images/catalogo-promociones/dekton/lucid/lucid-4.jpg";
+import lucid5 from "../images/catalogo-promociones/dekton/lucid/lucid-5.jpg";
+import kreta1 from "../images/catalogo-promociones/dekton/kreta/kreta-1.avif";
+import kreta2 from "../images/catalogo-promociones/dekton/kreta/kreta-2.avif";
+import kreta3 from "../images/catalogo-promociones/dekton/kreta/kreta-3.avif";
+import markina from "../images/promociones-bajio/markina/markina.jpg";
+import logodekton from "../images/logo-dekton.svg";
+import logosilestone from "../images/silestone-logo.svg";
+import leChicTwo from "../images/lechic.jpg";
+import dekton from "../images/somnia.avif";
+import trevi from "../images/trevipolar.avif";
+---
+
+<style
+    define:vars={{
+        dekton: `url("${dekton.src}")`,
+        lechic: `url("${leChicTwo.src}")`,
+        trevi: `url("${trevi.src}")`,
+    }}
+>
+    .earthic {
+        background-image: linear-gradient(
+                to top,
+                rgba(0, 0, 0, 0.55),
+                rgba(0, 0, 0, 0.25)
+            ),
+            var(--dekton);
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+        height: 35vh;
+    }
+    .lechic {
+        background-image: linear-gradient(
+                to top,
+                rgba(0, 0, 0, 0.55),
+                rgba(0, 0, 0, 0.25)
+            ),
+            var(--lechic);
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+        height: 35vh;
+    }
+    .bgImage {
+        background-image: var(--trevi);
+        background-size: cover;
+        background-position: center;
+    }
+</style>
+<Layout
+    title="🔥 Promociones Dekton y Silestone"
+    description="Conoce las mejores promociones para transformar tus espacios con la sofisticación y durabilidad que solo Dekton y Silestone pueden ofrecer."
+>
+    <main class="">
+        <section
+            class=" w-full text-center lg:hidden"
+        >
+            <h1 class="text-white bg-orange-300 py-2">Catálogo de promociones 🔥</h1>
+        </section>
+        <section>
+            <div class="flex flex-col md:flex-row">
+                <div
+                    class="earthic md:basis-1/2 flex flex-col justify-center items-center"
+                >
+                    <div
+                        class="flex flex-col justify-center items-center my-6 space-y-2"
+                    >
+                        <p class="text-white mr-2">Conoce todo sobre</p>
+                        <img class="w-32" src={logodekton.src} alt="" />
+                    </div>
+                    <a href="/dekton">
+                        <div
+                            class="py-2 px-6 rounded bg-zinc-600 hover:bg-zinc-800"
+                        >
+                            <p class="text-white">Ver más</p>
+                        </div>
+                    </a>
+                </div>
+                <div
+                    class="lechic md:basis-1/2 flex flex-col justify-center items-center"
+                >
+                    <div
+                        class="flex flex-col justify-center items-center my-6 space-y-2"
+                    >
+                        <p class="text-white mr-2">Conoce todo sobre</p>
+                        <img class="w-32" src={logosilestone.src} alt="" />
+                    </div>
+                    <a href="/silestone">
+                        <div
+                            class="py-2 px-6 rounded bg-zinc-600 hover:bg-zinc-800"
+                        >
+                            <p class="text-white">Ver más</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+        <section>
+            <div>
+                <p class="text-gray-300 text-center py-6 px-4">
+                    Te presentamos nuestras promociones más destacadas para
+                    transformar tus espacios con la sofisticación y durabilidad
+                    que solo Dekton y Silestone pueden ofrecer.
+                </p>
+            </div>
+        </section>
+        <section>
+            <div class="max-w-screen-2xl mx-auto">
+                <div class="flex flex-col lg:flex-row">
+                    <div
+                        class="text-white lg:w-1/3 p-8 flex flex-col justify-between order-2 lg:order-1"
+                    >
+                        <div>
+                            <h3 class="text-4xl lg:text-6xl">Et Bella</h3>
+                            <p>Silestone - Eternal</p>
+                        </div>
+
+                        <div class="pt-6 lg:pt-0">
+                            <p class="">Medidas: 328cm x 152cm</p>
+                            <div class="flex space-x-2">
+                                <p>Espesor: 12mm</p>
+                                <p>Acabado: Suede</p>
+                            </div>
+                            <p class="font-thin py-3">
+                                Un material de lujo que aporta elegancia y
+                                sofisticación a cualquier espacio, creando
+                                ambientes luminosos y atemporales.
+                            </p>
+                            <div class="flex space-x-2 opacity-50 pb-1">
+                                <h4>Precio de lista:</h4>
+                                <div class="flex space-x-2">
+                                    <p class="line-through">
+                                        $63, 560 <span>MXN</span>
+                                    </p>
+                                </div>
+                            </div>
+                            <div
+                                class="flex items-center space-x-2 opacity-50 mb-6"
+                            >
+                                <h4>Precio en promoción:</h4>
+                                <div class="flex space-x-2">
+                                    <p
+                                        class="border border-red-500 p-1 text-red-300"
+                                    >
+                                        $19, 600 <span>MXN</span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div
+                        class="overflow-x-scroll snap-x snap-mandatory lg:w-2/3 responsive order-1 lg:order-2"
+                    >
+                        <div class="flex">
+                            <div class="absolute">
+                                <p
+                                    class="text-white font-light text-sm pl-6 p-4"
+                                >
+                                    Desliza<span class="pl-2">&rarr;</span>
+                                </p>
+                            </div>
+                            <img
+                                class="lg:object-cover h-auto w-auto snap-center"
+                                src={bella1.src}
+                                alt=""
+                            />
+                            <img
+                                class="lg:object-cover h-auto w-auto snap-center"
+                                src={bella2.src}
+                                alt=""
+                            />
+                            <img
+                                class="lg:object-cover h-auto w-auto snap-center"
+                                src={bella3.src}
+                                alt=""
+                            />
+                        </div>
+                    </div>
+                </div>
+                <div class="flex flex-col lg:flex-row">
+                    <div
+                        class="text-white lg:w-1/3 p-8 flex flex-col justify-between order-2"
+                    >
+                        <div>
+                            <h3 class="text-4xl lg:text-6xl">Et Noir</h3>
+                            <p>Silestone - Eternal</p>
+                        </div>
+                        <div class="pt-6 lg:pt-0">
+                            <p>Medidas: 323cm x 136cm</p>
+                            <div class="flex space-x-2">
+                                <p>Espesor: 12mm</p>
+                                <p>Acabado: Suede</p>
+                            </div>
+
+                            <p class="font-thin py-3">
+                                Inspirado en la profundidad del universo,
+                                Silestone Et Noir es un material de diseño que
+                                cautiva con su elegancia oscura. Su fondo negro
+                                intenso, adornado con sutiles vetas grises, crea
+                                un ambiente sofisticado y misterioso.
+                            </p>
+                            <div class="flex space-x-2 opacity-50 pb-1">
+                                <h4>Precio de lista:</h4>
+                                <div class="flex space-x-2">
+                                    <p class="line-through">
+                                        $54, 702 <span>MXN</span>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-2 opacity-50">
+                                <h4>Precio en promoción:</h4>
+                                <div class="flex space-x-2">
+                                    <p
+                                        class="border border-red-500 p-1 text-red-300"
+                                    >
+                                        $19, 600 <span>MXN</span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div
+                        class="overflow-x-scroll snap-x snap-mandatory lg:w-2/3 lg:order-1"
+                    >
+                        <div class="flex">
+                            <div class="absolute">
+                                <p
+                                    class="text-white font-light text-sm pl-6 p-4"
+                                >
+                                    Desliza<span class="pl-2">&rarr;</span>
+                                </p>
+                            </div>
+                            <img
+                                class="lg:object-cover h-auto w-auto snap-center"
+                                src={calacatta1.src}
+                                alt=""
+                            />
+                            <img
+                                class="lg:object-cover h-auto w-auto snap-center"
+                                src={calacatta2.src}
+                                alt=""
+                            />
+                            <img
+                                class="lg:object-cover h-auto w-auto snap-center"
+                                src={calacatta3.src}
+                                alt=""
+                            />
+                        </div>
+                    </div>
+                </div>
+                <div class="flex flex-col lg:flex-row">
+                    <div
+                        class="text-white lg:w-1/3 p-8 flex flex-col justify-between order-2 lg:order-1"
+                    >
+                        <div>
+                            <h3 class="text-4xl lg:text-6xl">Et Bella</h3>
+                            <p>Silestone - Eternal</p>
+                        </div>
+
+                        <div class="pt-6 lg:pt-0">
+                            <p class="">Medidas: 328cm x 152cm</p>
+                            <div class="flex space-x-2">
+                                <p>Espesor: 12mm</p>
+                                <p>Acabado: Suede</p>
+                            </div>
+                            <p class="font-thin py-3">
+                                Un material de lujo que aporta elegancia y
+                                sofisticación a cualquier espacio, creando
+                                ambientes luminosos y atemporales.
+                            </p>
+                            <div class="flex space-x-2 opacity-50 pb-1">
+                                <h4>Precio de lista:</h4>
+                                <div class="flex space-x-2">
+                                    <p class="line-through">
+                                        $63, 560 <span>MXN</span>
+                                    </p>
+                                </div>
+                            </div>
+                            <div
+                                class="flex items-center space-x-2 opacity-50 mb-6"
+                            >
+                                <h4>Precio en promoción:</h4>
+                                <div class="flex space-x-2">
+                                    <p
+                                        class="border border-red-500 p-1 text-red-300"
+                                    >
+                                        $19, 600 <span>MXN</span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div
+                        class="overflow-x-scroll snap-x snap-mandatory lg:w-2/3 responsive order-1 lg:order-2"
+                    >
+                        <div class="flex">
+                            <div class="absolute">
+                                <p
+                                    class="text-white font-light text-sm pl-6 p-4"
+                                >
+                                    Desliza<span class="pl-2">&rarr;</span>
+                                </p>
+                            </div>
+                            <img
+                                class="lg:object-cover h-auto w-auto snap-center"
+                                src={noir1.src}
+                                alt=""
+                            />
+                            <img
+                                class="lg:object-cover h-auto w-auto snap-center"
+                                src={noir2.src}
+                                alt=""
+                            />
+                            <img
+                                class="lg:object-cover h-auto w-auto snap-center"
+                                src={noir3.src}
+                                alt=""
+                            />
+                        </div>
+                    </div>
+                </div>
+                <div class="flex flex-col lg:flex-row">
+                    <div
+                        class="text-white lg:w-1/3 p-8 flex flex-col justify-between order-2"
+                    >
+                        <div>
+                            <h3 class="text-4xl lg:text-6xl">Et Marquina</h3>
+                            <p>Silestone - Eternal</p>
+                        </div>
+                        <div class="pt-6 lg:pt-0">
+                            <p>Medidas: 323cm x 159cm</p>
+                            <div class="flex space-x-2">
+                                <p>Espesor: 20mm</p>
+                                <p>Acabado: Suede</p>
+                            </div>
+
+                            <p class="font-thin py-3">
+                                Evocando al bello mármol español Negro Marquina,
+                                esta opción regala una vehemente base de color
+                                negro donde surgen contundentes e intensos
+                                detalles y veteados blancos.
+                            </p>
+                            <div class="flex space-x-2 opacity-50 pb-1">
+                                <h4>Precio de lista:</h4>
+                                <div class="flex space-x-2">
+                                    <p class="line-through">
+                                        $63, 552 <span>MXN</span>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-2 opacity-50">
+                                <h4>Precio en promoción:</h4>
+                                <div class="flex space-x-2">
+                                    <p
+                                        class="border border-red-500 p-1 text-red-300"
+                                    >
+                                        $19, 600 <span>MXN</span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div
+                        class="overflow-x-scroll snap-x snap-mandatory lg:w-2/3 lg:order-1"
+                    >
+                        <div class="flex">
+                            <div class="absolute">
+                                <p
+                                    class="text-white font-light text-sm pl-6 p-4"
+                                >
+                                    Desliza<span class="pl-2">&rarr;</span>
+                                </p>
+                            </div>
+                            <img
+                                class="lg:object-cover h-auto w-auto snap-center"
+                                src={marquina1.src}
+                                alt=""
+                            />
+                            <img
+                                class="lg:object-cover h-auto w-auto snap-center"
+                                src={marquina2.src}
+                                alt=""
+                            />
+                            <img
+                                class="lg:object-cover h-auto w-auto snap-center"
+                                src={marquina3.src}
+                                alt=""
+                            />
+                            <img
+                                class="lg:object-cover h-auto w-auto snap-center"
+                                src={marquina4.src}
+                                alt=""
+                            />
+                        </div>
+                    </div>
+                </div>
+                <div class="flex flex-col lg:flex-row">
+                    <div
+                        class="text-white lg:w-1/3 p-8 flex flex-col justify-between order-2 lg:order-1"
+                    >
+                        <div>
+                            <h3 class="text-4xl lg:text-6xl">Aura</h3>
+                            <p>Dk natural</p>
+                        </div>
+                        <div class="pt-6 lg:pt-0">
+                            <p>Medidas: 320cm x 144cm</p>
+                            <div class="flex space-x-2">
+                                <p>Espesor: 20mm</p>
+                                <p>Acabado: Mate</p>
+                            </div>
+
+                            <p class="font-thin py-3">
+                                El color blanco de Dekton Aura crea una
+                                sensación de amplitud y luminosidad en cualquier
+                                espacio.
+                            </p>
+                            <div class="flex space-x-2 opacity-50 pb-1">
+                                <h4>Precio de lista:</h4>
+                                <div class="flex space-x-2">
+                                    <p class="line-through">
+                                        $67.566.07<span>MXN</span>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-2 opacity-50">
+                                <h4>Precio en promoción:</h4>
+                                <div class="flex space-x-2">
+                                    <p
+                                        class="border border-red-500 p-1 text-red-300"
+                                    >
+                                        $20,100 <span>MXN</span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div
+                        class="overflow-x-scroll snap-x snap-mandatory lg:w-2/3 lg:order-1"
+                    >
+                        <div class="flex">
+                            <div class="absolute">
+                                <p
+                                    class="text-white font-light text-sm pl-6 p-4"
+                                >
+                                    Desliza<span class="pl-2">&rarr;</span>
+                                </p>
+                            </div>
+                            <img
+                                class="lg:object-cover h-auto w-auto snap-center"
+                                src={aura1.src}
+                                alt=""
+                            />
+                            <img
+                                class="lg:object-cover h-auto w-auto snap-center"
+                                src={aura2.src}
+                                alt=""
+                            />
+                            <img
+                                class="lg:object-cover h-auto w-auto snap-center"
+                                src={aura3.src}
+                                alt=""
+                            />
+                        </div>
+                    </div>
+                </div>
+                <div class="flex flex-col lg:flex-row">
+                    <div
+                        class="text-white lg:w-1/3 p-8 flex flex-col justify-between order-2"
+                    >
+                        <div>
+                            <h3 class="text-4xl lg:text-6xl">Lucid</h3>
+                            <p>Dekton - Onirika</p>
+                        </div>
+                        <div class="pt-6 lg:pt-0">
+                            <p>Medidas: 320cm x 144cm</p>
+                            <div class="flex space-x-2">
+                                <p>Espesor: 12mm</p>
+                                <p>Acabado: XGLOSS</p>
+                            </div>
+
+                            <p class="font-thin py-3">
+                                Las delicadas vetas blancas añaden sofisticación
+                                y luminosidad a un fondo de tonos gris claros,
+                                creando un efecto visual de frescura y amplitud.
+                                Dekton Lucid transforma cualquier espacio con su
+                                estética refinada y su capacidad para iluminar
+                                ambientes con su pureza y claridad.
+                            </p>
+                            <div class="flex space-x-2 opacity-50 pb-1">
+                                <h4>Precio de lista:</h4>
+                                <div class="flex space-x-2">
+                                    <p class="line-through">
+                                        $73, 812 <span>MXN</span>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-2 opacity-50">
+                                <h4>Precio en promoción:</h4>
+                                <div class="flex space-x-2">
+                                    <p
+                                        class="border border-red-500 p-1 text-red-300"
+                                    >
+                                        $20, 100 <span>MXN</span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div
+                        class="overflow-x-scroll snap-x snap-mandatory lg:w-2/3 lg:order-1"
+                    >
+                        <div class="flex">
+                            <div class="absolute">
+                                <p
+                                    class="text-white font-light text-sm pl-6 p-4"
+                                >
+                                    Desliza<span class="pl-2">&rarr;</span>
+                                </p>
+                            </div>
+                            <img
+                                class="lg:object-cover h-auto w-auto snap-center"
+                                src={lucid5.src}
+                                alt=""
+                            />
+                            <img
+                                class="lg:object-cover h-auto w-auto snap-center"
+                                src={lucid2.src}
+                                alt=""
+                            />
+                            <img
+                                class="lg:object-cover h-auto w-auto snap-center"
+                                src={lucid3.src}
+                                alt=""
+                            />
+                            <img
+                                class="lg:object-cover h-auto w-auto snap-center"
+                                src={lucid4.src}
+                                alt=""
+                            />
+                            <img
+                                class="lg:object-cover h-auto w-auto snap-center"
+                                src={lucid1.src}
+                                alt=""
+                            />
+                        </div>
+                    </div>
+                </div>
+                <div class="flex flex-col lg:flex-row">
+                    <div
+                        class="text-white lg:w-1/3 p-8 flex flex-col justify-between order-2 lg:order-1"
+                    >
+                        <div>
+                            <h3 class="text-4xl lg:text-6xl">Kreta</h3>
+                            <p>Dk industrial</p>
+                        </div>
+                        <div class="pt-6 lg:pt-0">
+                            <p>Medidas: 320cm x 144cm</p>
+                            <div class="flex space-x-2">
+                                <p>Espesor: 20mm</p>
+                                <p>Acabado: Mate</p>
+                            </div>
+
+                            <p class="font-thin py-3">
+                                Inspirado en los suelos de cemento clásicos, con
+                                un aire de serenidad. El diseño es uniforme y
+                                contenido, aunque incluye áreas oscuras o más
+                                claras en función de la densidad del diseño.
+                            </p>
+                            <div class="flex space-x-2 opacity-50 pb-1">
+                                <h4>Precio de lista:</h4>
+                                <div class="flex space-x-2">
+                                    <p class="line-through">
+                                        $51,225.74 <span>MXN</span>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-2 opacity-50">
+                                <h4>Precio en promoción:</h4>
+                                <div class="flex space-x-2">
+                                    <p
+                                        class="border border-red-500 p-1 text-red-300"
+                                    >
+                                        $25,612 <span>MXN</span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div
+                        class="overflow-x-scroll snap-x snap-mandatory lg:w-2/3 lg:order-1"
+                    >
+                        <div class="flex">
+                            <div class="absolute">
+                                <p
+                                    class="text-white font-light text-sm pl-6 p-4"
+                                >
+                                    Desliza<span class="pl-2">&rarr;</span>
+                                </p>
+                            </div>
+                            <img
+                                class="lg:object-cover h-auto w-auto snap-center"
+                                src={kreta1.src}
+                                alt=""
+                            />
+                            <img
+                                class="lg:object-cover h-auto w-auto snap-center"
+                                src={kreta2.src}
+                                alt=""
+                            />
+                            <img
+                                class="lg:object-cover h-auto w-auto snap-center"
+                                src={kreta3.src}
+                                alt=""
+                            />
+                        </div>
+                    </div>
+                </div>
+                <div class="flex flex-col lg:flex-row">
+                    <div
+                        class="text-white lg:w-1/3 p-8 flex flex-col justify-between order-2"
+                    >
+                        <div>
+                            <h3 class="text-4xl lg:text-6xl">Marquina</h3>
+                            <p>Dekton - Onirika</p>
+                        </div>
+                        <div class="pt-6 lg:pt-0">
+                            <p>Medidas: 320cm x 144cm</p>
+                            <div class="flex space-x-2">
+                                <p>Espesor: 12mm</p>
+                                <p>Acabado: Mate</p>
+                            </div>
+
+                            <p class="font-thin py-3">
+                                Nos presenta una paleta cromática que evoca la
+                                elegancia y el misterio. Su base negra, adornada
+                                con vetas grises y blancas, crea un juego de
+                                contrastes que aporta sofisticación y dinamismo
+                                a cualquier espacio.
+                            </p>
+                            <div class="flex space-x-2 opacity-50 pb-1">
+                                <h4>Precio de lista:</h4>
+                                <div class="flex space-x-2">
+                                    <p class="line-through">
+                                        $61, 560 <span>MXN</span>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-2 opacity-50">
+                                <h4>Precio en promoción:</h4>
+                                <div class="flex space-x-2">
+                                    <p
+                                        class="border border-red-500 p-1 text-red-300"
+                                    >
+                                        $20, 100 <span>MXN</span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div
+                        class="overflow-x-scroll snap-x snap-mandatory lg:w-2/3 lg:order-1"
+                    >
+                        <div class="flex">
+                            <div class="absolute">
+                                <p
+                                    class="text-white font-light text-sm pl-6 p-4"
+                                >
+                                    Desliza<span class="pl-2">&rarr;</span>
+                                </p>
+                            </div>
+                            <img
+                                class="lg:object-cover h-auto w-auto snap-center"
+                                src={markina.src}
+                                alt=""
+                            />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+</Layout>
