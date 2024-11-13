@@ -7,18 +7,20 @@ import Footer from "../components/footer.astro";
 <!doctype html>
 <html lang="es">
 	<head>
-		<!-- Google tag (gtag.js) -->
 		<script
 			async
 			src="https://www.googletagmanager.com/gtag/js?id=G-ZKBLNZ54R0"
 		></script>
 		<script>
+			// @ts-ignore
 			window.dataLayer = window.dataLayer || [];
-			function gtag() {
+			// Declaramos la función gtag como de tipo `any` para que no genere errores de tipos
+			// @ts-ignore
+			const gtag: any = function () {
+				// @ts-ignore
 				dataLayer.push(arguments);
-			}
+			};
 			gtag("js", new Date());
-
 			gtag("config", "G-ZKBLNZ54R0");
 		</script>
 		<meta charset="UTF-8" />
