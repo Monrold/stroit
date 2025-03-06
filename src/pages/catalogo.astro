@@ -118,9 +118,11 @@ const somnia = "https://pub-81aca52011284a96b910aedeefde00fe.r2.dev/somnia.webp"
 }
 
 </style>
-<Layout title="Catálogo Stroit Surfaces | Dekton, Silestone y Sensa" description="Explora el catálogo de Stroit Surfaces con superficies premium como Dekton, Silestone y Sensa. Descubre alternativas ideales al mármol y granito, con diseños exclusivos, durabilidad y elegancia para transformar tus espacios.">
+<Layout title="Catálogo Stroit Surfaces | Dekton, Silestone y Sensa en México" description="Conoce el mayor catálogo de Dekton, Silestone y Sensa en México. Explora superficies premium ideales para reemplazar el mármol y granito, con diseños exclusivos, durabilidad excepcional y elegancia para transformar tus espacios.">
     <main class="">
-        <section class="bgImage h-56 md:h-72 w-full mb-4"></section>
+        <section class="bgImage h-56 md:h-72 w-full mb-4 flex justify-end items-end">
+            <h1 class="text-white mx-4 my-2">Silestone y Dekton en 🇲🇽 México</h1>
+        </section>
         <section
             class="mx-2 bg-zinc-900 px-8 py-4 rounded-full md:mx-auto max-w-max"
         >
@@ -348,9 +350,9 @@ const somnia = "https://pub-81aca52011284a96b910aedeefde00fe.r2.dev/somnia.webp"
                     <li
                         class="w-1/2 sm:w-1/3 lg:w-1/4 px-2 my-4 post-item"
                         data-marca={item.marca}
-                        data-tono={item.tonos[0]}
-                        data-acabado={item.acabados[0]}
-                        data-estilo={item.estilo[0]}
+                        data-tono={Array.isArray(item.tonos) && item.tonos.length > 0 ? item.tonos[0] : undefined}
+                        data-acabado={Array.isArray(item.acabados) && item.acabados.length > 0 ? item.acabados[0] : undefined}
+                        data-estilo={Array.isArray(item.estilo) && item.estilo.length > 0 ? item.estilo[0] : undefined}
                         data-promocion={item.promocion}
                     >
                         {item.imagen?.[0]?.fields?.file?.url && (

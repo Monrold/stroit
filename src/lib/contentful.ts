@@ -14,7 +14,10 @@ export interface Surfaces {
       estilo: EntryFieldTypes.Text,
       imagen: EntryFieldTypes.AssetLink,
       promocion: EntryFieldTypes.Boolean,
-      price: EntryFieldTypes.Number,
+      price: EntryFieldTypes.Text,
+      pricePromo: EntryFieldTypes.Text,
+      restriccionPromo: EntryFieldTypes.Text,
+      restriccionPrecio: EntryFieldTypes.Text,
     }
   }
 
