@@ -40,6 +40,7 @@ export async function getStaticPaths() {
       espesores: item.fields.espesores,
       imagen: item.fields.imagen,
       promocion: item.fields.promocion,
+      price: item.fields.price,
     },
   }));
   return pages;
@@ -56,6 +57,7 @@ const {
   espesores,
   imagen,
   promocion,
+  price,
 } = Astro.props;
 ---
 
@@ -208,6 +210,17 @@ const {
           }
         </div>
       </div>
+    </section>
+    <!-- new section price -->
+    <section>
+      { price && (
+        <div>
+          <p>$</p>
+          <p>{price}</p>
+          <p>mxn</p>
+        </div>
+      )
+      }
     </section>
     <section class="px-8 my-10 space-y-3">
       <h3 class="text-white">Detalles de la tabla completa {nombre}</h3>
