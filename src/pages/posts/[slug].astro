@@ -621,33 +621,34 @@ const {
 
   <!--Cuentra regresiva marzo -->
   <script>
-    // Definir la fecha de fin de marzo (31 de marzo de 2025 a las 23:59:59)
-    const endDate = new Date("March 31, 2025 23:59:59").getTime();
-  
-    // Actualizar la cuenta regresiva cada 1 segundo
-    const interval = setInterval(function() {
-      // Obtener la fecha y hora actuales
-      const now = new Date().getTime();
-  
-      // Calcular la diferencia entre la fecha de fin de marzo y la fecha actual
-      const distance = endDate - now;
-  
-      // Calcular los días, horas y minutos restantes
-      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-  
-      // Mostrar el resultado con días, horas y minutos
-      document.getElementById("countdown").innerHTML =
-        days + "d " + hours + "h " + minutes + "m";
-  
-      // Si la cuenta regresiva ha terminado
-      if (distance < 0) {
-        clearInterval(interval);
-        document.getElementById("countdown").innerHTML = "0d 0h 0m";
-      }
-    }, 1000);
-  </script>
+  // Definir la fecha de fin de junio (30 de junio de 2025 a las 23:59:59)
+  const endDate = new Date("June 30, 2025 23:59:59").getTime();
+
+  // Actualizar la cuenta regresiva cada 1 segundo
+  const interval = setInterval(function() {
+    // Obtener la fecha y hora actuales
+    const now = new Date().getTime();
+
+    // Calcular la diferencia entre la fecha de fin de junio y la fecha actual
+    const distance = endDate - now;
+
+    // Calcular los días, horas y minutos restantes
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+
+    // Mostrar el resultado con días, horas y minutos
+    document.getElementById("countdown").innerHTML =
+      days + "d " + hours + "h " + minutes + "m";
+
+    // Si la cuenta regresiva ha terminado
+    if (distance < 0) {
+      clearInterval(interval);
+      document.getElementById("countdown").innerHTML = "0d 0h 0m";
+    }
+  }, 1000);
+</script>
+
 
   <script>
     document.addEventListener("DOMContentLoaded", function () {
