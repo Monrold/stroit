@@ -3,6 +3,7 @@ const { title, description } = Astro.props;
 import Nav from "../components/nav.astro";
 import Footer from "../components/footer.astro";
 import Posthog from "../components/posthog.astro";
+import Google from "../components/google.astro";
 ---
 
 <!doctype html>
@@ -13,18 +14,7 @@ import Posthog from "../components/posthog.astro";
 			async
 			src="https://www.googletagmanager.com/gtag/js?id=G-ZKBLNZ54R0"
 		></script>
-		<script>
-			// @ts-ignore
-			window.dataLayer = window.dataLayer || [];
-			// Declaramos la función gtag como de tipo `any` para que no genere errores de tipos
-			// @ts-ignore
-			const gtag: any = function () {
-				// @ts-ignore
-				dataLayer.push(arguments);
-			};
-			gtag("js", new Date());
-			gtag("config", "G-ZKBLNZ54R0");
-		</script>
+		
 		<meta http-equiv="Content-Security-Policy" content="connect-src 'self' https://analytics.stroitsurfaces.com">
 		<meta charset="UTF-8" />
 		<meta name="description" content={description} />
@@ -49,6 +39,7 @@ import Posthog from "../components/posthog.astro";
 		/>
 		<title>{title}</title>
 		<Posthog/>
+		<Google />
 	</head>
 	<body class="bg-zinc-800">
 		<Nav />
