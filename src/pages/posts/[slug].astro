@@ -30,12 +30,21 @@ export async function getStaticPaths() {
 
   const pages = entries.items
     .map((item) => {
-      const slug = item.fields.nombre;
+      const slug = item.fields.nombre && item.fields.marca
+  ? `${item.fields.marca} ${item.fields.nombre}`
+      .toLowerCase()
+      .normalize("NFD")                      // Elimina tildes
+      .replace(/[\u0300-\u036f]/g, "")       // Limpieza de tildes
+      .trim()
+      .replace(/\s+/g, "-")                  // Espacios por guiones
+      .replace(/[^a-z0-9\-]/g, "")           // Solo letras, números y guiones
+  : null;
+
 
       // Verificar si 'slug' está presente y no es vacío
       if (!slug || slug.trim() === "") {
-        console.error("Missing slug for item:", item); // Imprimir un mensaje de error para ayudarte a depurar
-        return null; // Ignorar este item si no tiene slug
+        console.error("Missing slug for item:", item);
+        return null;
       }
 
       return {
@@ -58,7 +67,7 @@ export async function getStaticPaths() {
         },
       };
     })
-    .filter((page) => page !== null); // Filtrar los elementos nulos (sin slug)
+    .filter((page) => page !== null);
 
   return pages;
 }
@@ -79,6 +88,7 @@ const {
   restriccionPromo,
   restriccionPrecio,
 } = Astro.props;
+
 ---
 
 <style
@@ -113,7 +123,16 @@ const {
   }
 </style>
 
-<Layout>
+<Layout title={`Descubre ${marca} ${nombre} | en Stroit Surfaces`}
+  description={
+    marca === "dekton"
+      ? `Dekton ${nombre} ofrece máxima resistencia a rayaduras, calor, manchas y rayos UV. Ideal para cocinas, fachadas y exteriores. Encuéntralo en Stroit Surfaces, distribuidor oficial en México.`
+      : marca === "silestone"
+      ? `Silestone ${nombre} combina diseño y tecnología en una superficie de cuarzo resistente a manchas y uso diario. Perfecto para interiores modernos. En Stroit Surfaces.`
+      : marca === "sensa"
+      ? `Sensa ${nombre} es granito natural protegido contra manchas y uso cotidiano, ideal para quienes buscan elegancia y durabilidad sin mantenimiento. Disponible en Stroit Surfaces.`
+      : `Descubre ${nombre} de ${marca}, una superficie elegante y duradera, resistente a rayaduras, manchas, altas temperaturas y uso diario. Ideal para cocinas, baños o revestimientos. Disponible en Stroit Surfaces, distribuidor oficial en México.`
+  }>
   <main class="max-w-screen-xl mx-auto">
     <section class="text-white lg:flex lg:px-8 pb-4 lg:pb-0 lg:py-10 relative">
       <div class="lg:w-2/3 relative">

@@ -25,38 +25,50 @@ const entries = await contentfulClient.getEntries<Surfaces>({
     content_type: "stroit",
 });
 
+
 const posts = entries.items.map((item) => {
-    const {
-        nombre,
-        marca,
-        coleccion,
-        espesores,
-        acabados,
-        medidas,
-        tonos,
-        estilo,
-        imagen,
-        promocion,
-    } = item.fields;
+  const {
+    nombre,
+    marca,
+    coleccion,
+    espesores,
+    acabados,
+    medidas,
+    tonos,
+    estilo,
+    imagen,
+    promocion,
+  } = item.fields;
 
-    // Convertir el valor booleano a cadena "true" o "false"
-    const promocionStr = promocion ? "true" : "false";
+  // Convertir el valor booleano a cadena "true" o "false"
+  const promocionStr = promocion ? "true" : "false";
 
-    return {
-        nombre,
-        marca,
-        coleccion,
-        espesores,
-        acabados,
-        medidas,
-        tonos,
-        estilo,
-        imagen,
-        promocion: promocionStr, // Usar la cadena en lugar del booleano
-        slug: `${item.fields.nombre}`,
-    };
+  // Generar slug con reglas: minúsculas, sin tildes, con guiones
+ const slug = nombre && marca
+  ? `${marca} ${nombre}`
+      .toLowerCase()
+      .normalize("NFD")                    // Elimina acentos
+      .replace(/[\u0300-\u036f]/g, "")     // Limpieza de tildes
+      .trim()
+      .replace(/\s+/g, "-")                // Espacios por guiones
+      .replace(/[^a-z0-9\-]/g, "")         // Solo letras, números y guiones
+  : "";
+
+
+  return {
+    nombre,
+    marca,
+    coleccion,
+    espesores,
+    acabados,
+    medidas,
+    tonos,
+    estilo,
+    imagen,
+    promocion: promocionStr,
+    slug,
+  };
 });
-
 
 const somnia = "https://pub-81aca52011284a96b910aedeefde00fe.r2.dev/somnia.webp";
 
