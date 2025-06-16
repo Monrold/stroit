@@ -1,0 +1,48 @@
+---
+import { contentfulClient } from "../lib/contentful";
+
+const entries = await contentfulClient.getEntries({
+  content_type: "stroit",
+  select: ["fields.nombre", "fields.marca"],
+  limit: 1000,
+  "sys.publishedAt[exists]": true, // Filtra solo entradas publicadas
+});
+
+const listado = entries.items.map((item) => {
+  const nombre = item.fields.nombre || "";
+  const marca = item.fields.marca || "";
+
+  const slug =
+    marca && nombre
+      ? `${marca} ${nombre}`
+          .toLowerCase()
+          .normalize("NFD")
+          .replace(/[\u0300-\u036f]/g, "")
+          .trim()
+          .replace(/\s+/g, "-")
+          .replace(/[^a-z0-9\-]/g, "")
+      : "";
+
+  return {
+    nombre,
+    marca,
+    slug,
+  };
+});
+
+const totalEntradas = listado.length;
+---
+
+<html lang="es">
+  <body>
+    <h1>Listado de productos publicados</h1>
+    <p>Total de entradas publicadas: {totalEntradas}</p>
+    <ul>
+      {listado.map((item) => (
+        <li >
+          <code>posts/{item.slug}</code>
+        </li>
+      ))}
+    </ul>
+  </body>
+</html>

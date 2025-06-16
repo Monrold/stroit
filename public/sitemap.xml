@@ -7,7 +7,7 @@
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
-  
+
   <!-- Página de marcas -->
   <url>
     <loc>https://stroitsurfaces.com/dekton</loc>
@@ -27,7 +27,7 @@
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
-  
+
   <!-- Catálogos -->
   <url>
     <loc>https://stroitsurfaces.com/catalogo</loc>
@@ -41,7 +41,7 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-  
+
   <!-- Páginas de colecciones -->
   <url>
     <loc>https://stroitsurfaces.com/lechic</loc>
@@ -55,7 +55,7 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-  
+
   <!-- Página de servicios -->
   <url>
     <loc>https://stroitsurfaces.com/servicios</loc>
@@ -63,5 +63,18 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
+
+  <url>
+    <loc>https://stroitsurfaces.com/privacy</loc>
+    <lastmod>2024-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Posts de productos -->
+  <!-- Ejemplo de una URL para posts -->
+  <!-- <url><loc>https://stroitsurfaces.com/posts/dekton-sasea-kc</loc><lastmod>2024-11-13</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url> -->
   
-</urlset>
+  <!-- Lista completa: -->
+  
+ 
