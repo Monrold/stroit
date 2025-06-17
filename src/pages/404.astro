@@ -1,0 +1,27 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout title="Página no encontrada" description="Error 404 - Página no disponible">
+  <section
+    class="min-h-screen flex flex-col items-center justify-center text-center px-6 py-12 relative bg-black/70 text-white"
+    style="background-image: url('https://pub-81aca52011284a96b910aedeefde00fe.r2.dev/somnia.webp'); background-size: cover; background-position: center;"
+  >
+    <div class="bg-black/60 p-8 rounded-xl max-w-xl">
+      <h1 class="text-6xl font-bold mb-4">404</h1>
+      <p class="text-2xl font-medium mb-6">
+        Cada espacio cuenta, pero este aún no está construido.
+      </p>
+      <p class="text-gray-300 mb-8">
+        La página que buscas no existe o fue removida.<br />
+        Volvamos al plano principal.
+      </p>
+      <a
+        href="/"
+        class="inline-block px-6 py-3 bg-white text-black font-semibold rounded-full transition hover:bg-gray-200"
+      >
+        Ir al inicio
+      </a>
+    </div>
+  </section>
+</Layout>
