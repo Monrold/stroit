@@ -21,39 +21,42 @@ import otherEstilo from "../images/catalogo/filters/estilos/organico.jpg";
 
 
 
-const entries = await contentfulClient.getEntries<Surfaces>({
+import type { Entry } from "contentful"; // asegúrate de importar Entry
+
+let skip = 0;
+const limit = 100;
+let total = 0;
+
+// Aquí guardamos los entries completos
+let allEntries: Entry<Surfaces>[] = [];
+
+do {
+  const response = await contentfulClient.getEntries<Surfaces>({
     content_type: "stroit",
-});
+    skip,
+    limit,
+  });
 
+  allEntries = allEntries.concat(response.items);
+  total = response.total;
+  skip += limit;
+} while (skip < total);
 
-const posts = entries.items.map((item) => {
-  const {
-    nombre,
-    marca,
-    coleccion,
-    espesores,
-    acabados,
-    medidas,
-    tonos,
-    estilo,
-    imagen,
-    promocion,
-  } = item.fields;
+// Ahora mapeamos sobre los entries, extrayendo los fields
+const posts = allEntries.map((entry) => {
+  const { nombre, marca, coleccion, espesores, acabados, medidas, tonos, estilo, imagen, promocion } = entry.fields;
 
-  // Convertir el valor booleano a cadena "true" o "false"
   const promocionStr = promocion ? "true" : "false";
 
-  // Generar slug con reglas: minúsculas, sin tildes, con guiones
- const slug = nombre && marca
-  ? `${marca} ${nombre}`
-      .toLowerCase()
-      .normalize("NFD")                    // Elimina acentos
-      .replace(/[\u0300-\u036f]/g, "")     // Limpieza de tildes
-      .trim()
-      .replace(/\s+/g, "-")                // Espacios por guiones
-      .replace(/[^a-z0-9\-]/g, "")         // Solo letras, números y guiones
-  : "";
-
+  const slug = nombre && marca
+    ? `${marca} ${nombre}`
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .trim()
+        .replace(/\s+/g, "-")
+        .replace(/[^a-z0-9\-]/g, "")
+    : "";
 
   return {
     nombre,
@@ -70,8 +73,11 @@ const posts = entries.items.map((item) => {
   };
 });
 
-console.log(entries);
+
+
+
 const somnia = "https://pub-81aca52011284a96b910aedeefde00fe.r2.dev/somnia.webp";
+console.log(posts.length);
 
 ---
 
