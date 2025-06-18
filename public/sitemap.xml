@@ -71,10 +71,467 @@
     <priority>0.7</priority>
   </url>
 
-  <!-- Posts de productos -->
-  <!-- Ejemplo de una URL para posts -->
-  <!-- <url><loc>https://stroitsurfaces.com/posts/dekton-sasea-kc</loc><lastmod>2024-11-13</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url> -->
-  
-  <!-- Lista completa: -->
+
+  <!-- Silestone -->
+
+  <url>
+  <loc>https://stroitsurfaces.com/posts/silestone-et-statuario/</loc>
+  <lastmod>2024-11-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.6</priority>
+</url>
+<url>
+  <loc>https://stroitsurfaces.com/posts/silestone-line-cream/</loc>
+  <lastmod>2024-11-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.6</priority>
+</url>
+<url>
+  <loc>https://stroitsurfaces.com/posts/silestone-blanco-norte-14/</loc>
+  <lastmod>2024-11-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.6</priority>
+</url>
+<url>
+  <loc>https://stroitsurfaces.com/posts/silestone-victorian-silver/</loc>
+  <lastmod>2024-11-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.6</priority>
+</url>
+<url>
+  <loc>https://stroitsurfaces.com/posts/silestone-nolita-23/</loc>
+  <lastmod>2024-11-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.6</priority>
+</url>
+<url>
+  <loc>https://stroitsurfaces.com/posts/silestone-persian-white/</loc>
+  <lastmod>2024-11-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.6</priority>
+</url>
+<url>
+  <loc>https://stroitsurfaces.com/posts/silestone-blanco-maple-14/</loc>
+  <lastmod>2024-11-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.6</priority>
+</url>
+<url>
+  <loc>https://stroitsurfaces.com/posts/silestone-miami-vena/</loc>
+  <lastmod>2024-11-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.6</priority>
+</url>
+<url>
+  <loc>https://stroitsurfaces.com/posts/silestone-arcilla-red/</loc>
+  <lastmod>2024-11-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.6</priority>
+</url>
+<url>
+  <loc>https://stroitsurfaces.com/posts/silestone-blanc-elysee/</loc>
+  <lastmod>2024-11-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.6</priority>
+</url>
+<url>
+  <loc>https://stroitsurfaces.com/posts/silestone-romantic-ash/</loc>
+  <lastmod>2024-11-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.6</priority>
+</url>
+<url>
+  <loc>https://stroitsurfaces.com/posts/silestone-coral-clay-colour/</loc>
+  <lastmod>2024-11-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.6</priority>
+</url>
+<url>
+  <loc>https://stroitsurfaces.com/posts/silestone-ethereal-noctis/</loc>
+  <lastmod>2024-11-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.6</priority>
+</url>
+<url>
+  <loc>https://stroitsurfaces.com/posts/silestone-motion-gray/</loc>
+  <lastmod>2024-11-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.6</priority>
+</url>
+<url>
+  <loc>https://stroitsurfaces.com/posts/silestone-raw-a/</loc>
+  <lastmod>2024-11-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.6</priority>
+</url>
+<url>
+  <loc>https://stroitsurfaces.com/posts/silestone-stellar-night/</loc>
+  <lastmod>2024-11-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.6</priority>
+</url>
+<url>
+  <loc>https://stroitsurfaces.com/posts/silestone-electic-pearl/</loc>
+  <lastmod>2024-11-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.6</priority>
+</url>
+<url>
+  <loc>https://stroitsurfaces.com/posts/silestone-versailles-ivory/</loc>
+  <lastmod>2024-11-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.6</priority>
+</url>
+<url>
+  <loc>https://stroitsurfaces.com/posts/silestone-night-tebas-18/</loc>
+  <lastmod>2024-11-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.6</priority>
+</url>
+<url>
+  <loc>https://stroitsurfaces.com/posts/silestone-snowy-ibiza/</loc>
+  <lastmod>2024-11-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.6</priority>
+</url>
+<url>
+  <loc>https://stroitsurfaces.com/posts/silestone-et-calacatta-gold/</loc>
+  <lastmod>2024-11-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.6</priority>
+</url>
+<url>
+  <loc>https://stroitsurfaces.com/posts/silestone-cincel-gray/</loc>
+  <lastmod>2024-11-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.6</priority>
+</url>
+<url>
+  <loc>https://stroitsurfaces.com/posts/silestone-desert-silver/</loc>
+  <lastmod>2024-11-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.6</priority>
+</url>
+<url>
+  <loc>https://stroitsurfaces.com/posts/silestone-poblenou/</loc>
+  <lastmod>2024-11-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.6</priority>
+</url>
+<url>
+  <loc>https://stroitsurfaces.com/posts/silestone-miami-white-17/</loc>
+  <lastmod>2024-11-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.6</priority>
+</url>
+<url>
+  <loc>https://stroitsurfaces.com/posts/silestone-corktown/</loc>
+  <lastmod>2024-11-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.6</priority>
+</url>
+<url>
+  <loc>https://stroitsurfaces.com/posts/silestone-pearl-jasmine/</loc>
+  <lastmod>2024-11-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.6</priority>
+</url>
+<url>
+  <loc>https://stroitsurfaces.com/posts/silestone-ffrom01/</loc>
+  <lastmod>2024-11-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.6</priority>
+</url>
+<url>
+  <loc>https://stroitsurfaces.com/posts/silestone-chateau-brown/</loc>
+  <lastmod>2024-11-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.6</priority>
+</url>
+<url>
+  <loc>https://stroitsurfaces.com/posts/silestone-parisien-bleu/</loc>
+  <lastmod>2024-11-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.6</priority>
+</url>
+<url>
+  <loc>https://stroitsurfaces.com/posts/silestone-blanco-stellar-13/</loc>
+  <lastmod>2024-11-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.6</priority>
+</url>
+<url>
+  <loc>https://stroitsurfaces.com/posts/silestone-brass-relish/</loc>
+  <lastmod>2024-11-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.6</priority>
+</url>
+<url>
+  <loc>https://stroitsurfaces.com/posts/silestone-ethereal-glow/</loc>
+  <lastmod>2024-11-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.6</priority>
+</url>
+<url>
+  <loc>https://stroitsurfaces.com/posts/silestone-ffrom03/</loc>
+  <lastmod>2024-11-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.6</priority>
+</url>
+<url>
+  <loc>https://stroitsurfaces.com/posts/silestone-ethereal-haze/</loc>
+  <lastmod>2024-11-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.6</priority>
+</url>
+<url>
+  <loc>https://stroitsurfaces.com/posts/silestone-bohemian-flame/</loc>
+  <lastmod>2024-11-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.6</priority>
+</url>
+<url>
+  <loc>https://stroitsurfaces.com/posts/silestone-classic-calacatta/</loc>
+  <lastmod>2024-11-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.6</priority>
+</url>
+<url>
+  <loc>https://stroitsurfaces.com/posts/silestone-gris-expo/</loc>
+  <lastmod>2024-11-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.6</priority>
+</url>
+<url>
+  <loc>https://stroitsurfaces.com/posts/silestone-rougui/</loc>
+  <lastmod>2024-11-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.6</priority>
+</url>
+<url>
+  <loc>https://stroitsurfaces.com/posts/silestone-cala-blue/</loc>
+  <lastmod>2024-11-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.6</priority>
+</url>
+<url>
+  <loc>https://stroitsurfaces.com/posts/silestone-et-noir/</loc>
+  <lastmod>2024-11-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.6</priority>
+</url>
+<url>
+  <loc>https://stroitsurfaces.com/posts/silestone-siberian/</loc>
+  <lastmod>2024-11-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.6</priority>
+</url>
+<url>
+  <loc>https://stroitsurfaces.com/posts/silestone-jardin-emerald/</loc>
+  <lastmod>2024-11-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.6</priority>
+</url>
+<url>
+  <loc>https://stroitsurfaces.com/posts/silestone-cemento-spa/</loc>
+  <lastmod>2024-11-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.6</priority>
+</url>
+<url>
+  <loc>https://stroitsurfaces.com/posts/silestone-marengo/</loc>
+  <lastmod>2024-11-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.6</priority>
+</url>
+<url>
+  <loc>https://stroitsurfaces.com/posts/silestone-charcoal-soapstone/</loc>
+  <lastmod>2024-11-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.6</priority>
+</url>
+<url>
+  <loc>https://stroitsurfaces.com/posts/silestone-seaport/</loc>
+  <lastmod>2024-11-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.6</priority>
+</url>
+<url>
+  <loc>https://stroitsurfaces.com/posts/silestone-lime-delight/</loc>
+  <lastmod>2024-11-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.6</priority>
+</url>
+<url>
+  <loc>https://stroitsurfaces.com/posts/silestone-lyra/</loc>
+  <lastmod>2024-11-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.6</priority>
+</url>
+<url>
+  <loc>https://stroitsurfaces.com/posts/silestone-ffrom02/</loc>
+  <lastmod>2024-11-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.6</priority>
+</url>
+<url>
+  <loc>https://stroitsurfaces.com/posts/silestone-concrete-pulse/</loc>
+  <lastmod>2024-11-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.6</priority>
+</url>
+<url>
+  <loc>https://stroitsurfaces.com/posts/silestone-yukon/</loc>
+  <lastmod>2024-11-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.6</priority>
+</url>
+<url>
+  <loc>https://stroitsurfaces.com/posts/silestone-ethereal-dusk/</loc>
+  <lastmod>2024-11-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.6</priority>
+</url>
+<url>
+  <loc>https://stroitsurfaces.com/posts/silestone-et-marquina/</loc>
+  <lastmod>2024-11-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.6</priority>
+</url>
+<url>
+  <loc>https://stroitsurfaces.com/posts/silestone-cinder-craze/</loc>
+  <lastmod>2024-11-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.6</priority>
+</url>
+<url>
+  <loc>https://stroitsurfaces.com/posts/silestone-raw-d/</loc>
+  <lastmod>2024-11-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.6</priority>
+</url>
+<url>
+  <loc>https://stroitsurfaces.com/posts/silestone-et-bella/</loc>
+  <lastmod>2024-11-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.6</priority>
+</url>
+<url>
+  <loc>https://stroitsurfaces.com/posts/silestone-riviere-rose/</loc>
+  <lastmod>2024-11-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.6</priority>
+</url>
+<url>
+  <loc>https://stroitsurfaces.com/posts/silestone-posidonia-green/</loc>
+  <lastmod>2024-11-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.6</priority>
+</url>
+<url>
+  <loc>https://stroitsurfaces.com/posts/silestone-white-storm-14/</loc>
+  <lastmod>2024-11-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.6</priority>
+</url>
+<url>
+  <loc>https://stroitsurfaces.com/posts/silestone-faro-white/</loc>
+  <lastmod>2024-11-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.6</priority>
+</url>
+<url>
+  <loc>https://stroitsurfaces.com/posts/silestone-raw-g/</loc>
+  <lastmod>2024-11-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.6</priority>
+</url>
+<url>
+  <loc>https://stroitsurfaces.com/posts/silestone-blanco-zeus/</loc>
+  <lastmod>2024-11-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.6</priority>
+</url>
+
+<!-- Sensa -->
+<url>
+  <loc>https://stroitsurfaces.com/posts/sensa-platino/</loc>
+  <lastmod>2024-11-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.6</priority>
+</url>
+<url>
+  <loc>https://stroitsurfaces.com/posts/sensa-orinoco/</loc>
+  <lastmod>2024-11-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.6</priority>
+</url>
+<url>
+  <loc>https://stroitsurfaces.com/posts/sensa-nilo/</loc>
+  <lastmod>2024-11-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.6</priority>
+</url>
+<url>
+  <loc>https://stroitsurfaces.com/posts/sensa-silver-gray/</loc>
+  <lastmod>2024-11-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.6</priority>
+</url>
+<url>
+  <loc>https://stroitsurfaces.com/posts/sensa-dakar/</loc>
+  <lastmod>2024-11-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.6</priority>
+</url>
+<url>
+  <loc>https://stroitsurfaces.com/posts/sensa-white-macaubas/</loc>
+  <lastmod>2024-11-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.6</priority>
+</url>
+<url>
+  <loc>https://stroitsurfaces.com/posts/sensa-indian-black/</loc>
+  <lastmod>2024-11-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.6</priority>
+</url>
+<url>
+  <loc>https://stroitsurfaces.com/posts/sensa-glacial-blue/</loc>
+  <lastmod>2024-11-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.6</priority>
+</url>
+<url>
+  <loc>https://stroitsurfaces.com/posts/sensa-nahoa/</loc>
+  <lastmod>2024-11-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.6</priority>
+</url>
+<url>
+  <loc>https://stroitsurfaces.com/posts/sensa-siberia/</loc>
+  <lastmod>2024-11-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.6</priority>
+</url>
+<url>
+  <loc>https://stroitsurfaces.com/posts/sensa-naori/</loc>
+  <lastmod>2024-11-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.6</priority>
+</url>
+<url>
+  <loc>https://stroitsurfaces.com/posts/sensa-ice-blue19/</loc>
+  <lastmod>2024-11-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.6</priority>
+</url>
+<url>
+  <loc>https://stroitsurfaces.com/posts/sensa-vancouver/</loc>
+  <lastmod>2024-11-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.6</priority>
+</url>
+
   
  
