@@ -23,25 +23,38 @@ import moreSensa from "../../images/catalogo/sensa/orinocomore.webp";
 import logoSensa from "../../images/logo-sensa.svg";
 import { isTemplateSpan } from "typescript";
 
-export async function getStaticPaths() {
-  const entries = await contentfulClient.getEntries<Surfaces>({
-    content_type: "stroit",
-  });
+import type { Entry } from "contentful";
 
-  const pages = entries.items
+export async function getStaticPaths() {
+  let skip = 0;
+  const limit = 100;
+  let total = 0;
+  let allEntries: Entry<Surfaces>[] = [];
+
+  do {
+    const response = await contentfulClient.getEntries<Surfaces>({
+      content_type: "stroit",
+      skip,
+      limit,
+    });
+
+    allEntries = allEntries.concat(response.items);
+    total = response.total;
+    skip += limit;
+  } while (skip < total);
+
+  const pages = allEntries
     .map((item) => {
       const slug = item.fields.nombre && item.fields.marca
-  ? `${item.fields.marca} ${item.fields.nombre}`
-      .toLowerCase()
-      .normalize("NFD")                      // Elimina tildes
-      .replace(/[\u0300-\u036f]/g, "")       // Limpieza de tildes
-      .trim()
-      .replace(/\s+/g, "-")                  // Espacios por guiones
-      .replace(/[^a-z0-9\-]/g, "")           // Solo letras, números y guiones
-  : null;
+        ? `${item.fields.marca} ${item.fields.nombre}`
+            .toLowerCase()
+            .normalize("NFD")
+            .replace(/[\u0300-\u036f]/g, "")
+            .trim()
+            .replace(/\s+/g, "-")
+            .replace(/[^a-z0-9\-]/g, "")
+        : null;
 
-
-      // Verificar si 'slug' está presente y no es vacío
       if (!slug || slug.trim() === "") {
         console.error("Missing slug for item:", item);
         return null;
@@ -71,6 +84,7 @@ export async function getStaticPaths() {
 
   return pages;
 }
+
 
 const {
   nombre,
