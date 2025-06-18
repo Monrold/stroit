@@ -125,12 +125,12 @@ const {
 
 <Layout title={`Descubre ${marca} ${nombre} | en Stroit Surfaces`}
   description={
-    marca === "dekton"
-      ? `Dekton ${nombre} ofrece máxima resistencia a rayaduras, calor, manchas y rayos UV. Ideal para cocinas, fachadas y exteriores. Encuéntralo en Stroit Surfaces, distribuidor oficial en México.`
-      : marca === "silestone"
-      ? `Silestone ${nombre} combina diseño y tecnología en una superficie de cuarzo resistente a manchas y uso diario. Perfecto para interiores modernos. En Stroit Surfaces.`
-      : marca === "sensa"
-      ? `Sensa ${nombre} es granito natural protegido contra manchas y uso cotidiano, ideal para quienes buscan elegancia y durabilidad sin mantenimiento. Disponible en Stroit Surfaces.`
+    marca == "dekton"
+      ? `dekton ${nombre} una piedra sinterizada que ofrece máxima resistencia a rayaduras, calor, manchas y rayos UV. Ideal para cocinas, fachadas y exteriores. Encuéntralo en Stroit Surfaces, distribuidor oficial en México.`
+      : marca == "silestone"
+      ? `silestone ${nombre} combina diseño y tecnología en una superficie de cuarzo resistente a manchas y uso diario. Perfecto para interiores modernos. En Stroit Surfaces.`
+      : marca == "sensa"
+      ? `sensa ${nombre} es granito natural protegido contra manchas y uso cotidiano, ideal para quienes buscan elegancia y durabilidad sin mantenimiento. Disponible en Stroit Surfaces.`
       : `Descubre ${nombre} de ${marca}, una superficie elegante y duradera, resistente a rayaduras, manchas, altas temperaturas y uso diario. Ideal para cocinas, baños o revestimientos. Disponible en Stroit Surfaces, distribuidor oficial en México.`
   }>
   <main class="max-w-screen-xl mx-auto">
