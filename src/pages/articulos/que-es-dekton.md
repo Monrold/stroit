@@ -53,7 +53,7 @@ Dekton no es un porcelánico ni un cuarzo tradicional. Es una mezcla sofisticada
 - **Disponible en múltiples espesores**, desde 4 mm (Dekton Slim) hasta 30 mm.
 
   <video autoplay playsinline loop muted class="rounded-xl w-full my-4 ">
-    <source src="https://pub-81aca52011284a96b910aedeefde00fe.r2.dev/calor-dekton-web.mp4" type="video/mp4" />
+    <source src="https://pub-81aca52011284a96b910aedeefde00fe.r2.dev/resistencia-dekton-web.mp4" type="video/mp4" />
     Tu navegador no soporta el video.
   </video>
 
