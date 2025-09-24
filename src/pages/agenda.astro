@@ -1,0 +1,84 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const calendlyLinks = [
+    "https://calendly.com/asesora1",
+    "https://calendly.com/asesora2",
+];
+
+const phoneNumbers = ["5551234567", "5552345678", "5553456789"];
+
+function getRandomItem(arr) {
+    return arr[Math.floor(Math.random() * arr.length)];
+}
+
+const selectedCalendly = getRandomItem(calendlyLinks);
+const selectedPhone = getRandomItem(phoneNumbers);
+
+const agendaBg =
+    "https://pub-81aca52011284a96b910aedeefde00fe.r2.dev/silestone-portada-agenda.jpg";
+---
+
+<style
+    define:vars={{
+        agendaBackground: `url("${agendaBg}")`,
+    }}
+>
+    .agenda-portada {
+        background-image: var(--agendaBackground);
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        height: 50vh;
+        width: 100%;
+    }
+</style>
+
+<Layout
+    title="Stroit Surfaces | Agenda tu Asesoría Personalizada en Superficies"
+    description="Agenda una videollamada o llamada telefónica con nuestras asesoras para recibir orientación personalizada sobre Dekton, Silestone y Sensa."
+>
+    <main
+        class="bg-zinc-900 min-h-screen flex items-center justify-center px-4 py-10"
+    >
+        <div
+            class="bg-black rounded-xl max-w-5xl w-full flex flex-col lg:flex-row overflow-hidden"
+        >
+            <!-- Contenido -->
+            <div
+                class="p-8 lg:w-1/2 flex flex-col justify-center text-left space-y-6"
+            >
+                <h1 class="text-4xl md:text-5xl font-bold text-white">
+                    Agenda tu llamada y recibe asesoría personalizada
+                </h1>
+                <p class="text-zinc-400 text-lg md:text-xl leading-relaxed">
+                    Queremos ayudarte a elegir el mejor material para tu
+                    cubierta de cocina o proyecto. Con una llamada rápida, una
+                    de nuestras asesoras podrá guiarte paso a paso según tus
+                    necesidades.
+                </p>
+
+                <!-- Botón envuelto en un div para evitar que se estire -->
+                <div class="inline-block">
+                    <a
+                        href={selectedCalendly}
+                        target="_blank"
+                        class="inline-flex items-center gap-3 text-black font-semibold py-3 px-6 rounded-lg transition"
+                        style="background: linear-gradient(to right, #dbd6ca, #cbbfae, #bfa986);"
+                    >
+                        Agendar llamada
+                    </a>
+                </div>
+            </div>
+
+            <!-- Imagen -->
+            <div class="flex-1">
+                <img
+                    src="https://pub-81aca52011284a96b910aedeefde00fe.r2.dev/silestone-portada-agenda.jpg"
+                    alt="Asesora Stroit"
+                    class="w-full h-auto object-cover mt-6 lg:mt-0"
+                />
+            </div>
+        </div>
+    </main>
+</Layout>
