@@ -1,11 +1,11 @@
 ---
 interface Props {
-  title: string;
-  description: string;
-  ogImage?: string;
-  lightColor?: boolean;
-  pageviewData?: Record<string, any>;
-  isIndexable?: boolean;
+	title: string;
+	description: string;
+	ogImage?: string;
+	lightColor?: boolean;
+	pageviewData?: Record<string, any>;
+	isIndexable?: boolean;
 }
 
 // destructuring válido con valor por defecto
@@ -37,12 +37,53 @@ import Pageview from "../components/events-meta/pageview.astro";
 			sizes="16x16"
 			type="image/png"
 		/>
-		<meta property="og:image" content={ogImage ?? "https://pub-81aca52011284a96b910aedeefde00fe.r2.dev/og-image%20copia.webp"} />
+		<meta
+			property="og:image"
+			content={ogImage ??
+				"https://pub-81aca52011284a96b910aedeefde00fe.r2.dev/og-image%20copia.webp"}
+		/>
 
 		<title>{title}</title>
-		<Posthog/>
+		<Posthog />
 		<Google />
 		<Pageview eventName="PageView" customData={pageviewData} />
+		<!-- Meta Pixel Code -->
+		<script type="module">
+			!(function (f, b, e, v, n, t, s) {
+				if (f.fbq) return;
+				n = f.fbq = function () {
+					n.callMethod
+						? n.callMethod.apply(n, arguments)
+						: n.queue.push(arguments);
+				};
+				if (!f._fbq) f._fbq = n;
+				n.push = n;
+				n.loaded = !0;
+				n.version = "2.0";
+				n.queue = [];
+				t = b.createElement(e);
+				t.async = !0;
+				t.src = v;
+				s = b.getElementsByTagName(e)[0];
+				s.parentNode.insertBefore(t, s);
+			})(
+				window,
+				document,
+				"script",
+				"https://connect.facebook.net/en_US/fbevents.js",
+			);
+			fbq("init", "2414437608907873");
+			fbq("track", "PageView");
+		</script>
+		<noscript
+			><img
+				height="1"
+				width="1"
+				style="display:none"
+				src="https://www.facebook.com/tr?id=2414437608907873&ev=PageView&noscript=1"
+			/></noscript
+		>
+		<!-- End Meta Pixel Code -->
 	</head>
 	<body class="bg-zinc-800">
 		<Nav />
