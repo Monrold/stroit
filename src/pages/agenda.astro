@@ -1,22 +1,11 @@
 ---
 import Layout from "../layouts/Layout.astro";
-
-const calendlyLinks = [
-    "https://calendly.com/stroitsurfaces-mech/30min",
-    "https://calendly.com/stroitsurfaces-sindy/30min",
-];
-
-const phoneNumbers = ["5551234567", "5552345678", "5553456789"];
-
-function getRandomItem(arr) {
-    return arr[Math.floor(Math.random() * arr.length)];
-}
-
-const selectedCalendly = getRandomItem(calendlyLinks);
-const selectedPhone = getRandomItem(phoneNumbers);
+import ReservaButton from "../components/events-meta/reservaButton.astro";
 
 const agendaBg =
     "https://pub-81aca52011284a96b910aedeefde00fe.r2.dev/silestone-portada-agenda.jpg";
+
+const pageviewData = { landing: "agenda" };
 ---
 
 <style
@@ -37,6 +26,7 @@ const agendaBg =
 <Layout
     title="Stroit Surfaces | Agenda tu Asesoría Personalizada en Superficies"
     description="Agenda una videollamada o llamada telefónica con nuestras asesoras para recibir orientación personalizada sobre Dekton, Silestone y Sensa."
+    pageviewData={pageviewData}
 >
     <main
         class="bg-zinc-900 min-h-screen flex items-center justify-center px-4 py-10"
@@ -60,14 +50,11 @@ const agendaBg =
 
                 <!-- Botón envuelto en un div para evitar que se estire -->
                 <div class="inline-block">
-                    <a
-                        href={selectedCalendly}
-                        target="_blank"
-                        class="inline-flex items-center gap-3 text-black font-semibold py-3 px-6 rounded-lg transition"
-                        style="background: linear-gradient(to right, #dbd6ca, #cbbfae, #bfa986);"
-                    >
-                        Agendar llamada
-                    </a>
+                    <ReservaButton
+                        text="Agendar llamada"
+                        eventName="ClickBotonReserva"
+                        className="inline-flex ring-1 px-8 py-4 justify-center ring-zinc-400 space-x-1 items-center "
+                    />
                 </div>
             </div>
 

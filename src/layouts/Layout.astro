@@ -1,9 +1,20 @@
 ---
-const { title, description, ogImage } = Astro.props;
+interface Props {
+  title: string;
+  description: string;
+  ogImage?: string;
+  lightColor?: boolean;
+  pageviewData?: Record<string, any>;
+  isIndexable?: boolean;
+}
+
+// destructuring válido con valor por defecto
+const { title, description, ogImage, pageviewData = {} }: Props = Astro.props;
 import Nav from "../components/nav.astro";
 import Footer from "../components/footer.astro";
 import Posthog from "../components/posthog.astro";
 import Google from "../components/google.astro";
+import Pageview from "../components/events-meta/pageview.astro";
 ---
 
 <!doctype html>
@@ -31,6 +42,7 @@ import Google from "../components/google.astro";
 		<title>{title}</title>
 		<Posthog/>
 		<Google />
+		<Pageview eventName="PageView" customData={pageviewData} />
 	</head>
 	<body class="bg-zinc-800">
 		<Nav />

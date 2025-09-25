@@ -79,6 +79,9 @@ const posts = allEntries.map((entry) => {
 const somnia = "https://pub-81aca52011284a96b910aedeefde00fe.r2.dev/somnia.webp";
 console.log(posts.length);
 
+
+const pageviewData = { landing: "catalogo" };
+
 ---
 
 <style define:vars={{ 
@@ -137,7 +140,7 @@ console.log(posts.length);
 }
 
 </style>
-<Layout title="Catálogo Stroit Surfaces | Dekton, Silestone y Sensa en México" description="Conoce el mayor catálogo de Dekton, Silestone y Sensa en México. Explora superficies premium ideales para reemplazar el mármol y granito, con diseños exclusivos, durabilidad excepcional y elegancia para transformar tus espacios.">
+<Layout title="Catálogo Stroit Surfaces | Dekton, Silestone y Sensa en México" description="Conoce el mayor catálogo de Dekton, Silestone y Sensa en México. Explora superficies premium ideales para reemplazar el mármol y granito, con diseños exclusivos, durabilidad excepcional y elegancia para transformar tus espacios." pageviewData={pageviewData}>
     <main class="">
         <section class="bgImage h-56 md:h-72 w-full mb-4 flex justify-end items-end">
             <h1 class="text-white mx-4 my-2">Silestone y Dekton en 🇲🇽 México</h1>

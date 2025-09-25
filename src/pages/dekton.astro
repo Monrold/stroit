@@ -29,6 +29,8 @@ import appSuelosImage from "../images/dekton/app-suelos.png";
 import appFachadasImage from "../images/dekton/app-fachadas.png";
 import appEncimeraImage from "../images/dekton/app-encimeras.png";
 import MoreProductsDekton from "../components/Moreproductsdekton.astro";
+
+const pageviewData = { landing: "dekton" };
 ---
 
 <style
@@ -63,6 +65,7 @@ import MoreProductsDekton from "../components/Moreproductsdekton.astro";
 <Layout
     title="Dekton México | Superficies Ultracompactas de Alta Resistencia y Diseño"
     description="Descubre Dekton en México, la superficie ultracompacta líder en resistencia, durabilidad y estilo para cocinas, baños, fachadas y proyectos arquitectónicos exigentes. Calidad y tecnología en cada detalle."
+    pageviewData={pageviewData}
 >
     <main>
         <div class="portada flex items-center justify-center">

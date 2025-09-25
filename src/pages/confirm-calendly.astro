@@ -3,11 +3,14 @@ import Layout from "../layouts/Layout.astro";
 
 const agendaBg =
     "https://pub-81aca52011284a96b910aedeefde00fe.r2.dev/somnia.webp";
+
+const pageviewData = { landing: "confirm-calendly" };
 ---
 
 <Layout
     title="Stroit Surfaces | Cita Confirmada"
     description="Gracias por agendar tu asesoría personalizada con nuestras expertas en Dekton, Silestone y Sensa."
+    pageviewData={pageviewData}
 >
     <main
         class="min-h-screen flex items-center justify-center px-4 py-10"

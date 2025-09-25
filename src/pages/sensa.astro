@@ -10,6 +10,8 @@ import mantenimiento from "../images/sensa/mantenimiento.avif";
 import gustos from "../images/sensa/gustos.avif";
 import tacto from "../images/sensa/tacto.avif";
 import Moreproductssensa from "../components/Moreproductssensa.astro";
+
+const pageviewData = { landing: "sensa" };
 ---
 
 <style define:vars={{ portada: `url("${portada.src}")` }}>
@@ -24,7 +26,11 @@ import Moreproductssensa from "../components/Moreproductssensa.astro";
         background-color: black;
     }
 </style>
-<Layout>
+<Layout
+    title="Sensa México: Granito Antimanchas de Alta Calidad para Todo Tipo de Proyectos"
+    description="Descubre Sensa en México, un granito con recubrimiento antimanchas ideal para tu hogar o proyecto comercial. Con acabados sofisticados, alta resistencia y fácil mantenimiento, Sensa combina estilo y durabilidad para transformar cualquier espacio en un proyecto de diseño excepcional. ¡Haz que tus superficies luzcan impecables con la calidad de Sensa!"
+    pageviewData={pageviewData}
+>
     <main>
         <section>
             <div class="md:flex">

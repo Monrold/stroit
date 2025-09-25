@@ -30,7 +30,9 @@ import parisien4 from "../images/lechic/parisien/4-parisien.jpg";
 import romantic1 from "../images/lechic/romantic/1-romantic.jpg";
 import romantic2 from "../images/lechic/romantic/2-romantic.jpg";
 import romantic3 from "../images/lechic/romantic/3-romantic.jpg";
-import romantic4 from "../images/lechic/romantic/4-romantic.jpg"
+import romantic4 from "../images/lechic/romantic/4-romantic.jpg";
+
+const pageviewData = { landing: "lechic" };
 ---
 
 <style
@@ -52,7 +54,7 @@ import romantic4 from "../images/lechic/romantic/4-romantic.jpg"
     }
 </style>
 
-<Layout>
+<Layout pageviewData={pageviewData} title="Le Chic | Superficies Veteadas Inspiradas en la Piedra Natural" description="Descubre Le Chic, una colección exclusiva de superficies veteadas que combina la belleza de la piedra natural con la innovación y durabilidad de Silestone. Perfecta para transformar tus espacios con elegancia y estilo atemporal. ¡Explora Le Chic hoy!" >
     <main class="text-white">
         <section class="portada flex items-center justify-center">
             <h1 class="text-2xl lg:text-4xl text-center px-2 lg:px-96">

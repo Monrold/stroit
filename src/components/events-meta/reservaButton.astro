@@ -1,0 +1,107 @@
+---
+// ReserveButton.astro
+const {
+  text = "Agendar llamada",
+  eventName = "ClickBotonReserva",
+  customData = {}, // Props dinámicos como { landing, marca, nombre, pricePromo }
+  className = "inline-flex items-center gap-3 text-black font-semibold py-3 px-6 rounded-lg transition",
+  style = "background: linear-gradient(to right, #dbd6ca, #cbbfae, #bfa986);",
+} = Astro.props;
+
+// Lista de links de Calendly
+const calendlyLinks = [
+  "https://calendly.com/stroitsurfaces-mech/30min",
+  "https://calendly.com/stroitsurfaces-sindy/30min",
+];
+---
+
+<a
+  href="#"
+  target="_blank"
+  class={className}
+  style={style}
+  data-event-name={eventName}
+  data-event-data={JSON.stringify(customData)}
+>
+  {text}
+</a>
+
+<script is:inline>
+document.addEventListener("DOMContentLoaded", () => {
+  const btn = document.querySelector("a[data-event-name]");
+  if (!btn) return;
+
+  const eventName = btn.dataset.eventName;
+  const eventData = JSON.parse(btn.dataset.eventData || "{}");
+
+  const calendlyLinks = [
+    "https://calendly.com/stroitsurfaces-mech/30min",
+    "https://calendly.com/stroitsurfaces-sindy/30min",
+  ];
+
+  function getCookie(name) {
+    return document.cookie
+      .split("; ")
+      .find((row) => row.startsWith(name + "="))
+      ?.split("=")[1];
+  }
+
+  btn.addEventListener("click", (e) => {
+    e.preventDefault();
+
+    // --- Alternar link al hacer click
+    let currentIndex = parseInt(localStorage.getItem("calendlyIndex") || "0");
+    const selectedCalendly = calendlyLinks[currentIndex];
+    currentIndex = (currentIndex + 1) % calendlyLinks.length;
+    localStorage.setItem("calendlyIndex", currentIndex.toString());
+
+    // --- Construir URL con parámetros dinámicos si existen
+    let finalLink = selectedCalendly;
+    if (eventData && Object.keys(eventData).length > 0) {
+      const params = new URLSearchParams({
+        landing: eventData.landing || "",
+        marca: eventData.marca || "",
+        nombre: eventData.nombre || "",
+        pricePromo: eventData.pricePromo ? "Sí" : "No",
+      }).toString();
+      finalLink += "?" + params;
+    }
+
+    // --- Pixel del navegador
+    if (window.fbq) fbq("track", eventName, eventData);
+
+    // --- Preparar payload para CAPI
+    const capiPayload = {
+      event_name: eventName,
+      event_time: Math.floor(Date.now() / 1000),
+      action_source: "website",
+      event_source_url: window.location.href,
+      user_data: {
+        client_ip_address: "NO_HASH_IP",
+        client_user_agent: navigator.userAgent,
+        fbc: getCookie("_fbc"),
+        fbp: getCookie("_fbp"),
+      },
+      custom_data: eventData,
+    };
+
+    // --- Log para depuración CAPI
+    console.log("CAPI payload:", capiPayload);
+
+    // --- Enviar al worker
+    fetch("https://metaevents.soporte-draw.workers.dev", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(capiPayload),
+    }).catch(console.error);
+
+    // --- Log de URL final de Calendly
+    console.log("Abrir Calendly:", finalLink);
+
+    // --- Abrir Calendly después de 200ms
+    setTimeout(() => {
+      window.open(finalLink, "_blank");
+    }, 200);
+  });
+});
+</script>

@@ -22,6 +22,8 @@ import Moreproductssilestone from "../components/Moreproductssilestone.astro";
 import cocina from "../images/silestone/cocinas.avif";
 import banos from "../images/silestone/banos.avif";
 import mobiliario from "../images/silestone/mobiliario.avif";
+
+const pageviewData = { landing: "silestone" };
 ---
 
 <style
@@ -47,7 +49,7 @@ import mobiliario from "../images/silestone/mobiliario.avif";
         background-position: center;
     }
 </style>
-<Layout title="Silestone México: Superficies de Alta Calidad para Todo Tipo de Proyectos" description="Descubre las superficies Silestone en México, una opción ideal para tu hogar o proyecto comercial. Con una amplia gama de colores y texturas, Silestone ofrece durabilidad, resistencia y estilo para todas tus necesidades de diseño. ¡Haz que cada espacio brille con la calidad única de Silestone!">
+<Layout title="Silestone México: Superficies de Alta Calidad para Todo Tipo de Proyectos" description="Descubre las superficies Silestone en México, una opción ideal para tu hogar o proyecto comercial. Con una amplia gama de colores y texturas, Silestone ofrece durabilidad, resistencia y estilo para todas tus necesidades de diseño. ¡Haz que cada espacio brille con la calidad única de Silestone!" pageviewData={pageviewData}>
     <main class="text-white">
         <section>
             <div class="relative">
