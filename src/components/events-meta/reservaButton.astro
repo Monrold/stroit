@@ -89,7 +89,7 @@ document.addEventListener("DOMContentLoaded", () => {
     console.log("CAPI payload:", capiPayload);
 
     // --- Enviar al worker
-    fetch("https://metaevents.soporte-draw.workers.dev", {
+    fetch("https://stroit-metaapi.soporte-draw.workers.dev/", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(capiPayload),
