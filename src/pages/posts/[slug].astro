@@ -140,7 +140,13 @@ const pageviewData = { landing: `${marca}-${nombre}` };
   }
 </style>
 
-<Layout title={`Descubre ${marca} ${nombre} | en Stroit Surfaces`}
+<Layout title={
+  marca === "dekton"
+    ? `${marca} ${nombre} | Precio, usos y disponibilidad en México`
+    : marca === "silestone"
+    ? `${marca} ${nombre} | Precio y aplicaciones en México`
+    : `${marca} ${nombre} | Superficie y precio en México`
+}
   description={
     marca == "dekton"
       ? `dekton ${nombre} una piedra sinterizada que ofrece máxima resistencia a rayaduras, calor, manchas y rayos UV. Ideal para cocinas, fachadas y exteriores. Encuéntralo en Stroit Surfaces, distribuidor oficial en México.`
@@ -205,9 +211,12 @@ const pageviewData = { landing: `${marca}-${nombre}` };
           <p>{nombre}</p>
         </div>
         {promocion && <p>🔥 En promoción</p>}
-        <h1 class="text-4xl">{nombre}</h1>
+        <h1 class="text-4xl capitalize">{`${marca} ${nombre}`}</h1>
+        <p class="text-sm text-zinc-400 mt-6 capitalize ">
+        SKU: {`${marca} ${nombre}`}
+        </p>
         <div class="flex space-x-1">
-          <p class="capitalize">{marca}</p>
+          <p class="capitalize">Colección | {marca}</p>
           <p>|</p>
           <p>{coleccion}</p>
         </div>
@@ -236,7 +245,7 @@ const pageviewData = { landing: `${marca}-${nombre}` };
         </div>
         <div class="mt-4">
           <h3 class="text-xl border-blue-50 border-b pb-1">
-            Formatos disponibles
+            Medidas de la placa
           </h3>
           <ul class="font-thin my-2">
             {medidas[0] && <li>{medidas[0]}</li>}
