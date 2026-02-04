@@ -1,0 +1,51 @@
+---
+const { marca, nombre } = Astro.props;
+const imagenShowroom = "https://cdn.stroitsurfaces.com/new-web-images/haze-prueba-web.jpg";
+---
+
+<section class="max-w-screen-xl mx-auto mb-12 lg:flex lg:gap-0 px-6">
+  
+  <!-- Lado izquierdo: Texto y botones con padding -->
+  <div class="w-full lg:w-1/2 bg-black flex flex-col justify-center text-white px-10 py-5">
+    <h2 class="text-2xl  lg:text-3xl font-bold mb-4">¿Quieres ver nuestras superficies en persona?</h2>
+    <p class="text-gray-300 mb-6">
+      Encuentra el showroom más cercano en Pachuca o Querétaro, o solicita un envío de una muestra del material que más te interese.
+    </p>
+
+    <div class="flex flex-col gap-4">
+      <!-- Querétaro -->
+      <a
+        href="/showroom" 
+        target="_blank"
+        rel="noopener noreferrer"
+        class="py-4 bg-gradient-to-r from-[#313131] to-[#141414] font-semibold hover:from-[#363636] hover:to-[#272727] transition  text-center text-white"
+      >
+        Encontrar Showroom
+      </a>
+
+    
+
+      <!-- WhatsApp -->
+      <a
+        href={`https://api.whatsapp.com/send?phone=527713473810&text=${encodeURIComponent(
+          `Hola, quiero solicitar una muestra de ${marca} ${nombre}`
+        )}`}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="py-4 bg-gradient-to-r from-[#f0f2ed] to-[#dbd6ca] text-black font-semibold hover:from-[#dbd6ca] hover:to-[#cbbfae] transition  text-center"
+      >
+        Solicitar muestra 
+      </a>
+    </div>
+  </div>
+
+  <!-- Lado derecho: Imagen sin padding -->
+  <div class="lg:w-1/2">
+    <img 
+      src={imagenShowroom} 
+      alt="Showroom Stroit Surfaces" 
+      class="w-full h-full object-cover"
+    />
+  </div>
+
+</section>

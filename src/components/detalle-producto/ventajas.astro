@@ -1,0 +1,169 @@
+---
+const { marca } = Astro.props;
+---
+
+<div class="w-full max-w-7xl mx-auto pt-10">
+
+{marca == "dekton" && (
+  <div class="w-full max-w-7xl mx-auto  px-8 pb-6">
+
+    <div class="flex flex-col lg:flex-row gap-8">
+      <div class="flex-1">
+        <h3 class="text-lg font-semibold text-white mb-4 lg:mb-4">Ventajas {marca}</h3>
+        <div class="grid grid-cols-3 gap-x-4 gap-y-6">
+          <div class="flex flex-col items-center text-center">
+            <img src="https://cdn.stroitsurfaces.com/icons-stroit/ventajas/aprueba-de-fuego.png" class="w-11 h-11 mb-1" />
+            <p class="text-xs text-zinc-400 font-medium">Material a prueba de fuego</p>
+          </div>
+          <div class="flex flex-col items-center text-center">
+            <img src="https://cdn.stroitsurfaces.com/icons-stroit/ventajas/durabilidad-color.png" class="w-11 h-11 mb-1" />
+            <p class="text-xs text-zinc-400 font-medium">Durabilidad de color</p>
+          </div>
+          <div class="flex flex-col items-center text-center">
+            <img src="https://cdn.stroitsurfaces.com/icons-stroit/ventajas/estabilidad-dimensional.png" class="w-11 h-11 mb-1" />
+            <p class="text-xs text-zinc-400 font-medium">Estabilidad dimensional</p>
+          </div>
+          <div class="flex flex-col items-center text-center">
+            <img src="https://cdn.stroitsurfaces.com/icons-stroit/ventajas/hidrolisis.png" class="w-9 h-10 mb-1" />
+            <p class="text-xs text-zinc-400 font-medium mt-1">Alta resistencia a la hidrólisis</p>
+          </div>
+          <div class="flex flex-col items-center text-center">
+            <img src="https://cdn.stroitsurfaces.com/icons-stroit/ventajas/minimo-mantenimiento.png" class="w-9 h-11 mb-1" />
+            <p class="text-xs text-zinc-400 font-medium">Fácil de limpiar y mínimo mantenimiento</p>
+          </div>
+          <div class="flex flex-col items-center text-center">
+            <img src="https://cdn.stroitsurfaces.com/icons-stroit/ventajas/resistente-abrasion.png" class="w-11 h-11 mb-1" />
+            <p class="text-xs text-zinc-400 font-medium">Resistente a la abrasión</p>
+          </div>
+          <div class="flex flex-col items-center text-center">
+            <img src="https://cdn.stroitsurfaces.com/icons-stroit/ventajas/resistente-al-rayado.png" class="w-13 h-9 mb-1" />
+            <p class="text-xs text-zinc-400 font-medium mt-2">Resistente al rayado</p>
+          </div>
+          <div class="flex flex-col items-center text-center">
+            <img src="https://cdn.stroitsurfaces.com/icons-stroit/ventajas/resistente-hielo-deshielo.png" class="w-10 h-11 mb-1" />
+            <p class="text-xs text-zinc-400 font-medium">Resistencia al hielo y deshielo</p>
+          </div>
+          <div class="flex flex-col items-center text-center">
+            <img src="https://cdn.stroitsurfaces.com/icons-stroit/ventajas/resistente-manchas.png" class="w-11 h-11 mb-1" />
+            <p class="text-xs text-zinc-400 font-medium">Resistencia a las manchas</p>
+          </div>
+          <div class="flex flex-col items-center text-center">
+            <img src="https://cdn.stroitsurfaces.com/icons-stroit/ventajas/resistente-mecanica.png" class="w-8 h-12 mb-1" />
+            <p class="text-xs text-zinc-400 font-medium">Alta resistencia mecánica</p>
+          </div>
+          <div class="flex flex-col items-center text-center">
+            <img src="https://cdn.stroitsurfaces.com/icons-stroit/ventajas/resistente-rayos-uv.png" class="w-11 h-11 mb-1" />
+            <p class="text-xs text-zinc-400 font-medium mt-1">Alta resistencia a los rayos UV</p>
+          </div>
+          <div class="flex flex-col items-center text-center">
+            <img src="https://cdn.stroitsurfaces.com/icons-stroit/ventajas/resistente-calor.png" class="w-8 h-11 mb-1" />
+            <p class="text-xs text-zinc-400 font-medium mt-1">Resistente al fuego y al calor</p>
+          </div>
+        </div>
+      </div>
+
+      {/* Aplicaciones */}
+      <div class="flex-1">
+        <h3 class="text-lg font-semibold text-white mb-4 lg:mb-4">Aplicaciones {marca}</h3>
+        <div class="grid grid-cols-3 gap-x-4 gap-y-6">
+          <div class="flex flex-col items-center text-center">
+            <img src="https://cdn.stroitsurfaces.com/icons-stroit/aplicaciones/encimera-bano.png" class="w-11 h-11 mb-1" />
+            <p class="text-xs text-zinc-400 font-medium">Encimeras de baño</p>
+          </div>
+          <div class="flex flex-col items-center text-center">
+            <img src="https://cdn.stroitsurfaces.com/icons-stroit/aplicaciones/encimera-cocina.png" class="w-11 h-11 mb-1" />
+            <p class="text-xs text-zinc-400 font-medium">Encimera de cocina</p>
+          </div>
+          <div class="flex flex-col items-center text-center">
+            <img src="https://cdn.stroitsurfaces.com/icons-stroit/aplicaciones/encimera-exterior.png" class="w-11 h-11 mb-1" />
+            <p class="text-xs text-zinc-400 font-medium">Encimera de exterior</p>
+          </div>
+          <div class="flex flex-col items-center text-center">
+            <img src="https://cdn.stroitsurfaces.com/icons-stroit/aplicaciones/escaleras.png" class="w-11 h-11 mb-1" />
+            <p class="text-xs text-zinc-400 font-medium">Escaleras</p>
+          </div>
+          <div class="flex flex-col items-center text-center">
+            <img src="https://cdn.stroitsurfaces.com/icons-stroit/aplicaciones/fachadas.png" class="w-11 h-11 mb-1" />
+            <p class="text-xs text-zinc-400 font-medium">Paredes y fachadas de exteriores</p>
+          </div>
+          <div class="flex flex-col items-center text-center">
+            <img src="https://cdn.stroitsurfaces.com/icons-stroit/aplicaciones/pared-banos.png" class="w-11 h-11 mb-1" />
+            <p class="text-xs text-zinc-400 font-medium">Revestimiento de pared para baños</p>
+          </div>
+          <div class="flex flex-col items-center text-center">
+            <img src="https://cdn.stroitsurfaces.com/icons-stroit/aplicaciones/revestimiento-pared.png" class="w-11 h-11 mb-1" />
+            <p class="text-xs text-zinc-400 font-medium">Revestimiento de pared para terrazas de exterior</p>
+          </div>
+          <div class="flex flex-col items-center text-center">
+            <img src="https://cdn.stroitsurfaces.com/icons-stroit/aplicaciones/suelo-interior.png" class="w-11 h-11 mb-1" />
+            <p class="text-xs text-zinc-400 font-medium">Suelos de interior</p>
+          </div>
+          <div class="flex flex-col items-center text-center">
+            <img src="https://cdn.stroitsurfaces.com/icons-stroit/aplicaciones/suelo-psicinas-banos.png" class="w-11 h-11 mb-1" />
+            <p class="text-xs text-zinc-400 font-medium">Revestimiento de suelo para baños y piscinas</p>
+          </div>
+          <div class="flex flex-col items-center text-center">
+            <img src="https://cdn.stroitsurfaces.com/icons-stroit/aplicaciones/suelo-terrazas.png" class="w-11 h-11 mb-1" />
+            <p class="text-xs text-zinc-400 font-medium">Suelo para terrazas</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+)}
+
+
+
+
+
+
+  {marca == "silestone" && (
+    <div class="mb-16">
+      <h3 class="text-3xl font-semibold mb-6 text-center">Silestone – 25 años de garantía</h3>
+
+      <!-- Ventajas Silestone -->
+      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-6 mb-8">
+        <div class="flex flex-col items-center text-center">
+          <img src="https://cdn.stroitsurfaces.com/icons-stroit/ventajas/resistente-al-rayado.png" class="w-16 h-16 mb-2" />
+          <p class="text-sm font-medium">Resistente al rayado</p>
+        </div>
+        <!-- Agrega las demás ventajas de Silestone aquí... -->
+      </div>
+
+      <!-- Aplicaciones Silestone -->
+      <h4 class="text-2xl font-semibold mb-4 text-center">Aplicaciones</h4>
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-6">
+        <div class="flex flex-col items-center text-center">
+          <img src="https://cdn.stroitsurfaces.com/icons-stroit/aplicaciones/encimera-bano.png" class="w-16 h-16 mb-2" />
+          <p class="text-sm font-medium">Encimeras de baño</p>
+        </div>
+        <!-- Agrega las demás aplicaciones de Silestone aquí... -->
+      </div>
+    </div>
+  )}
+
+  {marca == "sensa" && (
+    <div class="mb-16">
+      <h3 class="text-3xl font-semibold mb-6 text-center">Sensa – 15 años de garantía</h3>
+
+      <!-- Ventajas Sensa -->
+      <div class="flex flex-col sm:flex-row flex-wrap justify-center gap-6 mb-8">
+        <div class="flex flex-col items-center text-center">
+          <img src="https://cdn.stroitsurfaces.com/icons-stroit/ventajas/resistente-manchas.png" class="w-16 h-16 mb-2" />
+          <p class="text-sm font-medium">Resistencia a las manchas</p>
+        </div>
+      </div>
+
+      <!-- Aplicaciones Sensa -->
+      <h4 class="text-2xl font-semibold mb-4 text-center">Aplicaciones</h4>
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-6">
+        <div class="flex flex-col items-center text-center">
+          <img src="https://cdn.stroitsurfaces.com/icons-stroit/aplicaciones/encimera-bano.png" class="w-16 h-16 mb-2" />
+          <p class="text-sm font-medium">Encimeras de baño</p>
+        </div>
+        <!-- Agrega las demás aplicaciones de Sensa aquí... -->
+      </div>
+    </div>
+  )}
+</div>

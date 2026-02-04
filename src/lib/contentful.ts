@@ -2,24 +2,29 @@ import contentful, { EntryFieldTypes } from "contentful";
 
 
 export interface Surfaces {
-    contentTypeId: "stroit",
-    fields: {
-      nombre: EntryFieldTypes.Text,
-      marca: EntryFieldTypes.Text,
-      coleccion: EntryFieldTypes.Text,
-      espesores: EntryFieldTypes.Text,
-      acabados: EntryFieldTypes.Text,
-      tonos: EntryFieldTypes.Text,
-      medidas: EntryFieldTypes.Text,
-      estilo: EntryFieldTypes.Text,
-      imagen: EntryFieldTypes.AssetLink,
-      promocion: EntryFieldTypes.Boolean,
-      price: EntryFieldTypes.Text,
-      pricePromo: EntryFieldTypes.Text,
-      restriccionPromo: EntryFieldTypes.Text,
-      restriccionPrecio: EntryFieldTypes.Text,
-    }
+  contentTypeId: "stroit",
+  fields: {
+    nombre: EntryFieldTypes.Text,
+    marca: EntryFieldTypes.Text,
+    coleccion: EntryFieldTypes.Text,
+    espesores: EntryFieldTypes.Text,
+    acabados: EntryFieldTypes.Text,
+    tonos: EntryFieldTypes.Text,
+    medidas: EntryFieldTypes.Text,
+    estilo: EntryFieldTypes.Text,
+    imagen: EntryFieldTypes.AssetLink,
+    promocion: EntryFieldTypes.Boolean,
+    price: EntryFieldTypes.Text,
+    pricePromo: EntryFieldTypes.Text,
+    restriccionPromo: EntryFieldTypes.Text,
+    restriccionPrecio: EntryFieldTypes.Text,
+    precio4mm: EntryFieldTypes.Number,
+    precio8Mm: EntryFieldTypes.Number,
+    precio12Mm: EntryFieldTypes.Number,
+    precio20Mm: EntryFieldTypes.Number,
+    medidaSensa: EntryFieldTypes.Text,
   }
+}
 
 export const contentfulClient = contentful.createClient({
   space: import.meta.env.CONTENTFUL_SPACE_ID,

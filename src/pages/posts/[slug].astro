@@ -23,6 +23,8 @@ import moreSensa from "../../images/catalogo/sensa/orinocomore.webp";
 import logoSensa from "../../images/logo-sensa.svg";
 import ReservaButton from "../../components/events-meta/reservaButton.astro";
 import { isTemplateSpan } from "typescript";
+import Showroom from "../../components/detalle-producto/showroom.astro";
+import Ventajas from "../../components/detalle-producto/ventajas.astro";
 
 
 import type { Entry } from "contentful";
@@ -70,6 +72,7 @@ export async function getStaticPaths() {
           coleccion: item.fields.coleccion,
           acabados: item.fields.acabados,
           medidas: item.fields.medidas,
+          medidasSensa: item.fields.medidaSensa,
           estilo: item.fields.estilo,
           tonos: item.fields.tonos,
           espesores: item.fields.espesores,
@@ -79,6 +82,10 @@ export async function getStaticPaths() {
           pricePromo: item.fields.pricePromo,
           restriccionPromo: item.fields.restriccionPromo,
           restriccionPrecio: item.fields.restriccionPrecio,
+          precio4mm: item.fields.precio4mm,
+          precio8mm: item.fields.precio8Mm,
+          precio12mm: item.fields.precio12Mm,
+          precio20mm: item.fields.precio20Mm,
         },
       };
     })
@@ -94,6 +101,7 @@ const {
   coleccion,
   acabados,
   medidas,
+  medidasSensa,
   estilo,
   tonos,
   espesores,
@@ -103,31 +111,153 @@ const {
   pricePromo,
   restriccionPromo,
   restriccionPrecio,
+  precio4mm,
+  precio8mm,
+  precio12mm,
+  precio20mm,
 } = Astro.props;
 
 const pageviewData = { landing: `${marca}-${nombre}` };
 
-const medidasArray = Array.isArray(medidas)
+
+// --- Normalizar medidas de Contentful ---
+const medidasArray: string[] = Array.isArray(medidas)
   ? medidas
   : typeof medidas === 'string'
     ? [medidas]
-    : Object.values(medidas ?? {})
+    : Object.values(medidas ?? {});
 
 
 
-const precioBase = Number(pricePromo ?? price)
-const hayPromo = Boolean(pricePromo)
+// --- Normalizar variable de Contentful "espesores" ---
+const espesoresSeleccionados: string[] = Array.isArray(espesores)
+  ? espesores
+  : typeof espesores === 'string'
+    ? [espesores]
+    : Object.values(espesores ?? {});
 
-const espesor = [
-  { label: '4 mm', factorM2: 1, factorML: 1.6 },
-  { label: '8 mm', factorM2: 1.25, factorML: 1.9 },
-  { label: '12 mm', factorM2: 1.45, factorML: 2.2 },
-  { label: '20 mm', factorM2: 1.75, factorML: 2.6 },
-]
+
+
+const marcaLower = `${marca}`;
+const hayPromo = Boolean(pricePromo);
+
+// --- Definir tipo Espesor y variables ---
+type Espesor = {
+  label: string;
+  precioPlaca: number;
+  precioM2?: number;
+  precioML?: number;
+  factorML?: number;
+};
+
+let espesor: Espesor[] = [];
+let areaPlaca = 1; // m²
+const factorMLs: Record<string, number> = { '4 mm': 1.6, '8 mm': 1.9, '12 mm': 2.2, '20 mm': 2.6 };
+
+// --- Función para calcular área según medidas ---
+function calcularArea(medidas: string[]): number {
+  if (!medidas || medidas.length === 0) return 1;
+
+  if (medidas.length === 1) {
+    const [largo, ancho] = medidas[0].replace(/cm/g, '').split('x').map(s => Number(s.trim()) / 100);
+    return largo * ancho;
+  }
+
+  // Si hay varias medidas, se toma la más pequeña
+  const areas = medidas.map(medida => {
+    const [largo, ancho] = medida.replace(/cm/g, '').split('x').map(s => Number(s.trim()) / 100);
+    return largo * ancho;
+  });
+
+  return Math.min(...areas);
+}
+
+// --- Dekton ---
+if (marcaLower === 'dekton') {
+  areaPlaca = calcularArea(medidasArray);
+  espesor = [
+    { label: '4 mm', precioPlaca: Number(precio4mm ?? 0), factorML: factorMLs['4 mm'] },
+    { label: '8 mm', precioPlaca: Number(precio8mm ?? 0), factorML: factorMLs['8 mm'] },
+    { label: '12 mm', precioPlaca: Number(precio12mm ?? 0), factorML: factorMLs['12 mm'] },
+    { label: '20 mm', precioPlaca: Number(precio20mm ?? 0), factorML: factorMLs['20 mm'] },
+  ];
+}
+
+// --- Silestone ---
+else if (marcaLower === 'silestone') {
+  areaPlaca = calcularArea(medidasArray);
+  espesor = [
+    { label: '12 mm', precioPlaca: Number(precio12mm ?? 0), factorML: factorMLs['12 mm'] },
+    { label: '20 mm', precioPlaca: Number(precio20mm ?? 0), factorML: factorMLs['20 mm'] },
+  ];
+}
+
+// --- Sensa / Granitops ---
+else {
+  let largo = 1;
+  let ancho = 1;
+
+  if (typeof medidasSensa === 'string') {
+    const partes = medidasSensa.replace(/cm/g, '').split('x').map(s => s.trim());
+    if (partes.length === 2) {
+      largo = Number(partes[0]) / 100;
+      ancho = Number(partes[1]) / 100;
+    }
+  }
+
+  areaPlaca = largo * ancho;
+
+  const precioBase = Number(pricePromo ?? price ?? 0);
+
+  espesor = espesoresSeleccionados.includes('20 mm')
+    ? [{ label: '20 mm', precioPlaca: precioBase, factorML: factorMLs['20 mm'] }]
+    : [];
+}
+
+// --- Calcular precio por m² y metro lineal ---
+espesor = espesor.map(e => ({
+  ...e,
+  precioM2: Number((e.precioPlaca / areaPlaca).toFixed(2)),
+  precioML: Number(((e.precioPlaca / areaPlaca) * (e.factorML || 1)).toFixed(2))
+}));
+
+// --- Filtrar solo los espesores seleccionados (Contentful) ---
+espesor = espesor.filter(e => espesoresSeleccionados.includes(e.label));
+
+// --- Determinar medida usada en los precios ---
+let medidaUsada: string = medidasArray[0] || ""; // por defecto la primera medida o string vacío
+
+if (medidasArray.length > 1) {
+  // Si hay varias medidas, se toma la que tiene el área más pequeña
+  let minArea = Infinity;
+  for (const medida of medidasArray) {
+    const partes = medida.replace(/cm/g, '').split('x').map(s => s.trim());
+    if (partes.length === 2) {
+      const largo = Number(partes[0]) / 100;
+      const ancho = Number(partes[1]) / 100;
+      const area = largo * ancho;
+      if (area < minArea) {
+        minArea = area;
+        medidaUsada = medida;
+      }
+    }
+  }
+}
+
+// Para Sensa/Granitops, siempre se usa la medida específica de la placa
+if (marcaLower === 'sensa' || marcaLower === 'granitops') {
+  if (typeof medidasSensa === 'string') {
+    medidaUsada = medidasSensa;
+  }
+}
+
+console.log("Medida usada para el cálculo de precios:", medidaUsada);
 
 
 
 ---
+
+
 
 <style
   define:vars={{
@@ -183,42 +313,44 @@ const espesor = [
   >
   <main class="max-w-screen-xl mx-auto">
     <section class="text-white lg:flex lg:px-8 pb-4 lg:pb-0 lg:py-10 relative">
-      <div class="lg:w-2/3 relative">
-        <div
-          class="relative overflow-x-scroll scroll-container snap-x snap-mandatory"
-        >
-          <div class="flex w-[200vw] lg:w-[100vw]" id="photosItems">
-            {
-              imagen[1].fields.file.url && (
-                <img
-                  class="snap-start w-1/2 h-[80vh] object-cover"
-                  src={imagen[1].fields.file.url}
-                  alt={`Conoce ${marca} ${nombre}`}
-                />
-              )
-            }
-            {
-              imagen[0].fields.file.url && (
-                <img
-                  class="snap-start w-1/2 h-[80vh] object-cover"
-                  src={imagen[0].fields.file.url}
-                  alt={`Textura de ${marca} ${nombre}`}
-                />
-              )
-            }
-          </div>
-        </div>
-        <div
-          class="absolute bottom-6 left-1/2 transform -translate-x-1/2 flex space-x-2"
-        >
-          <button
-            class="circle-button w-4 h-4 rounded-full border border-white cursor-pointer"
-            onclick="changeImage(0)"></button>
-          <button
-            class="circle-button w-4 h-4 rounded-full border border-white cursor-pointer"
-            onclick="changeImage(1)"></button>
-        </div>
-      </div>
+     <div class="lg:w-2/3 relative">
+  <!-- Contenedor de imágenes scrollable -->
+  <div
+    class="relative overflow-x-scroll scroll-container snap-x snap-mandatory"
+    id="photoContainer"
+  >
+    <div class="flex w-[200vw] lg:w-[100vw]" id="photosItems">
+      {imagen[1]?.fields?.file?.url && (
+        <img
+          class="snap-start w-1/2 h-[80vh] object-cover"
+          src={imagen[1].fields.file.url}
+          alt={`Conoce ${marca} ${nombre}`}
+        />
+      )}
+      {imagen[0]?.fields?.file?.url && (
+        <img
+          class="snap-start w-1/2 h-[80vh] object-cover"
+          src={imagen[0].fields.file.url}
+          alt={`Textura de ${marca} ${nombre}`}
+        />
+      )}
+    </div>
+  </div>
+
+  <!-- Botones de navegación -->
+  <button
+    id="prevBtn"
+    class="absolute top-1/2 left-2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-3 rounded-full hover:bg-opacity-70 transition"
+  >
+    &#10094; <!-- flecha izquierda -->
+  </button>
+  <button
+    id="nextBtn"
+    class="absolute top-1/2 right-2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-3 rounded-full hover:bg-opacity-70 transition"
+  >
+    &#10095; <!-- flecha derecha -->
+  </button>
+</div>
       <div
         class="w-full lg:w-1/3 px-8 mt-4 lg:mt-0 flex flex-col justify-center"
       >
@@ -268,32 +400,41 @@ const espesor = [
           <h3 class="text-xl border-blue-50 border-b pb-1">
             Medidas disponibles  
           </h3>
-         <ul class="font-thin my-3 space-y-4">
-  {medidasArray.map((medida, index) => {
-    const [ancho, alto] = medida
-      .replace(' cm', '')
-      .split(' x ')
+<ul class="font-thin my-3 space-y-4">
+  {marca == 'sensa' ? (() => {
+  const medidas = String(medidasSensa ?? "0 x 0"); // FORZAR A STRING
+  const [largo, ancho] = medidas.replace(/cm/g, '').split(' x ').map(s => s.trim());
 
-    const tituloFormato =
-      medidasArray.length > 1
-        ? `Formato ${index + 1}`
-        : 'Formato'
+  return (
+    <li class="border-l border-zinc-600 pl-3">
+      <ul class="ml-4 mt-1 list-disc text-sm text-zinc-300">
+        <li>Largo: {largo} cm</li>
+        <li>Ancho: {ancho} cm</li>
+      </ul>
+    </li>
+  );
+})() : (
+  medidasArray.map((medida, index) => {
+    const [ancho, alto] = medida.replace(' cm', '').split(' x ').map(s => s.trim());
+    const tituloFormato = medidasArray.length > 1 ? `Formato ${index + 1}` : null;
 
     return (
       <li class="border-l border-zinc-600 pl-3">
-        <p class="font-medium">{tituloFormato}</p>
+        {tituloFormato && <p class="font-medium">{tituloFormato}</p>}
         <ul class="ml-4 mt-1 list-disc text-sm text-zinc-300">
           <li>Ancho: {ancho} cm</li>
           <li>Alto: {alto} cm</li>
         </ul>
       </li>
-    )
-  })}
+    );
+  })
+)}
+
 </ul>
 
-
         </div>
-        <!-- new section price -->
+        <!-- precios por placa
+       
         <section>
           {
             price && (
@@ -311,7 +452,7 @@ const espesor = [
             )
           }
         </section>
-         <!-- Price promo-->
+        
          <section>
           {
             pricePromo && (
@@ -331,7 +472,7 @@ const espesor = [
           }
         </section>
         <div class="mt-4">
-          
+         -->
          <a
   href={`https://api.whatsapp.com/send?phone=527713473810&text=${encodeURIComponent(
     `Hola, vi su web y me interesa cotizar ${marca} ${nombre}.`
@@ -343,10 +484,11 @@ const espesor = [
 >
   Cotiza vía WhatsApp
 </a>
+<div class="info-material mt-4 text-xs text-gray-300">
+  <p>El material se vende únicamente por <strong>placa completa</strong>
 
-
-
-
+  <p class="mt-2">Contamos con showroom en Pachuca y Querétaro, donde puedes ver las placas en persona y recibir asesoría personalizada o realizamos envios a todo México.</p>
+</div>
 
           {
             promocion && restriccionPromo && (
@@ -368,82 +510,81 @@ const espesor = [
 
 
 
-<section class="mt-10">
-  <!-- Título -->
-  <h3 class="text-xl border-blue-50 border-b pb-1 mb-6">
-    Precios referenciales
-  </h3>
+<section class="bg-black text-white my-5 py-14 lg:mx-8">
+    <div class="pricing max-w-screen-xl mx-auto px-8 lg:px-12">
+  <h2 class="text-xl font-bold lg:mb-0 mb-4">Precios por espesor</h2>
+  <div class="mb-6 mt-6 opacity-70 text-xs lg:mb-8 lg:mt-0 lg:flex lg:gap-3">
+    <p>Al tipo de cambio del día de la compra</p>
+    <p class="hidden lg:block">|</p>
+<p>No incluye instalación ni flete</p>
+<p class="hidden lg:block">|</p>
+<p>Relizamos envíos a todo México</p>
+<p class="hidden lg:block">|</p>
+<p>Los precios solo aplican para el formato: <strong>{medidaUsada}</strong></p>
 
-  <!-- Grid responsive -->
+</div>
+
   <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-
-    <!-- Precio por metro cuadrado -->
-    <div class="border border-zinc-700 p-4">
-      <h4 class="text-lg font-medium mb-3">
-        Precio por metro cuadrado (m²)
-      </h4>
-
-      <ul class="space-y-2 text-sm">
-        {espesor.map(({ label, factorM2 }) => (
-          <li class="flex justify-between border-b border-zinc-700 pb-1">
-            <span>{label}</span>
-            <span class="font-medium">
-              ${Math.round(precioBase * factorM2)} MXN
-            </span>
+    <!-- Precios por m² -->
+    <div>
+      <h3 class="text-lg font-semibold my-6 lg:my-2">Precio por metro cuadrado (m²)</h3>
+      <ul class="space-y-1">
+        {espesor.map(e => (
+          <li  class="flex justify-between text-zinc-400">
+            <span>{e.label}</span>
+            <span>${e.precioM2?.toLocaleString('en-US')} USD</span>
           </li>
         ))}
       </ul>
     </div>
 
-    <!-- Precio por metro lineal -->
-    <div class="border border-zinc-700 p-4">
-      <h4 class="text-lg font-medium mb-3">
-        Precio por metro lineal (ml)
-      </h4>
-
-      <ul class="space-y-2 text-sm">
-        {espesor.map(({ label, factorML }) => (
-          <li class="flex justify-between border-b border-zinc-700 pb-1">
-            <span>{label}</span>
-            <span class="font-medium">
-              ${Math.round(precioBase * factorML)} MXN
-            </span>
+    <!-- Precios por metro lineal -->
+    <div>
+      <h3 class="text-lg font-semibold my-6 lg:my-2">Precio por metro lineal (ml)</h3>
+      <ul class="space-y-1">
+        {espesor.map(e => (
+          <li class="flex justify-between text-zinc-400">
+            <span>{e.label}</span>
+            <span>${e.precioML?.toLocaleString('en-US')} USD</span>
           </li>
         ))}
       </ul>
     </div>
 
   </div>
+  </div>
+  <div>
+   
+  </div>
+</section>
+   <section class="px-8 my-10 space-y-3">
+  <h3 class="text-white">{`Detalles de la tabla completa ${marca} ${nombre}`}</h3>
 
-  <!-- Nota legal / aclaración -->
-  <p class="text-xs text-zinc-400 mt-4 leading-relaxed">
-    *Precios calculados a partir del precio
-    {hayPromo ? ' en promoción' : ' de lista'}.
-    El costo final puede variar según formato de placa,
-    espesor seleccionado, desperdicio, cortes y tipo de instalación.
-  </p>
+  <div>
+    <img
+      class="object-cover w-full h-96"
+      src={imagen[0].fields.file.url}
+      alt={`Textura en alta resolución de ${marca} ${nombre}`}
+    />
+  </div>
+
+  
 </section>
 
 
-    <section class="px-8 my-10 space-y-3">
-      <h3 class="text-white">Detalles de la tabla completa {nombre}</h3>
-      <div class="">
-        <img
-          class="object-cover w-full sm:h-96"
-          src={imagen[0].fields.file.url}
-          alt=""
-        />
-      </div>
-    </section>
+
+
     <section></section>
-    <section class="px-6 py-10 text-white">
-      <div class="flex space-x-1 text-2xl font-semibold">
-        <p>
+    <section class=" lg:mx-6 text-white">
+      <div class="flex space-x-1 text-2xl font-semibold ">
+        <p class="px-6 pt-6">
           ¿Por qué elegir <span class="capitalize">{marca}</span><span
             class="pl-1">{nombre}?</span
           >
         </p>
+         
       </div>
+       <Ventajas marca={marca} />
       {
         marca == "silestone" && (
           <>
@@ -539,29 +680,12 @@ const espesor = [
           </>
         )
       }
+     
       {
         marca == "dekton" && (
           <>
             <>
-              <div class="md:flex mt-4 text-zinc-200">
-                <p class="my-2 md:w-1/2 md:p-4">
-                  Dekton es la innovadora superficie ultracompacta de Cosentino,
-                  un material tecnológico compuesto por una sofisticada mezcla
-                  de minerales. Se beneficia de una alta resistencia y
-                  versatilidad, perfecto para usar tanto en aplicaciones
-                  domésticas como en proyectos más grandes.
-                </p>
-                <p class="my-2 md:w-1/2 md:p-4">
-                  Las superficies Dekton cuentan con propiedades técnicas, altas
-                  prestaciones y característicos colores y texturas para
-                  proyectos de interior y exterior: encimeras de cocina,
-                  encimeras de baño, revestimientos de paredes, fachadas
-                  residenciales, suelos, mobiliario y platos de ducha. De esta
-                  manera, es posible crear espacios con diferentes aplicaciones
-                  a juego o combinadas entre sí.
-                </p>
-              </div>
-              <div class="overflow-x-scroll snap-x snap-mandatory mt-4">
+             <div class="overflow-x-scroll snap-x snap-mandatory mt-4">
                 <div class="flex" id="silestoneVentajas">
                   <div class="w-1/4 snap-center mx-1 sm:mx-2 lg:mx-4">
                     <video
@@ -572,12 +696,6 @@ const espesor = [
                       class="h-80 w-full object-cover mb-4"
                       src={rayadoDekton}
                     />
-                    <h3 class="text-lg font-bold mb-2">
-                      Altamente resistente al Rayado
-                    </h3>
-                    <p class="text-gray-300">
-                      Los utencilios de cocina no rayan DEKTON
-                    </p>
                   </div>
                   <div class="w-1/4 snap-center mx-1 sm:mx-2 lg:mx-4">
                     <video
@@ -588,13 +706,7 @@ const espesor = [
                       class="h-80 w-full object-cover mb-4"
                       src={manchasDekton}
                     />
-                    <h3 class="text-lg font-bold mb-2">
-                      Resistente a las Manchas
-                    </h3>
-                    <p class="text-gray-300">
-                      Las encimeras de DEKTON recisten las manchas más
-                      difíciles, permitiendo su fácil mantenimiento y limpieza.
-                    </p>
+                    
                   </div>
                   <div class="w-1/4 snap-center mx-1 sm:mx-2 lg:mx-4">
                     <video
@@ -605,13 +717,7 @@ const espesor = [
                       class="h-80 w-full object-cover mb-4"
                       src={calorDekton}
                     />
-                    <h3 class="text-lg font-bold mb-2">
-                      Resiste al fuego y el calor
-                    </h3>
-                    <p class="text-gray-300">
-                      DEKTON resiste altas temperaturas evitando daños en su
-                      superficies.
-                    </p>
+                    
                   </div>
                   <div class="w-1/4 snap-center mx-1 sm:mx-2 lg:mx-4">
                     <video
@@ -622,15 +728,29 @@ const espesor = [
                       class="h-80 w-full object-cover mb-4"
                       src={impactoDekton}
                     />
-                    <h3 class="text-lg font-bold mb-2">
-                      Gran resistencia a impactos
-                    </h3>
-                    <p class="text-gray-300">
-                      Alta resistencia a los impactos y golpes diarios.
-                    </p>
+                    
                   </div>
                 </div>
               </div>
+              <div class="md:flex mt-4 text-zinc-200  px-4">
+                <p class="my-4 md:w-1/2 md:p-4">
+                  Dekton es la innovadora superficie ultracompacta de Cosentino,
+                  un material tecnológico compuesto por una sofisticada mezcla
+                  de minerales. Se beneficia de una alta resistencia y
+                  versatilidad, perfecto para usar tanto en aplicaciones
+                  domésticas como en proyectos más grandes.
+                </p>
+                <p class="my-4 md:w-1/2  md:p-4">
+                  Las superficies Dekton cuentan con propiedades técnicas, altas
+                  prestaciones y característicos colores y texturas para
+                  proyectos de interior y exterior: encimeras de cocina,
+                  encimeras de baño, revestimientos de paredes, fachadas
+                  residenciales, suelos, mobiliario y platos de ducha. De esta
+                  manera, es posible crear espacios con diferentes aplicaciones
+                  a juego o combinadas entre sí.
+                </p>
+              </div>
+             
             </>
             <div
               class="w-full h-96 mt-20 flex flex-col justify-center items-center"
@@ -742,7 +862,10 @@ const espesor = [
           </>
         )
       }
+      
     </section>
+    
+    <Showroom marca={`${marca}`} nombre={`${nombre}`} />
     <MoreProducts />
   </main>
 
@@ -777,71 +900,38 @@ const espesor = [
 </script>
 
 
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      const images = document.querySelectorAll<HTMLImageElement>(".snap-start");
-      const buttons =
-        document.querySelectorAll<HTMLButtonElement>(".circle-button");
-      const container = document.querySelector(
-        ".scroll-container",
-      ) as HTMLElement;
+  <script is:inline>
+  document.addEventListener("DOMContentLoaded", function () {
+    const container = document.getElementById("photoContainer");
+    const images = container.querySelectorAll("img");
+    let currentIndex = 0;
 
-      // Función para activar el botón correspondiente
-      function activateButton(index: number) {
-        buttons.forEach((button, i) => {
-          if (i === index) {
-            button.classList.add("active");
-          } else {
-            button.classList.remove("active");
-          }
-        });
-      }
-
-      // Función para cambiar la imagen y activar el botón correspondiente
-      function changeImage(index: number) {
-        const image = images[index];
-
-        if (image instanceof HTMLElement) {
-          const imageWidth = image.offsetWidth;
-          const scrollLeft = imageWidth * index;
-          container.scrollTo({
-            left: scrollLeft,
-            behavior: "smooth",
-          });
-
-          activateButton(index);
-        }
-      }
-
-      // Agregar evento de escucha para el desplazamiento
-      container.addEventListener("scroll", function () {
-        const scrollPosition = container.scrollLeft;
-        const containerWidth = container.offsetWidth;
-
-        images.forEach((image, index) => {
-          const imageWidth = image.offsetWidth;
-          const imagePosition = index * imageWidth;
-
-          // Ajuste para la detección de la imagen en vista
-          if (
-            scrollPosition >= imagePosition - containerWidth / 4 &&
-            scrollPosition < imagePosition + imageWidth - containerWidth / 4
-          ) {
-            // La imagen está en la vista, activar el botón correspondiente
-            activateButton(index);
-          }
-        });
+    function scrollToImage(index) {
+      if (!container) return;
+      const imageWidth = images[0].offsetWidth;
+      container.scrollTo({
+        left: index * imageWidth,
+        behavior: "smooth",
       });
+      currentIndex = index;
+    }
 
-      // Agregar evento de clic a los botones
-      buttons.forEach((button, index) => {
-        button.addEventListener("click", () => {
-          changeImage(index);
-        });
-      });
-
-      // Agregar clase 'active' al primer botón cuando se carga la página
-      buttons[0].classList.add("active");
+    document.getElementById("prevBtn").addEventListener("click", () => {
+      const prevIndex = Math.max(currentIndex - 1, 0);
+      scrollToImage(prevIndex);
     });
-  </script>
+
+    document.getElementById("nextBtn").addEventListener("click", () => {
+      const nextIndex = Math.min(currentIndex + 1, images.length - 1);
+      scrollToImage(nextIndex);
+    });
+
+    // Actualizar currentIndex al hacer scroll manual
+    container.addEventListener("scroll", () => {
+      const scrollLeft = container.scrollLeft;
+      const imageWidth = images[0].offsetWidth;
+      currentIndex = Math.round(scrollLeft / imageWidth);
+    });
+  });
+</script>
 </Layout>

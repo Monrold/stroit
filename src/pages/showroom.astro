@@ -1,0 +1,69 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const imagenFondo =
+  "https://cdn.stroitsurfaces.com/new-web-images/silestone-et-noir.avif";
+const imagenShowroom =
+  "https://cdn.stroitsurfaces.com/new-web-images/locations-mexio-showroom-2.jpg";
+---
+
+<Layout
+  title="Showrooms Stroit | Dekton, Silestone y Sensa en Pachuca y Querétaro"
+  description="Visita los showrooms de Stroit en Pachuca o Querétaro. Descubre nuestras superficies premium Dekton, Silestone y Sensa para tu proyecto de diseño o construcción y solicita muestras directamente desde nuestra página."
+>
+  <section
+    class="w-full min-h-screen bg-[#0b0b0b] bg-cover bg-center flex items-center justify-center py-16 lg:py-32"
+    style={`background-image: url(${imagenFondo})`}
+  >
+    <div
+      class="flex flex-col w-full max-w-xl mx-4 lg:mx-auto my-auto overflow-hidden rounded-xl shadow-xl"
+    >
+      <!-- Imagen del showroom/mapa -->
+      <div class="w-full max-h-[60vh] overflow-hidden">
+        <img
+          src={imagenShowroom}
+          alt="Showroom Stroit"
+          class="w-full h-full object-cover rounded-t-xl"
+        />
+      </div>
+
+      <!-- Recuadro negro central -->
+      <div
+        class="bg-black py-16 px-8 lg:px-12 text-center text-white flex flex-col items-center justify-center gap-8 rounded-b-xl"
+      >
+        <h2 class="text-3xl font-bold">Encuentra el showroom más cercano</h2>
+        <p class="text-gray-300 max-w-lg">
+          Visita nuestros showrooms en Pachuca o Querétaro y descubre la calidad
+          y belleza de nuestras superficies. <span class="text-zinc-500"
+            >Los botones a continuación te guiarán directamente a cada ubicación
+            a través de Google Maps.</span
+          >
+        </p>
+
+        <div class="flex flex-col sm:flex-row gap-6 w-full max-w-md mx-auto">
+          <a
+            href="https://maps.app.goo.gl/uo1CnNAdzJ8jg7YA8"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="flex-1 py-4 bg-gradient-to-r from-[#262626] to-[#1c1c1c] zinc-700 font-semibold hover:from-[#272727] hover:to-[#2e2e2e] transition text-white"
+          >
+            Showroom Pachuca
+          </a>
+
+          <a
+            href="https://maps.app.goo.gl/L8ds6B25avWP4tgn6"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="flex-1 py-4 bg-gradient-to-r from-[#dbd6ca] to-[#cbbfae] text-black font-semibold hover:from-[#cbbfae] hover:to-[#bfa986] transition"
+          >
+            Showroom Querétaro
+          </a>
+        </div>
+
+        <p class="text-gray-400 text-sm mt-6">
+          🇲🇽 Contamos con envíos a todo México.
+        </p>
+      </div>
+    </div>
+  </section></Layout
+>
