@@ -106,6 +106,27 @@ const {
 } = Astro.props;
 
 const pageviewData = { landing: `${marca}-${nombre}` };
+
+const medidasArray = Array.isArray(medidas)
+  ? medidas
+  : typeof medidas === 'string'
+    ? [medidas]
+    : Object.values(medidas ?? {})
+
+
+
+const precioBase = Number(pricePromo ?? price)
+const hayPromo = Boolean(pricePromo)
+
+const espesor = [
+  { label: '4 mm', factorM2: 1, factorML: 1.6 },
+  { label: '8 mm', factorM2: 1.25, factorML: 1.9 },
+  { label: '12 mm', factorM2: 1.45, factorML: 2.2 },
+  { label: '20 mm', factorM2: 1.75, factorML: 2.6 },
+]
+
+
+
 ---
 
 <style
@@ -245,14 +266,32 @@ const pageviewData = { landing: `${marca}-${nombre}` };
         </div>
         <div class="mt-4">
           <h3 class="text-xl border-blue-50 border-b pb-1">
-            Medidas de la placa
+            Medidas disponibles  
           </h3>
-          <ul class="font-thin my-2">
-            {medidas[0] && <li>{medidas[0]}</li>}
-            {medidas[1] && <li>{medidas[1]}</li>}
-            {medidas[2] && <li>{medidas[2]}</li>}
-            {medidas[3] && <li>{medidas[3]}</li>}
-          </ul>
+         <ul class="font-thin my-3 space-y-4">
+  {medidasArray.map((medida, index) => {
+    const [ancho, alto] = medida
+      .replace(' cm', '')
+      .split(' x ')
+
+    const tituloFormato =
+      medidasArray.length > 1
+        ? `Formato ${index + 1}`
+        : 'Formato'
+
+    return (
+      <li class="border-l border-zinc-600 pl-3">
+        <p class="font-medium">{tituloFormato}</p>
+        <ul class="ml-4 mt-1 list-disc text-sm text-zinc-300">
+          <li>Ancho: {ancho} cm</li>
+          <li>Alto: {alto} cm</li>
+        </ul>
+      </li>
+    )
+  })}
+</ul>
+
+
         </div>
         <!-- new section price -->
         <section>
@@ -293,13 +332,19 @@ const pageviewData = { landing: `${marca}-${nombre}` };
         </section>
         <div class="mt-4">
           
-          <ReservaButton
-  text={pricePromo ? "Cotiza tu proyecto" : "Agendar llamada"}
-  eventName="ClickBotonReserva"
-  customData={{ landing: "keratinas", marca, nombre, pricePromo }}
-  className="flex ring-1 p-4 justify-center ring-zinc-400 space-x-1 items-center text-black"
+         <a
+  href={`https://api.whatsapp.com/send?phone=527713473810&text=${encodeURIComponent(
+    `Hola, vi su web y me interesa cotizar ${marca} ${nombre}.`
+  )}`}
+  target="_blank"
+  rel="noopener noreferrer"
+  class="flex ring-1 p-4 justify-center ring-zinc-400 space-x-2 items-center text-black "
   style="background: linear-gradient(to right, #dbd6ca, #cbbfae, #bfa986);"
-/>
+>
+  Cotiza vía WhatsApp
+</a>
+
+
 
 
 
@@ -320,6 +365,65 @@ const pageviewData = { landing: `${marca}-${nombre}` };
         </div>
       </div>
     </section>
+
+
+
+<section class="mt-10">
+  <!-- Título -->
+  <h3 class="text-xl border-blue-50 border-b pb-1 mb-6">
+    Precios referenciales
+  </h3>
+
+  <!-- Grid responsive -->
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+    <!-- Precio por metro cuadrado -->
+    <div class="border border-zinc-700 p-4">
+      <h4 class="text-lg font-medium mb-3">
+        Precio por metro cuadrado (m²)
+      </h4>
+
+      <ul class="space-y-2 text-sm">
+        {espesor.map(({ label, factorM2 }) => (
+          <li class="flex justify-between border-b border-zinc-700 pb-1">
+            <span>{label}</span>
+            <span class="font-medium">
+              ${Math.round(precioBase * factorM2)} MXN
+            </span>
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    <!-- Precio por metro lineal -->
+    <div class="border border-zinc-700 p-4">
+      <h4 class="text-lg font-medium mb-3">
+        Precio por metro lineal (ml)
+      </h4>
+
+      <ul class="space-y-2 text-sm">
+        {espesor.map(({ label, factorML }) => (
+          <li class="flex justify-between border-b border-zinc-700 pb-1">
+            <span>{label}</span>
+            <span class="font-medium">
+              ${Math.round(precioBase * factorML)} MXN
+            </span>
+          </li>
+        ))}
+      </ul>
+    </div>
+
+  </div>
+
+  <!-- Nota legal / aclaración -->
+  <p class="text-xs text-zinc-400 mt-4 leading-relaxed">
+    *Precios calculados a partir del precio
+    {hayPromo ? ' en promoción' : ' de lista'}.
+    El costo final puede variar según formato de placa,
+    espesor seleccionado, desperdicio, cortes y tipo de instalación.
+  </p>
+</section>
+
 
     <section class="px-8 my-10 space-y-3">
       <h3 class="text-white">Detalles de la tabla completa {nombre}</h3>

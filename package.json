@@ -14,7 +14,6 @@
     "@astrojs/react": "^4.2.1",
     "@astrojs/tailwind": "^5.1.2",
     "@contentful/rich-text-html-renderer": "^16.6.10",
-    "@tailwindcss/typography": "^0.5.16",
     "@types/react": "^19.0.10",
     "@types/react-dom": "^19.0.4",
     "contentful": "^10.15.1",
@@ -26,6 +25,7 @@
     "typescript": "^5.3.3"
   },
   "devDependencies": {
+    "@tailwindcss/typography": "^0.5.19",
     "@types/node": "^22.13.10",
     "astro": "^5.0.2"
   }
