@@ -1,0 +1,710 @@
+---
+import Layout from "../layouts/Layout.astro";
+import portada from "../images/somnia.avif";
+import trazologo from "../images/logotipo-trazo.svg";
+---
+
+<Layout>
+  <main class="min-h-screen bg-[#080b0f] p-4 sm:p-6 lg:p-8">
+    <div class="mx-auto max-w-7xl">
+      <!-- CONTENEDOR PRINCIPAL -->
+      <section
+        class="grid overflow-hidden rounded-2xl border border-white/10 bg-black shadow-2xl shadow-black/50 lg:grid-cols-[38%_62%]"
+      >
+        <!-- =========================
+             IMAGEN / PORTADA
+        ========================== -->
+        <div
+          class="relative min-h-[280px] overflow-hidden sm:min-h-[380px] lg:min-h-full"
+        >
+          <img
+            src={portada.src}
+            alt="Proyecto Cesantoni"
+            class="absolute inset-0 h-full w-full object-cover"
+          />
+
+          <!-- Overlay oscuro -->
+          <div class="absolute inset-0 bg-black/40"></div>
+
+          <!-- Logo centrado -->
+          <div
+            class="absolute inset-0 z-10 flex items-center justify-center p-8"
+          >
+            <img
+              src={trazologo.src}
+              alt="Trazo"
+              class="w-full max-w-[220px] drop-shadow-2xl sm:max-w-[180px]"
+            />
+          </div>
+        </div>
+
+        <!-- =========================
+             FORMULARIO
+        ========================== -->
+        <div class="bg-black">
+          <!-- HEADER -->
+          <div class="border-b border-white/10 bg-black px-5 py-4 sm:px-7">
+            <div class="flex items-center gap-3">
+              <div>
+                <h1 class="text-lg font-semibold text-white sm:text-xl">
+                  Registrate
+                </h1>
+              </div>
+            </div>
+          </div>
+
+          <!-- =========================
+               FORM
+          ========================== -->
+          ```astro
+          <form id="formulario-visita" class="bg-black p-5 sm:p-7 lg:p-10">
+            <!-- NOMBRE / PERFIL -->
+            <div class="grid grid-cols-1 gap-5 md:grid-cols-2">
+              <!-- Nombre -->
+              <div>
+                <label
+                  for="nombre"
+                  class="mb-2 block text-xs font-semibold uppercase tracking-wider text-slate-400"
+                >
+                  Nombre
+                  <span class="text-amber-400">*</span>
+                </label>
+
+                <input
+                  id="nombre"
+                  name="nombre"
+                  type="text"
+                  placeholder="Ej. Carlos Mendoza"
+                  required
+                  class="h-12 w-full rounded-xl border border-white/10 bg-[#111] px-4 text-sm text-white outline-none transition placeholder:text-slate-500 focus:border-amber-400/50 focus:ring-4 focus:ring-amber-400/10"
+                />
+              </div>
+
+              <!-- Perfil -->
+              <div>
+                <label
+                  for="perfil"
+                  class="mb-2 block text-xs font-semibold uppercase tracking-wider text-slate-400"
+                >
+                  Perfil
+                  <span class="text-amber-400">*</span>
+                </label>
+
+                <select
+                  id="perfil"
+                  name="perfil"
+                  required
+                  class="h-12 w-full rounded-xl border border-white/10 bg-[#111] px-4 text-sm text-white outline-none transition focus:border-amber-400/50 focus:ring-4 focus:ring-amber-400/10"
+                >
+                  <option value="" disabled selected class="bg-black">
+                    Selecciona tu perfil
+                  </option>
+
+                  <option value="Arquitecto" class="bg-black">
+                    Arquitecto
+                  </option>
+
+                  <option value="Estudiante" class="bg-black">
+                    Estudiante
+                  </option>
+
+                  <option value="Diseñador de interiores" class="bg-black">
+                    Diseñador de interiores
+                  </option>
+
+                  <option value="Profesionista" class="bg-black">
+                    Profesionista
+                  </option>
+                </select>
+              </div>
+            </div>
+
+            <!-- TELÉFONO / MATERIAL -->
+            <div class="mt-5 grid grid-cols-1 gap-5 md:grid-cols-2">
+              <!-- Teléfono -->
+              <div>
+                <label
+                  for="telefono"
+                  class="mb-2 block text-xs font-semibold uppercase tracking-wider text-slate-400"
+                >
+                  Número de teléfono
+                  <span class="text-amber-400">*</span>
+                </label>
+
+                <div
+                  class="flex h-12 w-full overflow-hidden rounded-xl border border-white/10 bg-[#111] transition focus-within:border-amber-400/50 focus-within:ring-4 focus-within:ring-amber-400/10"
+                >
+                  <!-- Código de México -->
+                  <div
+                    class="flex items-center border-r border-white/10 px-4 text-sm text-slate-400"
+                  >
+                    +521
+                  </div>
+
+                  <!-- Número -->
+                  <input
+                    id="telefono"
+                    name="telefono"
+                    type="tel"
+                    inputmode="numeric"
+                    autocomplete="tel"
+                    placeholder="55 123 4567"
+                    maxlength="10"
+                    required
+                    class="h-full min-w-0 flex-1 bg-transparent px-4 text-sm text-white outline-none placeholder:text-slate-500"
+                  />
+                </div>
+              </div>
+
+              <!-- Material de interés -->
+              <div>
+                <label
+                  for="material"
+                  class="mb-2 block text-xs font-semibold uppercase tracking-wider text-slate-400"
+                >
+                  Material de interés
+                  <span class="text-amber-400">*</span>
+                </label>
+
+                <select
+                  id="material"
+                  name="material"
+                  required
+                  class="h-12 w-full rounded-xl border border-white/10 bg-[#111] px-4 text-sm text-white outline-none transition focus:border-amber-400/50 focus:ring-4 focus:ring-amber-400/10"
+                >
+                  <option value="" disabled selected class="bg-black">
+                    Selecciona un material
+                  </option>
+
+                  <option value="Sensa" class="bg-black"> Sensa </option>
+
+                  <option value="Silestone" class="bg-black">
+                    Silestone
+                  </option>
+
+                  <option value="Dekton" class="bg-black"> Dekton </option>
+
+                  <option value="Cesantoni" class="bg-black">
+                    Cesantoni
+                  </option>
+                </select>
+              </div>
+            </div>
+
+            <!-- CORREO / ASESOR -->
+            <div class="mt-5 grid grid-cols-1 gap-5 md:grid-cols-2">
+              <!-- Correo -->
+              <div>
+                <label
+                  for="correo"
+                  class="mb-2 block text-xs font-semibold uppercase tracking-wider text-slate-400"
+                >
+                  Correo
+                  <span class="text-amber-400">*</span>
+                </label>
+
+                <input
+                  id="correo"
+                  name="correo"
+                  type="email"
+                  placeholder="cliente@correo.com"
+                  required
+                  class="h-12 w-full rounded-xl border border-white/10 bg-[#111] px-4 text-sm text-white outline-none transition placeholder:text-slate-500 focus:border-amber-400/50 focus:ring-4 focus:ring-amber-400/10"
+                />
+              </div>
+
+              <!-- Asesor -->
+              <div>
+                <label
+                  for="asesor"
+                  class="mb-2 block text-xs font-semibold uppercase tracking-wider text-slate-400"
+                >
+                  Asesor que te atendió
+                  <span class="text-amber-400">*</span>
+                </label>
+
+                <select
+                  id="asesor"
+                  name="asesor"
+                  required
+                  class="h-12 w-full rounded-xl border border-white/10 bg-[#111] px-4 text-sm text-white outline-none transition focus:border-amber-400/50 focus:ring-4 focus:ring-amber-400/10"
+                >
+                  <option value="" disabled selected class="bg-black">
+                    Selecciona un asesor
+                  </option>
+
+                  <option value="Raquel" class="bg-black"> Raquel </option>
+
+                  <option value="Liz" class="bg-black"> Liz </option>
+                </select>
+              </div>
+            </div>
+
+            <!-- BOTÓN -->
+            <div
+              class="mt-8 flex flex-col-reverse gap-4 border-t border-white/10 pt-6 sm:flex-row sm:items-center sm:justify-between"
+            >
+              <p class="text-xs text-slate-500">
+                Los campos marcados con
+                <span class="text-amber-400">*</span>
+                son obligatorios.
+              </p>
+
+              <button
+                id="boton-guardar"
+                type="submit"
+                class="group flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-white px-6 text-sm font-semibold text-black transition duration-300 hover:bg-amber-400 hover:shadow-lg hover:shadow-amber-400/10 disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
+              >
+                <span id="texto-boton"> Registrar </span>
+
+                <svg
+                  id="icono-boton"
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path d="M5 12h14"></path>
+                  <path d="m13 6 6 6-6 6"></path>
+                </svg>
+              </button>
+            </div>
+          </form>
+        </div>
+      </section>
+    </div>
+
+    <!-- =========================
+       MODAL ÉXITO
+  ========================== -->
+
+    <div
+      id="modal-exito"
+      class="fixed inset-0 z-50 hidden items-center justify-center bg-black/80 p-4 backdrop-blur-sm"
+    >
+      <div
+        id="modal-contenido"
+        class="relative w-full max-w-md scale-95 overflow-hidden rounded-3xl border border-white/10 bg-[#111] p-8 text-center opacity-0 shadow-2xl transition duration-300"
+      >
+        <!-- Confetti -->
+        <div
+          id="confetti-container"
+          class="pointer-events-none absolute inset-0 overflow-hidden"
+        >
+        </div>
+
+        <!-- Icono -->
+        <div
+          class="relative mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-emerald-500/10 text-4xl text-emerald-400"
+        >
+          ✓
+        </div>
+
+        <h2 class="relative mt-6 text-2xl font-bold text-white">
+          ¡Registro guardado!
+        </h2>
+
+        <p class="relative mt-3 text-sm leading-relaxed text-slate-400">
+          La información de la visita se guardó correctamente.
+        </p>
+
+        <button
+          id="cerrar-modal"
+          type="button"
+          class="relative mt-7 h-12 w-full rounded-xl bg-white font-semibold text-black transition hover:bg-amber-400"
+        >
+          Continuar
+        </button>
+      </div>
+    </div>
+
+    <!-- =========================
+       MODAL ERROR
+  ========================== -->
+
+    <div
+      id="modal-error"
+      class="fixed inset-0 z-50 hidden items-center justify-center bg-black/80 p-4 backdrop-blur-sm"
+    >
+      <div
+        id="modal-error-contenido"
+        class="w-full max-w-md scale-95 rounded-3xl border border-red-500/20 bg-[#111] p-8 text-center opacity-0 shadow-2xl transition duration-300"
+      >
+        <!-- Icono error -->
+        <div
+          class="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-red-500/10 text-4xl font-bold text-red-400"
+        >
+          ✕
+        </div>
+
+        <h2 class="mt-6 text-2xl font-bold text-white">¡Algo salió mal!</h2>
+
+        <p
+          id="mensaje-error"
+          class="mt-3 text-sm leading-relaxed text-slate-400"
+        >
+          No se pudo guardar el registro. Por favor intenta nuevamente.
+        </p>
+
+        <button
+          id="cerrar-error"
+          type="button"
+          class="mt-7 h-12 w-full rounded-xl bg-red-500 font-semibold text-white transition hover:bg-red-600"
+        >
+          Intentar nuevamente
+        </button>
+      </div>
+    </div>
+
+    <!-- =========================
+       JAVASCRIPT
+  ========================== -->
+
+    <script>
+      const form = document.querySelector("#formulario-visita");
+
+      const botonGuardar = document.querySelector("#boton-guardar");
+      const textoBoton = document.querySelector("#texto-boton");
+      const iconoBoton = document.querySelector("#icono-boton");
+
+      // MODAL ÉXITO
+      const modal = document.querySelector("#modal-exito");
+      const modalContenido = document.querySelector("#modal-contenido");
+      const cerrarModal = document.querySelector("#cerrar-modal");
+
+      // MODAL ERROR
+      const modalError = document.querySelector("#modal-error");
+      const modalErrorContenido = document.querySelector(
+        "#modal-error-contenido",
+      );
+
+      const cerrarError = document.querySelector("#cerrar-error");
+
+      const mensajeError = document.querySelector("#mensaje-error");
+
+      // CONFETTI
+      const confettiContainer = document.querySelector("#confetti-container");
+
+      /* =========================
+       ENVIAR FORMULARIO
+    ========================== */
+
+      form?.addEventListener("submit", async (event) => {
+        event.preventDefault();
+
+        // VALIDAR FORMULARIO
+        if (!form.checkValidity()) {
+          form.reportValidity();
+
+          return;
+        }
+
+        // BLOQUEAR BOTÓN
+        if (botonGuardar) {
+          botonGuardar.disabled = true;
+        }
+
+        // CAMBIAR TEXTO
+        if (textoBoton) {
+          textoBoton.textContent = "Guardando...";
+        }
+
+        // OCULTAR ICONO
+        iconoBoton?.classList.add("hidden");
+
+        try {
+          // =========================
+          // OBTENER DATOS
+          // =========================
+
+          const formData = new FormData(form);
+
+          const datos = Object.fromEntries(formData.entries());
+
+          // =========================
+          // ENVIAR A LA API
+          // =========================
+
+          const respuesta = await fetch("/api/visitas", {
+            method: "POST",
+
+            headers: {
+              "Content-Type": "application/json",
+            },
+
+            body: JSON.stringify(datos),
+          });
+
+          // =========================
+          // ERROR HTTP
+          // =========================
+
+          if (!respuesta.ok) {
+            let mensajeServidor = "No se pudo guardar el registro.";
+
+            try {
+              const errorData = await respuesta.json();
+
+              mensajeServidor = errorData.message || mensajeServidor;
+            } catch (error) {
+              console.error("No se pudo leer la respuesta:", error);
+            }
+
+            throw new Error(mensajeServidor);
+          }
+
+          // =========================
+          // LEER RESPUESTA
+          // =========================
+
+          let resultado;
+
+          try {
+            resultado = await respuesta.json();
+          } catch (error) {
+            throw new Error(
+              "El servidor respondió, pero no se pudo confirmar el guardado.",
+            );
+          }
+
+          // =========================
+          // VALIDAR RESPUESTA
+          // =========================
+
+          if (resultado.success === false) {
+            throw new Error(
+              resultado.message || "No se pudo guardar el registro.",
+            );
+          }
+
+          // =========================
+          // ÉXITO
+          // =========================
+
+          mostrarExito();
+
+          // LIMPIAR FORMULARIO
+          // SOLO DESPUÉS DE ÉXITO
+
+          form.reset();
+        } catch (error) {
+          console.error("Error al guardar:", error);
+
+          // MOSTRAR ERROR
+
+          mostrarError(
+            error instanceof Error
+              ? error.message
+              : "No se pudo guardar el registro. Inténtalo nuevamente.",
+          );
+        } finally {
+          // RESTAURAR BOTÓN
+
+          if (botonGuardar) {
+            botonGuardar.disabled = false;
+          }
+
+          if (textoBoton) {
+            textoBoton.textContent = "Guardar registro";
+          }
+
+          iconoBoton?.classList.remove("hidden");
+        }
+      });
+
+      /* =========================
+       MOSTRAR ÉXITO
+    ========================== */
+
+      function mostrarExito() {
+        modal?.classList.remove("hidden");
+
+        modal?.classList.add("flex");
+
+        setTimeout(() => {
+          modalContenido?.classList.remove("scale-95", "opacity-0");
+
+          modalContenido?.classList.add("scale-100", "opacity-100");
+        }, 50);
+
+        crearConfetti();
+      }
+
+      /* =========================
+       MOSTRAR ERROR
+    ========================== */
+
+      function mostrarError(mensaje) {
+        if (mensajeError) {
+          mensajeError.textContent = mensaje;
+        }
+
+        modalError?.classList.remove("hidden");
+
+        modalError?.classList.add("flex");
+
+        setTimeout(() => {
+          modalErrorContenido?.classList.remove("scale-95", "opacity-0");
+
+          modalErrorContenido?.classList.add("scale-100", "opacity-100");
+        }, 50);
+      }
+
+      /* =========================
+       CONFETTI
+    ========================== */
+
+      function crearConfetti() {
+        if (!confettiContainer) return;
+
+        // LIMPIAR CONFETTI ANTERIOR
+
+        confettiContainer.innerHTML = "";
+
+        const cantidad = 80;
+
+        const colores = [
+          "#fbbf24",
+          "#ffffff",
+          "#22c55e",
+          "#60a5fa",
+          "#f472b6",
+          "#a78bfa",
+        ];
+
+        for (let i = 0; i < cantidad; i++) {
+          const confetti = document.createElement("span");
+
+          confetti.className = "confetti";
+
+          confetti.style.left = `${Math.random() * 100}%`;
+
+          confetti.style.top = `${Math.random() * 20 - 10}%`;
+
+          confetti.style.animationDelay = `${Math.random() * 0.8}s`;
+
+          confetti.style.animationDuration = `${1.8 + Math.random() * 1.5}s`;
+
+          confetti.style.backgroundColor =
+            colores[Math.floor(Math.random() * colores.length)];
+
+          confettiContainer.appendChild(confetti);
+        }
+
+        // LIMPIAR DESPUÉS
+
+        setTimeout(() => {
+          if (confettiContainer) {
+            confettiContainer.innerHTML = "";
+          }
+        }, 4500);
+      }
+
+      /* =========================
+       CERRAR ÉXITO
+    ========================== */
+
+      function cerrarExito() {
+        modalContenido?.classList.remove("scale-100", "opacity-100");
+
+        modalContenido?.classList.add("scale-95", "opacity-0");
+
+        setTimeout(() => {
+          modal?.classList.remove("flex");
+
+          modal?.classList.add("hidden");
+        }, 250);
+      }
+
+      cerrarModal?.addEventListener(
+        "click",
+
+        cerrarExito,
+      );
+
+      /* =========================
+       CERRAR ERROR
+    ========================== */
+
+      function cerrarModalError() {
+        modalErrorContenido?.classList.remove("scale-100", "opacity-100");
+
+        modalErrorContenido?.classList.add("scale-95", "opacity-0");
+
+        setTimeout(() => {
+          modalError?.classList.remove("flex");
+
+          modalError?.classList.add("hidden");
+        }, 250);
+      }
+
+      cerrarError?.addEventListener(
+        "click",
+
+        cerrarModalError,
+      );
+
+      /* =========================
+       CERRAR AL DAR CLICK FUERA
+    ========================== */
+
+      modal?.addEventListener(
+        "click",
+
+        (event) => {
+          if (event.target === modal) {
+            cerrarExito();
+          }
+        },
+      );
+
+      modalError?.addEventListener(
+        "click",
+
+        (event) => {
+          if (event.target === modalError) {
+            cerrarModalError();
+          }
+        },
+      );
+    </script>
+
+    <!-- =========================
+       ESTILOS CONFETTI
+  ========================== -->
+
+    <style>
+      .confetti {
+        position: absolute;
+
+        width: 10px;
+
+        height: 16px;
+
+        border-radius: 2px;
+
+        animation-name: caerConfetti;
+
+        animation-timing-function: cubic-bezier(0.15, 0.7, 0.3, 1);
+
+        animation-fill-mode: forwards;
+      }
+
+      @keyframes caerConfetti {
+        0% {
+          opacity: 1;
+
+          transform: translateY(-20px) rotate(0deg);
+        }
+
+        100% {
+          opacity: 0;
+
+          transform: translateY(450px) rotate(720deg);
+        }
+      }
+    </style>
+  </main>
+</Layout>
