@@ -1,0 +1,84 @@
+---
+import Layout from "../layouts/Layout.astro";
+import portada from "../images/trevipolar.avif";
+---
+
+<Layout title="Registro enviado" description="Gracias por registrarte. Hemos recibido tu información correctamente.">
+    <main
+        class="relative flex min-h-screen items-center justify-center overflow-hidden px-4 py-6 sm:px-6"
+    >
+        <!-- Imagen de fondo -->
+        <div
+            class="absolute inset-0 bg-cover bg-center"
+            style={`background-image: url(${portada.src});`}
+        >
+        </div>
+
+        <!-- Oscurecimiento general -->
+        <div class="absolute inset-0 bg-black/25"></div>
+
+        <!-- Tarjeta -->
+        <section
+            class="relative z-10 w-full max-w-2xl overflow-hidden rounded-3xl border border-white/50 shadow-2xl"
+        >
+            <!-- Vidrio esmerilado -->
+            <div
+                class="absolute inset-0 bg-white/65"
+                style="
+          backdrop-filter: blur(25px);
+          -webkit-backdrop-filter: blur(25px);
+        "
+            >
+            </div>
+
+            <!-- Contenido -->
+            <div class="relative z-10 px-6 py-10 text-center sm:px-10 sm:py-12">
+                <!-- Icono -->
+                <div
+                    class="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-white shadow-md"
+                >
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="h-8 w-8 text-green-600"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2.2"
+                    >
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            d="M5 13l4 4L19 7"></path>
+                    </svg>
+                </div>
+
+                <!-- Título -->
+                <h1
+                    class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl"
+                >
+                    ¡Registro enviado!
+                </h1>
+
+                <!-- Mensaje principal -->
+                <p class="mt-4 text-lg font-medium text-gray-800">
+                    Hemos recibido tu información correctamente.
+                </p>
+
+                <!-- Mensaje secundario -->
+                <p class="mx-auto mt-2 max-w-xl text-gray-700">
+                    Gracias por registrarte. Nos pondremos en contacto contigo
+                    próximamente.
+                </p>
+
+                <!-- Botón -->
+                <a
+                    href="/"
+                    class="mt-8 inline-flex items-center justify-center rounded-xl bg-black py-3 font-medium text-white shadow-lg transition duration-200 hover:bg-gray-800"
+                    style="padding-left: 32px; padding-right: 32px;"
+                >
+                    Volver al inicio
+                </a>
+            </div>
+        </section>
+    </main>
+</Layout>
