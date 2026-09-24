@@ -26,10 +26,17 @@ export interface Surfaces {
   }
 }
 
+const deliveryToken = import.meta.env.CONTENTFUL_DELIVERY_TOKEN;
+
+console.log("Contentful Space:", !!import.meta.env.CONTENTFUL_SPACE_ID);
+console.log("Contentful Delivery Token:", !!deliveryToken);
+
 export const contentfulClient = contentful.createClient({
   space: import.meta.env.CONTENTFUL_SPACE_ID,
   accessToken: import.meta.env.DEV
     ? import.meta.env.CONTENTFUL_PREVIEW_TOKEN
-    : import.meta.env.CONTENTFUL_DELIVERY_TOKEN,
-  host: import.meta.env.DEV ? "preview.contentful.com" : "cdn.contentful.com",
+    : deliveryToken,
+  host: import.meta.env.DEV
+    ? "preview.contentful.com"
+    : "cdn.contentful.com",
 });
