@@ -28,6 +28,7 @@ export interface Surfaces {
 
 const deliveryToken = import.meta.env.CONTENTFUL_DELIVERY_TOKEN;
 
+console.log("TEST CLOUDFLARE:", import.meta.env.TEST_CONTENTFUL);
 console.log("Contentful Space:", !!import.meta.env.CONTENTFUL_SPACE_ID);
 console.log("Contentful Delivery Token:", !!deliveryToken);
 
