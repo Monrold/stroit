@@ -2,6 +2,10 @@
 
 > ⚠️ **Pendiente de verificar en vivo.** Al crear este skill (octubre 2026), el entorno no tenía acceso a cosentino.com (bloqueado por la red). Lo que sigue describe el lenguaje visual conocido del sitio y de la marca Cosentino, pero **no** se comprobó contra la página actual. Si tienes acceso (dominio permitido en la red del entorno o capturas del usuario), revisa `https://www.cosentino.com/es-mx/` y actualiza esta página: marca lo verificado y corrige lo que no coincida.
 
+## Regla de uso (indicada por el dueño)
+- **Diseño**: puedes analizar **todo** cosentino.com, en cualquier país o idioma: layout, componentes, tipografía, ritmo, fotos y navegación.
+- **Información** (textos, datos de producto, colecciones, garantías, acabados, formatos, colores disponibles): tómala **solo de `https://www.cosentino.com/es-mx/`**. Otras versiones de país pueden tener catálogo, garantías o nombres distintos que no aplican en México. Si un dato no está en /es-mx, no lo uses; márcalo como `[confirmar]`.
+
 ## Qué tomar de Cosentino
 1. **El material es el héroe.** Fotos editoriales a todo lo ancho de cocinas, baños y fachadas reales, con poco texto encima. El producto se ve en contexto, no recortado.
 2. **Sobriedad tipográfica.** Sans serif limpia, pesos ligeros y regulares, títulos cortos y mucho espacio en blanco. La elegancia sale de la contención.
