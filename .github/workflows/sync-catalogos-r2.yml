@@ -1,0 +1,34 @@
+name: Sincronizar catálogos con R2
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "catalogos/**"
+  workflow_dispatch:
+
+concurrency:
+  group: sync-catalogos-r2
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Subir catalogos/ al bucket R2
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: auto
+          # R2 no admite todas las sumas de verificación que AWS CLI envía por defecto
+          AWS_REQUEST_CHECKSUM_CALCULATION: WHEN_REQUIRED
+          AWS_RESPONSE_CHECKSUM_VALIDATION: WHEN_REQUIRED
+          R2_ENDPOINT: https://${{ secrets.R2_ACCOUNT_ID }}.r2.cloudflarestorage.com
+          R2_BUCKET: ${{ secrets.R2_BUCKET }}
+        run: |
+          aws s3 sync catalogos/ "s3://${R2_BUCKET}/catalogos/" \
+            --endpoint-url "$R2_ENDPOINT" \
+            --exclude ".gitkeep" \
+            --size-only
