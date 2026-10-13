@@ -16,7 +16,7 @@ tags: ["dekton"]
 
 Dekton no es un porcelánico ni un cuarzo tradicional. Es una mezcla sofisticada de más de 20 minerales naturales compactados a alta presión y temperatura, sin necesidad de resinas. Esto lo convierte en una superficie no porosa, con características técnicas únicas:
 
-## ¿Qué lo hace diferente?
+## Propiedades principales de Dekton
 
 - **Alta resistencia al rayado**
 

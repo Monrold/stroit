@@ -3,7 +3,7 @@ import Layout from "../layouts/Layout.astro";
 
 const allPosts = await Astro.glob("../pages/articulos/*.md");
 const pageTitle =
-    "Wapa academy blog | Encuentra consejos, técnicas y recomendaciones.";
+    "Blog Stroit Surfaces | Guías de Dekton, Silestone y Sensa";
 
 const sortedPosts = allPosts.sort(
     (a, b) =>
@@ -14,7 +14,7 @@ const sortedPosts = allPosts.sort(
 
 <Layout
     title={pageTitle}
-    description="Descubre técnicas avanzadas y consejos profesionales para lograr alisados perfectos."
+    description="Guías para elegir cubiertas de cocina y baño: Dekton, Silestone y Sensa, precios, cuidados y comparativas. Asesoría en Pachuca y Querétaro."
     lightColor={true}
     isIndexable={true}
 >
@@ -24,7 +24,7 @@ const sortedPosts = allPosts.sort(
         >
             <!-- Título -->
             <h1 class="text-2xl font-semibold max-w-2xl mb-4 md:mb-0">
-                Encuentra consejos, técnicas y recomendaciones.
+                Guías de Dekton, Silestone y Sensa para tu proyecto
             </h1>
 
             <!-- Menú -->

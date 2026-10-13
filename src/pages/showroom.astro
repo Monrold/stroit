@@ -1,5 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import { sucursales, direccionCompleta } from "../data/sucursales";
 
 const imagenFondo =
   "https://cdn.stroitsurfaces.com/new-web-images/silestone-et-noir.avif";
@@ -8,8 +9,9 @@ const imagenShowroom =
 ---
 
 <Layout
-  title="Showrooms Stroit | Dekton, Silestone y Sensa en Pachuca y Querétaro"
-  description="Visita los showrooms de Stroit en Pachuca o Querétaro. Descubre nuestras superficies premium Dekton, Silestone y Sensa para tu proyecto de diseño o construcción y solicita muestras directamente desde nuestra página."
+  title="Showroom Dekton, Silestone y Sensa en Pachuca y Querétaro | Stroit"
+  description="Visita el showroom de Stroit Surfaces en Pachuca o Querétaro: ve placas de Dekton, Silestone y Sensa en persona, pide muestras y recibe asesoría."
+  schemaNegocio
 >
   <section
     class="w-full min-h-screen bg-[#0b0b0b] bg-cover bg-center flex items-center justify-center py-16 lg:py-32"
@@ -31,7 +33,7 @@ const imagenShowroom =
       <div
         class="bg-black py-16 px-8 lg:px-12 text-center text-white flex flex-col items-center justify-center gap-8 rounded-b-xl"
       >
-        <h2 class="text-3xl font-bold">Encuentra el showroom más cercano</h2>
+        <h1 class="text-3xl font-bold">Showroom de Dekton, Silestone y Sensa en Pachuca y Querétaro</h1>
         <p class="text-gray-300 max-w-lg">
           Visita nuestros showrooms en Pachuca o Querétaro y descubre la calidad
           y belleza de nuestras superficies. <span class="text-zinc-500"
@@ -58,6 +60,23 @@ const imagenShowroom =
           >
             Showroom Querétaro
           </a>
+        </div>
+
+        <div class="grid gap-6 sm:grid-cols-2 w-full text-sm text-left">
+          {sucursales.map((suc) => (
+            <div>
+              <h2 class="font-bold text-base">{suc.id === "pachuca" ? "Pachuca, Hidalgo" : "Querétaro"}</h2>
+              {suc.calle && <p class="text-gray-300 mt-1">{direccionCompleta(suc)}</p>}
+              {suc.telefono && (
+                <p class="text-gray-300 mt-1">
+                  Tel. <a class="underline" href={`tel:${suc.telefonoE164}`}>{suc.telefono}</a>
+                </p>
+              )}
+              {suc.horarios.map((h) => (
+                <p class="text-gray-300 mt-1">{h.etiqueta}: {h.abre} a {h.cierra}</p>
+              ))}
+            </div>
+          ))}
         </div>
 
         <p class="text-gray-400 text-sm mt-6">

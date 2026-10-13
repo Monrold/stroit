@@ -1,0 +1,187 @@
+---
+// Contenido propio de cada ficha (descripción + preguntas frecuentes) y sus
+// datos estructurados para Google (Product, BreadcrumbList y FAQPage).
+//
+// - Sin `soloSchema`: muestra la descripción y las preguntas en la página.
+// - Con `soloSchema`: solo imprime el JSON-LD (se usa dentro del <head>).
+//
+// La descripción usa el campo opcional "descripcion" de Contentful. Si está
+// vacío, se arma una descripción con los datos del color (colección, tonos,
+// acabados, espesores) para que ninguna ficha quede sin texto propio.
+import { sucursales, direccionCompleta } from "../../data/sucursales";
+
+interface Props {
+  marcaKey: string;
+  Marca: string;
+  nombre: string;
+  coleccion: string;
+  url: string;
+  imagenes: string[];
+  descripcion?: string;
+  espesores: string[];
+  acabados: string[];
+  precioM2Desde?: number | null;
+  soloSchema?: boolean;
+}
+
+const {
+  marcaKey,
+  Marca,
+  nombre,
+  coleccion,
+  url,
+  imagenes,
+  descripcion = "",
+  espesores,
+  acabados,
+  precioM2Desde = null,
+  soloSchema = false,
+} = Astro.props;
+
+const sitio = (Astro.site?.toString() ?? "https://stroitsurfaces.com/").replace(/\/$/, "");
+const nombreCompleto = `${Marca} ${nombre}`;
+const acabadosReales = acabados.filter((a) => !/^otros?$/i.test(a));
+
+function enumerar(lista: string[]): string {
+  if (lista.length <= 1) return lista.join("");
+  return `${lista.slice(0, -1).join(", ")} y ${lista[lista.length - 1]}`;
+}
+
+// --- Descripción ---
+const fraseMarca: Record<string, string> = {
+  dekton:
+    "Como todo Dekton, resiste el calor, el rayado, las manchas y los rayos UV, así que funciona igual en cubiertas de cocina y baño que en pisos, fachadas y cocinas exteriores.",
+  silestone:
+    "Como todo Silestone, es un cuarzo resistente a las manchas, al rayado y a los impactos, pensado para cubiertas de cocina y baño de uso diario.",
+  sensa:
+    "Es piedra natural con protección antimanchas integrada en la piedra: no necesita sellarse y es fácil de limpiar, y cada placa es irrepetible.",
+};
+
+const parrafosGenerados = [
+  `${nombreCompleto} es un color de la colección ${coleccion || Marca}${
+    (coleccion || Marca).toLowerCase().includes(marcaKey) ? "" : ` de ${Marca}`
+  }, distribuido en México por Stroit Surfaces.` +
+    (acabadosReales.length ? ` Está disponible en acabado ${enumerar(acabadosReales).toLowerCase()}` : "") +
+    (espesores.length ? `${acabadosReales.length ? " y" : " Está disponible"} en espesores de ${enumerar(espesores)}.` : acabadosReales.length ? "." : ""),
+  fraseMarca[marcaKey] ?? "",
+  `Puedes ver la placa de ${nombreCompleto} en nuestros showrooms de Pachuca y Querétaro, pedir una muestra o cotizar por WhatsApp.`,
+].filter(Boolean);
+
+const parrafos = descripcion.trim()
+  ? descripcion
+      .split(/\n\s*\n/)
+      .map((p) => p.trim())
+      .filter(Boolean)
+  : parrafosGenerados;
+
+// --- Preguntas frecuentes ---
+const pachuca = sucursales.find((s) => s.id === "pachuca");
+const dirPachuca = pachuca && pachuca.calle ? ` (${direccionCompleta(pachuca)})` : "";
+
+const respuestaPrecio =
+  precioM2Desde && Number.isFinite(precioM2Desde)
+    ? `El precio de ${nombreCompleto} va desde $${precioM2Desde.toLocaleString("en-US")} USD por m², al tipo de cambio del día. Se vende por placa completa y no incluye instalación ni flete. Escríbenos por WhatsApp para cotizar tu proyecto.`
+    : `El precio de ${nombreCompleto} depende del espesor y del formato de la placa, y se vende por placa completa. Escríbenos por WhatsApp y te enviamos la cotización con el precio vigente.`;
+
+const respuestaExterior: Record<string, string> = {
+  dekton: `Sí. ${nombreCompleto} resiste rayos UV, calor, fuego y ciclos de hielo y deshielo, por lo que funciona en cocinas exteriores, asadores, terrazas, albercas y fachadas.`,
+  silestone: `Silestone está pensado para interiores: cubiertas de cocina y baño, revestimiento de muros de baño y pisos de baño. Para cocinas exteriores o fachadas te recomendamos Dekton.`,
+  sensa: `Sensa es piedra natural pensada principalmente para cubiertas de cocina y baño en interiores. Si tu proyecto es exterior, te recomendamos Dekton; con gusto te asesoramos.`,
+};
+
+const respuestaEspesor = (() => {
+  if (!espesores.length) return "";
+  const base = `${nombreCompleto} está disponible en ${enumerar(espesores)}.`;
+  if (marcaKey === "dekton") {
+    return `${base} Para cubiertas de cocina normalmente se usan 12 o 20 mm; los espesores delgados se usan sobre todo en revestimientos de muros y mobiliario. Te asesoramos según tu proyecto.`;
+  }
+  return `${base} Te recomendamos el espesor según el uso, el diseño del canto y el tipo de mueble; pregúntanos por WhatsApp.`;
+})();
+
+const garantia: Record<string, string> = { dekton: "25 años", silestone: "25 años", sensa: "15 años" };
+
+const faqs = [
+  { pregunta: `¿Cuánto cuesta ${nombreCompleto}?`, respuesta: respuestaPrecio },
+  {
+    pregunta: `¿Dónde puedo ver ${nombreCompleto} en Pachuca o Querétaro?`,
+    respuesta: `En nuestros showrooms de Pachuca${dirPachuca} y Querétaro puedes ver las placas en persona y recibir asesoría. También enviamos muestras y material a todo México.`,
+  },
+  respuestaExterior[marcaKey] && {
+    pregunta: `¿${nombreCompleto} sirve para exterior?`,
+    respuesta: respuestaExterior[marcaKey],
+  },
+  respuestaEspesor && {
+    pregunta: `¿Qué espesor de ${nombreCompleto} conviene para una cubierta de cocina?`,
+    respuesta: respuestaEspesor,
+  },
+  garantia[marcaKey] && {
+    pregunta: `¿Qué garantía tiene ${nombreCompleto}?`,
+    respuesta: `${Marca} cuenta con ${garantia[marcaKey]} de garantía del fabricante, Cosentino. Stroit Surfaces es distribuidor oficial.`,
+  },
+].filter(Boolean) as { pregunta: string; respuesta: string }[];
+
+// --- Datos estructurados ---
+const urlAbsoluta = `${sitio}${url}`;
+const schema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Product",
+      "@id": `${urlAbsoluta}#producto`,
+      name: nombreCompleto,
+      url: urlAbsoluta,
+      image: imagenes,
+      description: parrafos.join(" "),
+      brand: { "@type": "Brand", name: Marca },
+      manufacturer: { "@type": "Organization", name: "Cosentino" },
+      category: coleccion ? `${Marca} ${coleccion}` : Marca,
+    },
+    {
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Stroit Surfaces", item: `${sitio}/` },
+        { "@type": "ListItem", position: 2, name: "Catálogo", item: `${sitio}/catalogo/` },
+        { "@type": "ListItem", position: 3, name: Marca, item: `${sitio}/${marcaKey}/` },
+        { "@type": "ListItem", position: 4, name: nombre, item: urlAbsoluta },
+      ],
+    },
+    {
+      "@type": "FAQPage",
+      mainEntity: faqs.map((f) => ({
+        "@type": "Question",
+        name: f.pregunta,
+        acceptedAnswer: { "@type": "Answer", text: f.respuesta },
+      })),
+    },
+  ],
+};
+---
+
+{
+  soloSchema ? (
+    <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+  ) : (
+    <section class="max-w-screen-xl mx-auto px-8 lg:px-12 my-12 text-white grid gap-12 lg:grid-cols-2">
+      <div>
+        <h2 class="text-2xl font-semibold mb-4">Sobre {nombreCompleto}</h2>
+        <div class="space-y-4 text-zinc-300 leading-relaxed">
+          {parrafos.map((p) => <p>{p}</p>)}
+        </div>
+      </div>
+      <div>
+        <h2 class="text-2xl font-semibold mb-4">Preguntas frecuentes</h2>
+        <div class="divide-y divide-zinc-700 border-y border-zinc-700">
+          {faqs.map((f) => (
+            <details class="group py-4">
+              <summary class="cursor-pointer list-none flex justify-between gap-4 font-medium">
+                <h3 class="text-base">{f.pregunta}</h3>
+                <span class="text-zinc-400 group-open:rotate-45 transition-transform">+</span>
+              </summary>
+              <p class="mt-3 text-zinc-300 text-sm leading-relaxed">{f.respuesta}</p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
