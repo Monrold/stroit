@@ -122,7 +122,7 @@ Ver `references/guiones.md` › Recontacto. Puntos clave:
 ## Formato de tu salida
 
 Cuando te pidan responder a un lead, entrega:
-1. **Diagnóstico** (de 2 a 4 líneas): anuncio de origen, modo (prisa o explora), datos que ya tienes y los que faltan, preguntas sin contestar , si estás dentro o fuera de la ventana de 24 h y la variante A/B (`A-economicos`, `B-premium` o `fuera`).
+1. **Diagnóstico** (de 2 a 4 líneas): anuncio de origen, modo (prisa o explora), datos que ya tienes y los que faltan, preguntas sin contestar, si estás dentro o fuera de la ventana de 24 h y la variante A/B (`A-economicos`, `B-premium` o `fuera`).
 2. **Mensaje(s) listo(s) para enviar**, en bloque de cita, separados si conviene mandarlos en 2 burbujas.
 3. **Qué adjuntar** (fotos de los modelos X, Y, Z o el catálogo) y **siguiente paso o seguimiento** con fecha.
 
