@@ -44,6 +44,10 @@ El mismo cliente entró 4 veces por anuncios a lo largo de 2 meses y cada vez se
 El mensaje automático de bienvenida explica "sinterización de partículas que replica cambios metamórficos…" antes de saber qué necesita el cliente.
 **Corrección:** usa beneficios en una línea (calor, rayones, manchas, sol, 25 años) y pregunta por la aplicación.
 
+## 11. Recomendar modelos que no vienen en el catálogo enviado
+Al lead de piso en León se le mandó el Flash Sale de septiembre (Lyfe Lunar $15,833, Strato $16,880, Crema Marfil $16,351…), pero la primera sugerencia de seguimiento proponía Kreta, Lunar y Aeris con precios de `modelos.md` que ya no coincidían (en el catálogo de octubre, Kreta está en $27,823). El cliente vería modelos y precios que no encuentra en su PDF.
+**Corrección:** abre el PDF que se le envió y recomienda solo modelos de ahí, con ese precio. Si ya tiene los precios, no se los repitas: fíltrale el catálogo y dale la referencia por m², aclarando que se vende por placa completa.
+
 ## Lo que sí funciona (mantenerlo)
 - Enviar 3 o 4 modelos con foto y una línea de descripción cuando el cliente dice el estilo ("tengo este modelo con vetas doradas…").
 - Comparar con la foto del cliente: "Este modelo se me hace súper parecido a tu fachada".

@@ -79,6 +79,9 @@ Si el anuncio era de un producto pero la necesidad pide otro, **dilo con natural
 - Si el cliente mandó una **foto de referencia** (fachada, cocina de Pinterest), describe lo que ves (tono, vetas, acabado) y propón los modelos más parecidos.
 - **Catálogo**: si lo pide, se lo mandas de inmediato, sin condicionarlo. Agrega 1 o 2 modelos recomendados para que no se pierda entre 30 opciones. Por Instagram el PDF pesa demasiado: pásalo a WhatsApp **442 269 0555**.
 - Cuando estés en ParrotCRM, el vendedor adjunta los PDFs (catálogo de promociones Dekton/Silestone, catálogo Sensa). Indícale cuál adjuntar.
+- **Si el cliente ya recibió un catálogo, recomienda solo modelos de ese catálogo y con su precio.** Antes de sugerir modelos, revisa qué PDF se le envió: en el mensaje del vendedor, `sent_attachments` trae el `href` de cada PDF (en `cdn.theparrotcrm.com`). Descárgalo y léelo; son imágenes, así que conviértelas con `pdftoppm`. Confirma cuál se entregó de verdad: el adjunto cuyo `wamid` coincide con el `externalId` del mensaje es el que llegó; un segundo `wamid` sin mensaje propio puede no haberse entregado. Los precios de `references/modelos.md` pueden estar desactualizados frente al catálogo vigente; si no coinciden, manda el catálogo.
+- Si ya tiene el catálogo, **no le reenvíes los precios**: fíltrale 2 o 3 modelos de ese PDF y dale la referencia por m² (ver `references/guiones.md` › Recontacto).
+- **Prueba A/B en curso (económicos vs. premium):** cuando le recomiendes modelos a un lead que todavía no ha elegido, asigna la variante con el último dígito de su WhatsApp (par → económicos, impar → premium), arma la selección según `references/ab-testing.md` e indica en tu salida qué variante usaste.
 
 ## Cotización
 
@@ -119,7 +122,7 @@ Ver `references/guiones.md` › Recontacto. Puntos clave:
 ## Formato de tu salida
 
 Cuando te pidan responder a un lead, entrega:
-1. **Diagnóstico** (de 2 a 4 líneas): anuncio de origen, modo (prisa o explora), datos que ya tienes y los que faltan, preguntas sin contestar y si estás dentro o fuera de la ventana de 24 h.
+1. **Diagnóstico** (de 2 a 4 líneas): anuncio de origen, modo (prisa o explora), datos que ya tienes y los que faltan, preguntas sin contestar, si estás dentro o fuera de la ventana de 24 h y la variante A/B (`A-economicos`, `B-premium` o `fuera`).
 2. **Mensaje(s) listo(s) para enviar**, en bloque de cita, separados si conviene mandarlos en 2 burbujas.
 3. **Qué adjuntar** (fotos de los modelos X, Y, Z o el catálogo) y **siguiente paso o seguimiento** con fecha.
 

@@ -76,6 +76,12 @@ Si no se conoce un precio: deja `$[confirmar]` y avisa al vendedor.
   > ¡Hola [nombre]! ¿Pudiste ver los modelos? Te dejo fotos de *[Modelo]* ya instalado en [aplicación] 👇 ¿Qué te pareció?
 - **Cliente que iba a medir**:
   > ¡Hola [nombre]! ¿Ya tienes las medidas? Mándame largo x ancho o una foto con las medidas a mano y te paso la cotización exacta hoy mismo.
+- **Cliente que ya recibió el catálogo pero no ha elegido** (ni midió): no le repitas la lista de precios que ya tiene. Lo que aporta valor es **filtrarle el catálogo** (2 o 3 modelos de ese PDF para su aplicación) y darle una **referencia por m²** para que haga cuentas, aclarando que se vende por placa completa. Ejemplo real (Roberto, piso en León, oct-2026, con el Flash Sale de septiembre):
+  > ¡Hola Roberto, buen día! 😊 Para que no tengas que revisar todo el catálogo: para piso, los mejores son los del *Flash Sale* que te mandé, son mate y los más económicos. Te recomiendo *Lyfe Lunar* (gris claro), *Strato* (gris oscuro) o *Crema Marfil* (crema).
+  > Se venden por placa completa (≈4.6 a 4.8 m² cada una); como referencia, te sale en ≈ $3,400 por m². Un piso de 20 m² lleva unas 5 placas y el envío a León es sin costo.
+  > Cuando midas, mándame largo x ancho y te paso el total exacto. ¿Te mando fotos de alguno ya instalado?
+
+  Reglas de este mensaje: usa **solo modelos y precios del PDF que el cliente sí recibió** (ver SKILL.md › Enviar modelos adecuados); el precio por m² es precio de placa ÷ m² de la placa, y **siempre** se aclara que no se vende por m² sino por placa completa.
 
 ### Fuera de las 24 h (WhatsApp exige plantilla aprobada)
 - Usa la plantilla aprobada para reabrir. En cuanto conteste, manda **de inmediato** un mensaje con contexto:
