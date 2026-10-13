@@ -53,7 +53,7 @@ const imagenShowroom =
           </a>
 
           <a
-            href="https://maps.app.goo.gl/L8ds6B25avWP4tgn6"
+            href="https://maps.app.goo.gl/bWQVc9GkzbP1Fh6y7"
             target="_blank"
             rel="noopener noreferrer"
             class="flex-1 py-4 bg-gradient-to-r from-[#dbd6ca] to-[#cbbfae] text-black font-semibold hover:from-[#cbbfae] hover:to-[#bfa986] transition"
@@ -65,7 +65,7 @@ const imagenShowroom =
         <div class="grid gap-6 sm:grid-cols-2 w-full text-sm text-left">
           {sucursales.map((suc) => (
             <div>
-              <h2 class="font-bold text-base">{suc.id === "pachuca" ? "Pachuca, Hidalgo" : "Querétaro"}</h2>
+              <h2 class="font-bold text-base">{suc.id === "pachuca" ? "Pachuca, Hidalgo" : "Bajío: Querétaro"}</h2>
               {suc.calle && <p class="text-gray-300 mt-1">{direccionCompleta(suc)}</p>}
               {suc.telefono && (
                 <p class="text-gray-300 mt-1">
@@ -75,6 +75,11 @@ const imagenShowroom =
               {suc.horarios.map((h) => (
                 <p class="text-gray-300 mt-1">{h.etiqueta}: {h.abre} a {h.cierra}</p>
               ))}
+              {suc.id === "queretaro" && (
+                <a class="inline-block mt-2 underline text-gray-300" href="/bajio/">
+                  Atendemos Querétaro, Guanajuato, Aguascalientes y San Luis Potosí
+                </a>
+              )}
             </div>
           ))}
         </div>

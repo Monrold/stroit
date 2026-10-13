@@ -11,6 +11,7 @@ const PAGINAS = [
   "/silestone/",
   "/sensa/",
   "/showroom/",
+  "/bajio/",
   "/agenda/",
   "/blog/",
   "/earthic/",

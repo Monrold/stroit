@@ -502,6 +502,14 @@ const descripcionMeta = (() => {
   <p>El material se vende únicamente por <strong>placa completa</strong>
 
   <p class="mt-2">Ve {nombreCompleto} en persona en nuestros showrooms de <a class="underline" href="/showroom/">Pachuca y Querétaro</a> y recibe asesoría personalizada. También hacemos envíos a todo México.</p>
+  <p class="mt-2">¿Estás en Querétaro, Guanajuato, Aguascalientes o San Luis Potosí?
+    <a
+      class="underline"
+      href={`https://api.whatsapp.com/send?phone=524422690555&text=${encodeURIComponent(`Hola, estoy en el Bajío y me interesa cotizar ${nombreCompleto}.`)}`}
+      target="_blank"
+      rel="noopener noreferrer"
+    >Escribe a nuestro showroom del Bajío</a>.
+  </p>
 </div>
 
           {

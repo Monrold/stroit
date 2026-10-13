@@ -76,7 +76,9 @@ const parrafos = descripcion.trim()
 
 // --- Preguntas frecuentes ---
 const pachuca = sucursales.find((s) => s.id === "pachuca");
+const bajio = sucursales.find((s) => s.id === "queretaro");
 const dirPachuca = pachuca && pachuca.calle ? ` (${direccionCompleta(pachuca)})` : "";
+const dirBajio = bajio && bajio.calle ? ` (${direccionCompleta(bajio)})` : "";
 
 const respuestaPrecio =
   precioM2Desde && Number.isFinite(precioM2Desde)
@@ -104,7 +106,7 @@ const faqs = [
   { pregunta: `¿Cuánto cuesta ${nombreCompleto}?`, respuesta: respuestaPrecio },
   {
     pregunta: `¿Dónde puedo ver ${nombreCompleto} en Pachuca o Querétaro?`,
-    respuesta: `En nuestros showrooms de Pachuca${dirPachuca} y Querétaro puedes ver las placas en persona y recibir asesoría. También enviamos muestras y material a todo México.`,
+    respuesta: `En nuestros showrooms de Pachuca${dirPachuca} y Querétaro${dirBajio} puedes ver las placas en persona y recibir asesoría. Desde Querétaro atendemos todo el Bajío (Guanajuato, Aguascalientes y San Luis Potosí), y enviamos muestras y material a todo México.`,
   },
   respuestaExterior[marcaKey] && {
     pregunta: `¿${nombreCompleto} sirve para exterior?`,

@@ -17,6 +17,12 @@ export interface Horario {
 export interface Sucursal {
   id: "pachuca" | "queretaro";
   nombre: string;
+  /** Nombre corto para mostrar: "Pachuca", "Bajío (Querétaro)" */
+  etiqueta: string;
+  /** Página de la plaza en el sitio. */
+  pagina: string;
+  /** Estados y ciudades que atiende esta sucursal (datos estructurados). */
+  areaServida: string[];
   ciudad: string;
   estado: string;
   calle: string;
@@ -38,6 +44,9 @@ export const sucursales: Sucursal[] = [
   {
     id: "pachuca",
     nombre: "Stroit Surfaces Pachuca",
+    etiqueta: "Pachuca",
+    pagina: "/showroom/",
+    areaServida: ["Hidalgo", "Pachuca de Soto", "Mineral de la Reforma", "Estado de México", "Ciudad de México"],
     ciudad: "Pachuca de Soto",
     estado: "Hidalgo",
     calle: "Boulevard Colonias 2503, letra K, Bodega 11",
@@ -49,23 +58,59 @@ export const sucursales: Sucursal[] = [
     mapa: "https://maps.app.goo.gl/uo1CnNAdzJ8jg7YA8",
     lat: 20.1080799,
     lng: -98.8167114,
-    // TODO: confirmar horario con el cliente y cargarlo aquí.
-    horarios: [],
+    // Lunes a viernes según Google Business. TODO: confirmar sábado
+    // (Google muestra "9:00 a 2:00 a. m.", probablemente 2:00 p. m.).
+    horarios: [
+      {
+        dias: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+        etiqueta: "Lunes a viernes",
+        abre: "09:00",
+        cierra: "18:00",
+      },
+    ],
   },
   {
     id: "queretaro",
     nombre: "Stroit Surfaces Bajío",
+    etiqueta: "Bajío (Querétaro)",
+    pagina: "/bajio/",
+    areaServida: [
+      "Querétaro",
+      "Guanajuato",
+      "Aguascalientes",
+      "San Luis Potosí",
+      "Santiago de Querétaro",
+      "El Marqués",
+      "Corregidora",
+      "San Juan del Río",
+      "León",
+      "Celaya",
+      "Irapuato",
+      "San Miguel de Allende",
+    ],
     ciudad: "Querétaro",
     estado: "Querétaro",
-    // TODO: dirección, teléfono, WhatsApp y horario de la sucursal Querétaro.
-    calle: "",
-    colonia: "",
-    cp: "",
-    telefono: "",
-    telefonoE164: "",
-    whatsapp: "",
-    mapa: "https://maps.app.goo.gl/L8ds6B25avWP4tgn6",
-    horarios: [],
+    // Dirección tal como aparece en Google Business (TerraPark Centenario).
+    // TODO: agregar número exterior y nave/bodega si Google lo tiene.
+    calle: "Paseo Centenario del Ejército Mexicano, TerraPark Centenario",
+    colonia: "Parque Industrial Terra Park Centenario",
+    cp: "76269",
+    telefono: "442 269 0555",
+    telefonoE164: "+524422690555",
+    whatsapp: "524422690555",
+    mapa: "https://maps.app.goo.gl/bWQVc9GkzbP1Fh6y7",
+    lat: 20.6657243,
+    lng: -100.2948123,
+    // Martes a viernes 9:00–18:00 según Google; el lunes aparece mal
+    // ("9:00 a 6:00 a. m."). Sábado y domingo cerrado.
+    horarios: [
+      {
+        dias: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+        etiqueta: "Lunes a viernes",
+        abre: "09:00",
+        cierra: "18:00",
+      },
+    ],
   },
 ];
 
@@ -79,10 +124,11 @@ export function localBusinessSchema(s: Sucursal, sitio = "https://stroitsurfaces
     "@type": "HomeAndConstructionBusiness",
     "@id": `${sitio}/#${s.id}`,
     name: s.nombre,
-    url: `${sitio}/showroom/`,
+    url: `${sitio}${s.pagina}`,
+    priceRange: "$$$",
     image: "https://cdn.stroitsurfaces.com/new-web-images/locations-mexio-showroom-2.jpg",
     brand: ["Dekton", "Silestone", "Sensa"].map((name) => ({ "@type": "Brand", name })),
-    areaServed: "MX",
+    areaServed: s.areaServida.map((name) => ({ "@type": "AdministrativeArea", name })),
     hasMap: s.mapa,
   };
   if (s.calle) {

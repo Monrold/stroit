@@ -40,7 +40,9 @@ import { sucursales, direccionCompleta } from "../data/sucursales";
     <div class="grid gap-6 sm:grid-cols-2 py-6 my-4 border-y border-zinc-800 text-sm">
         {sucursales.map((suc) => (
             <div class="text-center sm:text-left">
-                <h3 class="font-bold">Showroom {suc.id === "pachuca" ? "Pachuca" : "Querétaro"}</h3>
+                <h3 class="font-bold">
+                    {suc.pagina !== "/showroom/" ? <a class="hover:text-zinc-300" href={suc.pagina}>Showroom {suc.etiqueta}</a> : <>Showroom {suc.etiqueta}</>}
+                </h3>
                 {suc.calle && <p class="text-zinc-400 mt-1">{direccionCompleta(suc)}</p>}
                 {suc.telefono && (
                     <p class="text-zinc-400 mt-1">
