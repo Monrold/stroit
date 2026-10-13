@@ -7,7 +7,7 @@ description: Diseña y modifica páginas del sitio web de Stroit Surfaces (stroi
 
 El sitio es un **showroom digital de superficies de lujo**. La protagonista es la **piedra**: fotos grandes, mucho aire y poco texto. Todo lo demás (botones, textos, marcos) está para que el material luzca y para llevar al visitante a **pedir muestra, cotizar por WhatsApp o visitar el showroom**.
 
-Referencia de nivel: **cosentino.com** (ver `references/cosentino.md`). Stroit no copia a Cosentino. Mantiene su identidad oscura y cálida, pero con el mismo rigor: editorial, sobrio y con la foto del material primero.
+Referencia de nivel: **cosentino.com**, analizado en vivo (ver `references/cosentino.md`). Para diseño puedes ver todo el sitio; para información, **solo `/es-mx/`**. Stroit no copia a Cosentino. Mantiene su identidad oscura y cálida, pero con el mismo rigor: editorial, sobrio y con la foto del material primero.
 
 ## Antes de tocar nada
 
@@ -34,11 +34,12 @@ Referencia de nivel: **cosentino.com** (ver `references/cosentino.md`). Stroit n
 **Prohibido**: degradados de color en botones, `bg-zinc-600` gris en botones, `red-300`/`red-500` como estilo de precio, `amber-400` como acento (usa el piedra), y mezclar `bg-zinc-800`, `#080b0f` y `black` como fondo de página.
 
 ### Tipografía
-- No hay fuente propia; se usa la del sistema. **No agregues fuentes sin preguntar.** Si el dueño quiere una, propón una sans geométrica y ligera (estilo de la marca Cosentino), por ejemplo *Manrope* o *Inter*, cargada desde Google Fonts.
+- No hay fuente propia; se usa la del sistema. **No agregues fuentes sin preguntar.** Cosentino usa *Diagramm* (con licencia, no disponible). Si el dueño quiere una, propón *Hanken Grotesk* o *Manrope* desde Google Fonts, que son las más parecidas.
 - El carácter lo dan el **peso ligero y el tamaño**, no la negrita:
   - Eyebrow (antetítulo): `text-xs uppercase tracking-[0.2em] text-zinc-400`
-  - H1: `text-4xl md:text-6xl font-light tracking-tight`
-  - H2: `text-3xl md:text-4xl font-light`
+  - H1 de héroe: `text-5xl md:text-7xl font-extralight uppercase tracking-tight`. Son las mayúsculas muy ligeras que firman Cosentino; sobre foto o negro lucen mucho.
+  - H1 de página interna (modelo, marca): `text-4xl md:text-5xl font-light`
+  - H2: `text-3xl md:text-4xl font-light`; en títulos de sección editoriales, `uppercase font-extralight`
   - H3: `text-xl md:text-2xl font-normal`
   - Párrafo: `text-base leading-relaxed text-zinc-400`, con un máximo de unas 65 letras por línea (`max-w-prose`)
 - `font-bold` solo en precios y botones (`font-medium`). Nunca en títulos grandes.
@@ -60,7 +61,11 @@ Referencia de nivel: **cosentino.com** (ver `references/cosentino.md`). Stroit n
 Solo 3 estilos (código en `references/componentes.md`):
 1. **Principal**: fondo `#dbd6ca` y texto negro. Para la acción que vende: "Solicitar muestra", "Cotizar por WhatsApp".
 2. **Secundario**: borde `#dbd6ca` y texto `#dbd6ca`; en hover se rellena. Para "Ver catálogo" y "Encontrar showroom".
-3. **Enlace**: texto con flecha, por ejemplo `Ver más →`, subrayado al hacer hover. Para navegar a otra página.
+3. **Enlace**: texto con flecha, por ejemplo `Ver modelo →`, subrayado. Para navegar a otra página.
+
+Los botones llevan **flecha → al final del texto**, como en Cosentino ("Solicitar muestra →").
+
+**CTA flotante**: todas las páginas de producto y catálogo llevan el botón fijo "Cotiza por WhatsApp" en tono piedra (lateral en escritorio, barra inferior en celular). Es el equivalente al "Pide presupuesto" de Cosentino; ver `references/componentes.md`.
 
 Textos de CTA cortos y con verbo: "Solicitar muestra", "Cotizar por WhatsApp", "Ver catálogo", "Agendar visita". Nada de "Click aquí" ni "Ver más sobre Lechic".
 
