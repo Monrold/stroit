@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=816">
+<meta name="hz:slide-selector" content=".slide">
+<title>{{titulo}}</title>
+<style>
+@page { size: 816px 1056px; margin:0 }
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:#fff}
+body{font-family:Arial,Helvetica,sans-serif;color:#1a1a1a;font-size:11px;line-height:1.4}
+.slide{position:relative;width:816px;height:1056px;padding:40px 44px;overflow:hidden;background:#fff}
+.head{display:flex;justify-content:space-between;align-items:flex-start}
+.brand{display:flex;gap:14px;align-items:flex-start}
+.brand img{width:120px;margin-top:4px}
+.co h1{font-size:14px;font-weight:700}
+.co p{font-size:10.5px}
+.muted{color:#777}
+.meta{text-align:right}
+.meta .num{color:#1f6fd1;font-size:13px;margin-top:6px}
+.meta .mon{margin-top:14px}
+.cli{margin-top:22px;border-top:1px solid #e5e5e5;padding-top:10px}
+.lbl{color:#777;font-size:9.5px}
+table{width:100%;border-collapse:collapse}
+.items{margin-top:30px}
+.items th{background:#f0f0f0;color:#777;font-weight:400;text-align:left;padding:8px 10px}
+.items th:first-child{border-radius:8px 0 0 8px} .items th:last-child{border-radius:0 8px 8px 0}
+.items td{padding:8px 10px;vertical-align:top;border-bottom:1px solid #e5e5e5}
+.r,.items th.r,.mo th.r{text-align:right}
+.thumb{width:58px;height:58px;object-fit:cover;display:block}
+.sub{color:#777;font-size:9.5px;margin-top:4px}
+.tot{display:flex;justify-content:flex-end;margin-top:14px}
+.tot div{text-align:right}
+.tot .big{font-size:16px;font-weight:700}
+.mo{margin-top:24px;border:1px solid #e5e5e5;border-radius:8px;padding:14px 16px}
+.mo h2{font-size:12px;font-weight:700}
+.mo .nota{color:#777;font-size:9.5px;margin:3px 0 10px}
+.mo th{color:#777;font-weight:400;text-align:left;padding:5px 6px;border-bottom:1px solid #e5e5e5}
+.mo td{padding:5px 6px;border-bottom:1px solid #f0f0f0}
+.mo tr.t td{font-weight:700;border-bottom:none}
+.mo tr.g td{font-weight:700;background:#f7f7f7}
+.prueba{display:inline-block;background:#fff3cd;color:#8a6d00;font-size:9px;font-weight:700;padding:1px 6px;border-radius:4px;margin-left:6px}
+.foot{position:absolute;left:44px;right:44px;bottom:28px}
+.qr{position:absolute;right:44px;bottom:110px;width:60px;height:60px}
+.cond{color:#888;font-size:7.5px;line-height:1.35}
+.fl{display:flex;justify-content:space-between;margin-top:8px;font-size:10px}
+.fl a{color:#1f6fd1;text-decoration:none}
+</style></head><body>
+<div class="slide" data-canvas-width="816" data-canvas-height="1056">
+ <div class="head">
+  <div class="brand"><img src="{{logo}}" alt="Stroit Surfaces">
+   <div class="co"><h1>{{empresa_nombre}}</h1><p><b>{{rfc}}</b></p>
+    <p>{{direccion}}</p>
+    <p style="margin-top:6px">{{telefonos}}</p><p>{{email}}</p>
+    {{cuenta_bloque}}</div></div>
+  <div class="meta"><p class="muted">Fecha: {{fecha}}</p><p>Cotización vigente hasta el {{vigencia}}</p>
+   <p class="num">Cotización <b>{{folio}}</b></p><p class="mon muted">Moneda <span style="color:#1a1a1a">MXN</span></p></div>
+ </div>
+ <div class="cli"><p class="lbl">Cliente</p><p>{{cliente}}</p>{{proyecto_bloque}}</div>
+ <table class="items"><thead><tr><th style="width:80px">Imagen</th><th style="width:70px">Cantidad</th><th>Descripción</th><th class="r">Precio</th><th class="r">Importe</th></tr></thead>
+ <tbody>{{partidas}}</tbody></table>
+ <div class="tot"><div><p>Subtotal {{subtotal}}</p><p class="big">Total material ({{num_piezas}}) {{total}}</p></div></div>
+ {{mano_de_obra}}
+ <img class="qr" src="{{qr}}" alt="QR stroitsurfaces.com">
+ <div class="foot"><p class="cond">{{condiciones}}</p>
+ <div class="fl"><a href="{{web}}">{{web}}</a><span>Página 1 de 1</span><span class="muted">Precios con impuestos incluidos *</span></div></div>
+</div></body></html>

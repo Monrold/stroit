@@ -47,11 +47,27 @@ Desde Instagram o Facebook se manda el mismo enlace; no hace falta pasar al clie
 > • Adhesivo Ultraflex LFT Mapei: [N] sacos × $[precio] = $[subtotal] _(si aplica)_
 > • Envío a [ciudad]: *sin costo* (flete consolidado)
 > *Total: $[total]*
-> Incluye [N] placa(s) extra por cortes y desperdicio. No incluye corte ni instalación; te recomiendo instalador de confianza.
+> • Mano de obra aprox. (corte, instalación, tarja, parrilla, zoclo): entre *$[mín]* y *$[máx]* _(referencia; la realiza el instalador)_
+> Incluye [N] placa(s) extra por cortes y desperdicio. Nosotros no instalamos, pero te recomiendo instalador de confianza.
 > Tiempo de entrega: ≈2 semanas. Precio de promoción sujeto a existencia.
 > ¿Te lo aparto? También te puedo enviar una muestra física sin costo para que la veas en tu espacio.
 
 Si no se conoce un precio: deja `$[confirmar]` y avisa al vendedor.
+
+Adjunta el PDF del cotizador (`cotizador/cotizar.py`, ver SKILL.md › Cotización); el mensaje solo resume los totales.
+
+## 5b. Formas de pago (cuando quiere apartar o comprar)
+Primero pregunta, sin mandar cuentas todavía:
+> ¡Perfecto, [nombre]! ¿Cómo te gustaría pagar: con tarjeta, por transferencia o en efectivo?
+
+Según lo que conteste:
+- *Tarjeta*:
+  > Te paso el link de pago con tarjeta por *$[total]* 👇 [link Mercado Pago]
+  > En cuanto se refleje te confirmo y apartamos tu material.
+- *Transferencia* (adjunta la imagen de la cuenta de su región: Bajío `catalogos/pagos/cuenta-bajio.jpg`, Hidalgo `catalogos/pagos/cuenta-hidalgo.jpg`):
+  > Te comparto los datos para transferencia 👇 Al hacerla, mándame tu comprobante por aquí y apartamos tu material.
+- *Efectivo*:
+  > El pago en efectivo es en nuestra bodega de [Querétaro / Pachuca]. ¿Qué día y hora te queda para agendarte la cita? Te mando la ubicación: [mapa]
 
 ## 6. Objeción: "está caro" / "voy a ahorrar"
 > Te entiendo. Es una inversión que no vuelves a hacer: no se mancha, no pierde color y no necesita mantenimiento (25 años de garantía).
