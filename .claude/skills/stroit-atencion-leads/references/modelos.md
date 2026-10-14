@@ -7,7 +7,7 @@
 > Base de las imágenes: `https://cdn.stroitsurfaces.com/catalogos/<marca>/<archivo>` con nombres en minúsculas y guiones, sin espacios.
 
 ## Catálogos completos (PDF) – octubre 2026
-Cuando el cliente pida **"el catálogo"**, **"todos los modelos"** o **"la lista de precios"**, mándale el enlace del PDF de la marca que le interesa (o los que apliquen). Son las mismas fotos de la tabla, con precio y medida. Acompáñalo siempre con 2 o 3 modelos recomendados para su proyecto (ver SKILL.md › Enviar modelos adecuados).
+Cuando el cliente pida **"el catálogo"**, **"todos los modelos"** o **"la lista de precios"**, mándale **solo** el enlace del PDF de la marca que le interesa (o los que apliquen), sin recomendar modelos, y pregúntale si tiene algún tono o color en mente. Los PDFs traen las mismas fotos de la tabla, con precio y medida. Los modelos se mandan cuando diga el color (ver SKILL.md › Enviar modelos adecuados).
 
 | Catálogo | Páginas | Enlace |
 |---|---|---|
@@ -19,7 +19,7 @@ Cuando el cliente pida **"el catálogo"**, **"todos los modelos"** o **"la lista
 Mensaje sugerido:
 > ¡Claro! Aquí está el catálogo de [marca] con precio y medida de cada placa 👇
 > [enlace]
-> Para tu [aplicación] te recomiendo ver *[Modelo A]* y *[Modelo B]*. El que te guste me dices y te mando fotos ya instalado.
+> ¿Tienes algún tono o color en mente? Así te digo cuáles te quedan mejor para tu proyecto.
 
 Por Instagram o Facebook también funciona: es un enlace, no un archivo pesado.
 

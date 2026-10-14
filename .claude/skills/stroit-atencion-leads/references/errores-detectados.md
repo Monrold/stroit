@@ -26,7 +26,7 @@ Cliente: "¿Se puede colocar sobre muro de ladrillo? ¿Y en qué tamaño vienen?
 
 ## 6. "Enseguida te lo comparto" y no llega nada con valor
 Catálogo enviado sin comentario, o "Claro que sí" sin seguimiento.
-**Corrección:** acompaña el catálogo con 2 recomendaciones concretas y una pregunta.
+**Corrección:** manda el catálogo solo, sin recomendar modelos, y cierra con "¿Tienes algún tono o color en mente?". Cuando conteste, mándale 2 o 3 modelos de ese color con foto y precio.
 
 ## 7. No hacer el cálculo cuando el cliente no tiene medidas
 "No lo sé, todavía no he medido" → "Perfecto, claro que sí, no te preocupes" y la conversación se enfría.
