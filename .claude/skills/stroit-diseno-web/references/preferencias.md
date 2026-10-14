@@ -14,3 +14,8 @@ Formato:
 - Qué se hizo: cambios de diseño en sesiones anteriores (sin detalle registrado).
 - Reacción: 👎 "No me encantaron los cambios".
 - Regla que se desprende: trabajar por secciones, mostrar capturas del antes y el después antes de hacer commit y pedir referencias visuales cuando el pedido sea vago. Cuando el usuario diga qué no le gustó, regístralo aquí con detalle.
+
+## 2026-10-14 · Detalle de producto › Ventajas y aplicaciones
+- Qué se hizo: revisión del bloque de íconos (`detalle-producto/ventajas.astro`).
+- Reacción: 👎 "veo los íconos cortados" (Silestone y Sensa) y "se ve feo, muy atascado" (Dekton: dos cuadrículas de 3 columnas lado a lado con texto `text-xs`).
+- Regla que se desprende: los íconos van en una caja fija con `object-contain` (nunca ancho y alto forzados, porque los PNG tienen proporciones distintas). Ventajas y aplicaciones se apilan, no lado a lado, con títulos ligeros, línea fina y mucho aire entre filas. Las tres marcas usan el mismo diseño.

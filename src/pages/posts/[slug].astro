@@ -576,13 +576,11 @@ console.log("Medida usada para el cálculo de precios:", medidaUsada);
 
     <section></section>
     <section class=" lg:mx-6 text-white">
-      <div class="flex space-x-1 text-2xl font-semibold ">
-        <p class="px-6 pt-6">
-          ¿Por qué elegir <span class="capitalize">{marca}</span><span
-            class="pl-1">{nombre}?</span
-          >
-        </p>
-         
+      <div class="w-full max-w-screen-xl mx-auto px-6 lg:px-10 pt-16 lg:pt-24">
+        <h2 class="text-3xl md:text-4xl font-light">
+          ¿Por qué elegir <span class="capitalize">{marca}</span> <span
+            class="capitalize">{nombre}</span>?
+        </h2>
       </div>
        <Ventajas marca={marca} />
       {

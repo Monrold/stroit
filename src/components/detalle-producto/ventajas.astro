@@ -1,169 +1,100 @@
 ---
 const { marca } = Astro.props;
+
+const cdn = "https://cdn.stroitsurfaces.com/icons-stroit";
+
+const ventajas = {
+  fuego: { icon: "ventajas/aprueba-de-fuego.png", label: "Material a prueba de fuego" },
+  color: { icon: "ventajas/durabilidad-color.png", label: "Durabilidad de color" },
+  estabilidad: { icon: "ventajas/estabilidad-dimensional.png", label: "Estabilidad dimensional" },
+  hidrolisis: { icon: "ventajas/hidrolisis.png", label: "Alta resistencia a la hidrólisis" },
+  limpieza: { icon: "ventajas/minimo-mantenimiento.png", label: "Fácil de limpiar y mínimo mantenimiento" },
+  abrasion: { icon: "ventajas/resistente-abrasion.png", label: "Resistente a la abrasión" },
+  rayado: { icon: "ventajas/resistente-al-rayado.png", label: "Resistente al rayado" },
+  hielo: { icon: "ventajas/resistente-hielo-deshielo.png", label: "Resistencia al hielo y deshielo" },
+  manchas: { icon: "ventajas/resistente-manchas.png", label: "Resistencia a las manchas" },
+  mecanica: { icon: "ventajas/resistente-mecanica.png", label: "Alta resistencia mecánica" },
+  impactos: { icon: "ventajas/resistente-mecanica.png", label: "Resistencia a los impactos" },
+  uv: { icon: "ventajas/resistente-rayos-uv.png", label: "Alta resistencia a los rayos UV" },
+  calor: { icon: "ventajas/resistente-calor.png", label: "Resistente al fuego y al calor" },
+  calorSensa: { icon: "ventajas/resistente-calor.png", label: "Resistente al calor" },
+};
+
+const aplicaciones = {
+  bano: { icon: "aplicaciones/encimera-bano.png", label: "Encimeras de baño" },
+  cocina: { icon: "aplicaciones/encimera-cocina.png", label: "Encimeras de cocina" },
+  exterior: { icon: "aplicaciones/encimera-exterior.png", label: "Encimeras de exterior" },
+  escaleras: { icon: "aplicaciones/escaleras.png", label: "Escaleras" },
+  fachadas: { icon: "aplicaciones/fachadas.png", label: "Paredes y fachadas exteriores" },
+  paredBano: { icon: "aplicaciones/pared-banos.png", label: "Revestimiento de pared para baños" },
+  paredTerraza: { icon: "aplicaciones/revestimiento-pared.png", label: "Revestimiento de pared en terrazas" },
+  sueloInterior: { icon: "aplicaciones/suelo-interior.png", label: "Suelos de interior" },
+  sueloPiscina: { icon: "aplicaciones/suelo-psicinas-banos.png", label: "Suelos para baños y piscinas" },
+  sueloTerraza: { icon: "aplicaciones/suelo-terrazas.png", label: "Suelos para terrazas" },
+};
+
+const porMarca = {
+  dekton: {
+    garantia: "25 años de garantía",
+    ventajas: ["fuego", "color", "estabilidad", "hidrolisis", "limpieza", "abrasion", "rayado", "hielo", "manchas", "mecanica", "uv", "calor"],
+    aplicaciones: ["cocina", "bano", "exterior", "escaleras", "fachadas", "paredBano", "paredTerraza", "sueloInterior", "sueloPiscina", "sueloTerraza"],
+  },
+  silestone: {
+    garantia: "25 años de garantía",
+    ventajas: ["rayado", "manchas", "impactos", "limpieza"],
+    aplicaciones: ["cocina", "bano", "paredBano", "sueloInterior"],
+  },
+  sensa: {
+    garantia: "15 años de garantía",
+    ventajas: ["manchas", "limpieza", "rayado", "calorSensa"],
+    aplicaciones: ["cocina", "bano", "paredBano", "sueloInterior"],
+  },
+};
+
+const datos = porMarca[`${marca}`.toLowerCase()];
+
+const grupos = datos
+  ? [
+      { titulo: "Ventajas", items: datos.ventajas.map((k) => ventajas[k]) },
+      { titulo: "Aplicaciones", items: datos.aplicaciones.map((k) => aplicaciones[k]) },
+    ]
+  : [];
 ---
 
-<div class="w-full max-w-7xl mx-auto pt-10">
+{datos && (
+  <div class="w-full max-w-screen-xl mx-auto px-6 lg:px-10 pt-8 pb-16 lg:pb-24">
+    <p class="text-xs uppercase tracking-[0.2em] text-[#dbd6ca]">
+      {marca} · {datos.garantia}
+    </p>
 
-{marca == "dekton" && (
-  <div class="w-full max-w-7xl mx-auto  px-8 pb-6">
-
-    <div class="flex flex-col lg:flex-row gap-8">
-      <div class="flex-1">
-        <h3 class="text-lg font-semibold text-white mb-4 lg:mb-4">Ventajas {marca}</h3>
-        <div class="grid grid-cols-3 gap-x-4 gap-y-6">
-          <div class="flex flex-col items-center text-center">
-            <img src="https://cdn.stroitsurfaces.com/icons-stroit/ventajas/aprueba-de-fuego.png" class="w-11 h-11 mb-1" />
-            <p class="text-xs text-zinc-400 font-medium">Material a prueba de fuego</p>
-          </div>
-          <div class="flex flex-col items-center text-center">
-            <img src="https://cdn.stroitsurfaces.com/icons-stroit/ventajas/durabilidad-color.png" class="w-11 h-11 mb-1" />
-            <p class="text-xs text-zinc-400 font-medium">Durabilidad de color</p>
-          </div>
-          <div class="flex flex-col items-center text-center">
-            <img src="https://cdn.stroitsurfaces.com/icons-stroit/ventajas/estabilidad-dimensional.png" class="w-11 h-11 mb-1" />
-            <p class="text-xs text-zinc-400 font-medium">Estabilidad dimensional</p>
-          </div>
-          <div class="flex flex-col items-center text-center">
-            <img src="https://cdn.stroitsurfaces.com/icons-stroit/ventajas/hidrolisis.png" class="w-9 h-10 mb-1" />
-            <p class="text-xs text-zinc-400 font-medium mt-1">Alta resistencia a la hidrólisis</p>
-          </div>
-          <div class="flex flex-col items-center text-center">
-            <img src="https://cdn.stroitsurfaces.com/icons-stroit/ventajas/minimo-mantenimiento.png" class="w-9 h-11 mb-1" />
-            <p class="text-xs text-zinc-400 font-medium">Fácil de limpiar y mínimo mantenimiento</p>
-          </div>
-          <div class="flex flex-col items-center text-center">
-            <img src="https://cdn.stroitsurfaces.com/icons-stroit/ventajas/resistente-abrasion.png" class="w-11 h-11 mb-1" />
-            <p class="text-xs text-zinc-400 font-medium">Resistente a la abrasión</p>
-          </div>
-          <div class="flex flex-col items-center text-center">
-            <img src="https://cdn.stroitsurfaces.com/icons-stroit/ventajas/resistente-al-rayado.png" class="w-13 h-9 mb-1" />
-            <p class="text-xs text-zinc-400 font-medium mt-2">Resistente al rayado</p>
-          </div>
-          <div class="flex flex-col items-center text-center">
-            <img src="https://cdn.stroitsurfaces.com/icons-stroit/ventajas/resistente-hielo-deshielo.png" class="w-10 h-11 mb-1" />
-            <p class="text-xs text-zinc-400 font-medium">Resistencia al hielo y deshielo</p>
-          </div>
-          <div class="flex flex-col items-center text-center">
-            <img src="https://cdn.stroitsurfaces.com/icons-stroit/ventajas/resistente-manchas.png" class="w-11 h-11 mb-1" />
-            <p class="text-xs text-zinc-400 font-medium">Resistencia a las manchas</p>
-          </div>
-          <div class="flex flex-col items-center text-center">
-            <img src="https://cdn.stroitsurfaces.com/icons-stroit/ventajas/resistente-mecanica.png" class="w-8 h-12 mb-1" />
-            <p class="text-xs text-zinc-400 font-medium">Alta resistencia mecánica</p>
-          </div>
-          <div class="flex flex-col items-center text-center">
-            <img src="https://cdn.stroitsurfaces.com/icons-stroit/ventajas/resistente-rayos-uv.png" class="w-11 h-11 mb-1" />
-            <p class="text-xs text-zinc-400 font-medium mt-1">Alta resistencia a los rayos UV</p>
-          </div>
-          <div class="flex flex-col items-center text-center">
-            <img src="https://cdn.stroitsurfaces.com/icons-stroit/ventajas/resistente-calor.png" class="w-8 h-11 mb-1" />
-            <p class="text-xs text-zinc-400 font-medium mt-1">Resistente al fuego y al calor</p>
-          </div>
-        </div>
+    {grupos.map((grupo) => (
+      <div class="mt-12 lg:mt-16">
+        <h3 class="border-b border-white/10 pb-4 text-xl md:text-2xl font-light text-white">
+          {grupo.titulo}{" "}<span class="capitalize">{marca}</span>
+        </h3>
+        <ul
+          class:list={[
+            "grid grid-cols-2 sm:grid-cols-3 gap-x-6 gap-y-10 pt-10",
+            grupo.items.length > 6 ? "lg:grid-cols-6" : "lg:grid-cols-4",
+          ]}
+        >
+          {grupo.items.map((item) => (
+            <li class="flex flex-col items-center text-center">
+              <div class="h-14 w-14 flex items-center justify-center">
+                <img
+                  src={`${cdn}/${item.icon}`}
+                  alt=""
+                  loading="lazy"
+                  class="max-h-full max-w-full object-contain"
+                />
+              </div>
+              <p class="mt-4 max-w-[11rem] text-sm leading-snug text-zinc-400">
+                {item.label}
+              </p>
+            </li>
+          ))}
+        </ul>
       </div>
-
-      {/* Aplicaciones */}
-      <div class="flex-1">
-        <h3 class="text-lg font-semibold text-white mb-4 lg:mb-4">Aplicaciones {marca}</h3>
-        <div class="grid grid-cols-3 gap-x-4 gap-y-6">
-          <div class="flex flex-col items-center text-center">
-            <img src="https://cdn.stroitsurfaces.com/icons-stroit/aplicaciones/encimera-bano.png" class="w-11 h-11 mb-1" />
-            <p class="text-xs text-zinc-400 font-medium">Encimeras de baño</p>
-          </div>
-          <div class="flex flex-col items-center text-center">
-            <img src="https://cdn.stroitsurfaces.com/icons-stroit/aplicaciones/encimera-cocina.png" class="w-11 h-11 mb-1" />
-            <p class="text-xs text-zinc-400 font-medium">Encimera de cocina</p>
-          </div>
-          <div class="flex flex-col items-center text-center">
-            <img src="https://cdn.stroitsurfaces.com/icons-stroit/aplicaciones/encimera-exterior.png" class="w-11 h-11 mb-1" />
-            <p class="text-xs text-zinc-400 font-medium">Encimera de exterior</p>
-          </div>
-          <div class="flex flex-col items-center text-center">
-            <img src="https://cdn.stroitsurfaces.com/icons-stroit/aplicaciones/escaleras.png" class="w-11 h-11 mb-1" />
-            <p class="text-xs text-zinc-400 font-medium">Escaleras</p>
-          </div>
-          <div class="flex flex-col items-center text-center">
-            <img src="https://cdn.stroitsurfaces.com/icons-stroit/aplicaciones/fachadas.png" class="w-11 h-11 mb-1" />
-            <p class="text-xs text-zinc-400 font-medium">Paredes y fachadas de exteriores</p>
-          </div>
-          <div class="flex flex-col items-center text-center">
-            <img src="https://cdn.stroitsurfaces.com/icons-stroit/aplicaciones/pared-banos.png" class="w-11 h-11 mb-1" />
-            <p class="text-xs text-zinc-400 font-medium">Revestimiento de pared para baños</p>
-          </div>
-          <div class="flex flex-col items-center text-center">
-            <img src="https://cdn.stroitsurfaces.com/icons-stroit/aplicaciones/revestimiento-pared.png" class="w-11 h-11 mb-1" />
-            <p class="text-xs text-zinc-400 font-medium">Revestimiento de pared para terrazas de exterior</p>
-          </div>
-          <div class="flex flex-col items-center text-center">
-            <img src="https://cdn.stroitsurfaces.com/icons-stroit/aplicaciones/suelo-interior.png" class="w-11 h-11 mb-1" />
-            <p class="text-xs text-zinc-400 font-medium">Suelos de interior</p>
-          </div>
-          <div class="flex flex-col items-center text-center">
-            <img src="https://cdn.stroitsurfaces.com/icons-stroit/aplicaciones/suelo-psicinas-banos.png" class="w-11 h-11 mb-1" />
-            <p class="text-xs text-zinc-400 font-medium">Revestimiento de suelo para baños y piscinas</p>
-          </div>
-          <div class="flex flex-col items-center text-center">
-            <img src="https://cdn.stroitsurfaces.com/icons-stroit/aplicaciones/suelo-terrazas.png" class="w-11 h-11 mb-1" />
-            <p class="text-xs text-zinc-400 font-medium">Suelo para terrazas</p>
-          </div>
-        </div>
-      </div>
-
-    </div>
+    ))}
   </div>
 )}
-
-
-
-
-
-
-  {marca == "silestone" && (
-    <div class="mb-16">
-      <h3 class="text-3xl font-semibold mb-6 text-center">Silestone – 25 años de garantía</h3>
-
-      <!-- Ventajas Silestone -->
-      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-6 mb-8">
-        <div class="flex flex-col items-center text-center">
-          <img src="https://cdn.stroitsurfaces.com/icons-stroit/ventajas/resistente-al-rayado.png" class="w-16 h-16 mb-2" />
-          <p class="text-sm font-medium">Resistente al rayado</p>
-        </div>
-        <!-- Agrega las demás ventajas de Silestone aquí... -->
-      </div>
-
-      <!-- Aplicaciones Silestone -->
-      <h4 class="text-2xl font-semibold mb-4 text-center">Aplicaciones</h4>
-      <div class="grid grid-cols-2 sm:grid-cols-4 gap-6">
-        <div class="flex flex-col items-center text-center">
-          <img src="https://cdn.stroitsurfaces.com/icons-stroit/aplicaciones/encimera-bano.png" class="w-16 h-16 mb-2" />
-          <p class="text-sm font-medium">Encimeras de baño</p>
-        </div>
-        <!-- Agrega las demás aplicaciones de Silestone aquí... -->
-      </div>
-    </div>
-  )}
-
-  {marca == "sensa" && (
-    <div class="mb-16">
-      <h3 class="text-3xl font-semibold mb-6 text-center">Sensa – 15 años de garantía</h3>
-
-      <!-- Ventajas Sensa -->
-      <div class="flex flex-col sm:flex-row flex-wrap justify-center gap-6 mb-8">
-        <div class="flex flex-col items-center text-center">
-          <img src="https://cdn.stroitsurfaces.com/icons-stroit/ventajas/resistente-manchas.png" class="w-16 h-16 mb-2" />
-          <p class="text-sm font-medium">Resistencia a las manchas</p>
-        </div>
-      </div>
-
-      <!-- Aplicaciones Sensa -->
-      <h4 class="text-2xl font-semibold mb-4 text-center">Aplicaciones</h4>
-      <div class="grid grid-cols-2 sm:grid-cols-4 gap-6">
-        <div class="flex flex-col items-center text-center">
-          <img src="https://cdn.stroitsurfaces.com/icons-stroit/aplicaciones/encimera-bano.png" class="w-16 h-16 mb-2" />
-          <p class="text-sm font-medium">Encimeras de baño</p>
-        </div>
-        <!-- Agrega las demás aplicaciones de Sensa aquí... -->
-      </div>
-    </div>
-  )}
-</div>
