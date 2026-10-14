@@ -29,7 +29,7 @@ Señales: pide "precio", "cuánto cuesta", "medidas", "catálogo", "solo quiero 
 
 Fórmula para responder:
 1. **Respuesta directa** con números reales: el **rango de precio por placa** de la marca y la aplicación (de `references/modelos.md`). Si ya dijo un color, agrega 2 o 3 modelos de ese color con su precio; si no, **no listes modelos**.
-2. **Dato que le ahorra tiempo**: medida de la placa y m² que cubre (≈4.6 m²), y que el envío es gratis.
+2. **Dato que le ahorra tiempo**: medida de la placa y m² que cubre (≈4.6 m²), y que el envío es gratis. **No des precio por m²** salvo que lo pida: se vende por placa completa.
 3. **Una sola pregunta**: si todavía no sabes el color, "¿Tienes algún tono o color en mente? Con eso te mando los modelos que tengo en bodega"; si ya lo sabes, "¿Cuántos m² son, aprox.? Te digo cuántas placas y el total".
 
 Ejemplo de buena respuesta a "cuánto cuesta y qué medidas, estoy en León, es para piso":
@@ -82,8 +82,8 @@ Si el anuncio era de un producto pero la necesidad pide otro, **dilo con natural
 - **Catálogo**: si lo pide, mándale de inmediato el **enlace del PDF** de la marca (tabla *Catálogos completos* en `references/modelos.md`: Dekton, Dekton Flash Sale, Silestone y Sensa), sin condicionarlo. **Manda solo el catálogo, sin recomendar modelos**, y cierra con "¿Tienes algún tono o color en mente?" para filtrarle después (ver `references/guiones.md` §3). Como es un enlace, funciona igual por WhatsApp, Instagram y Facebook.
 - Para un modelo concreto, manda su **foto** (columna Imagen de `modelos.md`): es la placa real en bodega, con medida y precio.
 - **Si el cliente ya recibió un catálogo, recomienda solo modelos de ese catálogo y con su precio.** Antes de sugerir modelos, revisa qué PDF se le envió: en el mensaje del vendedor, `sent_attachments` trae el `href` de cada PDF (en `cdn.theparrotcrm.com`). Descárgalo y léelo; son imágenes, así que conviértelas con `pdftoppm`. Confirma cuál se entregó de verdad: el adjunto cuyo `wamid` coincide con el `externalId` del mensaje es el que llegó; un segundo `wamid` sin mensaje propio puede no haberse entregado. Los precios de `references/modelos.md` pueden estar desactualizados frente al catálogo vigente; si no coinciden, manda el catálogo.
-- Si ya tiene el catálogo, **no le reenvíes los precios**. Si ya dijo un color, fíltrale 2 o 3 modelos de ese PDF en ese color; si no, pregúntale "¿Tienes algún tono o color en mente?" y dale la referencia por m² (ver `references/guiones.md` › Recontacto).
-- **Prueba A/B en curso (económicos vs. premium):** cuando el cliente ya dijo un color y le vas a recomendar modelos por primera vez, asigna la variante con el último dígito de su WhatsApp (par → económicos, impar → premium), arma la selección según `references/ab-testing.md` e indica en tu salida qué variante usaste.
+- Si ya tiene el catálogo, **no le reenvíes los precios**. Si ya dijo un color, fíltrale 2 o 3 modelos de ese PDF en ese color; si no, pregúntale "¿Tienes algún tono o color en mente?" y recuérdale cuántos m² cubre la placa (ver `references/guiones.md` › Recontacto).
+- **Prueba A/B en curso (económicos vs. premium):** cuando el cliente ya dijo un color y le vas a recomendar modelos por primera vez, asigna la variante con el último dígito de su WhatsApp (par → económicos, impar → premium), arma la selección según `references/ab-testing.md` e indica en tu salida qué variante usaste. La variante solo decide el rango de precio **dentro de los colores que pidió** (cualquier marca, no solo Flash Sale); si en ese color no hay opción del rango, manda igual los modelos de ese color. Si dio presupuesto, ajústate a él pero dale 1 o 2 opciones extra.
 
 ## Cotización
 
@@ -116,7 +116,7 @@ Ver `references/guiones.md` › Recontacto. Puntos clave:
 
 - Lectura: `read_crm` para threads, clientes, ventas y la base de conocimiento (`resource: "knowledge"`, `id: "all"`). La base de conocimiento es la fuente oficial de políticas y FAQs.
 - Escritura (**solo si el usuario lo pide o lo aprueba**):
-  - `add_note` en el thread con el resumen del lead y el mensaje sugerido (este es el formato que ya usa el equipo: "📌 Seguimiento sugerido – fecha, contexto, mensaje sugerido, siguiente paso si no responde").
+  - `add_note` en el thread, **concisa**: solo el mensaje o seguimiento sugerido que se pidió, la hora en que vence la ventana de 24 h, qué adjuntar y la variante A/B. Sin contexto del cliente, sin razonamiento y sin "si no responde" (formato en `references/guiones.md` › Nota para ParrotCRM).
   - `create_lead` o `update_lead` con `attrs`: `material`, `medidasDelProyecto`, `tipoDeCliente`, `etapa`.
   - `create_activity` para programar el seguimiento.
 - Este MCP **no envía mensajes al cliente**: entrega el texto listo para copiar y pegar (o deja la nota en el thread).
