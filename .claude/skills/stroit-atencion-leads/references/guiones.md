@@ -27,11 +27,10 @@ Si el primer mensaje ya trae una pregunta (precio, medida o envío), **contésta
 
 ## 3. Pide catálogo
 > ¡Con gusto! Aquí te va el catálogo con precio y medida de cada modelo 👇
-> [adjuntar PDF]
+> [enlace del PDF de la marca, de `modelos.md` › Catálogos completos]
 > Para [aplicación] te recomiendo ver *[Modelo A]* y *[Modelo B]*. El que te guste me dices y te mando fotos ya instalado.
 
-Desde Instagram:
-> El PDF pesa mucho para mandarlo por aquí 😅. Escríbeme al WhatsApp 442 269 0555 y te lo paso al momento. Mientras, te dejo 3 opciones para [aplicación]: …
+Desde Instagram o Facebook se manda el mismo enlace; no hace falta pasar al cliente a WhatsApp para el catálogo.
 
 ## 4. Cliente con prisa o molesto ("solo quiero precio", repite la pregunta)
 > Tienes razón, te lo paso directo 👇

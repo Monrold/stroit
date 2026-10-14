@@ -19,13 +19,11 @@ La variante se asigna una vez por lead y se mantiene en los seguimientos. Si el 
 
 ## Cómo elegir los modelos
 - Toma los modelos **de un catálogo que el cliente tenga o que le vayas a mandar**, con el precio de ese catálogo (ver SKILL.md › Enviar modelos adecuados).
-- **A**: los 3 más baratos en existencia que encajen con la aplicación. En octubre 2026, para piso Dekton mate: *Kovik*, *Eter* y *Danae*, a $21,048 por placa (≈ $4,400 a $4,600/m²). Para cubierta interior, Silestone desde $14,220 (*Lyra*, *Blanco Orion*).
+- **A**: los 3 más baratos en existencia que encajen con la aplicación. En octubre 2026, para piso: Dekton **Flash Sale** (todos mate), con *Lyfe Lunar* $15,833, *Strato* $16,880 y *Crema Marfil* $16,351 (≈ $3,400/m²). Para cubierta interior: Silestone desde $14,220 (*Lyra*, *Blanco Orion*).
 - **B**: 3 modelos en existencia de $27,000 a $34,000 por placa (≈ $5,800 a $6,300/m²) con look llamativo, como *Sabbia*, *Kelya* o *Laurent* para piso. Adjunta sus fotos de `modelos.md`.
 - En las dos variantes, el precio por m² es solo una referencia: **se vende por placa completa**.
 
 ## Ejemplo con el mismo lead (piso en León, octubre 2026)
-
-> Ejemplo histórico: la variante A usaba el Flash Sale de septiembre, que **ya no aparece en las fotos de existencia de octubre**. Para leads nuevos, toma los modelos de `modelos.md`.
 
 **A · Económicos** (Flash Sale septiembre):
 > ¡Hola Roberto, buen día! 😊 Para que no tengas que revisar todo el catálogo: para piso, los mejores son los del *Flash Sale* que te mandé, son mate y los más económicos. Te recomiendo *Lyfe Lunar* (gris claro), *Strato* (gris oscuro) o *Crema Marfil* (crema).
