@@ -1,0 +1,5 @@
+{
+  "_nota": "Último folio usado por región. cotizar.py toma el siguiente y lo guarda. Haz commit de este archivo después de cada cotización real.",
+  "bajio": {"prefijo": "BJ", "ultimo": 0},
+  "hidalgo": {"prefijo": "HG", "ultimo": 0}
+}

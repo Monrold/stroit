@@ -105,7 +105,8 @@ cd .claude/skills/stroit-atencion-leads/cotizador
 python3 cotizar.py ejemplos/luis-montano.json /ruta/salida   # copia el ejemplo y cambia los datos
 ```
 
-- El JSON lleva: `cliente`, `estado` (define la región), `proyecto`, `folio`, `partidas` (cantidad, descripción, detalle, medida, precio y la URL de la foto de `modelos.md`) y `mano_de_obra` (claves de `config.json` › `tarifas_mano_de_obra` con su cantidad en ml, m² o piezas).
+- **Folio**: consecutivo por región desde el 1 (`BJ-0001` Bajío, `HG-0001` Hidalgo). Si el JSON no trae `folio`, el cotizador asigna el siguiente y lo guarda en `cotizador/folios.json`: **haz commit y push de ese archivo** después de cada cotización real, o el siguiente folio se repetirá. Para pruebas usa `"folio": "PRUEBA"`, que no consume número.
+- El JSON lleva: `cliente`, `estado` (define la región), `ciudad`, `proyecto`, `partidas` (cantidad, descripción, detalle, medida, precio y la URL de la foto de `modelos.md`) y `mano_de_obra` (claves de `config.json` › `tarifas_mano_de_obra` con su cantidad en ml, m² o piezas).
 - La región sale del estado (`config.json` › `regiones`): **Bajío** = Querétaro, San Luis Potosí, Aguascalientes y Guanajuato; **Hidalgo** = Hidalgo, CDMX, Edomex, Puebla, Veracruz, Morelos y Guerrero. Cambia la dirección del encabezado, la cuenta bancaria y la columna de mano de obra.
 - Imprime los totales; no necesitas abrir el PDF. Revisa el resultado con `pdftoppm` solo si cambiaste la plantilla.
 - Si el usuario quiere una copia editable en Adobe Express, exporta el `.html` que genera (pesa ≈15 KB).

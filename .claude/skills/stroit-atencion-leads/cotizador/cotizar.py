@@ -101,6 +101,18 @@ def mano_de_obra_html(q, cfg, regiones):
     return html, totales
 
 
+def siguiente_folio(region):
+    """Folio consecutivo por región (BJ-0001, HG-0001…). Lo guarda en folios.json."""
+    ruta = os.path.join(AQUI, "folios.json")
+    folios = json.load(open(ruta, encoding="utf-8"))
+    f = folios[region]
+    f["ultimo"] += 1
+    with open(ruta, "w", encoding="utf-8") as fh:
+        json.dump(folios, fh, ensure_ascii=False, indent=2)
+        fh.write("\n")
+    return f"{f['prefijo']}-{f['ultimo']:04d}"
+
+
 def renderizar_pdf(html_path, pdf_path):
     node = shutil.which("node")
     if not node:
@@ -140,6 +152,9 @@ def main():
             f"<td class='r'>{dinero(imp)}</td></tr>"
         )
 
+    # Sin "folio" en el JSON se asigna el siguiente de la región; "PRUEBA" no consume folio.
+    folio = str(q["folio"]) if q.get("folio") else siguiente_folio(region)
+
     mo_html, mo_tot = mano_de_obra_html(q, cfg, regiones_mo)
     cuenta = f'<p class="muted">{reg["cuenta_texto"]}</p>' if reg.get("cuenta_texto") else ""
     proyecto = f'<p class="lbl" style="margin-top:6px">Proyecto</p><p>{q["proyecto"]}</p>' if q.get("proyecto") else ""
@@ -161,7 +176,7 @@ def main():
         "cuenta_bloque": cuenta,
         "fecha": ahora.strftime("%m/%d/%Y %I:%M:%S %p"),
         "vigencia": vigencia.strftime("%m/%d/%Y"),
-        "folio": str(q.get("folio", "PRUEBA")),
+        "folio": folio,
         "cliente": q["cliente"],
         "proyecto_bloque": proyecto,
         "partidas": "".join(partidas),
@@ -179,6 +194,7 @@ def main():
     open(base + ".html", "w", encoding="utf-8").write(html)
     hecho_pdf = renderizar_pdf(base + ".html", base + ".pdf")
 
+    print(f"Folio: {folio}")
     print(f"Región: {reg['nombre']} | Material: {dinero(subtotal)} | Entrega {destino}: {envio_txt}")
     for r, t in mo_tot.items():
         print(f"Mano de obra {cfg['regiones'][r]['nombre']}: {dinero(t)} → total proyecto {dinero(subtotal + t)}")
