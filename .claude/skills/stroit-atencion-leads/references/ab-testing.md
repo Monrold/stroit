@@ -1,13 +1,13 @@
 # Prueba A/B: económicos vs. premium
 
 Qué medimos: cuando recomendamos modelos a un lead que **todavía no ha elegido**, ¿qué convierte mejor?
-- **A · Económicos**: los modelos más baratos del catálogo (Flash Sale).
+- **A · Económicos**: los modelos más baratos en existencia (ver `modelos.md`).
 - **B · Premium**: modelos más caros pero que lucen más (vetas, piedra, dorado).
 
 **Solo cambia la selección de modelos** (cuáles y en qué rango de precio). Todo lo demás se queda igual en las dos variantes: la estructura del mensaje, la referencia por m², la aclaración de que se vende por placa completa, el envío gratis, la muestra gratis y la pregunta de cierre. Si cambias otra cosa, ya no sabremos qué funcionó.
 
 ## Cuándo aplica
-- El primer mensaje en que le recomiendas modelos a un lead sin modelo elegido. Puede ser una respuesta en modo prisa o un recontacto, como el de "ya tiene catálogo y no ha elegido".
+- El primer mensaje en que le recomiendas modelos, que **siempre es después de que el cliente dijo un color o tono** (ver SKILL.md › Enviar modelos adecuados). La variante decide si le mandas los más baratos o los premium **de ese color**.
 - **No aplica** si el cliente ya pidió algo concreto ("lo más barato", "algo de lujo", un modelo o estilo específico) o si dijo "está caro". En esos casos manda lo que pidió y marca la variante como `fuera`.
 
 ## Asignación (para que no sea a gusto del vendedor)
@@ -19,11 +19,13 @@ La variante se asigna una vez por lead y se mantiene en los seguimientos. Si el 
 
 ## Cómo elegir los modelos
 - Toma los modelos **de un catálogo que el cliente tenga o que le vayas a mandar**, con el precio de ese catálogo (ver SKILL.md › Enviar modelos adecuados).
-- **A**: los 3 más baratos que encajen con la aplicación, por ejemplo el Flash Sale (≈ $15,700 a $16,900 por placa, ≈ $3,400/m²).
-- **B**: 3 modelos de $27,000 a $34,000 por placa (≈ $5,800 a $6,300/m²) con look llamativo. Si el cliente solo recibió el Flash Sale, adjunta las fotos de esos modelos o el catálogo de promociones vigente.
+- **A**: los 3 más baratos en existencia que encajen con la aplicación. En octubre 2026, para piso: Dekton **Flash Sale** (todos mate), con *Lyfe Lunar* $15,833, *Strato* $16,880 y *Crema Marfil* $16,351 (≈ $3,400/m²). Para cubierta interior: Silestone desde $14,220 (*Lyra*, *Blanco Orion*).
+- **B**: 3 modelos en existencia de $27,000 a $34,000 por placa (≈ $5,800 a $6,300/m²) con look llamativo, como *Sabbia*, *Kelya* o *Laurent* para piso. Adjunta sus fotos de `modelos.md`.
 - En las dos variantes, el precio por m² es solo una referencia: **se vende por placa completa**.
 
 ## Ejemplo con el mismo lead (piso en León, octubre 2026)
+
+> Supón que Roberto ya respondió a "¿Tienes algún tono o color en mente?" con "algo neutro, gris o crema". Sin esa respuesta no se mandan modelos.
 
 **A · Económicos** (Flash Sale septiembre):
 > ¡Hola Roberto, buen día! 😊 Para que no tengas que revisar todo el catálogo: para piso, los mejores son los del *Flash Sale* que te mandé, son mate y los más económicos. Te recomiendo *Lyfe Lunar* (gris claro), *Strato* (gris oscuro) o *Crema Marfil* (crema).

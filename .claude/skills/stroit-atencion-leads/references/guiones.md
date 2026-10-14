@@ -6,7 +6,7 @@ Adáptalos siempre a la conversación: usa el nombre del cliente, responde lo qu
 
 **Dekton** ("Dekton llegó a Guanajuato…"):
 > ¡Hola! 😊 Gracias por escribirnos. Dekton es la superficie de Cosentino que aguanta calor, rayones, manchas y sol (sirve para interior y exterior) y tiene 25 años de garantía.
-> ¿Para qué lo quieres: cocina, baño, piso, muro o fachada? Con eso te mando los modelos ideales y sus precios.
+> ¿Para qué lo quieres: cocina, baño, piso, muro o fachada? Con eso te paso precios y te ayudo a elegir.
 
 **Silestone**:
 > ¡Hola! 😊 Silestone es la superficie mineral de Cosentino, ideal para cubiertas de cocina y baño: resistente a manchas y rayones, con 25 años de garantía y diseños tipo mármol desde *$12,000 por placa* en promoción.
@@ -19,24 +19,24 @@ Adáptalos siempre a la conversación: usa el nombre del cliente, responde lo qu
 Si el primer mensaje ya trae una pregunta (precio, medida o envío), **contéstala primero** y luego haz una sola pregunta.
 
 ## 2. Pide precio sin dar contexto
-> ¡Claro! Se vende por placa completa (≈3.20 x 1.44 m, cubre ≈4.6 m²). En promoción van desde *$10,680* hasta *$34,000* según el modelo; los más pedidos:
-> • [Modelo 1] – $[precio]
-> • [Modelo 2] – $[precio]
-> • [Modelo 3] – $[precio]
-> ¿Para qué área es y cuántos m² aprox.? Te digo cuántas placas y el total.
+> ¡Claro! Se vende por placa completa (≈3.20 x 1.45 m, cubre ≈4.6 m²). En bodega tenemos Silestone desde *$14,220*, Dekton desde *$15,723* y Sensa (piedra natural) desde *$9,310* por placa, según el modelo.
+> ¿Para qué área es y tienes algún tono o color en mente? Con eso te mando los modelos que encajan con su precio.
+
+Sin color no se listan modelos (ver SKILL.md › Enviar modelos adecuados).
 
 ## 3. Pide catálogo
-> ¡Con gusto! Aquí te va el catálogo con precio y medida de cada modelo 👇
-> [adjuntar PDF]
-> Para [aplicación] te recomiendo ver *[Modelo A]* y *[Modelo B]*. El que te guste me dices y te mando fotos ya instalado.
+> ¡Con gusto! Aquí te va el catálogo con precio y medida de cada placa 👇
+> [enlace del PDF de la marca, de `modelos.md` › Catálogos completos]
+> ¿Tienes algún tono o color en mente? Así te digo cuáles te quedan mejor para tu proyecto.
 
-Desde Instagram:
-> El PDF pesa mucho para mandarlo por aquí 😅. Escríbeme al WhatsApp 442 269 0555 y te lo paso al momento. Mientras, te dejo 3 opciones para [aplicación]: …
+**Solo el catálogo**: no le recomiendes modelos en este mensaje. Cuando responda el color, ahí sí mándale 2 o 3 modelos de ese color con foto y precio.
+
+Desde Instagram o Facebook se manda el mismo enlace; no hace falta pasar al cliente a WhatsApp para el catálogo.
 
 ## 4. Cliente con prisa o molesto ("solo quiero precio", repite la pregunta)
 > Tienes razón, te lo paso directo 👇
-> • [Modelo] – $[precio] por placa ([medida], ≈[m²] m²)
-> • …
+> [Si ya dijo color o modelo:] • [Modelo] – $[precio] por placa ([medida], ≈[m²] m²) …
+> [Si no:] Van desde $[mínimo] hasta $[máximo] por placa ([medida], ≈[m²] m²), según el modelo. ¿Algún tono o color en mente para pasarte los precios exactos?
 > Envío sin costo a [ciudad]. Si me das los m², te mando el total en 2 minutos.
 
 ## 5. Cotización
@@ -55,11 +55,12 @@ Si no se conoce un precio: deja `$[confirmar]` y avisa al vendedor.
 
 ## 6. Objeción: "está caro" / "voy a ahorrar"
 > Te entiendo. Es una inversión que no vuelves a hacer: no se mancha, no pierde color y no necesita mantenimiento (25 años de garantía).
-> Si quieres cuidar el presupuesto, estos modelos tienen el mismo desempeño y cuestan menos:
-> • Dekton Dunna – $10,680
-> • Silestone Lyra – $12,000
-> • Dekton Lunar – $16,000
+> Si quieres cuidar el presupuesto, en [el color que eligió] tengo opciones con el mismo desempeño que cuestan menos:
+> • [Modelo más barato de ese color] – $[precio]
+> • [Segundo más barato de ese color] – $[precio]
 > ¿Alguno te late? Te puedo mandar una muestra sin costo.
+
+Toma las opciones de `modelos.md` › Guía rápida por estilo, **del mismo color** que el cliente eligió. Si aún no dijo color, dale el rango más bajo (Dekton Flash Sale desde $15,723, Silestone desde $14,220, Sensa desde $9,310) y pregúntale el tono.
 
 ## 7. Objeción: "¿tienen en León?" / "quiero verlo"
 > Estamos construyendo el showroom en León 🙌. Mientras, te atendemos desde Querétaro con envío sin costo a León y *muestras físicas gratis* para que veas el material en tu espacio.
@@ -76,12 +77,11 @@ Si no se conoce un precio: deja `$[confirmar]` y avisa al vendedor.
   > ¡Hola [nombre]! ¿Pudiste ver los modelos? Te dejo fotos de *[Modelo]* ya instalado en [aplicación] 👇 ¿Qué te pareció?
 - **Cliente que iba a medir**:
   > ¡Hola [nombre]! ¿Ya tienes las medidas? Mándame largo x ancho o una foto con las medidas a mano y te paso la cotización exacta hoy mismo.
-- **Cliente que ya recibió el catálogo pero no ha elegido** (ni midió): no le repitas la lista de precios que ya tiene. Lo que aporta valor es **filtrarle el catálogo** (2 o 3 modelos de ese PDF para su aplicación) y darle una **referencia por m²** para que haga cuentas, aclarando que se vende por placa completa. Ejemplo real (Roberto, piso en León, oct-2026, con el Flash Sale de septiembre):
-  > ¡Hola Roberto, buen día! 😊 Para que no tengas que revisar todo el catálogo: para piso, los mejores son los del *Flash Sale* que te mandé, son mate y los más económicos. Te recomiendo *Lyfe Lunar* (gris claro), *Strato* (gris oscuro) o *Crema Marfil* (crema).
-  > Se venden por placa completa (≈4.6 a 4.8 m² cada una); como referencia, te sale en ≈ $3,400 por m². Un piso de 20 m² lleva unas 5 placas y el envío a León es sin costo.
-  > Cuando midas, mándame largo x ancho y te paso el total exacto. ¿Te mando fotos de alguno ya instalado?
+- **Cliente que ya recibió el catálogo pero no ha elegido** (ni midió): no le repitas la lista de precios que ya tiene. Dale una **referencia por m²** para que haga cuentas, aclarando que se vende por placa completa, y pregúntale el color. Ejemplo (Roberto, piso en León, oct-2026, ya tenía el Flash Sale y no había dicho color):
+  > ¡Hola Roberto, buen día! 😊 Para piso, los del *Flash Sale* que te mandé son mate y los más económicos. Se venden por placa completa (≈4.6 a 4.8 m² cada una); como referencia, te sale en ≈ $3,400 por m². Un piso de 20 m² lleva unas 5 placas y el envío a León es sin costo.
+  > ¿Tienes algún tono o color en mente? Así te digo cuáles te quedan mejor y te mando fotos ya instalados.
 
-  Reglas de este mensaje: usa **solo modelos y precios del PDF que el cliente sí recibió** (ver SKILL.md › Enviar modelos adecuados); el precio por m² es precio de placa ÷ m² de la placa, y **siempre** se aclara que no se vende por m² sino por placa completa.
+  Cuando responda el color, **ahí sí** fíltrale 2 o 3 modelos de ese color, **solo del PDF que el cliente sí recibió** (ver SKILL.md › Enviar modelos adecuados). El precio por m² es precio de placa ÷ m² de la placa, y **siempre** se aclara que no se vende por m² sino por placa completa.
 
 ### Fuera de las 24 h (WhatsApp exige plantilla aprobada)
 - Usa la plantilla aprobada para reabrir. En cuanto conteste, manda **de inmediato** un mensaje con contexto:
