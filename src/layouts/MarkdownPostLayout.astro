@@ -1,13 +1,31 @@
 ---
 const { frontmatter } = Astro.props;
 import Layout from "../layouts/Layout.astro";
-import Tag from "../pages/tags/[tag].astro";
 import MoreProductsDekton from "../components/Moreproductsdekton.astro";
 import MoreProductsSilestone from "../components/Moreproductssilestone.astro";
 import MoreProductsSensa from "../components/Moreproductssensa.astro";
 ---
 
-<Layout title={frontmatter.title} description={frontmatter.description} ogImage={frontmatter.image}>
+<Layout
+  title={`${frontmatter.title} | Stroit Surfaces`}
+  description={frontmatter.description}
+  ogImage={frontmatter.image?.url}
+  ogType="article"
+>
+  <script
+    slot="head"
+    type="application/ld+json"
+    set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Article",
+      headline: frontmatter.title,
+      description: frontmatter.description,
+      image: frontmatter.image?.url ? [frontmatter.image.url] : undefined,
+      datePublished: frontmatter.pubDate ? new Date(frontmatter.pubDate).toISOString() : undefined,
+      author: { "@type": "Organization", name: frontmatter.author || "Stroit Surfaces" },
+      publisher: { "@type": "Organization", name: "Stroit Surfaces" },
+    })}
+  />
   <div class="bg-black">
     <div class="lg:max-w-screen-md m-auto px-2 lg:py-10 text-gray-200">
       <a class="flex flex-wrap items-center" href="../../blog">
@@ -27,7 +45,7 @@ import MoreProductsSensa from "../components/Moreproductssensa.astro";
           <p class="">Escrito por: {frontmatter.author}</p>
           <p class="md:pl-4">
             Publicado el: {
-              new Date(frontmatter.pubDate).toLocaleDateString("es-ES", {
+              new Date(frontmatter.pubDate).toLocaleDateString("es-MX", {
                 year: "numeric",
                 month: "long",
                 day: "numeric",
@@ -42,11 +60,11 @@ import MoreProductsSensa from "../components/Moreproductssensa.astro";
       </div>
     </div>
     {
-      frontmatter.tags == "dekton" ? (
+      frontmatter.tags?.includes("dekton") ? (
         <MoreProductsDekton />
-      ) : frontmatter.tags == "silestone" ? (
+      ) : frontmatter.tags?.includes("silestone") ? (
         <MoreProductsSilestone />
-      ) : frontmatter.tags == "sensa" ? (
+      ) : frontmatter.tags?.includes("sensa") ? (
         <MoreProductsSensa />
       ) : null
     }
