@@ -12,7 +12,7 @@ Qué medimos: cuando recomendamos modelos a un lead que **todavía no ha elegido
 - **Si ya dio un presupuesto**, prioriza modelos que entren en ese presupuesto, pero igual dale 1 o 2 opciones extra del color que pidió aunque se salgan un poco. Marca la variante como `fuera`.
 
 ## Asignación (para que no sea a gusto del vendedor)
-Usa el **último dígito del WhatsApp** del cliente:
+Usa el **último dígito del WhatsApp** del cliente (si escribe por Instagram o Facebook y no hay WhatsApp, el último dígito de su ID de Instagram o Facebook, `attrs.ig_id`):
 - **Par** (0, 2, 4, 6, 8) → **A · Económicos**
 - **Impar** (1, 3, 5, 7, 9) → **B · Premium**
 

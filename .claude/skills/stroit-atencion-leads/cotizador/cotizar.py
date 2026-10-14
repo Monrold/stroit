@@ -143,13 +143,17 @@ def main():
     mo_html, mo_tot = mano_de_obra_html(q, cfg, regiones_mo)
     cuenta = f'<p class="muted">{reg["cuenta_texto"]}</p>' if reg.get("cuenta_texto") else ""
     proyecto = f'<p class="lbl" style="margin-top:6px">Proyecto</p><p>{q["proyecto"]}</p>' if q.get("proyecto") else ""
+    destino = q.get("ciudad") or q["estado"]
+    gratis = any(sin_acentos(x).lower().strip() in reg["envio_gratis"] for x in (q["estado"], q.get("ciudad", "")))
+    envio_txt = "envío consolidado sin costo" if gratis else "flete por cotizar"
+    proyecto += f'<p class="lbl" style="margin-top:6px">Entrega</p><p>{destino} · {envio_txt}</p>'
 
     valores = {
         "titulo": f"Cotización {q['cliente']}",
         "logo": data_uri("assets/logo.png"),
         "qr": data_uri("assets/qr.png"),
-        "empresa_nombre": cfg["empresa"]["nombre"],
-        "rfc": cfg["empresa"]["rfc"],
+        "empresa_nombre": reg["razon_social"].upper(),
+        "rfc_bloque": f"<p><b>{reg['rfc']}</b></p>" if reg.get("rfc") else "",
         "email": cfg["empresa"]["email"],
         "web": cfg["empresa"]["web"],
         "direccion": reg["direccion"],
@@ -175,7 +179,7 @@ def main():
     open(base + ".html", "w", encoding="utf-8").write(html)
     hecho_pdf = renderizar_pdf(base + ".html", base + ".pdf")
 
-    print(f"Región: {reg['nombre']} | Material: {dinero(subtotal)}")
+    print(f"Región: {reg['nombre']} | Material: {dinero(subtotal)} | Entrega {destino}: {envio_txt}")
     for r, t in mo_tot.items():
         print(f"Mano de obra {cfg['regiones'][r]['nombre']}: {dinero(t)} → total proyecto {dinero(subtotal + t)}")
     print(f"Cuenta para transferencia: {reg['cuenta_imagen']}")
