@@ -1,0 +1,99 @@
+{
+  "_nota": "Datos fijos del cotizador. Cambia aquí cuentas, sucursales y tarifas; no hace falta tocar la plantilla.",
+  "empresa": {
+    "email": "stroitsurfaces@gmail.com",
+    "web": "https://stroitsurfaces.com/",
+    "nombre_marca": "STROIT SURFACES"
+  },
+  "regiones": {
+    "bajio": {
+      "nombre": "Bajío",
+      "estados": [
+        "queretaro",
+        "san luis potosi",
+        "aguascalientes",
+        "guanajuato"
+      ],
+      "envio_gratis": [
+        "queretaro",
+        "guanajuato"
+      ],
+      "envio_gratis_texto": "Querétaro y Guanajuato",
+      "razon_social": "Stroit Surfaces S.A. de C.V.",
+      "rfc": "",
+      "direccion": "TerraPark Centenario, Km. 1+37 Cerro, Paseo Centenario del Ejército Mexicano,<br>El Marqués, Querétaro, C.P. 76269, México",
+      "telefonos": "442 269 0555",
+      "cuenta_texto": "CUENTA BANCARIA // SANTANDER // CUENTA: 65-51151749-6 // CLABE:<br>014311655115174964 // STROIT SURFACES S.A. DE C.V.",
+      "cuenta_imagen": "https://cdn.stroitsurfaces.com/catalogos/cuenta-bajio.jpeg",
+      "bodega": "Querétaro (Terra Park Centenario, bodega 61E)",
+      "bodega_mapa": "https://maps.app.goo.gl/bWQVc9GkzbP1Fh6y7"
+    },
+    "hidalgo": {
+      "nombre": "Hidalgo",
+      "estados": [
+        "hidalgo",
+        "cdmx",
+        "ciudad de mexico",
+        "edomex",
+        "estado de mexico",
+        "puebla",
+        "veracruz",
+        "morelos",
+        "guerrero"
+      ],
+      "envio_gratis": [
+        "pachuca",
+        "pachuca de soto",
+        "cdmx",
+        "ciudad de mexico",
+        "edomex",
+        "estado de mexico"
+      ],
+      "envio_gratis_texto": "Pachuca, CDMX y Edomex",
+      "razon_social": "STROIT SURFACES",
+      "rfc": "HELJ910303GY9",
+      "direccion": "Blvd. Santa Catarina 2503-k, Int. 11, 42110, Pachuca de Soto,<br>Hidalgo, México",
+      "telefonos": "7712620413, 7714896576",
+      "cuenta_texto": "CUENTA BANCARIA // INBURSA // CUENTA: 50057516581 // CLABE:<br>036134500575165810",
+      "cuenta_imagen": "https://cdn.stroitsurfaces.com/catalogos/cuenta-centro.jpeg",
+      "bodega": "Pachuca (Blvd. Santa Catarina 2503-k, int. 11)",
+      "bodega_mapa": "https://maps.app.goo.gl/uo1CnNAdzJ8jg7YA8"
+    }
+  },
+  "_tarifas_nota": "PRECIOS DE PRUEBA. Reemplazar por las tarifas reales de instalador por región. Mientras prueba=true, el PDF muestra la etiqueta PRECIOS DE PRUEBA.",
+  "tarifas_prueba": true,
+  "tarifas_mano_de_obra": {
+    "instalacion_cubierta": {
+      "texto": "Corte e instalación de cubierta",
+      "unidad": "ml",
+      "bajio": 1500,
+      "hidalgo": 1300
+    },
+    "tarja_bajo_cubierta": {
+      "texto": "Corte y pegado de tarja bajo cubierta",
+      "unidad": "pza",
+      "bajio": 1800,
+      "hidalgo": 1500
+    },
+    "parrilla": {
+      "texto": "Corte para parrilla",
+      "unidad": "pza",
+      "bajio": 900,
+      "hidalgo": 800
+    },
+    "zoclo": {
+      "texto": "Zoclo de 10 cm",
+      "unidad": "ml",
+      "bajio": 350,
+      "hidalgo": 300
+    },
+    "instalacion_piso_muro": {
+      "texto": "Instalación de piso o muro",
+      "unidad": "m²",
+      "bajio": 450,
+      "hidalgo": 400
+    }
+  },
+  "condiciones": "CONDICIONES DE COMPRA: MATERIAL DE PROMOCION Y SOBRE PEDIDO, NO HAY CAMBIOS NI DEVOLUCIONES. MATERIAL PUESTO EN OBRA (APLICAN RESTRICCIONES). EL PRECIO NO INCLUYE MANIOBRA DE DESCARGA. LOS METROS CUADRADOS FINALES PUEDEN VARIAR YA QUE ES TOMADA LA MEDIDA ESTANDAR PARA ESTA COTIZACION. EL PAGO DEBE SER DE ACUERDO A LA MONEDA NACIONAL, TOMANDO EN CUENTA EL TIPO DE CAMBIO DEL INTERBANCARIO. LA MANO DE OBRA ES UNA REFERENCIA Y NO FORMA PARTE DEL TOTAL A PAGAR A STROIT SURFACES.",
+  "_nota_envio": "Envío consolidado sin costo solo a los estados de envio_gratis de cada región; al resto se cotiza flete. Urgente = flete dedicado aparte."
+}

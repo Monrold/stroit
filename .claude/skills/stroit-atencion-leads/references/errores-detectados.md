@@ -26,7 +26,7 @@ Cliente: "¿Se puede colocar sobre muro de ladrillo? ¿Y en qué tamaño vienen?
 
 ## 6. "Enseguida te lo comparto" y no llega nada con valor
 Catálogo enviado sin comentario, o "Claro que sí" sin seguimiento.
-**Corrección:** manda el catálogo solo, sin recomendar modelos, y cierra con "¿Tienes algún tono o color en mente?". Cuando conteste, mándale 2 o 3 modelos de ese color con foto y precio.
+**Corrección:** manda el catálogo solo, sin recomendar modelos, y cierra con "¿Tienes algún tono o color en mente?". Cuando conteste, mándale al menos 6 modelos de ese color con foto y precio.
 
 ## 7. No hacer el cálculo cuando el cliente no tiene medidas
 "No lo sé, todavía no he medido" → "Perfecto, claro que sí, no te preocupes" y la conversación se enfría.
@@ -48,8 +48,16 @@ El mensaje automático de bienvenida explica "sinterización de partículas que 
 Al lead de piso en León se le mandó el Flash Sale de septiembre (Lyfe Lunar $15,833, Strato $16,880, Crema Marfil $16,351…), pero la primera sugerencia de seguimiento proponía Kreta, Lunar y Aeris con precios de `modelos.md` que ya no coincidían (en el catálogo de octubre, Kreta está en $27,823). El cliente vería modelos y precios que no encuentra en su PDF.
 **Corrección:** abre el PDF que se le envió y recomienda solo modelos de ahí, con ese precio. Si ya tiene los precios, no se los repitas: fíltrale el catálogo y recuérdale que se vende por placa completa y cuántos m² cubre (sin precio por m², salvo que lo pida).
 
+## 12. Lo aprendido con Luis Montaño (Instagram, octubre 2026)
+- **Mensajes largos**: la primera propuesta juntaba beneficios, precio, medidas y dos preguntas. **Corrección:** 2 o 3 líneas y una pregunta; el precio, cuando lo pida o al cotizar.
+- **Pocos modelos**: con "blanco o beige" se propusieron 3. **Corrección:** al menos 6, agrupados por color.
+- **Texto interno pegado al cliente**: se copió toda la nota, con la lista "Adjuntar fotos" y una comilla suelta. **Corrección:** en la nota, el mensaje va entre comillas y lo interno debajo, marcado 🔒.
+- **Bot de Parrot cruzado**: programó "¿Ya tienes algún color?" y "Permíteme revisarlo con nuestro equipo" justo cuando el vendedor ya había respondido. **Corrección:** revisa los mensajes `scheduled` del bot y avisa que se cancelen.
+- **Precio antes de tiempo**: al confirmar que alcanzaba 1 placa se proponía dar el precio y "no incluye instalación". **Corrección:** confirma placas, pide la ciudad y manda la cotización completa (material, envío y mano de obra).
+- **Cotización sin mano de obra**: el cliente preguntó "¿en cuánto sale la mano de obra?". **Corrección:** la cotización siempre la incluye como referencia.
+
 ## Lo que sí funciona (mantenerlo)
-- Enviar 3 o 4 modelos con foto y una línea de descripción cuando el cliente dice el estilo ("tengo este modelo con vetas doradas…").
+- Enviar al menos 6 modelos con foto y una línea de descripción cuando el cliente dice el estilo ("tengo este modelo con vetas doradas…").
 - Comparar con la foto del cliente: "Este modelo se me hace súper parecido a tu fachada".
 - Explicar el envío gratis por flete consolidado y el flete dedicado si es urgente.
 - Pasar la ubicación con el QR de acceso para visitas.
