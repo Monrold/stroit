@@ -77,11 +77,11 @@ Toma las opciones de `modelos.md` › Guía rápida por estilo, **del mismo colo
   > ¡Hola [nombre]! ¿Pudiste ver los modelos? Te dejo fotos de *[Modelo]* ya instalado en [aplicación] 👇 ¿Qué te pareció?
 - **Cliente que iba a medir**:
   > ¡Hola [nombre]! ¿Ya tienes las medidas? Mándame largo x ancho o una foto con las medidas a mano y te paso la cotización exacta hoy mismo.
-- **Cliente que ya recibió el catálogo pero no ha elegido** (ni midió): no le repitas la lista de precios que ya tiene. Dale una **referencia por m²** para que haga cuentas, aclarando que se vende por placa completa, y pregúntale el color. Ejemplo (Roberto, piso en León, oct-2026, ya tenía el Flash Sale y no había dicho color):
-  > ¡Hola Roberto, buen día! 😊 Para piso, los del *Flash Sale* que te mandé son mate y los más económicos. Se venden por placa completa (≈4.6 a 4.8 m² cada una); como referencia, te sale en ≈ $3,400 por m². Un piso de 20 m² lleva unas 5 placas y el envío a León es sin costo.
+- **Cliente que ya recibió el catálogo pero no ha elegido** (ni midió): no le repitas la lista de precios que ya tiene. Recuérdale que se vende por placa completa y cuántos m² cubre cada una (sin precio por m², salvo que lo pida) y pregúntale el color. Ejemplo (Roberto, piso en León, oct-2026, ya tenía el Flash Sale y no había dicho color):
+  > ¡Hola Roberto, buen día! 😊 Para piso, los del *Flash Sale* que te mandé son mate y los más económicos. Se venden por placa completa (cada una cubre ≈4.6 a 4.8 m²); un piso de 20 m² lleva unas 5 placas y el envío a León es sin costo.
   > ¿Tienes algún tono o color en mente? Así te digo cuáles te quedan mejor y te mando fotos ya instalados.
 
-  Cuando responda el color, **ahí sí** fíltrale 2 o 3 modelos de ese color, **solo del PDF que el cliente sí recibió** (ver SKILL.md › Enviar modelos adecuados). El precio por m² es precio de placa ÷ m² de la placa, y **siempre** se aclara que no se vende por m² sino por placa completa.
+  Cuando responda el color, **ahí sí** fíltrale 2 o 3 modelos de ese color, **solo del PDF que el cliente sí recibió** (ver SKILL.md › Enviar modelos adecuados). **No des precio por m²** a menos que el cliente lo pida; si lo pide, es precio de placa ÷ m² de la placa, aclarando que se vende por placa completa.
 
 ### Fuera de las 24 h (WhatsApp exige plantilla aprobada)
 - Usa la plantilla aprobada para reabrir. En cuanto conteste, manda **de inmediato** un mensaje con contexto:
@@ -102,11 +102,11 @@ Toma las opciones de `modelos.md` › Guía rápida por estilo, **del mismo colo
 > ¡Hola de nuevo, [nombre]! 😊 La vez pasada platicamos de [aplicación/estilo]. ¿Sigues con el proyecto? Hoy tengo en promo [Modelo] a $[precio]. ¿Te paso la cotización?
 
 ## 10. Nota para ParrotCRM (`add_note`)
+Corta y sin explicaciones: **no** pongas el contexto del cliente, el razonamiento ni el "si no responde". Solo lo que se pidió (el mensaje sugerido o el seguimiento):
 ```
-📌 Seguimiento sugerido – [día fecha, hora]
-Contexto: [qué quiere, aplicación, ciudad, estilo, m², lo que ya se le envió y lo que falta]
-⏰ Ventana de 24 h vence: [fecha y hora] → después solo con plantilla.
-Mensaje sugerido:
-"…"
-Si no responde: [siguiente acción y fecha].
+📌 [Mensaje sugerido | Seguimiento sugerido] – [día fecha]
+⏰ Ventana 24 h vence: [fecha hora]
+"…mensaje…"
+Adjuntar: [fotos o catálogo, si aplica]
+🧪 A/B precio: [A-economicos | B-premium | fuera]  ← solo si se recomendaron modelos
 ```

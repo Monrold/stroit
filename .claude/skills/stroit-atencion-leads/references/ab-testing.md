@@ -4,11 +4,12 @@ Qué medimos: cuando recomendamos modelos a un lead que **todavía no ha elegido
 - **A · Económicos**: los modelos más baratos en existencia (ver `modelos.md`).
 - **B · Premium**: modelos más caros pero que lucen más (vetas, piedra, dorado).
 
-**Solo cambia la selección de modelos** (cuáles y en qué rango de precio). Todo lo demás se queda igual en las dos variantes: la estructura del mensaje, la referencia por m², la aclaración de que se vende por placa completa, el envío gratis, la muestra gratis y la pregunta de cierre. Si cambias otra cosa, ya no sabremos qué funcionó.
+**Solo cambia la selección de modelos** (cuáles y en qué rango de precio). Todo lo demás se queda igual en las dos variantes: la estructura del mensaje, la aclaración de que se vende por placa completa (y cuántos m² cubre), el envío gratis, la muestra gratis y la pregunta de cierre. Si cambias otra cosa, ya no sabremos qué funcionó.
 
 ## Cuándo aplica
-- El primer mensaje en que le recomiendas modelos, que **siempre es después de que el cliente dijo un color o tono** (ver SKILL.md › Enviar modelos adecuados). La variante decide si le mandas los más baratos o los premium **de ese color**.
+- El primer mensaje en que le recomiendas modelos, que **siempre es después de que el cliente dijo un color o tono** (ver SKILL.md › Enviar modelos adecuados). La variante decide si le mandas los más baratos o los premium **de los colores que pidió**.
 - **No aplica** si el cliente ya pidió algo concreto ("lo más barato", "algo de lujo", un modelo o estilo específico) o si dijo "está caro". En esos casos manda lo que pidió y marca la variante como `fuera`.
+- **Si ya dio un presupuesto**, prioriza modelos que entren en ese presupuesto, pero igual dale 1 o 2 opciones extra del color que pidió aunque se salgan un poco. Marca la variante como `fuera`.
 
 ## Asignación (para que no sea a gusto del vendedor)
 Usa el **último dígito del WhatsApp** del cliente:
@@ -18,35 +19,43 @@ Usa el **último dígito del WhatsApp** del cliente:
 La variante se asigna una vez por lead y se mantiene en los seguimientos. Si el vendedor ya mandó la otra variante, registra **la que realmente se envió**.
 
 ## Cómo elegir los modelos
-- Toma los modelos **de un catálogo que el cliente tenga o que le vayas a mandar**, con el precio de ese catálogo (ver SKILL.md › Enviar modelos adecuados).
-- **A**: los 3 más baratos en existencia que encajen con la aplicación. En octubre 2026, para piso: Dekton **Flash Sale** (todos mate), con *Lyfe Lunar* $15,833, *Strato* $16,880 y *Crema Marfil* $16,351 (≈ $3,400/m²). Para cubierta interior: Silestone desde $14,220 (*Lyra*, *Blanco Orion*).
-- **B**: 3 modelos en existencia de $27,000 a $34,000 por placa (≈ $5,800 a $6,300/m²) con look llamativo, como *Sabbia*, *Kelya* o *Laurent* para piso. Adjunta sus fotos de `modelos.md`.
-- En las dos variantes, el precio por m² es solo una referencia: **se vende por placa completa**.
+- **El color manda, la variante solo ordena por precio.** Toma los modelos **del color o los colores que pidió** el cliente, de la *Guía rápida por estilo* de `modelos.md` (ya está ordenada de menor a mayor precio):
+  - **A · Económicos**: los más baratos **de ese color**, de cualquier marca y catálogo (Dekton, Flash Sale, Silestone o Sensa). **No te limites al Flash Sale**: si pide negro, manda los negros más baratos; si pide blanco, los blancos más baratos.
+  - **B · Premium**: los más caros o llamativos **de ese color** (vetas marcadas, jumbo, piedra natural).
+- **Si pide varios colores** (por ejemplo, blanco y negro), da opciones de **cada** color: 2 o 3 por color.
+- **Si no hay opción económica (o premium) en ese color**, manda igual los modelos de ese color que sí haya, aunque no encajen con el rango de la variante. Es mejor mandarle lo que quiere que dejarlo sin opciones. Registra la variante que realmente se envió.
+- **Respeta la aplicación**: si es exterior o fachada, solo Dekton (Silestone y Sensa no van en exterior). Si es piso, prioriza acabado mate.
+- Si el cliente ya tiene un catálogo, toma los modelos y precios de ese catálogo (ver SKILL.md › Enviar modelos adecuados).
+- **No des precio por m²** a menos que el cliente lo pida: di el precio por placa y cuántos m² cubre la placa completa.
 
-## Ejemplo con el mismo lead (piso en León, octubre 2026)
+Referencia rápida (octubre 2026, en existencia; detalle en `modelos.md` › Guía rápida por estilo):
 
-> Supón que Roberto ya respondió a "¿Tienes algún tono o color en mente?" con "algo neutro, gris o crema". Sin esa respuesta no se mandan modelos.
+| Color | A · Económicos | B · Premium |
+|---|---|---|
+| Blanco liso | Silestone *Lyra* $14,220, *Blanco Orion* $14,221; Dekton Flash Sale *Neva* $16,351 | Dekton *Halo* $23,202, *Zenith* $29,222 |
+| Blanco con vetas | Silestone *Ethereal Haze* $18,922; Dekton *Kairos* $21,048, *Limbo* $24,172 | Dekton *Borealis* / *Rem* $30,071, *Inuk* / *Bering* / *Salina* jumbo ≈$33,078; Sensa *White Macaubas* $32,257 |
+| Gris / cemento | Sensa *Blanco Leblon* $9,310; Dekton Flash Sale *Lyfe Lunar* $15,833, *Strato* $16,880; Silestone *Cemento Spa* $16,167 | Dekton *Kreta* $27,823, *Argentium* / *Marmorio* $29,222 |
+| Negro liso | Sensa *Indian Black* desde $12,100; Silestone *Iconic Black* $16,590; Dekton *Eter* $21,048 | Dekton *Domoos* $23,232, *Fossil* $29,222 |
+| Negro con vetas | Sensa *American Black* $9,457; Silestone *Ethereal Noir* $18,922; Dekton *Markina* $23,202 | Dekton *Somnia* $28,000, *Kelya* $29,222, *Laurent* $33,078 |
+| Crema / beige | Dekton Flash Sale *Arenisca* $15,931, *Crema Marfil* $16,351; Silestone *Ethereal Marfil* $18,237 | Dekton *Sabbia* $27,068, *Adia* $29,222, *Nara* $33,078 |
+| Dorado | (no hay económicos: manda los más baratos) Dekton *Khalo* $27,610; Sensa *Orinoco* desde $21,210 | Dekton *Laurent* $33,078, *Reverie* $36,422 |
 
-**A · Económicos** (Flash Sale septiembre):
-> ¡Hola Roberto, buen día! 😊 Para que no tengas que revisar todo el catálogo: para piso, los mejores son los del *Flash Sale* que te mandé, son mate y los más económicos. Te recomiendo *Lyfe Lunar* (gris claro), *Strato* (gris oscuro) o *Crema Marfil* (crema).
-> Se venden por placa completa (≈4.6 a 4.8 m² cada una); como referencia, te sale en ≈ $3,400 por m². Un piso de 20 m² lleva unas 5 placas y el envío a León es sin costo.
-> Cuando midas, mándame largo x ancho y te paso el total exacto. ¿Te mando fotos de alguno ya instalado?
+En fachada o exterior, quita Silestone y Sensa de la lista y usa solo los Dekton de ese color.
 
-**B · Premium** (catálogo de promociones octubre):
-> ¡Hola Roberto, buen día! 😊 Para que no tengas que revisar todo el catálogo: para piso, estos son los que más lucen, en acabado mate. Te recomiendo *Sabbia* (piedra clara tipo travertino), *Kelya* (oscuro con vetas claras) o *Laurent* (oscuro con vetas doradas).
-> Se venden por placa completa (≈4.6 a 5.5 m² cada una); como referencia, te sale en ≈ $6,000 por m². Un piso de 20 m² lleva 4 o 5 placas y el envío a León es sin costo.
-> Cuando midas, mándame largo x ancho y te paso el total exacto. ¿Te mando fotos de alguno ya instalado?
+## Ejemplo (Coco, sala, baños y fachada en León, octubre 2026)
 
-Precios de referencia, octubre 2026:
+> Coco respondió "blanco y negro" a "¿Tienes algún tono o color en mente?". Su WhatsApp termina en 2 → **A · Económicos**. Como incluye fachada, todo Dekton.
 
-| Modelo | Placa | m² por placa | Precio por placa | ≈ precio por m² |
-|---|---|---|---|---|
-| Lyfe Lunar | 321 x 145 cm, 12 mm, mate | 4.65 | $15,833 | $3,400 |
-| Strato | 320 x 144 cm, 20 mm, mate | 4.61 | $16,880 | $3,660 |
-| Crema Marfil | 327 x 147 cm, 12 mm, mate | 4.81 | $16,351 | $3,400 |
-| Sabbia | 322 x 144 cm, 12 mm, mate | 4.64 | $27,068 | $5,830 |
-| Kelya | 325 x 147 cm, 12 mm, mate | 4.78 | $29,222 | $6,110 |
-| Laurent | 332 x 166 cm, 12 mm, mate | 5.51 | $33,078 | $6,000 |
+**A · Económicos:**
+> ¡Perfecto, Coco! Te paso opciones en Dekton (sirven para sala, baño y fachada) 👇
+> *Blancos:* • *Neva* (Flash Sale, blanco con textura de piedra) – $16,351 • *Kairos* (blanco con vetas finas) – $21,048
+> *Negros:* • *Eter* (negro grafito) – $21,048 • *Markina* (negro con vetas blancas) – $23,202
+> Se venden por placa completa (cada una cubre ≈4.6 a 4.8 m²) y el envío a León es sin costo.
+> ¿Cuántos m² son de cada área, aprox.? Con eso te paso cuántas placas y el total.
+
+**B · Premium** (mismo mensaje, solo cambian los modelos):
+> *Blancos:* • *Borealis* (blanco cálido con vetas doradas, jumbo) – $30,071 • *Bering* (blanco con vetas grises finas, jumbo) – $33,078
+> *Negros:* • *Somnia* (negro con vetas grises y blancas) – $31,219 • *Laurent* (oscuro con vetas doradas, jumbo) – $33,078
 
 ## Registro en ParrotCRM (indispensable para medir)
 Al entregar el mensaje, indica la variante y, con aprobación del usuario:
