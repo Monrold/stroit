@@ -92,7 +92,7 @@ Cuando tengas modelo y m² (o el cliente pida el número), arma la cotización c
 - Aclara que **no se incluye** corte, instalación ni base, pero que se le recomienda instalador.
 - Cierra con **un siguiente paso concreto**: apartar el material, enviar muestra física gratis, agendar visita al showroom (con QR) o llamada.
 
-**Precios**: los de `references/modelos.md` son de referencia (catálogo de promociones). Si el usuario te da precios más recientes, usa esos. Si no hay precio de un modelo, dilo y marca `[confirmar precio]`; **nunca inventes un precio**.
+**Precios y existencia**: `references/modelos.md` tiene los **modelos en existencia del mes**, leídos de las fotos de las placas en bodega, con precio por placa y el enlace a la foto (`cdn.stroitsurfaces.com/catalogos/...`) para mandarla al cliente. Lo que no esté ahí es **sobre pedido**. Si el usuario te da precios más recientes, usa esos. Si no hay precio de un modelo, dilo y marca `[confirmar precio]`; **nunca inventes un precio**.
 
 ## Reglas de estilo (WhatsApp)
 
