@@ -1,6 +1,6 @@
 ---
 name: stroit-atencion-leads
-description: Atiende leads de Stroit Surfaces (distribuidor Cosentino en el Bajío e Hidalgo/Centro) por WhatsApp, Facebook e Instagram, desde el primer mensaje hasta el pago. Responde como asesor de ventas con mensajes cortos, perfila rápido y recomienda Dekton, Silestone o Sensa según el uso, envía modelos y catálogos adecuados, genera la cotización en PDF con mano de obra aproximada, gestiona la forma de pago por región y redacta recontactos y seguimientos. Úsalo cuando el usuario pegue una conversación de un cliente, pida responder o dar seguimiento a un lead o thread de ParrotCRM, pida cotizar o recomendar material o modelos, o mencione campañas de Meta de Dekton, Silestone o Sensa.
+description: Atiende leads de Stroit Surfaces (distribuidor Cosentino en el Bajío e Hidalgo/Centro) por WhatsApp, Facebook e Instagram, desde el primer mensaje hasta el pago. Responde como asesor de ventas con mensajes cortos, perfila rápido y recomienda Dekton, Silestone o Sensa según el uso, envía modelos y catálogos adecuados, genera la cotización en PDF con mano de obra aproximada, prepara notas de voz con ElevenLabs (prueba A/B texto vs. audio), gestiona la forma de pago por región y redacta recontactos y seguimientos. Úsalo cuando el usuario pegue una conversación de un cliente, pida responder o dar seguimiento a un lead o thread de ParrotCRM, pida cotizar o recomendar material o modelos, pida responder con audio o mencione campañas de Meta de Dekton, Silestone o Sensa.
 ---
 
 # Atención de leads – Stroit Surfaces
@@ -110,8 +110,19 @@ python3 cotizar.py ejemplos/luis-montano.json /ruta/salida   # copia el ejemplo 
 - Imprime los totales; no necesitas abrir el PDF. Revisa el resultado con `pdftoppm` solo si cambiaste la plantilla.
 - Si el usuario quiere una copia editable en Adobe Express, exporta el `.html` que genera (pesa ≈15 KB).
 - Las tarifas de mano de obra son **de prueba** (`tarifas_prueba: true`) hasta que el usuario dé las reales; el PDF lo indica.
+- **El PDF va con su mensaje y, en la variante `audio`, con una nota de voz** que resume material, envío, mano de obra aproximada y cierra con "¿Te aparto la placa?" (guion y pasos en `references/audio.md`). El PDF siempre se manda como archivo, aunque haya audio.
 
 **Precios y existencia**: `references/modelos.md` tiene los **modelos en existencia del mes**, leídos de las fotos de las placas en bodega, con precio por placa y el enlace a la foto (`cdn.stroitsurfaces.com/catalogos/...`) para mandarla al cliente. Lo que no esté ahí es **sobre pedido**. Si el usuario te da precios más recientes, usa esos. Si no hay precio de un modelo, dilo y marca `[confirmar precio]`; **nunca inventes un precio**.
+
+## Notas de voz (ElevenLabs) y prueba A/B texto vs. audio
+
+Podemos mandar las preguntas y la cotización como **nota de voz** con una voz femenina mexicana natural (Ana María, `eleven_v4`), generada con el conector de ElevenLabs. Todo el detalle está en `references/audio.md`; lo esencial:
+- **Variante de formato**: penúltimo dígito del WhatsApp, o del ID de Instagram o Facebook si no hay WhatsApp. Par → `texto`, impar → `audio`. Se asigna una vez por lead y se mantiene. Es independiente de la prueba de precio (que usa el último dígito).
+- En `audio`, cada pregunta del perfilamiento y el resumen de la cotización van en nota de voz. **El contenido no cambia**, solo el formato: lo que hay que leer (modelos con precio y fotos, enlaces, cuentas y el PDF) sigue en un texto corto junto al audio.
+- Si el usuario pide audio para un cliente, se manda audio y la variante es `fuera`.
+- Guion para el oído: máximo ≈40 s, cifras con palabras ("treinta mil setenta y un pesos"), sin símbolos ni viñetas, y una sola pregunta al final.
+- Genera con `creative_generate_speech`, espera con `creative_get_flow_run_status` y descarga cada toma con `audio/descargar_audio.py` a `/mnt/project-files/audios/<cliente>/`: `.mp3` para Instagram y Facebook, `.ogg` para WhatsApp (se reproduce como nota de voz). Nunca repitas una generación fallida: cobra otra vez.
+- Solo dentro de la ventana de 24 h (en Instagram y Facebook, hasta 7 días si Parrot usa la etiqueta de agente humano).
 
 ## Formas de pago
 
@@ -150,7 +161,7 @@ Caso real (Luis Montaño, Instagram, octubre 2026), en mensajes cortos y una pre
 3. "Blanco o beige" → al menos 6 modelos agrupados por color, con precio por placa y foto + "¿Cuántos metros lineales mide tu cocina?".
 4. "Me gustó Borealis, ¿con una placa me alcanza?" → respuesta directa: medida de la placa y cuántos metros lineales rinde + "¿Me compartes las medidas o un croquis?".
 5. Croquis → confirma cuántas placas salen (sin dar precio todavía) + "¿De qué ciudad nos escribes? Para armarte la cotización con envío".
-6. Ciudad → cotización en PDF (material, envío y mano de obra aproximada) + resumen corto de totales + "¿Te aparto la placa?".
+6. Ciudad → cotización en PDF (material, envío y mano de obra aproximada) + resumen corto de totales (en texto o nota de voz, según la variante de formato) + "¿Te aparto la placa?".
 7. Quiere apartar → "¿Cómo te gustaría pagar?" y luego los datos de esa forma de pago.
 
 **Rendimiento de una placa en cubierta** (60 cm de fondo): de cada placa salen dos tiras a lo largo. Jumbo de 336 x 167 cm → dos tramos de hasta 3.36 m y sobra una franja de ≈47 cm para zoclo; estándar de 320 x 144 cm → dos tramos de hasta 3.20 m y sobra ≈24 cm. En una cocina en L, resta los 60 cm de la esquina a uno de los lados. Si un tramo pasa del largo de la placa, lleva unión o una placa más.
@@ -160,15 +171,15 @@ Caso real (Luis Montaño, Instagram, octubre 2026), en mensajes cortos y una pre
 - Lectura: `read_crm` para threads, clientes, ventas y la base de conocimiento (`resource: "knowledge"`, `id: "all"`). La base de conocimiento es la fuente oficial de políticas y FAQs.
 - Escritura (**solo si el usuario lo pide o lo aprueba**):
   - `add_note` en el thread, **concisa** (y sin preguntar de nuevo cuando el usuario ya pidió dejar las respuestas en notas): solo el mensaje o seguimiento sugerido que se pidió, la hora en que vence la ventana de 24 h, qué adjuntar y la variante A/B. Sin contexto del cliente, sin razonamiento y sin "si no responde" (formato en `references/guiones.md` › Nota para ParrotCRM).
-  - `create_lead` o `update_lead` con `attrs`: `material`, `medidasDelProyecto`, `tipoDeCliente`, `etapa`.
+  - `create_lead` o `update_lead` con `attrs`: `material`, `medidasDelProyecto`, `tipoDeCliente`, `etapa`, `abPrecio` y `abFormato`.
   - `create_activity` para programar el seguimiento.
 - Este MCP **no envía mensajes al cliente**: entrega el texto listo para copiar y pegar (o deja la nota en el thread).
 
 ## Formato de tu salida
 
 Cuando te pidan responder a un lead, entrega:
-1. **Diagnóstico** (de 2 a 4 líneas): anuncio de origen, modo (prisa o explora), datos que ya tienes y los que faltan, preguntas sin contestar, si estás dentro o fuera de la ventana de 24 h, la variante A/B (`A-economicos`, `B-premium` o `fuera`) y si hay respuestas del bot programadas que cancelar.
-2. **Mensaje(s) listo(s) para enviar**, en bloque de cita, separados si conviene mandarlos en 2 burbujas.
-3. **Qué adjuntar** (fotos de los modelos X, Y, Z o el catálogo) y **siguiente paso o seguimiento** con fecha.
+1. **Diagnóstico** (de 2 a 4 líneas): anuncio de origen, modo (prisa o explora), datos que ya tienes y los que faltan, preguntas sin contestar, si estás dentro o fuera de la ventana de 24 h, la variante A/B de precio (`A-economicos`, `B-premium` o `fuera`), la de formato (`texto`, `audio` o `fuera`) y si hay respuestas del bot programadas que cancelar.
+2. **Mensaje(s) listo(s) para enviar**, en bloque de cita, separados si conviene mandarlos en 2 burbujas. En la variante `audio`: el guion, los archivos de audio generados y el texto corto que lo acompaña.
+3. **Qué adjuntar** (fotos de los modelos X, Y, Z, el catálogo, el PDF o el audio) y **siguiente paso o seguimiento** con fecha.
 
 Al revisar conversaciones de vendedores, apóyate en `references/errores-detectados.md` para señalar errores concretos y proponer la versión corregida.
