@@ -151,4 +151,5 @@ Corta y sin explicaciones: **no** pongas el contexto del cliente, el razonamient
 Adjuntar: [fotos, catálogo o PDF de cotización, si aplica]
 ⚠️ Cancelar respuesta automática del bot programada [hora]  ← si aplica
 🧪 A/B precio: [A-economicos | B-premium | fuera]  ← solo si se recomendaron modelos
+🎙️ A/B formato: [texto | audio | fuera]  ← en audio, el archivo va en "Adjuntar"
 ```

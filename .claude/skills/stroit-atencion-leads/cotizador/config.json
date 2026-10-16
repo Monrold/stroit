@@ -95,5 +95,17 @@
     }
   },
   "condiciones": "CONDICIONES DE COMPRA: MATERIAL DE PROMOCION Y SOBRE PEDIDO, NO HAY CAMBIOS NI DEVOLUCIONES. MATERIAL PUESTO EN OBRA (APLICAN RESTRICCIONES). EL PRECIO NO INCLUYE MANIOBRA DE DESCARGA. LOS METROS CUADRADOS FINALES PUEDEN VARIAR YA QUE ES TOMADA LA MEDIDA ESTANDAR PARA ESTA COTIZACION. EL PAGO DEBE SER DE ACUERDO A LA MONEDA NACIONAL, TOMANDO EN CUENTA EL TIPO DE CAMBIO DEL INTERBANCARIO. LA MANO DE OBRA ES UNA REFERENCIA Y NO FORMA PARTE DEL TOTAL A PAGAR A STROIT SURFACES.",
-  "_nota_envio": "Envío consolidado sin costo solo a los estados de envio_gratis de cada región; al resto se cotiza flete. Urgente = flete dedicado aparte."
+  "_nota_envio": "Envío consolidado sin costo solo a los estados de envio_gratis de cada región; al resto se cotiza flete. Urgente = flete dedicado aparte.",
+  "audio": {
+    "_nota": "Notas de voz con ElevenLabs. Ver references/audio.md.",
+    "voz": "Ana María - Calm & natural neutral Spanish",
+    "voice_id": "m7yTemJqdIqrcNleANfX",
+    "modelo": "eleven_v4",
+    "alternativas": {
+      "Cristina": "EsHsbdAoFNIyDFJ5UnZx",
+      "Regina": "9Godp7dNohUvXk6qp0gS"
+    },
+    "duracion_max_seg": 40,
+    "carpeta_salida": "/mnt/project-files/audios"
+  }
 }
