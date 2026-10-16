@@ -101,6 +101,7 @@
     "voz": "Ana María - Calm & natural neutral Spanish",
     "voice_id": "m7yTemJqdIqrcNleANfX",
     "modelo": "eleven_v4",
+    "generations_count": 1,
     "alternativas": {
       "Cristina": "EsHsbdAoFNIyDFJ5UnZx",
       "Regina": "9Godp7dNohUvXk6qp0gS"

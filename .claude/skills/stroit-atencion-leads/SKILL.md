@@ -121,7 +121,7 @@ Podemos mandar las preguntas y la cotización como **nota de voz** con una voz f
 - En `audio`, cada pregunta del perfilamiento y el resumen de la cotización van en nota de voz. **El contenido no cambia**, solo el formato: lo que hay que leer (modelos con precio y fotos, enlaces, cuentas y el PDF) sigue en un texto corto junto al audio.
 - Si el usuario pide audio para un cliente, se manda audio y la variante es `fuera`.
 - Guion para el oído: máximo ≈40 s, cifras con palabras ("treinta mil setenta y un pesos"), sin símbolos ni viñetas, y una sola pregunta al final.
-- Genera con `creative_generate_speech`, espera con `creative_get_flow_run_status` y descarga cada toma con `audio/descargar_audio.py` a `/mnt/project-files/audios/<cliente>/`: `.mp3` para Instagram y Facebook, `.ogg` para WhatsApp (se reproduce como nota de voz). Nunca repitas una generación fallida: cobra otra vez.
+- Genera **un solo audio** con `creative_generate_speech` (`generations_count: 1`, nunca varias versiones, para ahorrar créditos), espera con `creative_get_flow_run_status` y descárgalo con `audio/descargar_audio.py` a `/mnt/project-files/audios/<cliente>/`: `.mp3` para Instagram y Facebook, `.ogg` para WhatsApp (se reproduce como nota de voz). Nunca repitas una generación fallida: cobra otra vez.
 - Solo dentro de la ventana de 24 h (en Instagram y Facebook, hasta 7 días si Parrot usa la etiqueta de agente humano).
 
 ## Formas de pago
