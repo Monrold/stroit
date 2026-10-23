@@ -16,9 +16,15 @@
       ],
       "envio_gratis": [
         "queretaro",
-        "guanajuato"
+        "guanajuato",
+        "aguascalientes",
+        "san luis potosi"
       ],
-      "envio_gratis_texto": "Querétaro y Guanajuato",
+      "envio_gratis_texto": "Querétaro, Guanajuato, Aguascalientes y San Luis Potosí",
+      "envio_directo": [
+        "queretaro"
+      ],
+      "_envio_nota": "Consolidado: los envíos se juntan y salen cuando hay suficientes, sin fecha fija. Querétaro (envio_directo): sin costo siempre, sin esperar consolidado (por confirmar con el usuario).",
       "razon_social": "Stroit Surfaces S.A. de C.V.",
       "rfc": "",
       "direccion": "TerraPark Centenario, Km. 1+37 Cerro, Paseo Centenario del Ejército Mexicano,<br>El Marqués, Querétaro, C.P. 76269, México",
@@ -60,14 +66,20 @@
       "bodega_mapa": "https://maps.app.goo.gl/uo1CnNAdzJ8jg7YA8"
     }
   },
-  "_tarifas_nota": "PRECIOS DE PRUEBA. Reemplazar por las tarifas reales de instalador por región. Mientras prueba=true, el PDF muestra la etiqueta PRECIOS DE PRUEBA.",
+  "_tarifas_nota": "Un número = tarifa fija; [mín, máx] = rango. 'confirmado' lista las regiones con tarifa real; las demás son PRECIOS DE PRUEBA y el PDF lo indica. Corte e instalación de cubierta en Bajío: $1,800 a $2,100 por metro lineal (real).",
   "tarifas_prueba": true,
   "tarifas_mano_de_obra": {
     "instalacion_cubierta": {
       "texto": "Corte e instalación de cubierta",
       "unidad": "ml",
-      "bajio": 1500,
-      "hidalgo": 1300
+      "bajio": [
+        1800,
+        2100
+      ],
+      "hidalgo": 1300,
+      "confirmado": [
+        "bajio"
+      ]
     },
     "tarja_bajo_cubierta": {
       "texto": "Corte y pegado de tarja bajo cubierta",
@@ -95,7 +107,7 @@
     }
   },
   "condiciones": "CONDICIONES DE COMPRA: MATERIAL DE PROMOCION Y SOBRE PEDIDO, NO HAY CAMBIOS NI DEVOLUCIONES. MATERIAL PUESTO EN OBRA (APLICAN RESTRICCIONES). EL PRECIO NO INCLUYE MANIOBRA DE DESCARGA. LOS METROS CUADRADOS FINALES PUEDEN VARIAR YA QUE ES TOMADA LA MEDIDA ESTANDAR PARA ESTA COTIZACION. EL PAGO DEBE SER DE ACUERDO A LA MONEDA NACIONAL, TOMANDO EN CUENTA EL TIPO DE CAMBIO DEL INTERBANCARIO. LA MANO DE OBRA ES UNA REFERENCIA Y NO FORMA PARTE DEL TOTAL A PAGAR A STROIT SURFACES.",
-  "_nota_envio": "Envío consolidado sin costo solo a los estados de envio_gratis de cada región; al resto se cotiza flete. Urgente = flete dedicado aparte.",
+  "_nota_envio": "Envío consolidado sin costo a los estados de envio_gratis de cada región (se juntan envíos y salen cuando hay suficientes); envio_directo = sin costo sin esperar consolidado. Al resto se cotiza flete. Urgente = flete dedicado aparte.",
   "audio": {
     "_nota": "Notas de voz con ElevenLabs. Ver references/audio.md.",
     "voz": "Ana María - Calm & natural neutral Spanish",

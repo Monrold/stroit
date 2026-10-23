@@ -101,10 +101,11 @@ Si el anuncio era de un producto pero la necesidad pide otro, **dilo con natural
 Cuando tengas modelo y medidas (o el cliente pida el número), calcula las placas:
 - Placas = m² ÷ m² por placa, **redondeado hacia arriba**, más **10 a 15 % de desperdicio**. En cocinas, revisa sobre las medidas reales si los tramos de 60 cm salen de la placa (una jumbo de 336 x 167 cm da dos tiras de 60 cm y sobra para zoclo).
 - Precio por placa × número de placas. Agrega adhesivo Mapei si es piso o muro.
-- **Envío** (flete consolidado sin costo solo a estas ciudades; al resto el flete se cotiza, y si es urgente el flete dedicado va aparte):
-  - Región Bajío: *Querétaro y Guanajuato* (León, Celaya, Irapuato…).
+- **Envío** (sin costo solo a estos lugares; al resto el flete se cotiza, y si es urgente el flete dedicado va aparte):
+  - Región Bajío: *Querétaro* sin costo siempre, sin esperar consolidado. *Guanajuato (León, Celaya, Irapuato…), Aguascalientes y San Luis Potosí*: sin costo en **flete consolidado**, es decir, los envíos se juntan y salen cuando hay suficientes. No tiene fecha fija: **no prometas día de entrega**; si el cliente tiene fecha, dilo con claridad y ofrécele flete dedicado (con costo) o confirma la siguiente salida con el equipo.
   - Región Hidalgo: *Pachuca, CDMX y Estado de México*.
 - **Siempre incluye la mano de obra aproximada** (corte, instalación, tarja, parrilla, zoclo o m² de piso/muro), aunque nosotros no la realizamos: así el cliente ve el costo total de su proyecto. Aclara que es una referencia y que el instalador da el precio final.
+  - **Bajío, corte e instalación de cubierta: de $1,800 a $2,100 por metro lineal** (tarifa real). Da siempre el rango: "unos 5 metros lineales, entre $9,000 y $10,500". Tarja, parrilla, zoclo y piso/muro siguen con tarifas de prueba.
 - Cierra con **un siguiente paso concreto**: apartar el material, enviar muestra física gratis, agendar visita a bodega o llamada.
 
 **El PDF se hace con el cotizador, no a mano** (`cotizador/`). Solo escribe un JSON con los datos que cambian y ejecuta un comando; el diseño, la empresa, las cuentas y las tarifas ya están en la plantilla:

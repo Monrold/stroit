@@ -8,7 +8,7 @@ Fuente: la base de conocimiento de ParrotCRM y el sitio stroitsurfaces.com. Si u
 - Showroom en **León, Gto.**: en construcción.
 - Cobertura: Querétaro, todo Guanajuato (León, Irapuato, Celaya, San José Iturbide…), San Luis Potosí y Aguascalientes.
 - WhatsApp: **442 269 0555**.
-- **Envío sin costo** con flete consolidado a *Querétaro y Guanajuato* (región Bajío) y a *Pachuca, CDMX y Estado de México* (región Hidalgo). A otras ciudades el flete se cotiza; si es urgente, flete dedicado aparte.
+- **Envío sin costo** en la región Bajío: *Querétaro* siempre sin costo; *Guanajuato, Aguascalientes y San Luis Potosí* sin costo en flete consolidado (los envíos se juntan y salen cuando hay suficientes, sin fecha fija). Región Hidalgo: flete consolidado sin costo a *Pachuca, CDMX y Estado de México*. A otras ciudades el flete se cotiza; si es urgente, flete dedicado aparte.
 - Regiones: **Bajío** (Querétaro, San Luis Potosí, Aguascalientes, Guanajuato; bodega en Querétaro, cuenta Santander) e **Hidalgo** (Hidalgo, CDMX, Edomex, Puebla, Veracruz, Morelos, Guerrero; bodega en Pachuca, cuenta Inbursa).
 - Entrega: modelos en existencia en ≈**2 semanas**; los importados de España tardan más.
 - Lo que el anuncio promete: muestras físicas sin costo, texturas digitales para render y asesoría por WhatsApp.
