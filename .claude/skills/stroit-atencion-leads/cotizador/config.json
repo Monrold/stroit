@@ -66,16 +66,13 @@
       "bodega_mapa": "https://maps.app.goo.gl/uo1CnNAdzJ8jg7YA8"
     }
   },
-  "_tarifas_nota": "Un número = tarifa fija; [mín, máx] = rango; \"incluido\" = va dentro de otra partida; null = sin tarifa (el PDF dice 'por confirmar'). 'confirmado' lista las regiones con tarifa real; las demás son PRECIOS DE PRUEBA. Bajío (real): cubierta $1,800–$2,100/ml e incluye tarja, parrilla y zoclo de hasta 20 cm; zoclo de más de 20 cm, backsplash y cascadas se cobran aparte como metro lineal al mismo rango.",
+  "_tarifas_nota": "Un número = tarifa fija; [mín, máx] = rango; \"incluido\" = va dentro de otra partida; null = sin tarifa (el PDF dice 'por confirmar'). 'confirmado' lista las regiones con tarifa real; las demás son PRECIOS DE PRUEBA. Bajío (real): cubierta $2,000/ml (el rango real es $1,800–$2,100; en la cotización se usa un solo precio aproximado) e incluye tarja, parrilla y zoclo de hasta 20 cm; zoclo de más de 20 cm, backsplash y cascadas se cobran aparte como metro lineal al mismo rango.",
   "tarifas_prueba": true,
   "tarifas_mano_de_obra": {
     "instalacion_cubierta": {
       "texto": "Corte e instalación de cubierta",
       "unidad": "ml",
-      "bajio": [
-        1800,
-        2100
-      ],
+      "bajio": 2000,
       "hidalgo": 1300,
       "confirmado": [
         "bajio"
@@ -114,10 +111,7 @@
     "zoclo_alto": {
       "texto": "Zoclo de más de 20 cm de altura",
       "unidad": "ml",
-      "bajio": [
-        1800,
-        2100
-      ],
+      "bajio": 2000,
       "hidalgo": null,
       "confirmado": [
         "bajio"
@@ -126,10 +120,7 @@
     "backsplash": {
       "texto": "Backsplash",
       "unidad": "ml",
-      "bajio": [
-        1800,
-        2100
-      ],
+      "bajio": 2000,
       "hidalgo": null,
       "confirmado": [
         "bajio"
@@ -138,10 +129,7 @@
     "cascada": {
       "texto": "Cascada (lateral de isla o cubierta, ≈90 cm de alto)",
       "unidad": "ml",
-      "bajio": [
-        1800,
-        2100
-      ],
+      "bajio": 2000,
       "hidalgo": null,
       "confirmado": [
         "bajio"
