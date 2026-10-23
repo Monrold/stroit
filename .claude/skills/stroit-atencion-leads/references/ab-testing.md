@@ -32,13 +32,15 @@ Referencia rápida (octubre 2026, en existencia; detalle en `modelos.md` › Gu�
 
 | Color | A · Económicos | B · Premium |
 |---|---|---|
-| Blanco liso | Silestone *Lyra* $14,220, *Blanco Orion* $14,221; Dekton Flash Sale *Neva* $16,351 | Dekton *Halo* $23,202, *Zenith* $29,222 |
-| Blanco con vetas | Silestone *Ethereal Haze* $18,922; Dekton *Kairos* $21,048, *Limbo* $24,172 | Dekton *Borealis* / *Rem* $30,071, *Inuk* / *Bering* / *Salina* jumbo ≈$33,078; Sensa *White Macaubas* $32,257 |
-| Gris / cemento | Sensa *Blanco Leblon* $9,310; Dekton Flash Sale *Lyfe Lunar* $15,833, *Strato* $16,880; Silestone *Cemento Spa* $16,167 | Dekton *Kreta* $27,823, *Argentium* / *Marmorio* $29,222 |
+| Blanco liso | Silestone *Blanco Orion* $14,221, *Iconic White* $16,590, *Miami White* $21,272 | Dekton *Halo* $23,202, *Zenith* $29,222 |
+| Blanco frío con vetas grises | Silestone *Ethereal Haze* $18,922; Dekton *Kairos* $21,048, *Bergen* / *Vigil* 12 mm $26,468 | Dekton *Bering* / *Salina* jumbo / *Morpheus* jumbo $33,078; Sensa *White Macaubas* $32,257 |
+| Blanco cálido con vetas doradas | Dekton *Keena* $24,330, *Lucid* $29,222 | Dekton *Borealis* / *Rem* $30,071, *Entzo* $31,219; Sensa *Meridian* $33,270 |
+| Gris / cemento | Sensa *Blanco Leblon* $9,310; Dekton Flash Sale *Lyfe Lunar* $15,833, *Neva* $16,351, *Strato* $16,880; Silestone *Cemento Spa* $16,167 | Dekton *Kreta* $27,823, *Argentium* / *Fossil* $29,222 |
 | Negro liso | Sensa *Indian Black* desde $12,100; Silestone *Iconic Black* $16,590; Dekton *Eter* $21,048 | Dekton *Domoos* $23,232, *Fossil* $29,222 |
-| Negro con vetas | Sensa *American Black* $9,457; Silestone *Ethereal Noir* $18,922; Dekton *Markina* $23,202 | Dekton *Somnia* $28,000, *Kelya* $29,222, *Laurent* $33,078 |
+| Negro con vetas | Sensa *American Black* $9,457, *Via Lattea* $12,809; Silestone *Ethereal Marquina* $19,160; Dekton *Markina* $23,202 | Dekton *Somnia* $28,000, *Kelya* $29,222; Sensa *Orinoco* (con dorado) desde $21,210 |
 | Crema / beige | Dekton Flash Sale *Arenisca* $15,931, *Crema Marfil* $16,351; Silestone *Ethereal Marfil* $18,237 | Dekton *Sabbia* $27,068, *Adia* $29,222, *Nara* $33,078 |
-| Dorado | (no hay económicos: manda los más baratos) Dekton *Khalo* $27,610; Sensa *Orinoco* desde $21,210 | Dekton *Laurent* $33,078, *Reverie* $36,422 |
+| Negro con dorado | Silestone *Ethereal Noir* $18,922; Sensa *Titanium* $19,408, *Cosmic Black* $20,207 | Sensa *Orinoco* hasta $29,710, *Saturnia* $29,403 |
+| Café | Dekton Flash Sale *Kadum* $15,723 | Sensa *Macallan* $25,127, *Nahoa* $30,832; Dekton *Laurent* $33,078 |
 
 En fachada o exterior, quita Silestone y Sensa de la lista y usa solo los Dekton de ese color.
 
@@ -48,7 +50,7 @@ En fachada o exterior, quita Silestone y Sensa de la lista y usa solo los Dekton
 
 **A · Económicos:**
 > ¡Perfecto, Coco! Te paso opciones en Dekton (sirven para sala, baño y fachada) 👇
-> *Blancos:* • *Neva* (Flash Sale, blanco con textura de piedra) – $16,351 • *Kairos* (blanco con vetas finas) – $21,048
+> *Blancos:* • *Kairos* (blanco frío con vetas grises finas) – $21,048 • *Halo* (blanco roto brillante, liso) – $23,202
 > *Negros:* • *Eter* (negro grafito) – $21,048 • *Markina* (negro con vetas blancas) – $23,202
 > Se venden por placa completa (cada una cubre ≈4.6 a 4.8 m²) y el envío a León es sin costo.
 > ¿Cuántos m² son de cada área, aprox.? Con eso te paso cuántas placas y el total.

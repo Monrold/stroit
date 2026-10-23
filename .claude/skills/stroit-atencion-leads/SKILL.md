@@ -88,7 +88,20 @@ Si el anuncio era de un producto pero la necesidad pide otro, **dilo con natural
 
 **Regla de oro: los modelos se mandan solo cuando el cliente ya dijo un color o tono.** Eso pasa cuando pregunta por uno específico ("¿tienes algo gris?", "quiero un blanco con vetas", "¿cuánto el Laurent?"), manda una foto de referencia o responde a la pregunta **"¿Tienes algún tono o color en mente?"**. Mientras no lo diga, no le propongas modelos: contesta lo que preguntó (precio, medidas, catálogo) y cierra con esa pregunta.
 
-- En cuanto conozcas la aplicación y el color o estilo, elige **al menos 6 modelos** de `references/modelos.md` que encajen (si pidió 2 colores, 3 de cada uno) y preséntalos agrupados por color, con **nombre, una línea de descripción y precio**, más la foto de cada uno.
+- En cuanto conozcas la aplicación y el color o estilo, elige **al menos 6 modelos** de `references/modelos.md` que encajen (si pidió 2 colores, 3 de cada uno) y preséntalos agrupados por color, con **nombre, una línea de por qué encaja y precio**, más la foto de cada uno.
+
+### Precisión del color
+Antes de elegir, traduce lo que dijo el cliente a **tres rasgos** y toma los modelos de la categoría que coincida en `modelos.md` › Guía rápida por estilo (cada modelo está en una sola categoría, y la columna *Look* describe color base, subtono y vetas):
+1. **Color base**: blanco, blanco grisáceo, crema, beige/arena/taupe, gris claro, gris oscuro, negro, café, verde o azul.
+2. **Subtono**: frío (gris, azulado) o cálido (marfil, dorado, rosado).
+3. **Vetas**: sin vetas, motas, vetas finas o vetas marcadas, y su color (gris, dorado, blanco, café).
+
+Pistas: "que no se vea frío", "hueso", "marfil" → cálido. "Blanco blanco", "nórdico", "muy luminoso" → frío. "Tipo mármol", "Calacatta", "con mucho movimiento" → vetas marcadas. "Carrara", "vetas suaves" → vetas grises finas. "Liso", "minimalista", "sin rayitas" → sin vetas. "Cemento", "industrial" → gris sin vetas. "Beige" puede ser crema claro, arena o taupe. "Negro" no es café: Laurent y Kadum van como café.
+- **Color claro en los 3 rasgos** → 6 modelos de esa categoría, del más parecido al menos parecido.
+- **Falta un rasgo** (solo dijo "blanco", "beige" o "gris") → reparte los 6 entre las variantes, por ejemplo 2 lisos, 2 con vetas finas y 2 con vetas marcadas, o 3 fríos y 3 cálidos. Cierra con "¿Cuál se acerca más a lo que buscas?" en vez de la pregunta de los m²: así elige con fotos, sin una pregunta de más.
+- **Cada modelo dice por qué encaja**, en palabras del cliente: "*Kairos*: blanco frío con vetas grises finas, como lo querías – $21,048".
+- **No rellenes con otra categoría** sin decirlo: si no hay 6, completa con la más cercana y explica la diferencia ("este es café muy oscuro, casi negro").
+- Las fotos son placas reales en la bodega, con su luz; en pantalla el tono puede variar. Si duda entre dos, ofrécele la **muestra física gratis**.
 - Si el cliente mandó una **foto de referencia** (fachada, cocina de Pinterest), describe lo que ves (tono, vetas, acabado) y propón los modelos más parecidos.
 - **Catálogo**: si lo pide, mándale de inmediato el **enlace del PDF** de la marca (tabla *Catálogos completos* en `references/modelos.md`: Dekton, Dekton Flash Sale, Silestone y Sensa), sin condicionarlo. **Manda solo el catálogo, sin recomendar modelos**, y cierra con "¿Tienes algún tono o color en mente?" para filtrarle después (ver `references/guiones.md` §3). Como es un enlace, funciona igual por WhatsApp, Instagram y Facebook.
 - Para un modelo concreto, manda su **foto** (columna Imagen de `modelos.md`): es la placa real en bodega, con medida y precio.
@@ -101,10 +114,13 @@ Si el anuncio era de un producto pero la necesidad pide otro, **dilo con natural
 Cuando tengas modelo y medidas (o el cliente pida el número), calcula las placas:
 - Placas = m² ÷ m² por placa, **redondeado hacia arriba**, más **10 a 15 % de desperdicio**. En cocinas, revisa sobre las medidas reales si los tramos de 60 cm salen de la placa (una jumbo de 336 x 167 cm da dos tiras de 60 cm y sobra para zoclo).
 - Precio por placa × número de placas. Agrega adhesivo Mapei si es piso o muro.
-- **Envío** (flete consolidado sin costo solo a estas ciudades; al resto el flete se cotiza, y si es urgente el flete dedicado va aparte):
-  - Región Bajío: *Querétaro y Guanajuato* (León, Celaya, Irapuato…).
+- **Envío** (sin costo solo a estos lugares; al resto el flete se cotiza, y si es urgente el flete dedicado va aparte):
+  - Región Bajío: *Querétaro* sin costo siempre, sin esperar consolidado. *Guanajuato (León, Celaya, Irapuato…), Aguascalientes y San Luis Potosí*: sin costo en **flete consolidado**, es decir, los envíos se juntan y salen cuando hay suficientes. No tiene fecha fija: **no prometas día de entrega**; si el cliente tiene fecha, dilo con claridad y ofrécele flete dedicado (con costo) o confirma la siguiente salida con el equipo.
   - Región Hidalgo: *Pachuca, CDMX y Estado de México*.
 - **Siempre incluye la mano de obra aproximada** (corte, instalación, tarja, parrilla, zoclo o m² de piso/muro), aunque nosotros no la realizamos: así el cliente ve el costo total de su proyecto. Aclara que es una referencia y que el instalador da el precio final.
+  - **Bajío, corte e instalación de cubierta: $2,000 por metro lineal** (aproximado; el rango real de los instaladores es de $1,800 a $2,100). **Ya incluye** los cortes de tarja y parrilla y el zoclo de hasta 20 cm de alto. En la cotización y en los mensajes da **un solo número**, no el rango: "unos 5 metros lineales, ≈$10,000".
+  - Se cobran **aparte, como metro lineal al mismo precio ($2,000)**: el zoclo de más de 20 cm de alto, el **backsplash** y las **cascadas** (laterales que bajan al piso, normalmente de ≈90 cm de alto; cada una cuenta su altura en metros lineales, según el proyecto). En una cocina del Bajío, pregunta si lleva backsplash o cascadas antes de cotizar la mano de obra, y no lo supongas.
+  - En el JSON del cotizador: `instalacion_cubierta` con los ml de cubierta; `tarja_bajo_cubierta`, `parrilla` y `zoclo` salen como "Incluido"; `zoclo_alto`, `backsplash` y `cascada` con sus ml (ejemplo en `cotizador/ejemplos/ejemplo-bajio.json`). Piso/muro sigue con tarifa de prueba, y Hidalgo con tarifas de prueba (backsplash y cascadas: "por confirmar").
 - Cierra con **un siguiente paso concreto**: apartar el material, enviar muestra física gratis, agendar visita a bodega o llamada.
 
 **El PDF se hace con el cotizador, no a mano** (`cotizador/`). Solo escribe un JSON con los datos que cambian y ejecuta un comando; el diseño, la empresa, las cuentas y las tarifas ya están en la plantilla:

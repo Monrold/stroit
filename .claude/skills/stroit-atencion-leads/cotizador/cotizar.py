@@ -72,27 +72,47 @@ def region_de(estado, cfg):
     raise SystemExit(f"Estado '{estado}' sin región. Agrégalo en config.json › regiones.")
 
 
+def rango(v):
+    """Una tarifa es un número fijo o [mín, máx]."""
+    return (v[0], v[1]) if isinstance(v, list) else (v, v)
+
+
+def dinero_rango(a, b):
+    return dinero(a) if a == b else f"{dinero(a)} – {dinero(b)}"
+
+
 def mano_de_obra_html(q, cfg, regiones):
-    filas, totales = [], {r: 0 for r in regiones}
+    filas, totales = [], {r: [0, 0] for r in regiones}
+    hay_prueba = False
     for item in q.get("mano_de_obra", []):
         t = cfg["tarifas_mano_de_obra"][item["concepto"]]
         cant = item.get("cantidad", 1)
         etiqueta = item.get("texto", t["texto"])
-        if t["unidad"] != "pza" or cant != 1:
+        if t[regiones[0]] != "incluido" and (t["unidad"] != "pza" or cant != 1):
             etiqueta += f" (≈{cant:g} {t['unidad']})"
+        if len(regiones) == 1 and t.get("incluye", {}).get(regiones[0]):
+            etiqueta += f"<div class='sub'>{t['incluye'][regiones[0]].capitalize()}</div>"
         celdas = ""
         for r in regiones:
-            imp = t[r] * cant
-            totales[r] += imp
-            celdas += f"<td class='r'>{dinero(imp)}</td>"
+            if t[r] == "incluido":
+                celdas += "<td class='r'>Incluido</td>"
+                continue
+            if t[r] is None:
+                celdas += "<td class='r'>Por confirmar</td>"
+                continue
+            mn, mx = rango(t[r])
+            totales[r][0] += mn * cant
+            totales[r][1] += mx * cant
+            hay_prueba |= cfg.get("tarifas_prueba", False) and r not in t.get("confirmado", [])
+            celdas += f"<td class='r'>{dinero_rango(mn * cant, mx * cant)}</td>"
         filas.append(f"<tr><td>{etiqueta}</td>{celdas}</tr>")
     if not filas:
         return "", totales
     enc = "".join(f"<th class='r'>{cfg['regiones'][r]['nombre']}</th>" for r in regiones)
-    tot = "".join(f"<td class='r'>{dinero(totales[r])}</td>" for r in regiones)
+    tot = "".join(f"<td class='r'>{dinero_rango(*totales[r])}</td>" for r in regiones)
     material = sum(p["cantidad"] * p["precio"] for p in q["partidas"])
-    gran = "".join(f"<td class='r'>{dinero(material + totales[r])}</td>" for r in regiones)
-    prueba = '<span class="prueba">PRECIOS DE PRUEBA</span>' if cfg.get("tarifas_prueba") else ""
+    gran = "".join(f"<td class='r'>{dinero_rango(material + totales[r][0], material + totales[r][1])}</td>" for r in regiones)
+    prueba = '<span class="prueba">PRECIOS DE PRUEBA</span>' if hay_prueba else ""
     html = f"""<div class="mo"><h2>Mano de obra aproximada (referencia){prueba}</h2>
   <p class="nota">Stroit Surfaces no realiza corte ni instalación. Montos estimados para que consideres el costo total de tu proyecto; el instalador te dará el precio final.</p>
   <table><thead><tr><th>Concepto</th>{enc}</tr></thead><tbody>{''.join(filas)}
@@ -144,8 +164,13 @@ def main():
     cuenta = f'<p class="muted">{reg["cuenta_texto"]}</p>' if reg.get("cuenta_texto") else ""
     proyecto = f'<p class="lbl" style="margin-top:6px">Proyecto</p><p>{q["proyecto"]}</p>' if q.get("proyecto") else ""
     destino = q.get("ciudad") or q["estado"]
-    gratis = any(sin_acentos(x).lower().strip() in reg["envio_gratis"] for x in (q["estado"], q.get("ciudad", "")))
-    envio_txt = "envío consolidado sin costo" if gratis else "flete por cotizar"
+    lugares = [sin_acentos(x).lower().strip() for x in (q["estado"], q.get("ciudad", ""))]
+    if any(x in reg.get("envio_directo", []) for x in lugares):
+        envio_txt = "envío sin costo"
+    elif any(x in reg["envio_gratis"] for x in lugares):
+        envio_txt = "envío consolidado sin costo"
+    else:
+        envio_txt = "flete por cotizar"
     proyecto += f'<p class="lbl" style="margin-top:6px">Entrega</p><p>{destino} · {envio_txt}</p>'
 
     valores = {
@@ -180,8 +205,8 @@ def main():
     hecho_pdf = renderizar_pdf(base + ".html", base + ".pdf")
 
     print(f"Región: {reg['nombre']} | Material: {dinero(subtotal)} | Entrega {destino}: {envio_txt}")
-    for r, t in mo_tot.items():
-        print(f"Mano de obra {cfg['regiones'][r]['nombre']}: {dinero(t)} → total proyecto {dinero(subtotal + t)}")
+    for r, (mn, mx) in mo_tot.items():
+        print(f"Mano de obra {cfg['regiones'][r]['nombre']}: {dinero_rango(mn, mx)} → total proyecto {dinero_rango(subtotal + mn, subtotal + mx)}")
     print(f"Cuenta para transferencia: {reg['cuenta_imagen']}")
     print("PDF:", base + ".pdf" if hecho_pdf else "(no generado)")
     print("HTML:", base + ".html", f"({os.path.getsize(base + '.html') // 1024} KB)")

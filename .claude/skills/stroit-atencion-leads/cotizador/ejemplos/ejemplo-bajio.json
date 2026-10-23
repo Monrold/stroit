@@ -1,0 +1,28 @@
+{
+  "folio": "PRUEBA",
+  "cliente": "Ejemplo Bajío",
+  "estado": "Guanajuato",
+  "ciudad": "León",
+  "proyecto": "Cubierta de cocina de 3.20 m e isla de 1.80 m con 2 cascadas y backsplash de 3.20 m",
+  "fecha": "2026-10-23 15:00",
+  "vigencia_dias": 3,
+  "partidas": [
+    {
+      "cantidad": 2,
+      "unidad": "PZA",
+      "descripcion": "TABLA DK BOREALIS PULIDO 1.2 CM (JUMBO)",
+      "detalle": "Blanco cálido con vetas beige/doradas · cubre ≈5.6 m²",
+      "medida": "336*167",
+      "precio": 30071,
+      "imagen": "https://cdn.stroitsurfaces.com/catalogos/dekton/borealis.jpg"
+    }
+  ],
+  "mano_de_obra": [
+    {"concepto": "instalacion_cubierta", "cantidad": 5, "texto": "Corte e instalación de cubierta e isla"},
+    {"concepto": "tarja_bajo_cubierta"},
+    {"concepto": "parrilla"},
+    {"concepto": "zoclo"},
+    {"concepto": "cascada", "cantidad": 1.8, "texto": "2 cascadas de isla de 90 cm de alto"},
+    {"concepto": "backsplash", "cantidad": 3.2}
+  ]
+}

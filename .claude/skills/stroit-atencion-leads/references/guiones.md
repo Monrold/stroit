@@ -39,7 +39,7 @@ Si el primer mensaje ya trae una pregunta (precio, medida o envío), **contésta
 **Con la ciudad** (adjunta el PDF del cotizador):
 > ¡Perfecto, [nombre]! Te comparto tu cotización 👇
 > • [N] placa(s) [modelo]: *$[total]*, con envío a [ciudad] sin costo _(o "el flete a [ciudad] te lo confirmo" si no tiene envío gratis)_
-> • Mano de obra aprox. (corte, instalación, tarja, parrilla y zoclo): entre *$[mín]* y *$[máx]*
+> • Mano de obra aprox. (corte, instalación, tarja, parrilla y zoclo): *$[monto]*
 > Nosotros no instalamos, pero te recomendamos instalador. La promo está vigente hasta el [fecha], ¿te aparto la placa?
 
 ## 2. Pide precio sin dar contexto
@@ -61,7 +61,7 @@ Desde Instagram o Facebook se manda el mismo enlace; no hace falta pasar al clie
 > Tienes razón, te lo paso directo 👇
 > [Si ya dijo color o modelo:] • [Modelo] – $[precio] por placa ([medida], ≈[m²] m²) …
 > [Si no:] Van desde $[mínimo] hasta $[máximo] por placa ([medida], ≈[m²] m²), según el modelo. ¿Algún tono o color en mente para pasarte los precios exactos?
-> Envío sin costo a [ciudad] _(solo Querétaro, Guanajuato, Pachuca, CDMX o Edomex)_. Si me das los m², te mando el total en 2 minutos.
+> Envío sin costo a [ciudad] _(Bajío: Querétaro, Guanajuato, Aguascalientes y San Luis Potosí; Hidalgo: Pachuca, CDMX y Edomex)_. Si me das los m², te mando el total en 2 minutos.
 
 ## 5. Cotización
 > *Cotización – [Nombre]*
@@ -69,11 +69,11 @@ Desde Instagram o Facebook se manda el mismo enlace; no hace falta pasar al clie
 > Material: [Marca Modelo], [espesor], acabado [acabado]
 > • [N] placas de [medida] × $[precio] = *$[subtotal]*
 > • Adhesivo Ultraflex LFT Mapei: [N] sacos × $[precio] = $[subtotal] _(si aplica)_
-> • Envío a [ciudad]: *sin costo* (flete consolidado; solo Querétaro, Guanajuato, Pachuca, CDMX y Edomex. Al resto: flete por cotizar)
+> • Envío a [ciudad]: *sin costo* (Querétaro: sin costo siempre. Guanajuato, Aguascalientes, SLP, Pachuca, CDMX y Edomex: flete consolidado sin costo, sale cuando se junta la carga. Al resto: flete por cotizar)
 > *Total: $[total]*
-> • Mano de obra aprox. (corte, instalación, tarja, parrilla, zoclo): entre *$[mín]* y *$[máx]* _(referencia; la realiza el instalador)_
+> • Mano de obra aprox. (corte, instalación, tarja, parrilla, zoclo): *$[monto]* _(referencia; la realiza el instalador)_
 > Incluye [N] placa(s) extra por cortes y desperdicio. Nosotros no instalamos, pero te recomiendo instalador de confianza.
-> Tiempo de entrega: ≈2 semanas. Precio de promoción sujeto a existencia.
+> Tiempo de entrega: ≈2 semanas; en flete consolidado depende de la siguiente salida (confírmala si tiene fecha). Precio de promoción sujeto a existencia.
 > ¿Te lo aparto? También te puedo enviar una muestra física sin costo para que la veas en tu espacio.
 
 Si no se conoce un precio: deja `$[confirmar]` y avisa al vendedor.
