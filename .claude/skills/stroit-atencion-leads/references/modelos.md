@@ -149,6 +149,13 @@ Piedra natural: **cada placa es única** y la medida depende del bloque. Precio 
 | **Via Lattea** | 290×183 | 20 mm | Cepillado | $13,100 | $2,470 | Negro con vetas blancas finas. | [foto](https://cdn.stroitsurfaces.com/catalogos/sensa/via-lattea-cepillado.jpg) |
 | **White Macaubas** | — | — | Pulido | $32,257 | — | Cuarcita blanca con vetas grises lineales. | [foto](https://cdn.stroitsurfaces.com/catalogos/sensa/white-macaubas.jpg) |
 
+## Alternativas parecidas (modelo sobre pedido → en existencia)
+Si el cliente pide un modelo que no está en bodega, ofrécele primero su alternativa: "[alternativa], muy parecida a [modelo] y con el mismo acabado". Agrega aquí las equivalencias que confirme el equipo.
+
+| Pidió (sobre pedido) | Ofrece (entrega inmediata) | Por qué |
+|---|---|---|
+| Dekton *Arga* | Dekton *Taga* (pulido 20 mm, $26,397 promo) | Muy parecidas, mismo acabado pulido |
+
 ## Guía rápida por estilo (solo modelos en existencia, de menor a mayor precio)
 
 **Blancos con vetas (look mármol Carrara / Calacatta), el estilo más pedido**

@@ -56,6 +56,14 @@ Al lead de piso en León se le mandó el Flash Sale de septiembre (Lyfe Lunar $1
 - **Precio antes de tiempo**: al confirmar que alcanzaba 1 placa se proponía dar el precio y "no incluye instalación". **Corrección:** confirma placas, pide la ciudad y manda la cotización completa (material, envío y mano de obra).
 - **Cotización sin mano de obra**: el cliente preguntó "¿en cuánto sale la mano de obra?". **Corrección:** la cotización siempre la incluye como referencia.
 
+## 13. Lo aprendido con Cheli (WhatsApp desde la web, octubre 2026)
+Pidió cotizar 6 modelos por nombre (Dekton Arga, Kovik, Adia, Ava; Silestone Blanco Norte; Sensa Taj Mahal) para una barra de terraza.
+- **Descartar modelos por la aplicación antes de confirmar existencia**: Blanco Norte y Taj Mahal sí estaban en `modelos.md` (con foto), pero como la regla dice "exterior → Dekton", se omitieron de la lista de disponibles y la clienta no supo que había entrega inmediata. **Corrección:** primero confirma la existencia de cada modelo pedido, de las tres marcas; luego la restricción de uso.
+- **No ofrecer alternativa**: Arga no está en bodega y solo se dijo "sobre pedido", sin ofrecer Taga, que es muy parecida y tiene el mismo acabado. **Corrección:** usa la tabla *Alternativas parecidas* de `modelos.md`.
+- **Mensaje largo, con asteriscos y precios repetidos**: 3 burbujas con precio de cada modelo, cuando las fotos ya los traen. **Corrección:** una burbuja, texto plano, solo los nombres de los modelos.
+- **Necesidad sin respaldar**: "aguanta sol y lluvia" no explica por qué Dekton sirve para su barra. **Corrección:** liga el beneficio a su uso (no se decolora con el sol, no se mancha con bebidas o grasa, 25 años de garantía).
+- **Cierre plano**: "¿Cuánto mide tu barra?". **Corrección:** "Si me compartes cuánto mide tu barra, con gusto te ayudo con la cuantificación del material. ¿Te gustaría usarlo también en otra área de tu proyecto?".
+
 ## Lo que sí funciona (mantenerlo)
 - Enviar al menos 6 modelos con foto y una línea de descripción cuando el cliente dice el estilo ("tengo este modelo con vetas doradas…").
 - Comparar con la foto del cliente: "Este modelo se me hace súper parecido a tu fachada".

@@ -24,8 +24,8 @@ Si el primer mensaje ya trae una pregunta (precio, medida o envío), **contésta
 
 **Ya dijo el color** (al menos 6 modelos, agrupados por color, con foto de cada uno):
 > ¡Perfecto, [nombre]! Te paso opciones en Dekton para tu cocina 👇
-> *Blancos:* • *[Modelo]*: [descripción corta] – $[precio] (×3)
-> *Beige:* • *[Modelo]*: [descripción corta] – $[precio] (×3)
+> Blancos: • [Modelo]: [descripción corta] – $[precio] (×3)
+> Beige: • [Modelo]: [descripción corta] – $[precio] (×3)
 > Es precio por placa completa. ¿Cuántos metros lineales mide tu cocina, aprox.?
 
 **"¿Con una placa me alcanza?"** (respuesta directa y luego las medidas):
@@ -33,17 +33,17 @@ Si el primer mensaje ya trae una pregunta (precio, medida o envío), **contésta
 > ¿Me compartes las medidas de tu cocina o una foto/croquis? Así te confirmo si es 1 placa o 2.
 
 **Con las medidas** (confirma placas sin precio y pide la ciudad):
-> ¡Gracias, [nombre]! Con esas medidas *sí te alcanza con [N] placa(s) de [modelo]* 🙌 Salen los tramos de [medidas] y todavía sobra para el zoclo.
+> ¡Gracias, [nombre]! Con esas medidas sí te alcanza con [N] placa(s) de [modelo] 🙌 Salen los tramos de [medidas] y todavía sobra para el zoclo.
 > ¿De qué ciudad nos escribes? Para armarte la cotización con envío.
 
 **Con la ciudad** (adjunta el PDF del cotizador):
 > ¡Perfecto, [nombre]! Te comparto tu cotización 👇
-> • [N] placa(s) [modelo]: *$[total]*, con envío a [ciudad] sin costo _(o "el flete a [ciudad] te lo confirmo" si no tiene envío gratis)_
-> • Mano de obra aprox. (corte, instalación, tarja, parrilla y zoclo): entre *$[mín]* y *$[máx]*
+> • [N] placa(s) [modelo]: $[total], con envío a [ciudad] sin costo _(o "el flete a [ciudad] te lo confirmo" si no tiene envío gratis)_
+> • Mano de obra aprox. (corte, instalación, tarja, parrilla y zoclo): entre $[mín] y $[máx]
 > Nosotros no instalamos, pero te recomendamos instalador. La promo está vigente hasta el [fecha], ¿te aparto la placa?
 
 ## 2. Pide precio sin dar contexto
-> ¡Claro! Se vende por placa completa (≈3.20 x 1.45 m, cubre ≈4.6 m²). En bodega tenemos Silestone desde *$14,220*, Dekton desde *$15,723* y Sensa (piedra natural) desde *$9,310* por placa, según el modelo.
+> ¡Claro! Se vende por placa completa (≈3.20 x 1.45 m, cubre ≈4.6 m²). En bodega tenemos Silestone desde $14,220, Dekton desde $15,723 y Sensa (piedra natural) desde $9,310 por placa, según el modelo.
 > ¿Para qué área es y tienes algún tono o color en mente? Con eso te mando los modelos que encajan con su precio.
 
 Sin color no se listan modelos (ver SKILL.md › Enviar modelos adecuados).
@@ -64,14 +64,14 @@ Desde Instagram o Facebook se manda el mismo enlace; no hace falta pasar al clie
 > Envío sin costo a [ciudad] _(solo Querétaro, Guanajuato, Pachuca, CDMX o Edomex)_. Si me das los m², te mando el total en 2 minutos.
 
 ## 5. Cotización
-> *Cotización – [Nombre]*
+> Cotización – [Nombre]
 > Proyecto: [aplicación], [m²] m² aprox.
 > Material: [Marca Modelo], [espesor], acabado [acabado]
-> • [N] placas de [medida] × $[precio] = *$[subtotal]*
+> • [N] placas de [medida] × $[precio] = $[subtotal]
 > • Adhesivo Ultraflex LFT Mapei: [N] sacos × $[precio] = $[subtotal] _(si aplica)_
-> • Envío a [ciudad]: *sin costo* (flete consolidado; solo Querétaro, Guanajuato, Pachuca, CDMX y Edomex. Al resto: flete por cotizar)
-> *Total: $[total]*
-> • Mano de obra aprox. (corte, instalación, tarja, parrilla, zoclo): entre *$[mín]* y *$[máx]* _(referencia; la realiza el instalador)_
+> • Envío a [ciudad]: sin costo (flete consolidado; solo Querétaro, Guanajuato, Pachuca, CDMX y Edomex. Al resto: flete por cotizar)
+> Total: $[total]
+> • Mano de obra aprox. (corte, instalación, tarja, parrilla, zoclo): entre $[mín] y $[máx] _(referencia; la realiza el instalador)_
 > Incluye [N] placa(s) extra por cortes y desperdicio. Nosotros no instalamos, pero te recomiendo instalador de confianza.
 > Tiempo de entrega: ≈2 semanas. Precio de promoción sujeto a existencia.
 > ¿Te lo aparto? También te puedo enviar una muestra física sin costo para que la veas en tu espacio.
@@ -103,7 +103,7 @@ Según lo que conteste:
 Toma las opciones de `modelos.md` › Guía rápida por estilo, **del mismo color** que el cliente eligió. Si aún no dijo color, dale el rango más bajo (Dekton Flash Sale desde $15,723, Silestone desde $14,220, Sensa desde $9,310) y pregúntale el tono.
 
 ## 7. Objeción: "¿tienen en León?" / "quiero verlo"
-> Estamos construyendo el showroom en León 🙌. Mientras, te atendemos desde Querétaro con envío sin costo a León y *muestras físicas gratis* para que veas el material en tu espacio.
+> Estamos construyendo el showroom en León 🙌. Mientras, te atendemos desde Querétaro con envío sin costo a León y muestras físicas gratis para que veas el material en tu espacio.
 > Si prefieres venir: Terra Park Centenario, bodega 61E, Qro., de lunes a viernes de 9 a 6. Avísame el día y te mando el QR de acceso con tu nombre.
 
 ## 8. "¿Lo instalan?"
