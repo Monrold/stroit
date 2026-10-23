@@ -88,10 +88,18 @@ def mano_de_obra_html(q, cfg, regiones):
         t = cfg["tarifas_mano_de_obra"][item["concepto"]]
         cant = item.get("cantidad", 1)
         etiqueta = item.get("texto", t["texto"])
-        if t["unidad"] != "pza" or cant != 1:
+        if t[regiones[0]] != "incluido" and (t["unidad"] != "pza" or cant != 1):
             etiqueta += f" (≈{cant:g} {t['unidad']})"
+        if len(regiones) == 1 and t.get("incluye", {}).get(regiones[0]):
+            etiqueta += f"<div class='sub'>{t['incluye'][regiones[0]].capitalize()}</div>"
         celdas = ""
         for r in regiones:
+            if t[r] == "incluido":
+                celdas += "<td class='r'>Incluido</td>"
+                continue
+            if t[r] is None:
+                celdas += "<td class='r'>Por confirmar</td>"
+                continue
             mn, mx = rango(t[r])
             totales[r][0] += mn * cant
             totales[r][1] += mx * cant
