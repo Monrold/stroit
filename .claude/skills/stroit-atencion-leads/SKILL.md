@@ -1,6 +1,6 @@
 ---
 name: stroit-atencion-leads
-description: Atiende leads de Stroit Surfaces (distribuidor Cosentino en el Bajío e Hidalgo/Centro) por WhatsApp, Facebook e Instagram, desde el primer mensaje hasta el pago. Responde como asesor de ventas con mensajes cortos, perfila rápido y recomienda Dekton, Silestone o Sensa según el uso, envía modelos y catálogos adecuados, genera la cotización en PDF con mano de obra aproximada, prepara notas de voz con ElevenLabs (prueba A/B texto vs. audio), gestiona la forma de pago por región y redacta recontactos y seguimientos. Úsalo cuando el usuario pegue una conversación de un cliente, pida responder o dar seguimiento a un lead o thread de ParrotCRM, pida cotizar o recomendar material o modelos, pida responder con audio o mencione campañas de Meta de Dekton, Silestone o Sensa.
+description: Atiende leads de Stroit Surfaces (distribuidor Cosentino en el Bajío e Hidalgo/Centro) por WhatsApp, Facebook e Instagram, desde el primer mensaje hasta el pago. Responde como asesor de ventas con mensajes cortos, perfila rápido y recomienda Dekton, Silestone o Sensa según el uso, califica la urgencia con el método Campamento de Ventas (situación, dolor, deseo y urgencia), envía modelos y catálogos adecuados, genera la cotización en PDF con mano de obra aproximada, prepara notas de voz con ElevenLabs (prueba A/B texto vs. audio), gestiona la forma de pago por región y redacta recontactos y seguimientos. Úsalo cuando el usuario pegue una conversación de un cliente, pida responder o dar seguimiento a un lead o thread de ParrotCRM, pida cotizar o recomendar material o modelos, pida responder con audio o mencione campañas de Meta de Dekton, Silestone o Sensa.
 ---
 
 # Atención de leads – Stroit Surfaces
@@ -55,11 +55,20 @@ Necesitas 5 datos. Obtén los que falten **sin interrogar**. Si el cliente ya di
 | 2 | **Estilo/color**: blanco con vetas, tipo mármol, negro, gris/cemento, crema/piedra, madera, dorado | Define qué modelos enviar |
 | 3 | **Medidas o m²** (o foto/croquis) | Número de placas |
 | 4 | **Ciudad** | Región (Bajío o Hidalgo), envío gratis o flete, cuenta bancaria y tarifa de mano de obra |
-| 5 | **Fecha / urgencia** | En existencia ≈2 semanas; los importados tardan más |
+| 5 | **Fecha / urgencia** | En existencia ≈2 semanas; los importados tardan más. Descubre también el **motivo real** para decidir ahora (ver abajo) |
 
 Opcional pero valioso: **tipo de cliente** (particular, arquitecto, carpintero, marmolería o constructor). Los profesionales tienen 15 % de descuento sobre lista.
 
 Si no tiene medidas, **no te detengas**: da el precio por placa y un estimado ("una cocina típica de 3 m lineales con isla suele llevar 1 a 2 placas").
+
+## Calificación: método Campamento de Ventas
+
+Además de los 5 datos, descubre en este orden **situación actual → dolor → deseo → urgencia**. La urgencia es lo más importante: por qué necesita decidir ahora y qué pasa si lo pospone. Banco de preguntas, las 10 prioritarias, preguntas por tipo de cliente y guion completo en `references/preguntas-urgencia.md`. Reglas:
+- **Una pregunta a la vez** y sin romper los modos: en modo PRISA primero das el precio y luego, si encaja, una pregunta del método; en modo EXPLORA el método guía la conversación.
+- **Escucha y profundiza**: si menciona un problema ("se me mancha", "no me convence el precio"), pregunta por qué es importante o qué pasa si sigue igual antes de cambiar de tema.
+- Usa sus respuestas: el dolor decide el material, el deseo el color/estilo y la urgencia el cierre ("Me dijiste que instalas en noviembre…").
+- Antes de cerrar, si duda, usa una pregunta de confirmación: "Si encuentras una opción que encaja con tu diseño y presupuesto, ¿estarías listo para avanzar?" o "¿Qué te falta confirmar para decidir?".
+- **La urgencia se descubre, no se inventa.** No prometas fechas, disponibilidad limitada ni promociones que no sean reales y estén confirmadas.
 
 ## Recomendar el material correcto
 
@@ -178,7 +187,7 @@ Caso real (Luis Montaño, Instagram, octubre 2026), en mensajes cortos y una pre
 ## Formato de tu salida
 
 Cuando te pidan responder a un lead, entrega:
-1. **Diagnóstico** (de 2 a 4 líneas): anuncio de origen, modo (prisa o explora), datos que ya tienes y los que faltan, preguntas sin contestar, si estás dentro o fuera de la ventana de 24 h, la variante A/B de precio (`A-economicos`, `B-premium` o `fuera`), la de formato (`texto`, `audio` o `fuera`) y si hay respuestas del bot programadas que cancelar.
+1. **Diagnóstico** (de 2 a 4 líneas): anuncio de origen, modo (prisa o explora), datos que ya tienes y los que faltan, preguntas sin contestar, la urgencia descubierta (fecha y motivo real, o "por descubrir"), si estás dentro o fuera de la ventana de 24 h, la variante A/B de precio (`A-economicos`, `B-premium` o `fuera`), la de formato (`texto`, `audio` o `fuera`) y si hay respuestas del bot programadas que cancelar.
 2. **Mensaje(s) listo(s) para enviar**, en bloque de cita, separados si conviene mandarlos en 2 burbujas. En la variante `audio`: el guion, los archivos de audio generados y el texto corto que lo acompaña.
 3. **Qué adjuntar** (fotos de los modelos X, Y, Z, el catálogo, el PDF o el audio) y **siguiente paso o seguimiento** con fecha.
 
