@@ -1,10 +1,8 @@
 # Notas de voz con ElevenLabs
 
-Mandar una nota de voz con una voz femenina mexicana natural se siente más cercano que un texto y ayuda a que el cliente conteste. Se usa en dos momentos:
-1. **Preguntas de perfilamiento** (aplicación, color, medidas, ciudad, fecha): solo si al lead le tocó la variante *audio* de la prueba A/B de formato (abajo).
-2. **Cotización**: el PDF siempre va como archivo y, si el lead está en la variante *audio*, se acompaña de una nota de voz que resume el total y cierra con "¿Te aparto la placa?".
+Mandar una nota de voz con una voz femenina mexicana natural se siente más cercano que un texto y ayuda a que el cliente conteste. **Audio o texto se decide en cada mensaje, leyendo la conversación** (ver *Cuándo mandar audio* abajo): el audio se usa en los momentos en que ayuda a que el cliente avance, y el texto cuando lo que necesita es leer, guardar o ver un dato rápido. La prueba A/B por dígito solo decide los casos sin señales claras.
 
-Si el usuario pide audio para un cliente concreto, se manda audio aunque la variante diga texto, y la variante se registra como `fuera`.
+Si el usuario pide audio para un cliente concreto, se manda audio aunque las reglas digan texto (motivo `usuario`).
 
 ## Voz y modelo (`cotizador/config.json` › `audio`)
 
@@ -40,27 +38,63 @@ Ejemplo (Luis Montaño, cotización, octubre 2026):
 
 El audio es mensaje libre: solo se puede mandar **dentro de las 24 h** desde el último mensaje del cliente. En Instagram y Facebook, Parrot puede ampliarlo a 7 días con la etiqueta de agente humano, si la tiene. Fuera de la ventana, primero va la plantilla aprobada (`guiones.md` › Recontacto) y el audio, cuando el cliente responda.
 
-## Prueba A/B: texto vs. audio
+## Cuándo mandar audio: decisión por conversación
 
-Qué medimos: ¿el cliente contesta y avanza más si le preguntamos con nota de voz o con texto?
+Antes de cada mensaje, lee la conversación y decide el formato con estos pasos, en orden. El primero que aplique decide.
 
-**Asignación** (independiente de la prueba de precio, que usa el último dígito): **penúltimo dígito** del WhatsApp del cliente, o de su ID de Instagram o Facebook (`attrs.ig_id`) si no hay WhatsApp.
-- **Par** (0, 2, 4, 6, 8) → `texto`: todo se manda en texto, como siempre.
-- **Impar** (1, 3, 5, 7, 9) → `audio`: las preguntas y explicaciones van en nota de voz.
+### Paso 1. Lo que no se puede
+- **Fuera de la ventana de 24 h** → solo plantilla aprobada, sin audio (ver *Ventana de mensajería*).
+- **Sin créditos de ElevenLabs** o la generación falló → texto, y avisa al usuario.
 
-La variante se asigna una vez, desde el primer mensaje que mandamos, y se mantiene en todos los mensajes y seguimientos del lead.
+### Paso 2. Lo que pide el cliente (manda siempre)
+- Pidió que se lo pasen **por escrito**, dice que **no puede escuchar audios** (trabajo, reunión) o ya ignoró un audio y contestó en texto pidiendo el dato → **texto**. Motivo `cliente-texto`; a partir de ahí, todo en texto con ese lead.
+- Pidió **audio o llamada**, o **él manda notas de voz** → **audio**. Motivo `cliente-audio`: si él habla en audio, contestarle en audio se siente natural.
 
-**Qué cambia en la variante audio**: solo el formato. El contenido es el mismo mensaje que en texto (mismos datos, misma pregunta de cierre). Lo que el cliente necesita leer o guardar sigue en texto, en un mensaje corto junto al audio: la lista de modelos con precio y sus fotos, los enlaces (catálogo, cuentas, Mercado Pago, mapa) y el PDF de la cotización.
+### Paso 3. Momentos de audio (ayudan a avanzar)
+Manda audio cuando la conversación está en alguno de estos momentos:
 
-**No aplica** (`fuera`) cuando el cliente pidió explícitamente texto o audio, cuando el usuario pide audio para ese cliente, o cuando estamos fuera de la ventana de 24 h y solo se puede mandar plantilla.
+| Momento | Señales en la conversación | Por qué el audio ayuda | Motivo |
+|---|---|---|---|
+| **Cliente enfriándose** | Contesta con monosílabos ("No", "Ok", "Sí"), tarda cada vez más o ya no hace preguntas | Una voz humana rompe el ritmo de bot y reactiva la plática | `enfriandose` |
+| **Seguimiento tras silencio** | No contestó el último mensaje (2–3 h después del catálogo, a las 24 h, 3 o 7 días) y seguimos dentro de la ventana | Un audio corto destaca entre los chats y no se siente como mensaje automático | `seguimiento` |
+| **Explicación o comparación** | "¿Qué diferencia hay entre Dekton y Silestone?", "¿sirve para exterior?", "¿cuántas placas necesito?" | Se entiende mejor hablado que en un párrafo, y evita mensajes largos | `explicacion` |
+| **Objeción o duda** | "Está caro", "lo voy a pensar", "¿es confiable?", "lo vi más barato" | El tono cálido baja la tensión; en texto la respuesta suena a defensa | `objecion` |
+| **Preguntas de dolor, deseo o urgencia** | Ya tenemos aplicación y color y toca el método Campamento de Ventas ("¿Para cuándo te gustaría tenerla lista?", "¿qué es lo que más te preocupa?") | Se siente como plática con un asesor, no como cuestionario | `calificacion` |
+| **Cotización y cierre** | Se manda el PDF o se pregunta "¿Te aparto la placa?" | Un resumen con voz da confianza para decidir; el PDF va igual como archivo | `cierre` |
+| **Disculpa por demora** | Pasaron varias horas sin contestarle (como el cliente ".😗", que pidió el catálogo tres veces) | Una disculpa en voz se siente sincera | `disculpa` |
 
-**Registro en ParrotCRM** (con aprobación del usuario):
-- `update_lead` con `attrs.abFormato`: `texto`, `audio` o `fuera`.
-- En la nota, una línea `🎙️ A/B formato: audio` (o `texto` o `fuera`), y en `Adjuntar:` el nombre del archivo de audio.
+### Paso 4. Momentos de texto (aunque al lead le toque audio)
+| Momento | Señales | Motivo |
+|---|---|---|
+| **Modo PRISA** | Pide precio, medidas o envío, escribe corto, repite la pregunta | `prisa` |
+| **Contenido para leer** | Catálogo, lista de modelos con fotos, cuentas, Mercado Pago, dirección o mapa (un audio no se puede guardar ni reenviar) | `para-leer` |
+| **Profesional que pide datos técnicos** | Arquitecto, constructor o carpintero que pide fichas, espesores o especificaciones para reenviar a su cliente | `tecnico` |
+| **Audio anterior sin respuesta** | Ya mandamos un audio y no contestó: no mandes dos audios seguidos sin respuesta | `audio-sin-respuesta` |
+| **Primer mensaje** | Es la primera respuesta a "Quiero más información": todavía no sabemos cómo se comunica | `primer-mensaje` |
 
-**Qué medir**, por variante y contando desde el primer mensaje con esa variante:
-1. **Respuesta en 24 h** a cada pregunta (la métrica principal de esta prueba: ¿contesta más rápido?).
-2. **Avance**: cuántos datos del perfil completa (aplicación, color, medidas, ciudad) y si llega a cotización.
-3. **Venta** y monto.
+Si el mensaje tiene una parte para leer y otra para platicar (por ejemplo, catálogo y una pregunta de urgencia), manda **el texto con los enlaces y un audio corto** con la parte de plática; motivo del audio según el paso 3.
 
-Revisa resultados con **al menos 20 leads por variante**. Cuando el usuario pida el reporte, busca en ParrotCRM los leads con `abFormato` y arma una tabla con leads, % de respuesta en 24 h, % que llega a cotización, ventas y venta por lead. Cruza con `abPrecio` solo si hay suficientes leads en cada combinación.
+### Paso 5. Zona gris → prueba A/B
+Si no aplica ninguna regla de los pasos 2 a 4, decide con el **penúltimo dígito** del WhatsApp del cliente, o de su ID de Instagram o Facebook (`attrs.ig_id`) si no hay WhatsApp. Par → texto, impar → audio. Motivo `ab`. Es independiente de la prueba de precio, que usa el último dígito. Esta parte al azar es la que nos dice si el audio, por sí solo, hace que el cliente conteste más.
+
+### Límites siempre
+- **Máximo un audio por turno**, de ≈40 s. Lo que hay que leer va en texto junto al audio.
+- **El contenido no cambia** entre audio y texto: mismos datos y misma pregunta de cierre.
+- Si con un lead ya van 2 audios sin respuesta, vuelve a texto hasta que conteste.
+
+### Ejemplo (cliente ".😗", WhatsApp, 23 de octubre de 2026)
+1. "Quiero más información" + "¿Me envías tu catálogo?" → **texto** (`primer-mensaje` y `para-leer`): el enlace del catálogo y "¿Para qué lo quieres?".
+2. "Para cubierta en cocina" → zona gris → **audio** por dígito (penúltimo 3, impar; motivo `ab`).
+3. "No" + "Por eso quiero el catálogo" (llevaba 8 min sin respuesta) → **texto** con el catálogo (`para-leer`) + **audio corto** con la disculpa y la oferta de muestras (`disculpa`).
+4. Si no contesta en 2–3 h → **audio** de seguimiento (`seguimiento`): "¿Pudiste ver el catálogo? Si quieres te hago una selección para tu cocina".
+
+## Registro en ParrotCRM (con aprobación del usuario)
+- En la nota, una línea `🎙️ Formato: audio (enfriandose)` (o `texto (para-leer)`, `audio (ab)`, etc.) y en `Adjuntar:` el nombre del archivo de audio.
+- `update_lead` con `attrs.abFormato`: la variante por dígito del lead (`texto` o `audio`), aunque una regla la haya cambiado, y `attrs.formatoMotivo`: el motivo del último mensaje enviado.
+
+## Qué medir
+Cuando el usuario pida el reporte, busca en ParrotCRM las notas con `🎙️ Formato` y la respuesta del cliente al mensaje siguiente, y arma dos tablas:
+1. **Por motivo** (`enfriandose`, `seguimiento`, `objecion`, `cierre`…): % de respuesta en 24 h con audio, comparado con los mismos momentos de leads que se quedaron en texto. Dice **en qué momentos el audio sí ayuda** y en cuáles no: ajusta las reglas de los pasos 3 y 4 con eso.
+2. **Zona gris (`ab`)**: audio vs. texto por dígito. Respuesta en 24 h, % que llega a cotización, ventas y venta por lead. Necesita **al menos 20 leads por variante**.
+
+Cruza con `abPrecio` solo si hay suficientes leads en cada combinación.
