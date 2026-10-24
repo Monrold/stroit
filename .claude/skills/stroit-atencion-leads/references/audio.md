@@ -8,7 +8,7 @@ Si el usuario pide audio para un cliente concreto, se manda audio aunque las reg
 
 - Voz: **Ana María** (`m7yTemJqdIqrcNleANfX`), mexicana, cálida y natural. Si el usuario pide otra, búscala con `creative_list_voices` (`languages: ["es"]`, `accent: "mexican"`, `gender: "female"`). Alternativas ya probadas: Cristina (`EsHsbdAoFNIyDFJ5UnZx`) y Regina (`9Godp7dNohUvXk6qp0gS`).
 - Modelo: `eleven_v4`, que acepta indicaciones entre corchetes como `[warm, casual]`, `[short pause]` o `[friendly]`.
-- Cada audio de ≈35 s gasta ≈630 créditos por variación. La cuenta es Free Tier y ya marcó "actividad inusual" una vez: si una generación falla por eso, avisa al usuario de que hace falta un plan de pago y entrega el mensaje en texto.
+- **Siempre se genera un solo audio** (`generations_count: 1`), nunca varias versiones: así lo pidió el usuario para ahorrar créditos. Cada audio de ≈35 s gasta ≈630 créditos. La cuenta es Free Tier y ya marcó "actividad inusual" una vez: si una generación falla por eso, avisa al usuario de que hace falta un plan de pago y entrega el mensaje en texto.
 
 ## Cómo escribir el guion
 
@@ -25,14 +25,14 @@ Ejemplo (Luis Montaño, cotización, octubre 2026):
 
 ## Generar y entregar
 
-1. `creative_generate_speech` con `model_id: "eleven_v4"`, el `voice_id` de `config.json` y el guion como `prompt`. Deja `generations_count` en su valor por defecto, para que el vendedor elija la toma que suene más natural.
-2. Espera con `creative_get_flow_run_status` (con el `flow_id` y los `session_ids`) hasta que `all_completed` o `has_failures` sea verdadero. **No repitas la generación** si una toma falla: cada llamada cobra de nuevo.
-3. Descarga cada toma terminada con el script, que también la convierte a nota de voz de WhatsApp (`.ogg` con Opus, si hay ffmpeg):
+1. `creative_generate_speech` con `model_id: "eleven_v4"`, el `voice_id` de `config.json` y el guion como `prompt`. Pasa **`generations_count: 1`**: un solo audio por respuesta, nunca varias versiones.
+2. Espera con `creative_get_flow_run_status` (con el `flow_id` y los `session_ids`) hasta que `all_completed` o `has_failures` sea verdadero. **No repitas la generación** si falla: cada llamada cobra de nuevo. Avisa al usuario y entrega el mensaje en texto.
+3. Descarga el audio con el script, que también lo convierte a nota de voz de WhatsApp (`.ogg` con Opus, si hay ffmpeg):
    ```bash
-   python3 .claude/skills/stroit-atencion-leads/audio/descargar_audio.py "<url de la toma>" /mnt/project-files/audios/<cliente>/<nombre>
+   python3 .claude/skills/stroit-atencion-leads/audio/descargar_audio.py "<url del audio>" /mnt/project-files/audios/<cliente>/<nombre>
    ```
    Guarda `<nombre>.mp3` (Instagram y Facebook) y `<nombre>.ogg` (WhatsApp, se reproduce como nota de voz). Las URLs de ElevenLabs caducan a las 2 h, así que descarga en cuanto terminen.
-4. Entrega al usuario el guion y los audios. **No los envíes al cliente**: el vendedor los manda desde Parrot.
+4. Entrega al usuario el guion y el audio. **No lo envíes al cliente**: el vendedor lo manda desde Parrot.
 
 ## Ventana de mensajería
 
