@@ -17,6 +17,7 @@
   <nav class="tabs" role="tablist">
     <button role="tab" data-doc="saldo" aria-selected="true">Saldo a favor</button>
     <button role="tab" data-doc="entrega" aria-selected="false">Entrega a domicilio</button>
+    <button role="tab" data-doc="config" aria-selected="false">Configuración</button>
   </nav>
   <a class="salir" href="salir">Salir</a>
 </header>
@@ -27,8 +28,8 @@
     <form id="form-saldo" data-doc="saldo" autocomplete="off">
       <h2>Saldo a favor</h2>
       <div class="grid2">
-        <label>Folio del saldo<input name="folio" placeholder="SF-0001"></label>
-        <label>Asesor<input name="asesor"></label>
+        <label>Folio del saldo<input name="folio" class="folio-auto" readonly placeholder="Automático"></label>
+        <label>Asesor<select name="asesor" class="sel-asesor"><option value="">Selecciona…</option></select></label>
       </div>
       <label>Nombre del cliente<input name="cliente" required></label>
       <div class="grid2">
@@ -46,8 +47,8 @@
     <form id="form-entrega" data-doc="entrega" autocomplete="off" hidden>
       <h2>Registro de entrega a domicilio</h2>
       <div class="grid2">
-        <label>Folio de entrega<input name="folio" placeholder="EN-0001"></label>
-        <label>Asesor<input name="asesor"></label>
+        <label>Folio de entrega<input name="folio" class="folio-auto" readonly placeholder="Automático"></label>
+        <label>Asesor<select name="asesor" class="sel-asesor"><option value="">Selecciona…</option></select></label>
       </div>
       <div class="grid2">
         <label>Folio de la venta<input name="folioVenta" required></label>
@@ -99,6 +100,28 @@
         <label class="radio"><input type="radio" name="permisoEsp" value="NO APLICA">NO APLICA</label>
       </fieldset>
     </form>
+
+    <section id="config" hidden>
+      <h2>Configuración</h2>
+      <p class="aviso" id="config-aviso" hidden></p>
+      <h3>Vendedores</h3>
+      <p class="hint-c">Aparecen en el campo Asesor de los dos formatos.</p>
+      <ul class="vendedores" id="lista-vendedores"></ul>
+      <form id="form-vendedor" class="add-row" autocomplete="off">
+        <input name="nombre" placeholder="Nombre del vendedor" maxlength="80" required>
+        <button type="submit">Agregar</button>
+      </form>
+      <h3>Folios</h3>
+      <p class="hint-c">El folio se asigna solo al descargar o imprimir, y sigue el consecutivo. Aquí puedes cambiar el siguiente número, por ejemplo para continuar la numeración que ya traían en papel. Un número menor puede repetir folios.</p>
+      <form id="form-folios" autocomplete="off">
+        <div class="grid2">
+          <label>Siguiente saldo a favor (SF-)<input name="saldo" type="number" min="1" step="1" required></label>
+          <label>Siguiente entrega (EN-)<input name="entrega" type="number" min="1" step="1" required></label>
+        </div>
+        <button type="submit" class="secondary">Guardar folios</button>
+      </form>
+      <p class="status" id="config-status" role="status"></p>
+    </section>
 
     <div class="actions">
       <button type="button" id="btn-pdf" class="primary">Descargar PDF</button>

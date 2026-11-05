@@ -113,14 +113,127 @@
   }
 
   function cambiar(doc) {
-    actual = doc;
+    var esConfig = doc === 'config';
+    if (!esConfig) actual = doc;
     document.querySelectorAll('.tabs button').forEach(function (b) { b.setAttribute('aria-selected', String(b.dataset.doc === doc)); });
     Object.keys(docs).forEach(function (k) {
-      docs[k].form.hidden = k !== doc;
-      docs[k].sheet.hidden = k !== doc;
+      docs[k].form.hidden = esConfig || k !== doc;
+      docs[k].sheet.hidden = esConfig || k !== doc;
     });
+    configEl.hidden = !esConfig;
+    document.querySelector('.panel').classList.toggle('config-mode', esConfig);
+    document.querySelector('.layout').classList.toggle('config-mode', esConfig);
     statusEl.textContent = '';
+    if (esConfig) { pintarConfig(); return; }
+    escalar();
     pintar();
+  }
+
+  // ---------- API (folios y vendedores) ----------
+  var configEl = document.getElementById('config');
+  var configStatus = document.getElementById('config-status');
+  var cfg = { ok: false, vendedores: [], siguiente: {} };
+
+  function api(metodo, ruta, cuerpo) {
+    return fetch('api/' + ruta, {
+      method: metodo,
+      headers: cuerpo ? { 'Content-Type': 'application/json' } : {},
+      body: cuerpo ? JSON.stringify(cuerpo) : undefined,
+      credentials: 'same-origin'
+    }).then(function (r) {
+      return r.json().catch(function () { return {}; }).then(function (data) {
+        if (!r.ok) { var e = new Error(data.mensaje || data.error || ('HTTP ' + r.status)); e.status = r.status; throw e; }
+        return data;
+      });
+    });
+  }
+
+  function llenarSelects() {
+    document.querySelectorAll('select.sel-asesor').forEach(function (sel) {
+      var actualVal = sel.value || sel.dataset.pendiente || '';
+      var nombres = cfg.vendedores.slice();
+      if (actualVal && nombres.indexOf(actualVal) < 0) nombres.push(actualVal);
+      sel.innerHTML = '';
+      var o0 = document.createElement('option'); o0.value = ''; o0.textContent = 'Selecciona…'; sel.appendChild(o0);
+      nombres.forEach(function (n) { var o = document.createElement('option'); o.value = n; o.textContent = n; sel.appendChild(o); });
+      sel.value = actualVal;
+      delete sel.dataset.pendiente;
+    });
+  }
+
+  // Sin base de datos: folio y asesor se capturan a mano
+  function modoManual() {
+    cfg.ok = false;
+    document.querySelectorAll('input.folio-auto').forEach(function (i) {
+      i.readOnly = false; i.classList.remove('folio-auto');
+      i.placeholder = i.form.id === 'form-saldo' ? 'SF-0001' : 'EN-0001';
+    });
+    document.querySelectorAll('select.sel-asesor').forEach(function (sel) {
+      var inp = document.createElement('input');
+      inp.name = 'asesor'; inp.value = sel.value || sel.dataset.pendiente || '';
+      sel.parentNode.replaceChild(inp, sel);
+    });
+    var aviso = document.getElementById('config-aviso');
+    aviso.hidden = false;
+    aviso.textContent = 'La base de datos no está conectada todavía, así que el folio y el asesor se escriben a mano. Revisa los pasos en las notas del proyecto (FORMATOS_DB).';
+  }
+
+  function cargarConfig() {
+    return api('GET', 'config').then(function (data) {
+      cfg.ok = true;
+      cfg.vendedores = data.vendedores || [];
+      cfg.siguiente = data.siguiente || {};
+      llenarSelects();
+    }).catch(function (e) {
+      if (window.console) console.warn('Configuración no disponible:', e.message);
+      modoManual();
+    });
+  }
+
+  function pintarConfig() {
+    var ul = document.getElementById('lista-vendedores');
+    ul.innerHTML = '';
+    if (!cfg.vendedores.length) {
+      var li0 = document.createElement('li'); li0.className = 'vacio'; li0.textContent = 'Aún no hay vendedores.'; ul.appendChild(li0);
+    }
+    cfg.vendedores.forEach(function (n, i) {
+      var li = document.createElement('li');
+      var span = document.createElement('span'); span.textContent = n;
+      var b = document.createElement('button'); b.type = 'button'; b.textContent = 'Quitar';
+      b.addEventListener('click', function () {
+        var lista = cfg.vendedores.slice(); lista.splice(i, 1); guardarVendedores(lista);
+      });
+      li.appendChild(span); li.appendChild(b); ul.appendChild(li);
+    });
+    var ff = document.getElementById('form-folios');
+    ff.elements.saldo.value = cfg.siguiente.saldo || 1;
+    ff.elements.entrega.value = cfg.siguiente.entrega || 1;
+    var desactivar = !cfg.ok;
+    configEl.querySelectorAll('input,button').forEach(function (el) { el.disabled = desactivar; });
+  }
+
+  function avisoConfig(txt, err) {
+    configStatus.className = 'status' + (err ? ' err' : '');
+    configStatus.textContent = txt;
+  }
+
+  function guardarVendedores(lista) {
+    return api('PUT', 'vendedores', { vendedores: lista }).then(function (data) {
+      cfg.vendedores = data.vendedores;
+      llenarSelects(); pintarConfig(); avisoConfig('Vendedores guardados.');
+    }).catch(function (e) { avisoConfig('No se pudo guardar: ' + e.message, true); });
+  }
+
+  function asegurarFolio() {
+    var f = docs[actual].form;
+    if (!cfg.ok || f.elements.folio.value) return Promise.resolve();
+    statusEl.className = 'status';
+    statusEl.textContent = 'Asignando folio…';
+    return api('POST', 'folio', { tipo: actual }).then(function (data) {
+      f.elements.folio.value = data.folio;
+      cfg.siguiente[actual] = data.numero + 1;
+      pintar();
+    });
   }
 
   // ---------- guardado local (borrador) ----------
@@ -142,7 +255,8 @@
           if (!els) return;
           if (els.length && els[0] && els[0].type === 'radio') {
             Array.prototype.forEach.call(els, function (r) { r.checked = r.value === v[name]; });
-          } else if (els.type !== 'radio') { els.value = v[name]; }
+          } else if (els.tagName === 'SELECT') { els.dataset.pendiente = v[name]; els.value = v[name]; }
+          else if (els.type !== 'radio') { els.value = v[name]; }
           else { els.checked = els.value === v[name]; }
         });
       });
@@ -168,20 +282,24 @@
     if (!validar()) return;
     var btn = document.getElementById('btn-pdf');
     btn.disabled = true;
-    statusEl.className = 'status';
-    statusEl.textContent = 'Generando PDF…';
-    // Copia a tamaño real (sin la escala de la vista previa); html2pdf la monta en su propio contenedor
-    var copia = docs[actual].sheet.cloneNode(true);
-    copia.removeAttribute('id');
-    var opciones = {
-      margin: 0,
-      filename: nombreArchivo(),
-      image: { type: 'jpeg', quality: 0.95 },
-      html2canvas: { scale: 3, useCORS: true, backgroundColor: '#ffffff', scrollX: 0, scrollY: 0 },
-      jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
-    };
-    document.fonts.ready
-      .then(function () { return window.html2pdf().set(opciones).from(copia).outputPdf('blob'); })
+    var opciones;
+    asegurarFolio()
+      .catch(function (e) { e.folio = true; throw e; })
+      .then(function () {
+        statusEl.className = 'status';
+        statusEl.textContent = 'Generando PDF…';
+        // Copia a tamaño real (sin la escala de la vista previa); html2pdf la monta en su propio contenedor
+        var copia = docs[actual].sheet.cloneNode(true);
+        copia.removeAttribute('id');
+        opciones = {
+          margin: 0,
+          filename: nombreArchivo(),
+          image: { type: 'jpeg', quality: 0.95 },
+          html2canvas: { scale: 3, useCORS: true, backgroundColor: '#ffffff', scrollX: 0, scrollY: 0 },
+          jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+        };
+        return document.fonts.ready.then(function () { return window.html2pdf().set(opciones).from(copia).outputPdf('blob'); });
+      })
       .then(function (blob) {
         var url = URL.createObjectURL(blob), a = document.createElement('a');
         a.href = url; a.download = opciones.filename;
@@ -191,7 +309,9 @@
       .then(function () { statusEl.textContent = 'PDF descargado: ' + opciones.filename; })
       .catch(function (e) {
         statusEl.className = 'status err';
-        statusEl.textContent = 'No se pudo generar el PDF. Usa "Imprimir" y elige "Guardar como PDF".';
+        statusEl.textContent = e.folio
+          ? 'No se pudo asignar el folio (' + e.message + '). Revisa tu conexión e intenta de nuevo.'
+          : 'No se pudo generar el PDF. Usa "Imprimir" y elige "Guardar como PDF".';
         if (window.console) console.error(e);
       })
       .then(function () { btn.disabled = false; });
@@ -199,10 +319,16 @@
 
   function imprimir() {
     if (!validar()) return;
-    var prev = document.title;
-    document.title = nombreArchivo().replace(/\.pdf$/, '');
-    window.print();
-    document.title = prev;
+    asegurarFolio().then(function () {
+      statusEl.textContent = '';
+      var prev = document.title;
+      document.title = nombreArchivo().replace(/\.pdf$/, '');
+      window.print();
+      document.title = prev;
+    }).catch(function (e) {
+      statusEl.className = 'status err';
+      statusEl.textContent = 'No se pudo asignar el folio (' + e.message + '). Revisa tu conexión e intenta de nuevo.';
+    });
   }
 
   function limpiar() {
@@ -224,6 +350,22 @@
   document.getElementById('btn-pdf').addEventListener('click', descargarPDF);
   document.getElementById('btn-print').addEventListener('click', imprimir);
   document.getElementById('btn-clear').addEventListener('click', limpiar);
+  document.getElementById('form-vendedor').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var inp = e.target.elements.nombre, nombre = inp.value.trim();
+    if (!nombre) return;
+    guardarVendedores(cfg.vendedores.concat([nombre])).then(function () { inp.value = ''; inp.focus(); });
+  });
+  document.getElementById('form-folios').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var f = e.target;
+    Promise.all(['saldo', 'entrega'].map(function (t) {
+      return api('PUT', 'siguiente', { tipo: t, numero: Number(f.elements[t].value) });
+    })).then(function (res) {
+      cfg.siguiente = res[res.length - 1].siguiente;
+      pintarConfig(); avisoConfig('Folios guardados.');
+    }).catch(function (err) { avisoConfig('No se pudo guardar: ' + err.message, true); });
+  });
   window.addEventListener('resize', escalar);
   window.addEventListener('beforeprint', function () { scaler.style.transform = 'none'; });
   window.addEventListener('afterprint', escalar);
@@ -231,6 +373,7 @@
   cargar();
   escalar();
   cambiar(actual);
+  cargarConfig().then(pintar);
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(pintar);
 
   // para pruebas

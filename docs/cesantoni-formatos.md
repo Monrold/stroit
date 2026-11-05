@@ -31,6 +31,20 @@ Toda la ruta `/cesantoni-formatos/` muestra primero una pantalla de acceso con e
 - Al entrar se guarda una cookie firmada que dura 7 días. "Salir", arriba a la derecha, cierra la sesión.
 - Si se cambia la contraseña, todas las sesiones abiertas se cierran. Después de cambiarla hay que volver a desplegar (Deployments → Retry deployment).
 
+## Folios automáticos y vendedores
+
+El folio de cada formato (SF-0001, EN-0001…) se asigna solo, al dar **Descargar PDF** o **Imprimir**, y sigue un consecutivo compartido por todos los equipos. Si se vuelve a descargar el mismo formato, conserva su folio; **Limpiar** empieza uno nuevo. El campo Asesor es una lista que se llena desde la pestaña **Configuración**, donde también se puede fijar el siguiente número de cada folio.
+
+Esto usa una base de datos D1 de Cloudflare. Se configura una sola vez:
+
+1. Cloudflare → Storage & Databases → D1 SQL Database → Create → nombre `cesantoni-formatos`.
+2. Workers & Pages → stroit → Settings → Bindings → Add → D1 database → Variable name `FORMATOS_DB` → elegir `cesantoni-formatos` → Save. Hazlo en Production (y en Preview si se usan vistas previas).
+3. Deployments → Retry deployment del último de Production.
+
+Las tablas se crean solas la primera vez. Si `FORMATOS_DB` no está enlazada, el formulario sigue funcionando, pero el folio y el asesor se escriben a mano y la pestaña Configuración lo avisa.
+
+API (protegida por la misma sesión): `functions/cesantoni-formatos/api/[[ruta]].js`.
+
 ## Archivos
 
 - `index.html`: formularios y hojas carta.
@@ -40,5 +54,6 @@ Toda la ruta `/cesantoni-formatos/` muestra primero una pantalla de acceso con e
 - `assets/vendor/html2pdf.bundle.min.js`: html2pdf.js 0.10.1 (MIT), incluido para no depender de un CDN.
 - `assets/cesantoni-logo.svg`: logo.
 - `functions/cesantoni-formatos/_middleware.js` (en la raíz del repo): la contraseña.
+- `functions/cesantoni-formatos/api/[[ruta]].js`: folios consecutivos y vendedores (D1).
 
-Para probarlo localmente sin contraseña: `python3 -m http.server -d public/cesantoni-formatos` y abrir http://localhost:8000. Con contraseña: `npx wrangler pages dev public` desde la raíz del repo, con un archivo `.dev.vars` que tenga `FORMATOS_PASSWORD=...`.
+Para probarlo localmente sin contraseña: `python3 -m http.server -d public/cesantoni-formatos` y abrir http://localhost:8000. Con contraseña y base de datos: `npx wrangler pages dev public --d1 FORMATOS_DB=local` desde la raíz del repo, con un archivo `.dev.vars` que tenga `FORMATOS_PASSWORD=...`.
