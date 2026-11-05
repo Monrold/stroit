@@ -17,8 +17,8 @@ form label{display:block;font-size:13px;color:#333;margin-bottom:12px}
 form input,form textarea,form select{display:block;width:100%;margin-top:5px;padding:9px 10px;border:1px solid var(--line);border-radius:6px;background:#fafafa;font:inherit;color:var(--ink)}
 form input:focus,form textarea:focus,form select:focus{outline:2px solid #000;outline-offset:-1px;background:#fff}
 form textarea{resize:vertical}
-.grid2{display:grid;grid-template-columns:1fr 1fr;gap:0 12px}
-.grid21{display:grid;grid-template-columns:2fr 1fr;gap:0 12px}
+.grid2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:0 12px}
+.grid21{display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1fr);gap:0 12px}
 fieldset{border:0;padding:0;margin:0 0 12px;display:flex;flex-wrap:wrap;gap:6px 18px;align-items:center}
 legend{font-size:13px;color:#333;padding:0;margin-bottom:6px;width:100%}
 label.radio{display:flex;align-items:center;gap:6px;margin:0;font-weight:500;color:var(--ink)}
@@ -104,3 +104,17 @@ form select{appearance:auto}
 .red button{font:inherit;font-weight:600;padding:5px 12px;border-radius:6px;border:1px solid currentColor;background:transparent;color:inherit;cursor:pointer}
 .red[hidden]{display:none}
 @media print{.red{display:none!important}}
+
+/* Campos parejos en celular (Safari iOS da a fecha y hora su propio ancho y alto) */
+form input,form select,form textarea{min-width:0;max-width:100%}
+form input:not([type=radio]):not([type=checkbox]),form select{height:42px;line-height:20px}
+form input[type=date],form input[type=time]{-webkit-appearance:none;appearance:none;text-align:left;min-height:42px}
+form input::-webkit-date-and-time-value{text-align:left;margin:0}
+form input::-webkit-datetime-edit{padding:0}
+@media (max-width:700px){
+  /* 16px evita que el iPhone haga zoom al tocar un campo */
+  form input,form select,form textarea{font-size:16px}
+  .actions{flex-wrap:nowrap}
+  .actions button{flex:1 1 auto;padding:11px 10px;white-space:nowrap}
+  .actions button.ghost{flex:0 0 auto}
+}
