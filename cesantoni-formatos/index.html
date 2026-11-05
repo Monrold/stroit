@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Formatos Cesantoni</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/formatos.css">
+<link rel="stylesheet" href="assets/app.css">
+</head>
+<body>
+<header class="topbar">
+  <img src="assets/cesantoni-logo.svg" alt="Cesantoni Porcelanato Premium">
+  <nav class="tabs" role="tablist">
+    <button role="tab" data-doc="saldo" aria-selected="true">Saldo a favor</button>
+    <button role="tab" data-doc="entrega" aria-selected="false">Entrega a domicilio</button>
+  </nav>
+</header>
+
+<main class="layout">
+  <!-- FORMULARIOS -->
+  <section class="panel">
+    <form id="form-saldo" data-doc="saldo" autocomplete="off">
+      <h2>Saldo a favor</h2>
+      <div class="grid2">
+        <label>Folio del saldo<input name="folio" placeholder="SF-0001"></label>
+        <label>Asesor<input name="asesor"></label>
+      </div>
+      <label>Nombre del cliente<input name="cliente" required></label>
+      <div class="grid2">
+        <label>Folio de la venta<input name="folioVenta" required></label>
+        <label>Fecha de la venta<input name="fechaVenta" type="date" required></label>
+      </div>
+      <div class="grid2">
+        <label>Fecha del saldo<input name="fechaSaldo" type="date" required></label>
+        <label>Cantidad a favor (MXN)<input name="cantidad" type="number" min="0" step="0.01" inputmode="decimal" required></label>
+      </div>
+      <p class="hint" id="saldo-letra"></p>
+      <label>Notas<textarea name="notas" rows="4" maxlength="360"></textarea></label>
+    </form>
+
+    <form id="form-entrega" data-doc="entrega" autocomplete="off" hidden>
+      <h2>Registro de entrega a domicilio</h2>
+      <div class="grid2">
+        <label>Folio de entrega<input name="folio" placeholder="EN-0001"></label>
+        <label>Asesor<input name="asesor"></label>
+      </div>
+      <div class="grid2">
+        <label>Folio de la venta<input name="folioVenta" required></label>
+        <label>Fecha de la venta<input name="fechaVenta" type="date" required></label>
+      </div>
+      <label>Fecha de entrega<input name="fechaEntrega" type="date" required></label>
+      <div class="grid2">
+        <label>Horario desde<input name="horaDe" type="time"></label>
+        <label>Horario hasta<input name="horaA" type="time"></label>
+      </div>
+      <h3>Domicilio</h3>
+      <div class="grid21">
+        <label>Calle<input name="calle"></label>
+        <label>Número<input name="numero"></label>
+      </div>
+      <div class="grid21">
+        <label>Colonia<input name="colonia"></label>
+        <label>Código postal<input name="cp" inputmode="numeric" maxlength="5"></label>
+      </div>
+      <div class="grid2">
+        <label>Municipio<input name="municipio"></label>
+        <label>Estado<input name="estado"></label>
+      </div>
+      <label>Referencias del domicilio<textarea name="referencias" rows="2" maxlength="200"></textarea></label>
+      <h3>Contacto para entrega</h3>
+      <div class="grid21">
+        <label>Nombre<input name="contacto"></label>
+        <label>Teléfono<input name="telefono" type="tel"></label>
+      </div>
+      <h3>Carga y unidad</h3>
+      <div class="grid2">
+        <label>Peso total de carga (kg)<input name="peso" type="number" min="0" step="1" inputmode="numeric"></label>
+        <label>Tipo de unidad<input name="unidad" list="unidades"></label>
+      </div>
+      <datalist id="unidades">
+        <option value="Camioneta 1.5 t"><option value="Camioneta 3.5 t"><option value="Rabón"><option value="Torton">
+      </datalist>
+      <h3>Condiciones de descarga</h3>
+      <fieldset><legend>¿Se cuenta con lugar asignado para descarga?</legend>
+        <label class="radio"><input type="radio" name="lugar" value="SI">SI</label>
+        <label class="radio"><input type="radio" name="lugar" value="NO">NO</label>
+      </fieldset>
+      <fieldset><legend>Permiso para descargar en vía pública</legend>
+        <label class="radio"><input type="radio" name="permisoVia" value="APLICA">APLICA</label>
+        <label class="radio"><input type="radio" name="permisoVia" value="NO APLICA">NO APLICA</label>
+      </fieldset>
+      <fieldset><legend>Requerimiento o permiso especial</legend>
+        <label class="radio"><input type="radio" name="permisoEsp" value="APLICA">APLICA</label>
+        <label class="radio"><input type="radio" name="permisoEsp" value="NO APLICA">NO APLICA</label>
+      </fieldset>
+    </form>
+
+    <div class="actions">
+      <button type="button" id="btn-pdf" class="primary">Descargar PDF</button>
+      <button type="button" id="btn-print">Imprimir</button>
+      <button type="button" id="btn-clear" class="ghost">Limpiar</button>
+    </div>
+    <p class="status" id="status" role="status"></p>
+  </section>
+
+  <!-- VISTA PREVIA -->
+  <section class="preview" aria-label="Vista previa tamaño carta">
+    <div class="scaler" id="scaler">
+      <div class="sheet saldo" id="sheet-saldo">
+        <div class="band"><img src="assets/cesantoni-logo.svg" alt=""></div>
+        <div class="body">
+          <div class="folio">Folio: <div class="v" data-f="folio"></div></div>
+          <h1>Saldo a favor</h1>
+          <div class="row"><span>Nombre del cliente:</span><div class="v" data-f="cliente"></div></div>
+          <div class="row half"><span>Folio de la venta:</span><div class="v" data-f="folioVenta"></div><span></span><span></span></div>
+          <div class="row half"><span>Fecha de la venta:</span><div class="v" data-f="fechaVenta"></div><span></span><span></span></div>
+          <div class="row half"><span>Fecha del saldo:</span><div class="v" data-f="fechaSaldo"></div><span class="lbl2">Asesor:</span><div class="v" data-f="asesor"></div></div>
+          <div class="amount">
+            <div class="lbl">Cantidad a favor:</div>
+            <div class="num" data-f="cantidad"></div>
+            <div class="words" data-f="letra"></div>
+          </div>
+          <div class="notes">Notas:
+            <div class="lines"><div class="l" data-f="nota0"></div><div class="l" data-f="nota1"></div><div class="l" data-f="nota2"></div><div class="l" data-f="nota3"></div></div>
+          </div>
+          <div class="sigs">
+            <div class="sig"><div class="line"></div>Firma Asesor<div class="name" data-f="asesor"></div></div>
+            <div class="sig"><div class="line"></div>Firma Cliente<div class="name" data-f="cliente"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sheet entrega" id="sheet-entrega" hidden>
+        <div class="band"><img src="assets/cesantoni-logo.svg" alt=""></div>
+        <div class="body">
+          <div class="top"><h1>Registro de entrega a domicilio</h1><div class="folio">Folio: <div class="v" data-f="folio"></div></div></div>
+          <div class="sec"><h2>Venta y entrega</h2><div class="g g2">
+            <div class="f"><label>Folio de la venta</label><div class="v" data-f="folioVenta"></div></div>
+            <div class="f"><label>Fecha de la venta</label><div class="v" data-f="fechaVenta"></div></div>
+            <div class="f"><label>Fecha de entrega</label><div class="v" data-f="fechaEntrega"></div></div>
+            <div class="f"><label>Rango de horario de entrega</label><div class="range">De<div class="v" data-f="horaDe"></div>a<div class="v" data-f="horaA"></div>hrs</div></div>
+          </div></div>
+          <div class="sec"><h2>Domicilio de entrega</h2><div class="g g3">
+            <div class="f"><label>Calle</label><div class="v" data-f="calle"></div></div>
+            <div class="f"><label>Número</label><div class="v" data-f="numero"></div></div>
+            <div class="f"><label>Colonia</label><div class="v" data-f="colonia"></div></div>
+            <div class="f"><label>Código postal</label><div class="v" data-f="cp"></div></div>
+            <div class="f"><label>Municipio</label><div class="v" data-f="municipio"></div></div>
+            <div class="f"><label>Estado</label><div class="v" data-f="estado"></div></div>
+            <div class="f span2"><label>Referencias del domicilio</label><div class="v tall" data-f="referencias"></div></div>
+          </div></div>
+          <div class="sec"><h2>Contacto para entrega</h2><div class="g g3">
+            <div class="f"><label>Nombre</label><div class="v" data-f="contacto"></div></div>
+            <div class="f"><label>Teléfono</label><div class="v" data-f="telefono"></div></div>
+          </div></div>
+          <div class="sec"><h2>Carga y unidad</h2><div class="g g2">
+            <div class="f"><label>Peso total de carga</label><div class="range"><div class="v" data-f="peso"></div>kg</div></div>
+            <div class="f"><label>Tipo de unidad para entrega</label><div class="v" data-f="unidad"></div></div>
+          </div></div>
+          <div class="sec"><h2>Condiciones de descarga</h2>
+            <div class="q"><span>¿Se cuenta con lugar asignado para descarga?</span><div class="opts"><span class="opt"><span class="ck" data-ck="lugar=SI"></span>SI</span><span class="opt"><span class="ck" data-ck="lugar=NO"></span>NO</span></div></div>
+            <div class="q"><span>Permiso para descargar en vía pública</span><div class="opts"><span class="opt"><span class="ck" data-ck="permisoVia=APLICA"></span>APLICA</span><span class="opt"><span class="ck" data-ck="permisoVia=NO APLICA"></span>NO APLICA</span></div></div>
+            <div class="q"><span>Requerimiento o permiso especial</span><div class="opts"><span class="opt"><span class="ck" data-ck="permisoEsp=APLICA"></span>APLICA</span><span class="opt"><span class="ck" data-ck="permisoEsp=NO APLICA"></span>NO APLICA</span></div></div>
+          </div>
+          <div class="sigs">
+            <div class="sig"><div class="line"></div>Firma Asesor<div class="name" data-f="asesor"></div></div>
+            <div class="sig"><div class="line"></div>Firma Cliente<div class="name" data-f="contacto"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script src="assets/vendor/html2pdf.bundle.min.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>
