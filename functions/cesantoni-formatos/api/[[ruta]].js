@@ -6,9 +6,14 @@
 //   POST api/folio      { tipo }        → { folio: "SF-0001", numero }
 //   PUT  api/vendedores { vendedores }  → { vendedores }
 //   PUT  api/siguiente  { tipo, numero }→ { siguiente }
+//   PUT  api/formato    { tipo, datos } → guarda el formato en el historial (por folio)
+//   GET  api/historial?tipo=&q=         → [{ folio, tipo, nombre, asesor, ... }] (últimos 200)
+//   GET  api/formato?folio=SF-0001      → { folio, tipo, datos, creado, actualizado }
 
 const TIPOS = { saldo: 'SF', entrega: 'EN' };
 const MAX_VENDEDORES = 100;
+const MAX_DATOS = 8000; // bytes del JSON de un formato
+const MAX_HISTORIAL = 200;
 
 function json(data, status = 200) {
   return new Response(JSON.stringify(data), {
@@ -27,6 +32,11 @@ async function esquema(db) {
   await db.batch([
     db.prepare('CREATE TABLE IF NOT EXISTS contadores (tipo TEXT PRIMARY KEY, ultimo INTEGER NOT NULL)'),
     db.prepare('CREATE TABLE IF NOT EXISTS ajustes (clave TEXT PRIMARY KEY, valor TEXT NOT NULL)'),
+    db.prepare(
+      'CREATE TABLE IF NOT EXISTS formatos (folio TEXT PRIMARY KEY, tipo TEXT NOT NULL, nombre TEXT, asesor TEXT, ' +
+      'folio_venta TEXT, fecha TEXT, monto REAL, datos TEXT NOT NULL, creado TEXT NOT NULL, actualizado TEXT NOT NULL)'
+    ),
+    db.prepare('CREATE INDEX IF NOT EXISTS formatos_creado ON formatos (creado)'),
   ]);
   esquemaListo = true;
 }
@@ -98,6 +108,61 @@ export async function onRequest({ request, env, params }) {
       .bind(tipo, n - 1)
       .run();
     return json({ siguiente: await siguientes(db) });
+  }
+
+  if (ruta === 'formato' && metodo === 'PUT') {
+    const { tipo, datos } = await cuerpo(request);
+    if (!TIPOS[tipo] || !datos || typeof datos !== 'object') return json({ error: 'datos_invalidos' }, 400);
+    const limpio = {};
+    for (const [k, v] of Object.entries(datos)) {
+      if (/^[a-zA-Z]{1,30}$/.test(k)) limpio[k] = String(v ?? '').slice(0, 400);
+    }
+    const folio = limpio.folio || '';
+    if (!new RegExp('^' + TIPOS[tipo] + '-\\d{4,6}$').test(folio)) return json({ error: 'folio_invalido' }, 400);
+    const texto = JSON.stringify(limpio);
+    if (texto.length > MAX_DATOS) return json({ error: 'demasiado_grande' }, 400);
+    const nombre = tipo === 'saldo' ? limpio.cliente : limpio.contacto;
+    const fecha = tipo === 'saldo' ? limpio.fechaSaldo : limpio.fechaEntrega;
+    const monto = tipo === 'saldo' && limpio.cantidad !== '' && isFinite(Number(limpio.cantidad)) ? Number(limpio.cantidad) : null;
+    const ahora = new Date().toISOString();
+    await db
+      .prepare(
+        'INSERT INTO formatos (folio, tipo, nombre, asesor, folio_venta, fecha, monto, datos, creado, actualizado) ' +
+        'VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8, ?9, ?9) ON CONFLICT(folio) DO UPDATE SET ' +
+        'nombre = excluded.nombre, asesor = excluded.asesor, folio_venta = excluded.folio_venta, fecha = excluded.fecha, ' +
+        'monto = excluded.monto, datos = excluded.datos, actualizado = excluded.actualizado'
+      )
+      .bind(folio, tipo, nombre || '', limpio.asesor || '', limpio.folioVenta || '', fecha || '', monto, texto, ahora)
+      .run();
+    return json({ folio });
+  }
+
+  if (ruta === 'formato' && metodo === 'GET') {
+    const folio = new URL(request.url).searchParams.get('folio') || '';
+    const fila = await db.prepare('SELECT folio, tipo, datos, creado, actualizado FROM formatos WHERE folio = ?1').bind(folio).first();
+    if (!fila) return json({ error: 'no_encontrado' }, 404);
+    let datos = {};
+    try { datos = JSON.parse(fila.datos); } catch { /* dato dañado */ }
+    return json({ ...fila, datos });
+  }
+
+  if (ruta === 'historial' && metodo === 'GET') {
+    const qs = new URL(request.url).searchParams;
+    const tipo = qs.get('tipo');
+    const q = (qs.get('q') || '').trim().slice(0, 60);
+    const where = [], args = [];
+    if (TIPOS[tipo]) { args.push(tipo); where.push('tipo = ?' + args.length); }
+    if (q) {
+      args.push('%' + q.replace(/[\\%_]/g, (c) => '\\' + c) + '%');
+      const n = args.length;
+      where.push(`(folio LIKE ?${n} ESCAPE '\\' OR nombre LIKE ?${n} ESCAPE '\\' OR asesor LIKE ?${n} ESCAPE '\\' OR folio_venta LIKE ?${n} ESCAPE '\\')`);
+    }
+    const sql =
+      'SELECT folio, tipo, nombre, asesor, folio_venta, fecha, monto, creado, actualizado FROM formatos' +
+      (where.length ? ' WHERE ' + where.join(' AND ') : '') +
+      ' ORDER BY creado DESC LIMIT ' + MAX_HISTORIAL;
+    const { results } = await db.prepare(sql).bind(...args).all();
+    return json({ formatos: results });
   }
 
   return json({ error: 'no_encontrado' }, 404);
