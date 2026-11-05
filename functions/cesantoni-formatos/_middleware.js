@@ -20,6 +20,7 @@ const PUBLICOS = new Set([
   BASE + '/assets/apple-touch-icon.png',
   BASE + '/assets/favicon.svg',
   BASE + '/assets/favicon-32.png',
+  BASE + '/assets/og-image.png',
   BASE + '/manifest.webmanifest',
 ]);
 
@@ -60,12 +61,30 @@ async function sesionValida(request, password) {
   return igual(sig, await firmar(password, 'formatos:' + exp));
 }
 
-function paginaAcceso(error, status = 200) {
+// Vista previa al compartir el enlace (WhatsApp, etc.): los bots no tienen sesión y leen esta página
+function metaCompartir(origen) {
+  const img = origen + BASE + '/assets/og-image.png';
+  return `<meta name="description" content="Formatos internos de Cesantoni Porcelanato Premium.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Cesantoni Porcelanato Premium">
+<meta property="og:title" content="Formatos Cesantoni">
+<meta property="og:description" content="Saldo a favor y registro de entrega a domicilio.">
+<meta property="og:url" content="${origen}${BASE}/">
+<meta property="og:image" content="${img}">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Cesantoni Porcelanato Premium · Formatos">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="${img}">`;
+}
+
+function paginaAcceso(error, status = 200, origen = '') {
   const html = `<!doctype html>
 <html lang="es"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<title>Acceso · Formatos Cesantoni</title>
+<title>Formatos Cesantoni</title>
+${metaCompartir(origen)}
 <link rel="icon" href="${BASE}/assets/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="${BASE}/assets/favicon-32.png" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="${BASE}/assets/apple-touch-icon.png">
@@ -106,6 +125,7 @@ button:hover{background:#222}
       'Content-Type': 'text/html; charset=utf-8',
       'Cache-Control': 'no-store',
       'X-Robots-Tag': 'noindex, nofollow',
+      'X-Formatos-Acceso': '1', // sw.js no guarda esta página como la app
     },
   });
 }
@@ -140,7 +160,7 @@ export async function onRequest({ request, env, next }) {
     } catch { /* cuerpo inválido */ }
     if (!(await igual(intento, password))) {
       await new Promise((r) => setTimeout(r, 700)); // frena intentos repetidos
-      return paginaAcceso('Contraseña incorrecta.', 401);
+      return paginaAcceso('Contraseña incorrecta.', 401, url.origin);
     }
     const exp = Date.now() + SESION_DIAS * 864e5;
     const valor = exp + '.' + (await firmar(password, 'formatos:' + exp));
@@ -149,7 +169,14 @@ export async function onRequest({ request, env, next }) {
   }
 
   if (!(await sesionValida(request, password))) {
-    return paginaAcceso('', 401);
+    if (path.startsWith(BASE + '/api/')) {
+      return new Response(JSON.stringify({ error: 'sin_sesion', mensaje: 'Inicia sesión de nuevo.' }), {
+        status: 401,
+        headers: { 'Content-Type': 'application/json; charset=utf-8', 'Cache-Control': 'no-store' },
+      });
+    }
+    // 200 para que WhatsApp y otros muestren la vista previa del enlace
+    return paginaAcceso('', 200, url.origin);
   }
 
   const response = await next();

@@ -39,7 +39,7 @@ self.addEventListener('activate', (event) => {
 // Red primero para la página (así el acceso con contraseña sigue funcionando); sin red, la copia guardada
 function pagina(request) {
   return fetch(request).then((r) => {
-    if (r.ok && !r.redirected) {
+    if (r.ok && !r.redirected && !r.headers.get('X-Formatos-Acceso')) {
       const copia = r.clone();
       caches.open(CACHE).then((c) => c.put(BASE, copia));
     }
