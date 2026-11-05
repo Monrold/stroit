@@ -134,14 +134,27 @@
   // ---------- API (folios y vendedores) ----------
   var configEl = document.getElementById('config');
   var configStatus = document.getElementById('config-status');
-  var cfg = { ok: false, vendedores: [], siguiente: {} };
+  var cfg = { ok: false, offline: false, vendedores: [], siguiente: {} };
+  var CFG_STORE = 'cesantoni-formatos-config';
+  var COLA_STORE = 'cesantoni-formatos-pendientes';
+
+  function leerJSON(clave, defecto) {
+    try { var v = JSON.parse(localStorage.getItem(clave) || 'null'); return v == null ? defecto : v; } catch (e) { return defecto; }
+  }
+  function escribirJSON(clave, valor) {
+    try { localStorage.setItem(clave, JSON.stringify(valor)); } catch (e) { /* sin almacenamiento */ }
+  }
 
   function api(metodo, ruta, cuerpo) {
     return fetch('api/' + ruta, {
       method: metodo,
       headers: cuerpo ? { 'Content-Type': 'application/json' } : {},
       body: cuerpo ? JSON.stringify(cuerpo) : undefined,
-      credentials: 'same-origin'
+      credentials: 'same-origin',
+      cache: 'no-store'
+    }).catch(function (err) {
+      // Sin red: fetch falla antes de llegar al servidor
+      var e = new Error('sin conexión'); e.red = true; e.causa = err; throw e;
     }).then(function (r) {
       return r.json().catch(function () { return {}; }).then(function (data) {
         if (!r.ok) { var e = new Error(data.mensaje || data.error || ('HTTP ' + r.status)); e.status = r.status; throw e; }
@@ -183,12 +196,116 @@
   function cargarConfig() {
     return api('GET', 'config').then(function (data) {
       cfg.ok = true;
+      cfg.offline = false;
       cfg.vendedores = data.vendedores || [];
       cfg.siguiente = data.siguiente || {};
+      escribirJSON(CFG_STORE, { vendedores: cfg.vendedores });
       llenarSelects();
+      pintarRed();
+      sincronizar();
     }).catch(function (e) {
+      var guardada = leerJSON(CFG_STORE, null);
+      if (e.red && guardada) {
+        // Sin conexión: se trabaja con la última lista de vendedores conocida
+        cfg.ok = true;
+        cfg.offline = true;
+        cfg.vendedores = guardada.vendedores || [];
+        llenarSelects();
+        pintarRed();
+        return;
+      }
       if (window.console) console.warn('Configuración no disponible:', e.message);
+      if (cfg.ok) { cfg.offline = !!e.red; pintarRed(); return; }
       modoManual();
+    });
+  }
+
+  // ---------- sin conexión: folios provisionales y pendientes ----------
+  var redEl = document.getElementById('red');
+  var redTxt = document.getElementById('red-txt');
+  var redBtn = document.getElementById('red-btn');
+  var PREFIJO = { saldo: 'SF', entrega: 'EN' };
+  var sincronizando = false;
+
+  function esProvisional(folio) { return /^(SF|EN)-P[A-Z0-9]{4}$/.test(folio || ''); }
+  function folioProvisional(tipo) {
+    var abc = 'ABCDEFGHJKMNPQRSTUVWXYZ23456789', s = '';
+    var n = new Uint32Array(4);
+    (window.crypto || window.msCrypto).getRandomValues(n);
+    for (var i = 0; i < 4; i++) s += abc.charAt(n[i] % abc.length);
+    return PREFIJO[tipo] + '-P' + s;
+  }
+  function leerCola() { return leerJSON(COLA_STORE, []); }
+  function guardarCola(c) { escribirJSON(COLA_STORE, c); }
+
+  // Guarda (o actualiza) un formato para subirlo al historial cuando haya red
+  function encolar(tipo, d) {
+    var cola = leerCola(), i;
+    for (i = 0; i < cola.length; i++) if (cola[i].datos.folio === d.folio) break;
+    if (i < cola.length) cola[i].datos = d;
+    else cola.push({ id: Date.now().toString(36) + Math.random().toString(36).slice(2, 6), tipo: tipo, datos: d });
+    guardarCola(cola);
+    pintarRed();
+  }
+
+  function pintarRed() {
+    var n = leerCola().length, txt = '';
+    var plural = n === 1 ? '1 formato pendiente' : n + ' formatos pendientes';
+    if (cfg.offline) {
+      txt = 'Sin conexión. Puedes seguir llenando y descargando; el folio sale provisional (SF-P…) y se cambia por el definitivo al reconectar.';
+      if (n) txt += ' ' + plural + ' de subir.';
+    } else if (n) {
+      txt = plural + ' de subir al historial.';
+    }
+    redEl.hidden = !txt;
+    redEl.classList.toggle('off', cfg.offline);
+    redTxt.textContent = txt;
+    redBtn.hidden = cfg.offline || !n || sincronizando;
+  }
+
+  // Sube los pendientes: primero pide el folio definitivo, luego guarda en el historial
+  function sincronizar() {
+    if (sincronizando || !cfg.ok || cfg.offline || !leerCola().length) { pintarRed(); return Promise.resolve(); }
+    sincronizando = true;
+    pintarRed();
+    var cambios = [], subidos = 0;
+
+    function siguiente() {
+      var cola = leerCola(), item = cola[0];
+      if (!item) return Promise.resolve();
+      var paso = Promise.resolve();
+      if (esProvisional(item.datos.folio)) {
+        paso = api('POST', 'folio', { tipo: item.tipo }).then(function (r) {
+          var prov = item.datos.folio;
+          item.datos.folioProvisional = prov;
+          item.datos.folio = r.folio;
+          guardarCola(cola); // el definitivo queda guardado antes de subir
+          cambios.push(prov + ' → ' + r.folio);
+          var f = docs[item.tipo] && docs[item.tipo].form;
+          if (f && f.elements.folio.value === prov) f.elements.folio.value = r.folio;
+        });
+      }
+      return paso
+        .then(function () { return api('PUT', 'formato', { tipo: item.tipo, datos: item.datos }); })
+        .then(function () {
+          guardarCola(leerCola().filter(function (x) { return x.id !== item.id; }));
+          subidos++;
+          return siguiente();
+        });
+    }
+
+    return siguiente().catch(function (e) {
+      if (e.red) cfg.offline = true;
+      if (window.console) console.warn('No se pudieron subir los pendientes:', e.message);
+    }).then(function () {
+      sincronizando = false;
+      pintarRed();
+      if (subidos) {
+        pintar();
+        statusEl.className = 'status';
+        statusEl.textContent = (subidos === 1 ? 'Se subió 1 formato hecho sin conexión' : 'Se subieron ' + subidos + ' formatos hechos sin conexión') +
+          (cambios.length ? '. Folios definitivos: ' + cambios.join(', ') + '. Vuelve a descargarlos desde Historial si necesitas el PDF con el folio definitivo.' : '.');
+      }
     });
   }
 
@@ -210,7 +327,7 @@
     var ff = document.getElementById('form-folios');
     ff.elements.saldo.value = cfg.siguiente.saldo || 1;
     ff.elements.entrega.value = cfg.siguiente.entrega || 1;
-    var desactivar = !cfg.ok;
+    var desactivar = !cfg.ok || cfg.offline;
     configEl.querySelectorAll('input,button').forEach(function (el) { el.disabled = desactivar; });
   }
 
@@ -234,7 +351,15 @@
     return api('POST', 'folio', { tipo: actual }).then(function (data) {
       f.elements.folio.value = data.folio;
       cfg.siguiente[actual] = data.numero + 1;
+      if (cfg.offline) { cfg.offline = false; pintarRed(); }
       pintar();
+    }, function (e) {
+      if (!e.red) throw e;
+      // Sin red: folio provisional; al reconectar se cambia por el definitivo
+      cfg.offline = true;
+      f.elements.folio.value = folioProvisional(actual);
+      pintar();
+      pintarRed();
     });
   }
 
@@ -249,7 +374,9 @@
   function registrar() {
     var d = datos(docs[actual].form);
     if (!cfg.ok || !d.folio) return Promise.resolve(null);
+    if (esProvisional(d.folio)) { encolar(actual, d); return Promise.resolve('pendiente'); }
     return api('PUT', 'formato', { tipo: actual, datos: d }).then(function () { return true; }, function (e) {
+      if (e.red) { cfg.offline = true; encolar(actual, d); return 'pendiente'; }
       if (window.console) console.warn('No se guardó en el historial:', e.message);
       statusEl.className = 'status err';
       statusEl.textContent = 'Ojo: no se guardó en el historial (' + e.message + ').';
@@ -276,6 +403,11 @@
     if (!cfg.ok) {
       histLista.innerHTML = '';
       histStatus.textContent = 'El historial necesita la base de datos conectada (FORMATOS_DB).';
+      return;
+    }
+    if (cfg.offline) {
+      histLista.innerHTML = '';
+      histStatus.textContent = 'Sin conexión. El historial se ve al reconectar.';
       return;
     }
     var q = histForm.elements.q.value.trim(), tipo = histForm.elements.tipo.value, asesor = histForm.elements.asesor.value;
@@ -310,8 +442,9 @@
       if (lista.length >= 200) histStatus.textContent = 'Se muestran los 200 más recientes. Usa la búsqueda para encontrar otros.';
     }).catch(function (e) {
       if (n !== histPeticion) return;
+      if (e.red) { cfg.offline = true; pintarRed(); }
       histStatus.className = 'status err';
-      histStatus.textContent = 'No se pudo cargar el historial: ' + e.message;
+      histStatus.textContent = e.red ? 'Sin conexión. El historial se ve al reconectar.' : 'No se pudo cargar el historial: ' + e.message;
     });
   }
 
@@ -461,7 +594,9 @@
       })
       .then(function () {
         statusEl.className = 'status' + (guardado === false ? ' err' : '');
-        statusEl.textContent = 'PDF descargado: ' + opciones.filename + (guardado === false ? '. Ojo: no se guardó en el historial.' : '');
+        statusEl.textContent = 'PDF descargado: ' + opciones.filename +
+          (guardado === false ? '. Ojo: no se guardó en el historial.' : '') +
+          (guardado === 'pendiente' ? '. Sin conexión: se sube al historial al reconectar.' : '');
       })
       .catch(function (e) {
         statusEl.className = 'status err';
@@ -527,6 +662,9 @@
   var histTimer;
   histForm.addEventListener('input', function () { clearTimeout(histTimer); histTimer = setTimeout(cargarHistorial, 250); });
   histForm.addEventListener('submit', function (e) { e.preventDefault(); cargarHistorial(); });
+  redBtn.addEventListener('click', sincronizar);
+  window.addEventListener('online', function () { cfg.offline = false; pintarRed(); cargarConfig(); });
+  window.addEventListener('offline', function () { if (cfg.ok) { cfg.offline = true; pintarRed(); } });
   window.addEventListener('resize', escalar);
   window.addEventListener('beforeprint', function () { scaler.style.transform = 'none'; });
   window.addEventListener('afterprint', escalar);
@@ -536,6 +674,13 @@
   cambiar(actual);
   cargarConfig().then(pintar);
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(pintar);
+
+  // Guarda la app en el equipo para abrirla sin conexión
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function () {
+      navigator.serviceWorker.register('sw.js').catch(function (e) { if (window.console) console.warn('Sin modo offline:', e.message); });
+    });
+  }
 
   // para pruebas
   window.__formatos = { letras: letras };

@@ -12,7 +12,14 @@ const LOGIN = BASE + '/acceso';
 const SALIR = BASE + '/salir';
 const COOKIE = 'cesantoni_formatos';
 const SESION_DIAS = 7;
-const PUBLICOS = new Set([BASE + '/assets/cesantoni-logo.svg']);
+// El logo y los íconos de la app instalable se piden sin sesión
+const PUBLICOS = new Set([
+  BASE + '/assets/cesantoni-logo.svg',
+  BASE + '/assets/icon-192.png',
+  BASE + '/assets/icon-512.png',
+  BASE + '/assets/apple-touch-icon.png',
+  BASE + '/manifest.webmanifest',
+]);
 
 const enc = new TextEncoder();
 
@@ -107,7 +114,6 @@ export async function onRequest({ request, env, next }) {
   const url = new URL(request.url);
   const path = url.pathname;
 
-  // El logo se muestra en la pantalla de acceso
   if (PUBLICOS.has(path)) return next();
 
   const password = env.FORMATOS_PASSWORD;

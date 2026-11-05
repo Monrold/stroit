@@ -165,7 +165,9 @@ export async function onRequest({ request, env, params }) {
     if (q) {
       args.push('%' + q.replace(/[\\%_]/g, (c) => '\\' + c) + '%');
       const n = args.length;
-      where.push(`(folio LIKE ?${n} ESCAPE '\\' OR nombre LIKE ?${n} ESCAPE '\\' OR asesor LIKE ?${n} ESCAPE '\\' OR folio_venta LIKE ?${n} ESCAPE '\\')`);
+      where.push(`(folio LIKE ?${n} ESCAPE '\\' OR nombre LIKE ?${n} ESCAPE '\\' OR asesor LIKE ?${n} ESCAPE '\\' OR folio_venta LIKE ?${n} ESCAPE '\\'` +
+        // Folio provisional (hecho sin conexión), guardado dentro de los datos
+        (/^(SF|EN)-P/i.test(q) ? ` OR datos LIKE ?${n} ESCAPE '\\'` : '') + ')');
     }
     const sql =
       'SELECT folio, tipo, nombre, asesor, folio_venta, fecha, monto, creado, actualizado FROM formatos' +
