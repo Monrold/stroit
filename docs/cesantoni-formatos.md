@@ -47,7 +47,7 @@ API (protegida por la misma sesión): `functions/cesantoni-formatos/api/[[ruta]]
 
 ## Historial
 
-Cada formato se guarda en la base (tabla `formatos`, por folio) cuando se descarga el PDF o se imprime. La pestaña Historial muestra los 200 más recientes, con búsqueda por folio, cliente o contacto, asesor y folio de venta, y filtro por tipo. Se puede filtrar por vendedor. Eliminar quita el registro (pide confirmación) y no regresa el consecutivo; para reiniciar tras borrar pruebas, ajustar el siguiente folio en Configuración. Abrir un formato lo carga en su formulario con el mismo folio; si se corrige y se vuelve a descargar, se actualiza el registro en lugar de crear uno nuevo. Para un formato nuevo, usar Limpiar primero.
+Cada formato se guarda en la base (tabla `formatos`, por folio) cuando se descarga el PDF o se imprime. La pestaña Historial muestra los 200 más recientes, con búsqueda por folio, cliente o contacto, asesor y folio de venta, y filtro por tipo. Se puede filtrar por vendedor y por mes (según la fecha en que se hizo el formato, últimos 24 meses). Eliminar quita el registro (pide confirmación) y no regresa el consecutivo; para reiniciar tras borrar pruebas, ajustar el siguiente folio en Configuración. Abrir un formato lo carga en su formulario con el mismo folio; si se corrige y se vuelve a descargar, se actualiza el registro en lugar de crear uno nuevo. Para un formato nuevo, usar Limpiar primero.
 
 ## Sin conexión y celular
 
