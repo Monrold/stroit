@@ -1,0 +1,65 @@
+/* Hojas tamaño carta (8.5 x 11 in). Mismo diseño que las plantillas PDF. */
+.sheet{--ink:#111;--muted:#6b6b6b;--box:#ececec;width:8.5in;height:11in;background:#fff;color:var(--ink);font-family:Figtree,"Liberation Sans",Arial,sans-serif;display:flex;flex-direction:column;overflow:hidden;position:relative}
+.sheet[hidden]{display:none!important}
+.sheet *{box-sizing:border-box;margin:0;padding:0}
+.sheet .band{background:#000;display:flex;align-items:center;justify-content:center;flex:none}
+.sheet .band img{display:block}
+.sheet .body{flex:1;display:flex;flex-direction:column}
+.sheet .v{background:var(--box);border-radius:2px;display:flex;align-items:center;white-space:nowrap;overflow:hidden}
+.sheet .sigs{margin-top:auto;display:grid;grid-template-columns:1fr 1fr;gap:1.1in;padding:0 .05in}
+.sheet .sig{text-align:center}
+.sheet .sig .line{border-bottom:1.5px solid #000}
+.sheet .sig .name{color:var(--muted);margin-top:3px;min-height:14px}
+
+/* ---------- Saldo a favor ---------- */
+.saldo .band{height:1.5in}
+.saldo .band img{width:2.35in}
+.saldo .body{padding:.32in .62in .55in}
+.saldo .folio{align-self:flex-end;display:flex;align-items:center;gap:10px;font-size:13px}
+.saldo .folio .v{width:1.35in;height:30px;padding:0 10px;font-weight:500}
+.saldo h1{text-align:center;font-weight:500;font-size:24px;margin:26px 0 30px}
+.saldo .row{display:grid;grid-template-columns:1.95in 1fr;align-items:center;margin-bottom:12px;font-size:14.5px}
+.saldo .row .v{height:38px;padding:0 12px;font-size:14px}
+.saldo .half{grid-template-columns:1.95in 1fr auto 1.9in}
+.saldo .half .lbl2{padding:0 14px 0 26px}
+.saldo .amount{margin:34px 0 0 .05in;border-left:5px solid #000;padding:16px 0 16px .5in}
+.saldo .amount .lbl{font-size:15px}
+.saldo .amount .num{font-size:32px;font-weight:800;font-style:italic;margin-top:4px;letter-spacing:-.01em;min-height:44px}
+.saldo .amount .words{font-size:11px;color:var(--muted);margin-top:4px;font-style:italic;min-height:14px}
+.saldo .notes{margin-top:34px;font-size:14.5px}
+.saldo .notes .lines{margin-top:6px}
+.saldo .notes .l{height:30px;border-bottom:2px solid var(--box);font-size:13px;display:flex;align-items:flex-end;padding-bottom:4px;white-space:nowrap;overflow:hidden}
+.saldo .notes .l:first-child{margin-left:.75in;margin-top:-29px}
+.saldo .sig{font-size:14px}
+.saldo .sig .line{height:50px;margin-bottom:8px}
+.saldo .sig .name{font-size:11px}
+
+/* ---------- Registro de entrega a domicilio ---------- */
+.entrega .band{height:1.15in}
+.entrega .band img{width:2.05in}
+.entrega .body{padding:.22in .62in .45in}
+.entrega .top{display:flex;justify-content:space-between;align-items:center}
+.entrega h1{font-weight:500;font-size:21px}
+.entrega .folio{display:flex;align-items:center;gap:10px;font-size:12.5px}
+.entrega .folio .v{width:1.3in}
+.entrega .sec{margin-top:15px}
+.entrega .sec h2{font-size:10.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;border-left:4px solid #000;padding-left:9px;margin-bottom:8px;line-height:1.2}
+.entrega .g{display:grid;gap:7px 18px}
+.entrega .g2{grid-template-columns:1fr 1fr}
+.entrega .g3{grid-template-columns:2fr 1fr}
+.entrega .f label{display:block;font-size:11px;color:#333;margin-bottom:3px}
+.entrega .v{height:29px;padding:0 10px;font-size:12.5px}
+.entrega .v.tall{height:46px;align-items:flex-start;padding-top:7px;line-height:1.35;white-space:normal}
+.entrega .span2{grid-column:1/-1}
+.entrega .range{display:flex;align-items:center;gap:8px;font-size:11.5px}
+.entrega .range .v{flex:1}
+.entrega .q{display:grid;grid-template-columns:1fr auto;align-items:center;padding:8px 0;border-bottom:1.5px solid var(--box);font-size:12.5px}
+.entrega .q:last-child{border-bottom:0}
+.entrega .opts{display:flex;gap:22px}
+.entrega .opt{display:flex;align-items:center;gap:7px;font-size:11.5px;font-weight:500;min-width:88px}
+.entrega .ck{width:15px;height:15px;border:1.5px solid #000;border-radius:2px;display:flex;align-items:center;justify-content:center}
+.entrega .ck.on{background:#000}
+.entrega .ck.on::after{content:"";width:8px;height:4px;border-left:2px solid #fff;border-bottom:2px solid #fff;transform:translateY(-1px) rotate(-45deg)}
+.entrega .sig{font-size:12.5px}
+.entrega .sig .line{height:40px;margin-bottom:6px}
+.entrega .sig .name{font-size:10.5px}
