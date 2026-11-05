@@ -97,3 +97,10 @@ form select{appearance:auto}
 .historial button.h-del{border-color:transparent;color:#b00020;background:none;padding:7px 8px}
 .historial button.h-si{background:#b00020;border-color:#b00020;color:#fff}
 .historial .h-preg{font-size:13px;color:#b00020;font-weight:600}
+
+/* Aviso de conexión */
+.red{display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;background:#fff4e5;color:#6b4300;border-bottom:1px solid #f0c27b;padding:9px 16px;font-size:13px;text-align:center}
+.red.off{background:#2b2b2b;color:#fff;border-bottom-color:#000}
+.red button{font:inherit;font-weight:600;padding:5px 12px;border-radius:6px;border:1px solid currentColor;background:transparent;color:inherit;cursor:pointer}
+.red[hidden]{display:none}
+@media print{.red{display:none!important}}

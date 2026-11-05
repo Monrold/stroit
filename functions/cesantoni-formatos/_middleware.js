@@ -12,7 +12,16 @@ const LOGIN = BASE + '/acceso';
 const SALIR = BASE + '/salir';
 const COOKIE = 'cesantoni_formatos';
 const SESION_DIAS = 7;
-const PUBLICOS = new Set([BASE + '/assets/cesantoni-logo.svg']);
+// El logo y los íconos de la app instalable se piden sin sesión
+const PUBLICOS = new Set([
+  BASE + '/assets/cesantoni-logo.svg',
+  BASE + '/assets/icon-192.png',
+  BASE + '/assets/icon-512.png',
+  BASE + '/assets/apple-touch-icon.png',
+  BASE + '/assets/favicon.svg',
+  BASE + '/assets/favicon-32.png',
+  BASE + '/manifest.webmanifest',
+]);
 
 const enc = new TextEncoder();
 
@@ -57,6 +66,10 @@ function paginaAcceso(error, status = 200) {
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
 <title>Acceso · Formatos Cesantoni</title>
+<link rel="icon" href="${BASE}/assets/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="${BASE}/assets/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="${BASE}/assets/apple-touch-icon.png">
+<meta name="theme-color" content="#000000">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -107,7 +120,6 @@ export async function onRequest({ request, env, next }) {
   const url = new URL(request.url);
   const path = url.pathname;
 
-  // El logo se muestra en la pantalla de acceso
   if (PUBLICOS.has(path)) return next();
 
   const password = env.FORMATOS_PASSWORD;

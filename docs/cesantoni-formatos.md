@@ -49,6 +49,14 @@ API (protegida por la misma sesión): `functions/cesantoni-formatos/api/[[ruta]]
 
 Cada formato se guarda en la base (tabla `formatos`, por folio) cuando se descarga el PDF o se imprime. La pestaña Historial muestra los 200 más recientes, con búsqueda por folio, cliente o contacto, asesor y folio de venta, y filtro por tipo. Se puede filtrar por vendedor. Eliminar quita el registro (pide confirmación) y no regresa el consecutivo; para reiniciar tras borrar pruebas, ajustar el siguiente folio en Configuración. Abrir un formato lo carga en su formulario con el mismo folio; si se corrige y se vuelve a descargar, se actualiza el registro en lugar de crear uno nuevo. Para un formato nuevo, usar Limpiar primero.
 
+## Sin conexión y celular
+
+La página se guarda en el equipo (service worker `sw.js`) la primera vez que se abre con internet, y se puede instalar en el celular con "Agregar a pantalla de inicio" (`manifest.webmanifest`).
+
+Sin internet se puede llenar y descargar o imprimir. Como el consecutivo lo da el servidor, el folio sale provisional (`SF-P7K3Q`, `EN-P…`) y el formato queda en una cola local. Al volver la conexión, la app pide el folio definitivo, sube cada pendiente al historial (guardando el provisional en `folioProvisional`, que también se puede buscar) y avisa el cambio, por ejemplo `SF-P7K3Q → SF-0015`. Para el PDF con el folio definitivo, abrirlo desde Historial y volver a descargarlo.
+
+Los pendientes viven en el navegador de ese equipo: si se borran los datos del navegador antes de reconectar, se pierden. El historial y la configuración requieren conexión.
+
 ## Archivos
 
 - `index.html`: formularios y hojas carta.
