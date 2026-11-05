@@ -17,6 +17,7 @@
   <nav class="tabs" role="tablist">
     <button role="tab" data-doc="saldo" aria-selected="true">Saldo a favor</button>
     <button role="tab" data-doc="entrega" aria-selected="false">Entrega a domicilio</button>
+    <button role="tab" data-doc="historial" aria-selected="false">Historial</button>
     <button role="tab" data-doc="config" aria-selected="false">Configuración</button>
   </nav>
   <a class="salir" href="salir">Salir</a>
@@ -100,6 +101,21 @@
         <label class="radio"><input type="radio" name="permisoEsp" value="NO APLICA">NO APLICA</label>
       </fieldset>
     </form>
+
+    <section id="historial" hidden>
+      <h2>Historial</h2>
+      <p class="hint-c">Cada formato se guarda al descargarlo o imprimirlo. Ábrelo para revisarlo, corregirlo o volver a imprimirlo con el mismo folio.</p>
+      <form id="form-historial" class="filtros" autocomplete="off">
+        <input name="q" type="search" placeholder="Buscar folio, cliente, asesor o folio de venta">
+        <select name="tipo">
+          <option value="">Todos</option>
+          <option value="saldo">Saldo a favor</option>
+          <option value="entrega">Entrega a domicilio</option>
+        </select>
+      </form>
+      <ul class="historial" id="lista-historial"></ul>
+      <p class="status" id="historial-status" role="status"></p>
+    </section>
 
     <section id="config" hidden>
       <h2>Configuración</h2>

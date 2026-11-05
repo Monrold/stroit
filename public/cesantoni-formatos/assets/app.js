@@ -113,18 +113,20 @@
   }
 
   function cambiar(doc) {
-    var esConfig = doc === 'config';
-    if (!esConfig) actual = doc;
+    var esConfig = doc === 'config', esHist = doc === 'historial', sinHoja = esConfig || esHist;
+    if (!sinHoja) actual = doc;
     document.querySelectorAll('.tabs button').forEach(function (b) { b.setAttribute('aria-selected', String(b.dataset.doc === doc)); });
     Object.keys(docs).forEach(function (k) {
-      docs[k].form.hidden = esConfig || k !== doc;
-      docs[k].sheet.hidden = esConfig || k !== doc;
+      docs[k].form.hidden = sinHoja || k !== doc;
+      docs[k].sheet.hidden = sinHoja || k !== doc;
     });
     configEl.hidden = !esConfig;
-    document.querySelector('.panel').classList.toggle('config-mode', esConfig);
-    document.querySelector('.layout').classList.toggle('config-mode', esConfig);
+    histEl.hidden = !esHist;
+    document.querySelector('.panel').classList.toggle('config-mode', sinHoja);
+    document.querySelector('.layout').classList.toggle('config-mode', sinHoja);
     statusEl.textContent = '';
     if (esConfig) { pintarConfig(); return; }
+    if (esHist) { cargarHistorial(); return; }
     escalar();
     pintar();
   }
@@ -236,6 +238,114 @@
     });
   }
 
+  // ---------- historial ----------
+  var histEl = document.getElementById('historial');
+  var histForm = document.getElementById('form-historial');
+  var histLista = document.getElementById('lista-historial');
+  var histStatus = document.getElementById('historial-status');
+  var histPeticion = 0;
+
+  // Guarda el formato actual en la base (por folio). No detiene la descarga si falla.
+  function registrar() {
+    var d = datos(docs[actual].form);
+    if (!cfg.ok || !d.folio) return Promise.resolve(null);
+    return api('PUT', 'formato', { tipo: actual, datos: d }).then(function () { return true; }, function (e) {
+      if (window.console) console.warn('No se guardó en el historial:', e.message);
+      statusEl.className = 'status err';
+      statusEl.textContent = 'Ojo: no se guardó en el historial (' + e.message + ').';
+      return false;
+    });
+  }
+
+  function fechaHora(iso) {
+    var d = new Date(iso);
+    if (isNaN(d)) return '';
+    return d.toLocaleDateString('es-MX', { day: '2-digit', month: 'short', year: 'numeric' }) + ', ' +
+      d.toLocaleTimeString('es-MX', { hour: '2-digit', minute: '2-digit' });
+  }
+
+  function el(tag, cls, txt) {
+    var e = document.createElement(tag);
+    if (cls) e.className = cls;
+    if (txt != null) e.textContent = txt;
+    return e;
+  }
+
+  function cargarHistorial() {
+    histStatus.className = 'status';
+    if (!cfg.ok) {
+      histLista.innerHTML = '';
+      histStatus.textContent = 'El historial necesita la base de datos conectada (FORMATOS_DB).';
+      return;
+    }
+    var q = histForm.elements.q.value.trim(), tipo = histForm.elements.tipo.value;
+    var n = ++histPeticion;
+    histStatus.textContent = 'Cargando…';
+    api('GET', 'historial?tipo=' + encodeURIComponent(tipo) + '&q=' + encodeURIComponent(q)).then(function (data) {
+      if (n !== histPeticion) return;
+      histStatus.textContent = '';
+      histLista.innerHTML = '';
+      var lista = data.formatos || [];
+      if (!lista.length) {
+        histLista.appendChild(el('li', 'vacio', q || tipo ? 'Sin resultados.' : 'Aún no hay formatos guardados.'));
+        return;
+      }
+      lista.forEach(function (f) {
+        var li = el('li'), main = el('div', 'h-main'), top = el('div', 'h-top');
+        top.appendChild(el('span', 'h-folio', f.folio));
+        top.appendChild(el('span', 'h-tag', f.tipo === 'saldo' ? 'Saldo' : 'Entrega'));
+        top.appendChild(el('span', 'h-nombre', f.nombre || 'Sin nombre'));
+        var sub = [];
+        if (f.tipo === 'saldo' && f.monto != null) sub.push(dinero(f.monto));
+        if (f.tipo === 'entrega' && f.fecha) sub.push('Entrega ' + fecha(f.fecha));
+        if (f.folio_venta) sub.push('Venta ' + f.folio_venta);
+        if (f.asesor) sub.push(f.asesor);
+        sub.push(fechaHora(f.creado));
+        main.appendChild(top);
+        main.appendChild(el('div', 'h-sub', sub.join(' · ')));
+        var b = el('button', null, 'Abrir'); b.type = 'button';
+        b.addEventListener('click', function () { abrirFormato(f.folio); });
+        li.appendChild(main); li.appendChild(b);
+        histLista.appendChild(li);
+      });
+      if (lista.length >= 200) histStatus.textContent = 'Se muestran los 200 más recientes. Usa la búsqueda para encontrar otros.';
+    }).catch(function (e) {
+      if (n !== histPeticion) return;
+      histStatus.className = 'status err';
+      histStatus.textContent = 'No se pudo cargar el historial: ' + e.message;
+    });
+  }
+
+  function llenarForm(f, v) {
+    f.reset();
+    Object.keys(v).forEach(function (name) {
+      var els = f.elements[name];
+      if (!els) return;
+      if (els.length && els[0] && els[0].type === 'radio') {
+        Array.prototype.forEach.call(els, function (r) { r.checked = r.value === v[name]; });
+      } else if (els.tagName === 'SELECT') { els.dataset.pendiente = v[name]; els.value = v[name]; }
+      else if (els.type !== 'radio') { els.value = v[name]; }
+      else { els.checked = els.value === v[name]; }
+    });
+  }
+
+  function abrirFormato(folio) {
+    histStatus.className = 'status';
+    histStatus.textContent = 'Abriendo ' + folio + '…';
+    api('GET', 'formato?folio=' + encodeURIComponent(folio)).then(function (r) {
+      if (!docs[r.tipo]) throw new Error('tipo desconocido');
+      llenarForm(docs[r.tipo].form, r.datos || {});
+      llenarSelects();
+      histStatus.textContent = '';
+      cambiar(r.tipo);
+      statusEl.className = 'status';
+      statusEl.textContent = 'Abriste ' + folio + '. Si lo corriges y lo descargas de nuevo, se actualiza con el mismo folio.';
+    }).catch(function (e) {
+      histStatus.className = 'status err';
+      histStatus.textContent = 'No se pudo abrir: ' + e.message;
+    });
+  }
+
   // ---------- guardado local (borrador) ----------
   function guardar() {
     try {
@@ -248,18 +358,7 @@
     try {
       var o = JSON.parse(localStorage.getItem(STORE) || 'null');
       if (!o) return;
-      Object.keys(docs).forEach(function (k) {
-        var f = docs[k].form, v = o[k] || {};
-        Object.keys(v).forEach(function (name) {
-          var els = f.elements[name];
-          if (!els) return;
-          if (els.length && els[0] && els[0].type === 'radio') {
-            Array.prototype.forEach.call(els, function (r) { r.checked = r.value === v[name]; });
-          } else if (els.tagName === 'SELECT') { els.dataset.pendiente = v[name]; els.value = v[name]; }
-          else if (els.type !== 'radio') { els.value = v[name]; }
-          else { els.checked = els.value === v[name]; }
-        });
-      });
+      Object.keys(docs).forEach(function (k) { llenarForm(docs[k].form, o[k] || {}); });
       if (o.actual && docs[o.actual]) actual = o.actual;
     } catch (e) { /* sin almacenamiento */ }
   }
@@ -282,10 +381,12 @@
     if (!validar()) return;
     var btn = document.getElementById('btn-pdf');
     btn.disabled = true;
-    var opciones;
+    var opciones, guardado;
     asegurarFolio()
       .catch(function (e) { e.folio = true; throw e; })
-      .then(function () {
+      .then(registrar)
+      .then(function (ok) {
+        guardado = ok;
         statusEl.className = 'status';
         statusEl.textContent = 'Generando PDF…';
         // Copia a tamaño real (sin la escala de la vista previa); html2pdf la monta en su propio contenedor
@@ -306,7 +407,10 @@
         document.body.appendChild(a); a.click(); document.body.removeChild(a);
         setTimeout(function () { URL.revokeObjectURL(url); }, 30000);
       })
-      .then(function () { statusEl.textContent = 'PDF descargado: ' + opciones.filename; })
+      .then(function () {
+        statusEl.className = 'status' + (guardado === false ? ' err' : '');
+        statusEl.textContent = 'PDF descargado: ' + opciones.filename + (guardado === false ? '. Ojo: no se guardó en el historial.' : '');
+      })
       .catch(function (e) {
         statusEl.className = 'status err';
         statusEl.textContent = e.folio
@@ -321,6 +425,8 @@
     if (!validar()) return;
     asegurarFolio().then(function () {
       statusEl.textContent = '';
+      return registrar();
+    }).then(function () {
       var prev = document.title;
       document.title = nombreArchivo().replace(/\.pdf$/, '');
       window.print();
@@ -366,6 +472,9 @@
       pintarConfig(); avisoConfig('Folios guardados.');
     }).catch(function (err) { avisoConfig('No se pudo guardar: ' + err.message, true); });
   });
+  var histTimer;
+  histForm.addEventListener('input', function () { clearTimeout(histTimer); histTimer = setTimeout(cargarHistorial, 250); });
+  histForm.addEventListener('submit', function (e) { e.preventDefault(); cargarHistorial(); });
   window.addEventListener('resize', escalar);
   window.addEventListener('beforeprint', function () { scaler.style.transform = 'none'; });
   window.addEventListener('afterprint', escalar);

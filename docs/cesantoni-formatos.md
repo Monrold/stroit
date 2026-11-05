@@ -45,6 +45,10 @@ Las tablas se crean solas la primera vez. Si `FORMATOS_DB` no está enlazada, el
 
 API (protegida por la misma sesión): `functions/cesantoni-formatos/api/[[ruta]].js`.
 
+## Historial
+
+Cada formato se guarda en la base (tabla `formatos`, por folio) cuando se descarga el PDF o se imprime. La pestaña Historial muestra los 200 más recientes, con búsqueda por folio, cliente o contacto, asesor y folio de venta, y filtro por tipo. Abrir un formato lo carga en su formulario con el mismo folio; si se corrige y se vuelve a descargar, se actualiza el registro en lugar de crear uno nuevo. Para un formato nuevo, usar Limpiar primero.
+
 ## Archivos
 
 - `index.html`: formularios y hojas carta.
@@ -54,6 +58,6 @@ API (protegida por la misma sesión): `functions/cesantoni-formatos/api/[[ruta]]
 - `assets/vendor/html2pdf.bundle.min.js`: html2pdf.js 0.10.1 (MIT), incluido para no depender de un CDN.
 - `assets/cesantoni-logo.svg`: logo.
 - `functions/cesantoni-formatos/_middleware.js` (en la raíz del repo): la contraseña.
-- `functions/cesantoni-formatos/api/[[ruta]].js`: folios consecutivos y vendedores (D1).
+- `functions/cesantoni-formatos/api/[[ruta]].js`: folios consecutivos, vendedores e historial (D1).
 
 Para probarlo localmente sin contraseña: `python3 -m http.server -d public/cesantoni-formatos` y abrir http://localhost:8000. Con contraseña y base de datos: `npx wrangler pages dev public --d1 FORMATOS_DB=local` desde la raíz del repo, con un archivo `.dev.vars` que tenga `FORMATOS_PASSWORD=...`.
