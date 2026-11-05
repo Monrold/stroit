@@ -1,6 +1,6 @@
 // Guarda la app en el equipo para que abra y genere PDF sin conexión.
 // La API (folios, historial) nunca se guarda aquí: la app maneja sola los pendientes.
-const CACHE = 'cesantoni-formatos-v1';
+const CACHE = 'cesantoni-formatos-v2';
 const BASE = new URL('./', self.location).pathname; // /cesantoni-formatos/
 const APP = [
   './',
@@ -10,6 +10,8 @@ const APP = [
   'assets/vendor/html2pdf.bundle.min.js',
   'assets/cesantoni-logo.svg',
   'assets/icon-192.png',
+  'assets/favicon.svg',
+  'assets/favicon-32.png',
   'manifest.webmanifest',
 ];
 const FUENTES = ['fonts.googleapis.com', 'fonts.gstatic.com'];
