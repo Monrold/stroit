@@ -7,7 +7,8 @@
 //   PUT  api/vendedores { vendedores }  → { vendedores }
 //   PUT  api/siguiente  { tipo, numero }→ { siguiente }
 //   PUT  api/formato    { tipo, datos } → guarda el formato en el historial (por folio)
-//   GET  api/historial?tipo=&asesor=&q= → { formatos: [...] (últimos 200), asesores: [...] }
+//   GET  api/historial?tipo=&asesor=&q=&desde=&hasta= → { formatos: [...] (últimos 200), asesores: [...] }
+//        desde/hasta: fechas ISO (UTC) sobre la fecha en que se hizo el formato; el navegador las calcula en hora local
 //   DELETE api/formato?folio=SF-0001    → borra el formato del historial (el consecutivo no cambia)
 //   GET  api/formato?folio=SF-0001      → { folio, tipo, datos, creado, actualizado }
 
@@ -162,6 +163,10 @@ export async function onRequest({ request, env, params }) {
     if (TIPOS[tipo]) { args.push(tipo); where.push('tipo = ?' + args.length); }
     const asesor = (qs.get('asesor') || '').trim().slice(0, 80);
     if (asesor) { args.push(asesor); where.push('asesor = ?' + args.length); }
+    for (const [param, op] of [['desde', '>='], ['hasta', '<']]) {
+      const v = qs.get(param) || '';
+      if (/^\d{4}-\d{2}-\d{2}T[\d:.]+Z$/.test(v)) { args.push(v); where.push('creado ' + op + ' ?' + args.length); }
+    }
     if (q) {
       args.push('%' + q.replace(/[\\%_]/g, (c) => '\\' + c) + '%');
       const n = args.length;

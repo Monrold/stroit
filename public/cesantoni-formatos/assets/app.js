@@ -411,16 +411,22 @@
       return;
     }
     var q = histForm.elements.q.value.trim(), tipo = histForm.elements.tipo.value, asesor = histForm.elements.asesor.value;
+    var mes = histForm.elements.mes.value, rango = '';
+    if (mes) {
+      // Mes en hora local del equipo, enviado como rango UTC
+      var p = mes.split('-'), ini = new Date(+p[0], +p[1] - 1, 1), fin = new Date(+p[0], +p[1], 1);
+      rango = '&desde=' + encodeURIComponent(ini.toISOString()) + '&hasta=' + encodeURIComponent(fin.toISOString());
+    }
     var n = ++histPeticion;
     histStatus.textContent = 'Cargando…';
-    api('GET', 'historial?tipo=' + encodeURIComponent(tipo) + '&asesor=' + encodeURIComponent(asesor) + '&q=' + encodeURIComponent(q)).then(function (data) {
+    api('GET', 'historial?tipo=' + encodeURIComponent(tipo) + '&asesor=' + encodeURIComponent(asesor) + '&q=' + encodeURIComponent(q) + rango).then(function (data) {
       if (n !== histPeticion) return;
       histStatus.textContent = typeof aviso === 'string' ? aviso : '';
       llenarFiltroAsesor(data.asesores || []);
       histLista.innerHTML = '';
       var lista = data.formatos || [];
       if (!lista.length) {
-        histLista.appendChild(el('li', 'vacio', q || tipo || asesor ? 'Sin resultados.' : 'Aún no hay formatos guardados.'));
+        histLista.appendChild(el('li', 'vacio', q || tipo || asesor || mes ? 'Sin resultados.' : 'Aún no hay formatos guardados.'));
         return;
       }
       lista.forEach(function (f) {
@@ -447,6 +453,19 @@
       histStatus.textContent = e.red ? 'Sin conexión. El historial se ve al reconectar.' : 'No se pudo cargar el historial: ' + e.message;
     });
   }
+
+  // Meses del filtro: los últimos 24, del más reciente al más antiguo
+  (function llenarMeses() {
+    var sel = histForm.elements.mes, hoy = new Date();
+    for (var i = 0; i < 24; i++) {
+      var d = new Date(hoy.getFullYear(), hoy.getMonth() - i, 1);
+      var o = document.createElement('option');
+      o.value = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0');
+      var t = d.toLocaleDateString('es-MX', { month: 'long', year: 'numeric' });
+      o.textContent = t.charAt(0).toUpperCase() + t.slice(1);
+      sel.appendChild(o);
+    }
+  })();
 
   // Vendedores del filtro: los de Configuración más los que ya aparecen en el historial
   function llenarFiltroAsesor(enHistorial) {

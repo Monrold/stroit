@@ -70,7 +70,7 @@ form select{appearance:auto}
 /* Historial */
 .filtros{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
 .filtros input{margin:0;flex:1 1 100%;min-width:0}
-.filtros select{margin:0;width:auto;flex:1 1 0;min-width:0}
+.filtros select{margin:0;width:auto;flex:1 1 140px;min-width:0}
 .historial{list-style:none;margin:0;padding:0;border:1px solid #eee;border-radius:8px}
 .historial li{display:flex;align-items:center;gap:12px;padding:10px 12px;border-bottom:1px solid #eee}
 .historial li:last-child{border-bottom:0}
