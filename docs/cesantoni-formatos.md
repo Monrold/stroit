@@ -25,14 +25,11 @@ No necesita un proyecto aparte en Cloudflare. No sale en el menú ni en el sitem
 
 ## Contraseña
 
-Toda la ruta `/cesantoni-formatos/` pide usuario y contraseña antes de cargar cualquier archivo. Esto lo hace `functions/cesantoni-formatos/_middleware.js`, una Pages Function que corre en Cloudflare.
+Toda la ruta `/cesantoni-formatos/` muestra primero una pantalla de acceso con el logo de Cesantoni, que pide solo la contraseña. Esto lo hace `functions/cesantoni-formatos/_middleware.js`, una Pages Function que corre en Cloudflare. Sin sesión no se entrega ningún archivo del formulario; el logo es lo único público.
 
-Configuración en Cloudflare → Workers & Pages → stroit → Settings → Variables and Secrets (en Production y, si se usan vistas previas, también en Preview):
-
-- `FORMATOS_PASSWORD`: la contraseña. Agrégala como **Secret**. Es obligatoria: sin ella la ruta responde "no configurado" y no deja entrar a nadie.
-- `FORMATOS_USER`: el usuario. Es opcional; si no se pone, el usuario es `cesantoni`.
-
-Después de agregar o cambiar las variables hay que volver a desplegar (Deployments → Retry deployment) para que tomen efecto. El navegador recuerda el acceso hasta que se cierra.
+- La contraseña es la variable `FORMATOS_PASSWORD`, que va como **Secret** en Cloudflare → Workers & Pages → stroit → Settings → Variables and Secrets (en Production y, si se usan vistas previas, también en Preview). Sin ella la ruta responde "no configurado" y no deja entrar a nadie.
+- Al entrar se guarda una cookie firmada que dura 7 días. "Salir", arriba a la derecha, cierra la sesión.
+- Si se cambia la contraseña, todas las sesiones abiertas se cierran. Después de cambiarla hay que volver a desplegar (Deployments → Retry deployment).
 
 ## Archivos
 
@@ -44,4 +41,4 @@ Después de agregar o cambiar las variables hay que volver a desplegar (Deployme
 - `assets/cesantoni-logo.svg`: logo.
 - `functions/cesantoni-formatos/_middleware.js` (en la raíz del repo): la contraseña.
 
-Para probarlo localmente sin contraseña: `python3 -m http.server -d public/cesantoni-formatos` y abrir http://localhost:8000. Con contraseña: `npx wrangler pages dev public` con un archivo `.dev.vars` que tenga `FORMATOS_PASSWORD=...`.
+Para probarlo localmente sin contraseña: `python3 -m http.server -d public/cesantoni-formatos` y abrir http://localhost:8000. Con contraseña: `npx wrangler pages dev public` desde la raíz del repo, con un archivo `.dev.vars` que tenga `FORMATOS_PASSWORD=...`.
