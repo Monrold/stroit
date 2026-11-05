@@ -7,7 +7,8 @@
 //   PUT  api/vendedores { vendedores }  → { vendedores }
 //   PUT  api/siguiente  { tipo, numero }→ { siguiente }
 //   PUT  api/formato    { tipo, datos } → guarda el formato en el historial (por folio)
-//   GET  api/historial?tipo=&q=         → [{ folio, tipo, nombre, asesor, ... }] (últimos 200)
+//   GET  api/historial?tipo=&asesor=&q= → { formatos: [...] (últimos 200), asesores: [...] }
+//   DELETE api/formato?folio=SF-0001    → borra el formato del historial (el consecutivo no cambia)
 //   GET  api/formato?folio=SF-0001      → { folio, tipo, datos, creado, actualizado }
 
 const TIPOS = { saldo: 'SF', entrega: 'EN' };
@@ -146,12 +147,21 @@ export async function onRequest({ request, env, params }) {
     return json({ ...fila, datos });
   }
 
+  if (ruta === 'formato' && metodo === 'DELETE') {
+    const folio = new URL(request.url).searchParams.get('folio') || '';
+    const r = await db.prepare('DELETE FROM formatos WHERE folio = ?1').bind(folio).run();
+    if (!r.meta || !r.meta.changes) return json({ error: 'no_encontrado' }, 404);
+    return json({ borrado: folio });
+  }
+
   if (ruta === 'historial' && metodo === 'GET') {
     const qs = new URL(request.url).searchParams;
     const tipo = qs.get('tipo');
     const q = (qs.get('q') || '').trim().slice(0, 60);
     const where = [], args = [];
     if (TIPOS[tipo]) { args.push(tipo); where.push('tipo = ?' + args.length); }
+    const asesor = (qs.get('asesor') || '').trim().slice(0, 80);
+    if (asesor) { args.push(asesor); where.push('asesor = ?' + args.length); }
     if (q) {
       args.push('%' + q.replace(/[\\%_]/g, (c) => '\\' + c) + '%');
       const n = args.length;
@@ -161,8 +171,11 @@ export async function onRequest({ request, env, params }) {
       'SELECT folio, tipo, nombre, asesor, folio_venta, fecha, monto, creado, actualizado FROM formatos' +
       (where.length ? ' WHERE ' + where.join(' AND ') : '') +
       ' ORDER BY creado DESC LIMIT ' + MAX_HISTORIAL;
-    const { results } = await db.prepare(sql).bind(...args).all();
-    return json({ formatos: results });
+    const [{ results }, nombres] = await Promise.all([
+      db.prepare(sql).bind(...args).all(),
+      db.prepare("SELECT DISTINCT asesor FROM formatos WHERE asesor <> '' ORDER BY asesor COLLATE NOCASE").all(),
+    ]);
+    return json({ formatos: results, asesores: nombres.results.map((r) => r.asesor) });
   }
 
   return json({ error: 'no_encontrado' }, 404);

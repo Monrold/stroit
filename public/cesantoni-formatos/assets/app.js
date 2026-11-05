@@ -271,23 +271,24 @@
     return e;
   }
 
-  function cargarHistorial() {
+  function cargarHistorial(aviso) {
     histStatus.className = 'status';
     if (!cfg.ok) {
       histLista.innerHTML = '';
       histStatus.textContent = 'El historial necesita la base de datos conectada (FORMATOS_DB).';
       return;
     }
-    var q = histForm.elements.q.value.trim(), tipo = histForm.elements.tipo.value;
+    var q = histForm.elements.q.value.trim(), tipo = histForm.elements.tipo.value, asesor = histForm.elements.asesor.value;
     var n = ++histPeticion;
     histStatus.textContent = 'Cargando…';
-    api('GET', 'historial?tipo=' + encodeURIComponent(tipo) + '&q=' + encodeURIComponent(q)).then(function (data) {
+    api('GET', 'historial?tipo=' + encodeURIComponent(tipo) + '&asesor=' + encodeURIComponent(asesor) + '&q=' + encodeURIComponent(q)).then(function (data) {
       if (n !== histPeticion) return;
-      histStatus.textContent = '';
+      histStatus.textContent = typeof aviso === 'string' ? aviso : '';
+      llenarFiltroAsesor(data.asesores || []);
       histLista.innerHTML = '';
       var lista = data.formatos || [];
       if (!lista.length) {
-        histLista.appendChild(el('li', 'vacio', q || tipo ? 'Sin resultados.' : 'Aún no hay formatos guardados.'));
+        histLista.appendChild(el('li', 'vacio', q || tipo || asesor ? 'Sin resultados.' : 'Aún no hay formatos guardados.'));
         return;
       }
       lista.forEach(function (f) {
@@ -303,9 +304,7 @@
         sub.push(fechaHora(f.creado));
         main.appendChild(top);
         main.appendChild(el('div', 'h-sub', sub.join(' · ')));
-        var b = el('button', null, 'Abrir'); b.type = 'button';
-        b.addEventListener('click', function () { abrirFormato(f.folio); });
-        li.appendChild(main); li.appendChild(b);
+        li.appendChild(main); li.appendChild(acciones(f.folio));
         histLista.appendChild(li);
       });
       if (lista.length >= 200) histStatus.textContent = 'Se muestran los 200 más recientes. Usa la búsqueda para encontrar otros.';
@@ -313,6 +312,59 @@
       if (n !== histPeticion) return;
       histStatus.className = 'status err';
       histStatus.textContent = 'No se pudo cargar el historial: ' + e.message;
+    });
+  }
+
+  // Vendedores del filtro: los de Configuración más los que ya aparecen en el historial
+  function llenarFiltroAsesor(enHistorial) {
+    var sel = histForm.elements.asesor, val = sel.value, nombres = [];
+    cfg.vendedores.concat(enHistorial).forEach(function (n) {
+      if (n && !nombres.some(function (x) { return x.toLowerCase() === n.toLowerCase(); })) nombres.push(n);
+    });
+    if (val && nombres.indexOf(val) < 0) nombres.push(val);
+    nombres.sort(function (a, b) { return a.localeCompare(b, 'es'); });
+    sel.innerHTML = '';
+    var o0 = document.createElement('option'); o0.value = ''; o0.textContent = 'Todos los vendedores'; sel.appendChild(o0);
+    nombres.forEach(function (n) { var o = document.createElement('option'); o.value = n; o.textContent = n; sel.appendChild(o); });
+    sel.value = val;
+  }
+
+  function acciones(folio) {
+    var box = el('div', 'h-acc');
+    function normal() {
+      box.innerHTML = '';
+      var abrir = el('button', null, 'Abrir'); abrir.type = 'button';
+      abrir.addEventListener('click', function () { abrirFormato(folio); });
+      var borrar = el('button', 'h-del', 'Eliminar'); borrar.type = 'button';
+      borrar.addEventListener('click', confirmar);
+      box.appendChild(abrir); box.appendChild(borrar);
+    }
+    function confirmar() {
+      box.innerHTML = '';
+      var si = el('button', 'h-si', 'Sí, eliminar'); si.type = 'button';
+      var no = el('button', null, 'No'); no.type = 'button';
+      si.addEventListener('click', function () { si.disabled = no.disabled = true; eliminarFormato(folio); });
+      no.addEventListener('click', normal);
+      box.appendChild(el('span', 'h-preg', '¿Eliminar ' + folio + '?'));
+      box.appendChild(si); box.appendChild(no);
+      no.focus();
+    }
+    normal();
+    return box;
+  }
+
+  function eliminarFormato(folio) {
+    api('DELETE', 'formato?folio=' + encodeURIComponent(folio)).then(function () {
+      // Si ese folio está abierto en su formulario, se limpia para no volver a guardarlo por error
+      Object.keys(docs).forEach(function (k) {
+        if (docs[k].form.elements.folio.value === folio) { docs[k].form.reset(); }
+      });
+      guardar();
+      cargarHistorial(folio + ' eliminado.');
+    }).catch(function (e) {
+      histStatus.className = 'status err';
+      histStatus.textContent = 'No se pudo eliminar: ' + e.message;
+      cargarHistorial();
     });
   }
 

@@ -104,13 +104,16 @@
 
     <section id="historial" hidden>
       <h2>Historial</h2>
-      <p class="hint-c">Cada formato se guarda al descargarlo o imprimirlo. Ábrelo para revisarlo, corregirlo o volver a imprimirlo con el mismo folio.</p>
+      <p class="hint-c">Cada formato se guarda al descargarlo o imprimirlo. Ábrelo para revisarlo, corregirlo o volver a imprimirlo con el mismo folio. Eliminar lo quita del historial, pero el consecutivo no regresa; si borras pruebas, puedes ajustar el siguiente folio en Configuración.</p>
       <form id="form-historial" class="filtros" autocomplete="off">
         <input name="q" type="search" placeholder="Buscar folio, cliente, asesor o folio de venta">
         <select name="tipo">
           <option value="">Todos</option>
           <option value="saldo">Saldo a favor</option>
           <option value="entrega">Entrega a domicilio</option>
+        </select>
+        <select name="asesor" aria-label="Vendedor">
+          <option value="">Todos los vendedores</option>
         </select>
       </form>
       <ul class="historial" id="lista-historial"></ul>

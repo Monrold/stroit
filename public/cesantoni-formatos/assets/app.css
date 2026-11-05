@@ -68,9 +68,9 @@ form select{appearance:auto}
 #form-folios button.secondary{background:#fff;color:#000}
 
 /* Historial */
-.filtros{display:flex;gap:8px;margin-bottom:12px}
-.filtros input{margin:0;flex:1;min-width:0}
-.filtros select{margin:0;width:auto}
+.filtros{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.filtros input{margin:0;flex:1 1 100%;min-width:0}
+.filtros select{margin:0;width:auto;flex:1 1 0;min-width:0}
 .historial{list-style:none;margin:0;padding:0;border:1px solid #eee;border-radius:8px}
 .historial li{display:flex;align-items:center;gap:12px;padding:10px 12px;border-bottom:1px solid #eee}
 .historial li:last-child{border-bottom:0}
@@ -82,7 +82,6 @@ form select{appearance:auto}
 .historial .h-sub{font-size:12px;color:var(--muted);margin-top:2px}
 .historial .h-tag{font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;background:#f1f1f1;border-radius:4px;padding:2px 6px;color:#444}
 .historial button{font:inherit;font-weight:600;font-size:13px;padding:7px 12px;border-radius:7px;border:1px solid #000;background:#fff;color:#000;cursor:pointer;white-space:nowrap}
-.filtros select{flex:none}
 .tabs{max-width:100%;overflow-x:auto;scrollbar-width:none}
 .tabs button{white-space:nowrap}
 @media (max-width:700px){
@@ -93,3 +92,8 @@ form select{appearance:auto}
 @media (max-width:520px){
   .tabs{display:grid;grid-template-columns:1fr 1fr}
 }
+
+.historial .h-acc{display:flex;gap:6px;align-items:center;flex:none}
+.historial button.h-del{border-color:transparent;color:#b00020;background:none;padding:7px 8px}
+.historial button.h-si{background:#b00020;border-color:#b00020;color:#fff}
+.historial .h-preg{font-size:13px;color:#b00020;font-weight:600}
