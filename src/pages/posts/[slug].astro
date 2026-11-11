@@ -1,6 +1,4 @@
 ---
-import { contentfulClient } from "../../lib/contentful";
-import type { Surfaces } from "../../lib/contentful";
 import Layout from "../../layouts/Layout.astro";
 import rayadoSilestone from "../../images/catalogo/silestone/rayado.webp";
 import impactoSilestone from "../../images/catalogo/silestone/impacto.webp";
@@ -21,43 +19,25 @@ import mantenimientoSensa from "../../images/catalogo/sensa/bajo-mantenimiento.j
 import calidadSensa from "../../images/catalogo/sensa/calidad-maxima.jpg";
 import moreSensa from "../../images/catalogo/sensa/orinocomore.webp";
 import logoSensa from "../../images/logo-sensa.svg";
-import ReservaButton from "../../components/events-meta/reservaButton.astro";
-import { isTemplateSpan } from "typescript";
 import Showroom from "../../components/detalle-producto/showroom.astro";
 import Ventajas from "../../components/detalle-producto/ventajas.astro";
-
-
-import type { Entry } from "contentful";
+import FichaSeo from "../../components/detalle-producto/ficha-seo.astro";
+import {
+  obtenerCatalogo,
+  slugProducto,
+  marcaClave,
+  marcaNombre,
+  aLista,
+  aTexto,
+  urlAbsoluta,
+} from "../../lib/producto";
 
 export async function getStaticPaths() {
-  let skip = 0;
-  const limit = 100;
-  let total = 0;
-  let allEntries: Entry<Surfaces>[] = [];
-
-  do {
-    const response = await contentfulClient.getEntries<Surfaces>({
-      content_type: "stroit",
-      skip,
-      limit,
-    });
-
-    allEntries = allEntries.concat(response.items);
-    total = response.total;
-    skip += limit;
-  } while (skip < total);
+  const allEntries = await obtenerCatalogo();
 
   const pages = allEntries
     .map((item) => {
-      const slug = item.fields.nombre && item.fields.marca
-        ? `${item.fields.marca} ${item.fields.nombre}`
-            .toLowerCase()
-            .normalize("NFD")
-            .replace(/[\u0300-\u036f]/g, "")
-            .trim()
-            .replace(/\s+/g, "-")
-            .replace(/[^a-z0-9\-]/g, "")
-        : null;
+      const slug = slugProducto(item.fields.marca, item.fields.nombre) || null;
 
       if (!slug || slug.trim() === "") {
         console.error("Missing slug for item:", item);
@@ -86,6 +66,9 @@ export async function getStaticPaths() {
           precio8mm: item.fields.precio8Mm,
           precio12mm: item.fields.precio12Mm,
           precio20mm: item.fields.precio20Mm,
+          // Campo opcional nuevo en Contentful (Texto largo): descripción única del color.
+          descripcion: (item.fields as any).descripcion,
+          slug,
         },
       };
     })
@@ -115,7 +98,19 @@ const {
   precio8mm,
   precio12mm,
   precio20mm,
+  descripcion,
+  slug,
 } = Astro.props;
+
+// --- Datos limpios para SEO ---
+const marcaKey = marcaClave(marca);
+const Marca = marcaNombre(marca);
+const nombreLimpio = String(nombre ?? "").trim();
+const nombreCompleto = `${Marca} ${nombreLimpio}`;
+const coleccionTexto = aTexto(coleccion);
+const urlFicha = `/posts/${slug}/`;
+const imagenPrincipal = urlAbsoluta(imagen?.[1]?.fields?.file?.url ?? imagen?.[0]?.fields?.file?.url);
+const imagenTextura = urlAbsoluta(imagen?.[0]?.fields?.file?.url);
 
 const pageviewData = { landing: `${marca}-${nombre}` };
 
@@ -138,7 +133,7 @@ const espesoresSeleccionados: string[] = Array.isArray(espesores)
 
 
 
-const marcaLower = `${marca}`;
+const marcaLower = marcaKey;
 const hayPromo = Boolean(pricePromo);
 
 // --- Definir tipo Espesor y variables ---
@@ -251,7 +246,28 @@ if (marcaLower === 'sensa' || marcaLower === 'granitops') {
   }
 }
 
-console.log("Medida usada para el cálculo de precios:", medidaUsada);
+// Solo mostramos precios cuando de verdad están cargados en Contentful.
+// Antes se mostraba "$0 USD" en las fichas sin precio.
+espesor = espesor.filter((e) => e.precioPlaca > 0 && Number.isFinite(e.precioM2));
+const hayPrecios = espesor.length > 0;
+const precioM2Desde = hayPrecios ? Math.min(...espesor.map((e) => e.precioM2 ?? Infinity)) : null;
+
+const espesoresLista = aLista(espesores);
+const acabadosLista = aLista(acabados);
+
+// --- Título y descripción para Google (con ciudad) ---
+const titulo = `${nombreCompleto} · Precio y muestras en Pachuca y Querétaro`;
+const descripcionMeta = (() => {
+  const base =
+    marcaLower === "dekton"
+      ? `${nombreCompleto}: superficie ultracompacta resistente al calor, rayado y rayos UV para cocina, baño y exterior.`
+      : marcaLower === "silestone"
+      ? `${nombreCompleto}: cuarzo resistente a manchas y rayado para cubiertas de cocina y baño.`
+      : marcaLower === "sensa"
+      ? `${nombreCompleto}: piedra natural con protección antimanchas que no necesita sellado.`
+      : `${nombreCompleto}: superficie de alta resistencia para cocina y baño.`;
+  return `${base} Velo en Pachuca o Querétaro y cotiza por WhatsApp.`;
+})();
 
 
 
@@ -291,26 +307,28 @@ console.log("Medida usada para el cálculo de precios:", medidaUsada);
   }
 </style>
 
-<Layout title={
-  marca === "dekton"
-    ? `${marca} ${nombre} | Precio, usos y disponibilidad en México`
-    : marca === "silestone"
-    ? `${marca} ${nombre} | Precio y aplicaciones en México`
-    : `${marca} ${nombre} | Superficie y precio en México`
-}
-  description={
-    marca == "dekton"
-      ? `dekton ${nombre} una piedra sinterizada que ofrece máxima resistencia a rayaduras, calor, manchas y rayos UV. Ideal para cocinas, fachadas y exteriores. Encuéntralo en Stroit Surfaces, distribuidor oficial en México.`
-      : marca == "silestone"
-      ? `silestone ${nombre} combina diseño y tecnología en una superficie de cuarzo resistente a manchas y uso diario. Perfecto para interiores modernos. En Stroit Surfaces.`
-      : marca == "sensa"
-      ? `sensa ${nombre} es granito natural protegido contra manchas y uso cotidiano, ideal para quienes buscan elegancia y durabilidad sin mantenimiento. Disponible en Stroit Surfaces.`
-      : `Descubre ${nombre} de ${marca}, una superficie elegante y duradera, resistente a rayaduras, manchas, altas temperaturas y uso diario. Ideal para cocinas, baños o revestimientos. Disponible en Stroit Surfaces, distribuidor oficial en México.`
-  }
-  ogImage={imagen[1].fields.file.url}
+<Layout
+  title={titulo}
+  description={descripcionMeta}
+  ogImage={imagenPrincipal || undefined}
+  ogType="product"
   pageviewData={pageviewData}
   isIndexable={true}
-  >
+>
+  <FichaSeo
+    slot="head"
+    marcaKey={marcaLower}
+    Marca={Marca}
+    nombre={nombreLimpio}
+    coleccion={coleccionTexto}
+    url={urlFicha}
+    imagenes={[imagenPrincipal, imagenTextura].filter(Boolean)}
+    descripcion={descripcion ? String(descripcion) : ""}
+    espesores={espesoresLista}
+    acabados={acabadosLista}
+    precioM2Desde={precioM2Desde}
+    soloSchema
+  />
   <main class="max-w-screen-xl mx-auto">
     <section class="text-white lg:flex lg:px-8 pb-4 lg:pb-0 lg:py-10 relative">
      <div class="lg:w-2/3 relative">
@@ -323,15 +341,16 @@ console.log("Medida usada para el cálculo de precios:", medidaUsada);
       {imagen[1]?.fields?.file?.url && (
         <img
           class="snap-start w-1/2 h-[80vh] object-cover"
-          src={imagen[1].fields.file.url}
-          alt={`Conoce ${marca} ${nombre}`}
+          src={urlAbsoluta(imagen[1].fields.file.url)}
+          alt={`${nombreCompleto} instalado en una cocina`}
         />
       )}
       {imagen[0]?.fields?.file?.url && (
         <img
           class="snap-start w-1/2 h-[80vh] object-cover"
-          src={imagen[0].fields.file.url}
-          alt={`Textura de ${marca} ${nombre}`}
+          src={urlAbsoluta(imagen[0].fields.file.url)}
+          alt={`Textura de ${nombreCompleto}`}
+          loading="lazy"
         />
       )}
     </div>
@@ -354,41 +373,36 @@ console.log("Medida usada para el cálculo de precios:", medidaUsada);
       <div
         class="w-full lg:w-1/3 px-8 mt-4 lg:mt-0 flex flex-col justify-center"
       >
-        <div class="hidden lg:flex text-zinc-400 space-x-1 text-xs mb-2">
+        <nav aria-label="Ruta de navegación" class="hidden lg:flex text-zinc-400 space-x-1 text-xs mb-2">
           <a href="/" class="hover:text-zinc-200">Stroit Surfaces</a>
           <p>></p>
           <a href="/catalogo" class="hover:text-zinc-200">Catálogo</a>
           <p>></p>
-          <p>{marca}</p>
+          <a href={`/${marcaLower}`} class="hover:text-zinc-200">{Marca}</a>
           <p>></p>
-          <p>{nombre}</p>
-        </div>
+          <p>{nombreLimpio}</p>
+        </nav>
         {promocion && <p>🔥 En promoción</p>}
-        <h1 class="text-4xl capitalize">{`${marca} ${nombre}`}</h1>
-        <p class="text-sm text-zinc-400 mt-6 capitalize ">
-        SKU: {`${marca} ${nombre}`}
-        </p>
-        <div class="flex space-x-1">
-          <p class="capitalize">Colección | {marca}</p>
+        <h1 class="text-4xl">{nombreCompleto}</h1>
+        <div class="flex space-x-1 mt-4">
+          <p>Colección {Marca}</p>
           <p>|</p>
-          <p>{coleccion}</p>
+          <p>{coleccionTexto}</p>
         </div>
         <div class="mt-4">
-          <h3 class="text-xl border-blue-50 border-b pb-1">
+          <h2 class="text-xl border-blue-50 border-b pb-1">
             Acabados disponibles
-          </h3>
-          <ul class="flex space-x-1 font-thin my-2">
-            {acabados[0] && <li>{acabados[0]} </li>}
-            {acabados[1] && <li>| {acabados[1]}</li>}
-            {acabados[2] && <li>| {acabados[2]}</li>}
-            {acabados[3] && <li>| {acabados[3]}</li>}
-            {acabados[4] && <li>| {acabados[4]}</li>}
+          </h2>
+          <ul class="flex flex-wrap gap-x-1 font-thin my-2">
+            {acabadosLista
+              .filter((a) => !/^otros?$/i.test(a))
+              .map((a, i) => <li>{i > 0 ? `| ${a}` : a}</li>)}
           </ul>
         </div>
         <div class="mt-4">
-          <h3 class="text-xl border-blue-50 border-b pb-1">
+          <h2 class="text-xl border-blue-50 border-b pb-1">
             Espesores disponibles
-          </h3>
+          </h2>
           <ul class="font-thin my-2">
             {espesores[0] && <li>{espesores[0]}</li>}
             {espesores[1] && <li>{espesores[1]}</li>}
@@ -397,9 +411,9 @@ console.log("Medida usada para el cálculo de precios:", medidaUsada);
           </ul>
         </div>
         <div class="mt-4">
-          <h3 class="text-xl border-blue-50 border-b pb-1">
-            Medidas disponibles  
-          </h3>
+          <h2 class="text-xl border-blue-50 border-b pb-1">
+            Medidas disponibles
+          </h2>
 <ul class="font-thin my-3 space-y-4">
   {marca == 'sensa' ? (() => {
   const medidas = String(medidasSensa ?? "0 x 0"); // FORZAR A STRING
@@ -475,7 +489,7 @@ console.log("Medida usada para el cálculo de precios:", medidaUsada);
          -->
          <a
   href={`https://api.whatsapp.com/send?phone=527713473810&text=${encodeURIComponent(
-    `Hola, vi su web y me interesa cotizar ${marca} ${nombre}.`
+    `Hola, vi su web y me interesa cotizar ${nombreCompleto}.`
   )}`}
   target="_blank"
   rel="noopener noreferrer"
@@ -487,7 +501,15 @@ console.log("Medida usada para el cálculo de precios:", medidaUsada);
 <div class="info-material mt-4 text-xs text-gray-300">
   <p>El material se vende únicamente por <strong>placa completa</strong>
 
-  <p class="mt-2">Contamos con showroom en Pachuca y Querétaro, donde puedes ver las placas en persona y recibir asesoría personalizada o realizamos envios a todo México.</p>
+  <p class="mt-2">Ve {nombreCompleto} en persona en nuestros showrooms de <a class="underline" href="/showroom/">Pachuca y Querétaro</a> y recibe asesoría personalizada. También hacemos envíos a todo México.</p>
+  <p class="mt-2">¿Estás en Querétaro, Guanajuato, Aguascalientes o San Luis Potosí?
+    <a
+      class="underline"
+      href={`https://api.whatsapp.com/send?phone=524422690555&text=${encodeURIComponent(`Hola, estoy en el Bajío y me interesa cotizar ${nombreCompleto}.`)}`}
+      target="_blank"
+      rel="noopener noreferrer"
+    >Escribe a nuestro showroom del Bajío</a>.
+  </p>
 </div>
 
           {
@@ -495,13 +517,13 @@ console.log("Medida usada para el cálculo de precios:", medidaUsada);
               <p class="text-xs text-zinc-300 mt-2">
                 {restriccionPromo}
               </p>  
-              <p class="text-xs text-zinc-300 mt-2">El precio esta sujeto a cambios sin previo aviso</p>
+              <p class="text-xs text-zinc-300 mt-2">El precio está sujeto a cambios sin previo aviso</p>
             )
           }
           {
             restriccionPrecio && (
               <p class="text-xs text-zinc-300 mt-2">{restriccionPrecio}</p>
-              <p class="text-xs text-zinc-300 mt-2">El precio esta sujeto a cambios sin previo aviso</p>
+              <p class="text-xs text-zinc-300 mt-2">El precio está sujeto a cambios sin previo aviso</p>
             )
           }
         </div>
@@ -511,60 +533,88 @@ console.log("Medida usada para el cálculo de precios:", medidaUsada);
 
 
 <section class="bg-black text-white my-5 py-14 lg:mx-8">
-    <div class="pricing max-w-screen-xl mx-auto px-8 lg:px-12">
-  <h2 class="text-xl font-bold lg:mb-0 mb-4">Precios por espesor</h2>
-  <div class="mb-6 mt-6 opacity-70 text-xs lg:mb-8 lg:mt-0 lg:flex lg:gap-3">
-    <p>Al tipo de cambio del día de la compra</p>
-    <p class="hidden lg:block">|</p>
-<p>No incluye instalación ni flete</p>
-<p class="hidden lg:block">|</p>
-<p>Relizamos envíos a todo México</p>
-<p class="hidden lg:block">|</p>
-<p>Los precios solo aplican para el formato: <strong>{medidaUsada}</strong></p>
+  <div class="pricing max-w-screen-xl mx-auto px-8 lg:px-12">
+  <h2 class="text-xl font-bold lg:mb-0 mb-4">Precio de {nombreCompleto}</h2>
+  {hayPrecios ? (
+    <>
+      <div class="mb-6 mt-6 opacity-70 text-xs lg:mb-8 lg:mt-2 lg:flex lg:gap-3">
+        <p>Al tipo de cambio del día de la compra</p>
+        <p class="hidden lg:block">|</p>
+        <p>No incluye instalación ni flete</p>
+        <p class="hidden lg:block">|</p>
+        <p>Realizamos envíos a todo México</p>
+        <p class="hidden lg:block">|</p>
+        <p>Los precios solo aplican para el formato: <strong>{medidaUsada}</strong></p>
+      </div>
 
-</div>
-
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-    <!-- Precios por m² -->
-    <div>
-      <h3 class="text-lg font-semibold my-6 lg:my-2">Precio por metro cuadrado (m²)</h3>
-      <ul class="space-y-1">
-        {espesor.map(e => (
-          <li  class="flex justify-between text-zinc-400">
-            <span>{e.label}</span>
-            <span>${e.precioM2?.toLocaleString('en-US')} USD</span>
-          </li>
-        ))}
-      </ul>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          <h3 class="text-lg font-semibold my-6 lg:my-2">Precio por metro cuadrado (m²)</h3>
+          <ul class="space-y-1">
+            {espesor.map((e) => (
+              <li class="flex justify-between text-zinc-400">
+                <span>{e.label}</span>
+                <span>${e.precioM2?.toLocaleString("en-US")} USD</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div>
+          <h3 class="text-lg font-semibold my-6 lg:my-2">Precio por metro lineal (ml)</h3>
+          <ul class="space-y-1">
+            {espesor.map((e) => (
+              <li class="flex justify-between text-zinc-400">
+                <span>{e.label}</span>
+                <span>${e.precioML?.toLocaleString("en-US")} USD</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </>
+  ) : (
+    <div class="mt-4 lg:flex lg:items-center lg:justify-between gap-6">
+      <p class="text-zinc-300 max-w-2xl">
+        El precio de {nombreCompleto} depende del espesor y del formato de la placa, y se vende por placa completa.
+        Escríbenos por WhatsApp y te enviamos la cotización con el precio vigente, sin compromiso.
+      </p>
+      <a
+        href={`https://api.whatsapp.com/send?phone=527713473810&text=${encodeURIComponent(
+          `Hola, vi su web y quiero el precio de ${nombreCompleto}.`
+        )}`}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex mt-6 lg:mt-0 ring-1 px-8 py-4 justify-center ring-zinc-400 items-center text-black shrink-0"
+        style="background: linear-gradient(to right, #dbd6ca, #cbbfae, #bfa986);"
+      >
+        Pedir precio por WhatsApp
+      </a>
     </div>
-
-    <!-- Precios por metro lineal -->
-    <div>
-      <h3 class="text-lg font-semibold my-6 lg:my-2">Precio por metro lineal (ml)</h3>
-      <ul class="space-y-1">
-        {espesor.map(e => (
-          <li class="flex justify-between text-zinc-400">
-            <span>{e.label}</span>
-            <span>${e.precioML?.toLocaleString('en-US')} USD</span>
-          </li>
-        ))}
-      </ul>
-    </div>
-
-  </div>
-  </div>
-  <div>
-   
+  )}
   </div>
 </section>
+
+<FichaSeo
+  marcaKey={marcaLower}
+  Marca={Marca}
+  nombre={nombreLimpio}
+  coleccion={coleccionTexto}
+  url={urlFicha}
+  imagenes={[imagenPrincipal, imagenTextura].filter(Boolean)}
+  descripcion={descripcion ? String(descripcion) : ""}
+  espesores={espesoresLista}
+  acabados={acabadosLista}
+  precioM2Desde={precioM2Desde}
+/>
    <section class="px-8 my-10 space-y-3">
-  <h3 class="text-white">{`Detalles de la tabla completa ${marca} ${nombre}`}</h3>
+  <h2 class="text-white">{`Placa completa de ${nombreCompleto}`}</h2>
 
   <div>
     <img
       class="object-cover w-full h-96"
-      src={imagen[0].fields.file.url}
-      alt={`Textura en alta resolución de ${marca} ${nombre}`}
+      src={imagenTextura}
+      alt={`Textura en alta resolución de la placa de ${nombreCompleto}`}
+      loading="lazy"
     />
   </div>
 
@@ -577,11 +627,7 @@ console.log("Medida usada para el cálculo de precios:", medidaUsada);
     <section></section>
     <section class=" lg:mx-6 text-white">
       <div class="flex space-x-1 text-2xl font-semibold ">
-        <p class="px-6 pt-6">
-          ¿Por qué elegir <span class="capitalize">{marca}</span><span
-            class="pl-1">{nombre}?</span
-          >
-        </p>
+        <h2 class="px-6 pt-6">¿Por qué elegir {nombreCompleto}?</h2>
          
       </div>
        <Ventajas marca={marca} />
@@ -600,7 +646,7 @@ console.log("Medida usada para el cálculo de precios:", medidaUsada);
                 <p class="my-2 md:w-1/2 md:p-4">
                   Desde su nacimiento, Silestone® ha marcado las tendencias más
                   significativas en su categoría, transformado el mundo de las
-                  encimeras de cocina, siendo hoy un referente en el diseño
+                  cubiertas de cocina, siendo hoy un referente en el diseño
                   interior. Una vez más, volvemos a cambiarlo todo.
                 </p>
               </div>
@@ -610,7 +656,7 @@ console.log("Medida usada para el cálculo de precios:", medidaUsada);
                     <img
                       class="mb-4 h-80 w-full object-cover"
                       src={rayadoSilestone.src}
-                      alt={`Persona trabajando con herramientas filosas sobre ${marca}`}
+                      alt={`Persona trabajando con herramientas filosas sobre ${Marca}`}
                     />
                     <h3 class="text-lg font-bold mb-2">
                       Altamente resistente al Rayado
@@ -623,7 +669,7 @@ console.log("Medida usada para el cálculo de precios:", medidaUsada);
                     <img
                       class="mb-4 h-80 w-full object-cover"
                       src={manchasSilestone.src}
-                      alt={`Persona manchando con chocolate una superficie ${marca}`}
+                      alt={`Persona manchando con chocolate una superficie ${Marca}`}
                     />
                     <h3 class="text-lg font-bold mb-2">
                       Resistente a las Manchas
@@ -637,7 +683,7 @@ console.log("Medida usada para el cálculo de precios:", medidaUsada);
                     <img
                       class="mb-4 h-80 w-full object-cover"
                       src={impactoSilestone.src}
-                      alt={`Persona trabajando arcilla sobre ${marca}`}
+                      alt={`Persona trabajando arcilla sobre ${Marca}`}
                     />
                     <h3 class="text-lg font-bold mb-2">
                       Gran resistencia a los impactos
@@ -650,12 +696,12 @@ console.log("Medida usada para el cálculo de precios:", medidaUsada);
                     <img
                       class="mb-4 h-80 w-full object-cover"
                       src={acidoSilestone.src}
-                      alt={`Persona picando jitomate sobre la superficie ${marca}`}
+                      alt={`Persona picando jitomate sobre la superficie ${Marca}`}
                     />
-                    <h3 class="text-lg font-bold mb-2">Recistencia al Ácido</h3>
+                    <h3 class="text-lg font-bold mb-2">Resistencia al ácido</h3>
                     <p class="text-gray-300">
-                      La baja porosidad de Silestone evita que de dañe por
-                      manchas de ácido
+                      La baja porosidad de Silestone evita que se dañe por
+                      manchas de ácido.
                     </p>
                   </div>
                 </div>
@@ -743,9 +789,9 @@ console.log("Medida usada para el cálculo de precios:", medidaUsada);
                 <p class="my-4 md:w-1/2  md:p-4">
                   Las superficies Dekton cuentan con propiedades técnicas, altas
                   prestaciones y característicos colores y texturas para
-                  proyectos de interior y exterior: encimeras de cocina,
-                  encimeras de baño, revestimientos de paredes, fachadas
-                  residenciales, suelos, mobiliario y platos de ducha. De esta
+                  proyectos de interior y exterior: cubiertas de cocina,
+                  cubiertas de baño, revestimientos de muros, fachadas
+                  residenciales, pisos, mobiliario y bases de regadera. De esta
                   manera, es posible crear espacios con diferentes aplicaciones
                   a juego o combinadas entre sí.
                 </p>
@@ -783,8 +829,8 @@ console.log("Medida usada para el cálculo de precios:", medidaUsada);
                 </p>
                 <p class="my-2 md:w-1/2 md:p-4">
                   La protección antimanchas de las piedras naturales Sensa
-                  facilita su aplicación en encimeras de cocina y revestimientos
-                  de paredes. De esta manera, es posible crear espacios con
+                  facilita su aplicación en cubiertas de cocina y revestimientos
+                  de muros. De esta manera, es posible crear espacios con
                   diferentes aplicaciones a juego o combinadas entre sí.
                 </p>
               </div>
@@ -794,7 +840,7 @@ console.log("Medida usada para el cálculo de precios:", medidaUsada);
                     <img
                       class="h-80 w-full object-cover mb-4"
                       src={esteticaSensa.src}
-                      alt=""
+                      alt="Cocina con cubierta de piedra natural Sensa"
                     />
                     <h3 class="text-lg font-bold mb-2">Estética inigualable</h3>
                     <p class="text-gray-300">
@@ -806,7 +852,7 @@ console.log("Medida usada para el cálculo de precios:", medidaUsada);
                     <img
                       class="mb-4 h-80 w-full object-cover"
                       src={antimanchasSensa.src}
-                      alt={`Cocina ${marca} negra`}
+                      alt={`Cocina con cubierta ${Marca} negra`}
                     />
                     <h3 class="text-lg font-bold mb-2">
                       Protección antimanchas
@@ -820,11 +866,11 @@ console.log("Medida usada para el cálculo de precios:", medidaUsada);
                     <img
                       class="mb-4 h-80 w-full object-cover"
                       src={mantenimientoSensa.src}
-                      alt={`Lavabo ${marca}`}
+                      alt={`Lavabo de ${Marca}`}
                     />
                     <h3 class="text-lg font-bold mb-2">Bajo mantenimiento</h3>
                     <p class="text-gray-300">
-                      Su mantenimiento alarga la vida útil de tu encimera, no
+                      Su tratamiento alarga la vida útil de tu cubierta, no
                       necesita ser sellado y es fácil de limpiar.
                     </p>
                   </div>
@@ -832,7 +878,7 @@ console.log("Medida usada para el cálculo de precios:", medidaUsada);
                     <img
                       class="mb-4 h-80 w-full object-cover"
                       src={calidadSensa.src}
-                      alt={`Cocina ${marca} orinoco`}
+                      alt={`Cocina con ${Marca} Orinoco`}
                     />
                     <h3 class="text-lg font-bold mb-2">Calidad máxima</h3>
                     <p class="text-gray-300">
@@ -865,39 +911,11 @@ console.log("Medida usada para el cálculo de precios:", medidaUsada);
       
     </section>
     
-    <Showroom marca={`${marca}`} nombre={`${nombre}`} />
-    <MoreProducts />
+    <Showroom marca={Marca} nombre={nombreLimpio} />
+    <MoreProducts marca={marcaLower} coleccion={coleccionTexto} excluirUrl={urlFicha} />
   </main>
 
-  <!--Cuentra regresiva marzo -->
-  <script>
-  // Definir la fecha de fin de junio (30 de junio de 2025 a las 23:59:59)
-  const endDate = new Date("June 30, 2025 23:59:59").getTime();
 
-  // Actualizar la cuenta regresiva cada 1 segundo
-  const interval = setInterval(function() {
-    // Obtener la fecha y hora actuales
-    const now = new Date().getTime();
-
-    // Calcular la diferencia entre la fecha de fin de junio y la fecha actual
-    const distance = endDate - now;
-
-    // Calcular los días, horas y minutos restantes
-    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-
-    // Mostrar el resultado con días, horas y minutos
-    document.getElementById("countdown").innerHTML =
-      days + "d " + hours + "h " + minutes + "m";
-
-    // Si la cuenta regresiva ha terminado
-    if (distance < 0) {
-      clearInterval(interval);
-      document.getElementById("countdown").innerHTML = "0d 0h 0m";
-    }
-  }, 1000);
-</script>
 
 
   <script is:inline>

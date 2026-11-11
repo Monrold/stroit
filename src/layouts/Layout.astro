@@ -3,26 +3,85 @@ interface Props {
 	title: string;
 	description: string;
 	ogImage?: string;
+	ogType?: string;
 	lightColor?: boolean;
 	pageviewData?: Record<string, any>;
+	/** false = la página no aparece en Google (noindex). */
 	isIndexable?: boolean;
+	/** Incluye los datos del negocio y sus sucursales (Inicio y Showroom). */
+	schemaNegocio?: boolean;
 }
 
-// destructuring válido con valor por defecto
-const { title, description, ogImage, pageviewData = {} }: Props = Astro.props;
+const {
+	title,
+	description,
+	ogImage,
+	ogType = "website",
+	pageviewData = {},
+	isIndexable = true,
+	schemaNegocio = false,
+}: Props = Astro.props;
 import Nav from "../components/nav.astro";
 import Footer from "../components/footer.astro";
 import Posthog from "../components/posthog.astro";
 import Google from "../components/google.astro";
 import Pageview from "../components/events-meta/pageview.astro";
+import { sucursales, localBusinessSchema } from "../data/sucursales";
+
+const sitio = (Astro.site?.toString() ?? "https://stroitsurfaces.com/").replace(/\/$/, "");
+// URL canónica: sin parámetros (utm, fbclid de Meta Ads) y siempre con "/" final.
+const ruta = Astro.url.pathname.endsWith("/") || Astro.url.pathname.includes(".")
+	? Astro.url.pathname
+	: `${Astro.url.pathname}/`;
+const canonical = `${sitio}${ruta}`;
+
+const imagenOg = (() => {
+	const img = ogImage ?? "https://pub-81aca52011284a96b910aedeefde00fe.r2.dev/og-image%20copia.webp";
+	return img.startsWith("//") ? `https:${img}` : img;
+})();
+
+const schemaOrganizacion = schemaNegocio
+	? {
+			"@context": "https://schema.org",
+			"@graph": [
+				{
+					"@type": "Organization",
+					"@id": `${sitio}/#organizacion`,
+					name: "Stroit Surfaces",
+					url: `${sitio}/`,
+					logo: `${sitio}/favicon-32x32.png`,
+					description:
+						"Distribuidor de Cosentino en México: Dekton, Silestone y Sensa con showrooms en Pachuca y Querétaro.",
+					sameAs: [
+						"https://www.facebook.com/stroitsurfacescenter",
+						"https://www.instagram.com/stroitsurfaces/",
+						"https://www.instagram.com/stroitsurfacesbajio/",
+						"https://www.tiktok.com/@stroit_surfaces",
+					],
+				},
+				...sucursales
+					.filter((s) => s.calle)
+					.map((s) => ({ ...localBusinessSchema(s, sitio), parentOrganization: { "@id": `${sitio}/#organizacion` } })),
+			],
+		}
+	: null;
 ---
 
 <!doctype html>
-<html lang="es">
+<html lang="es-MX">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="description" content={description} />
-		<meta name="viewport" content="width=device-width" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="canonical" href={canonical} />
+		<meta name="robots" content={isIndexable ? "index, follow, max-image-preview:large" : "noindex, follow"} />
+		<meta property="og:site_name" content="Stroit Surfaces" />
+		<meta property="og:locale" content="es_MX" />
+		<meta property="og:type" content={ogType} />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:url" content={canonical} />
+		<meta name="twitter:card" content="summary_large_image" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<link
@@ -37,13 +96,13 @@ import Pageview from "../components/events-meta/pageview.astro";
 			sizes="16x16"
 			type="image/png"
 		/>
-		<meta
-			property="og:image"
-			content={ogImage ??
-				"https://pub-81aca52011284a96b910aedeefde00fe.r2.dev/og-image%20copia.webp"}
-		/>
+		<meta property="og:image" content={imagenOg} />
 
 		<title>{title}</title>
+		{schemaOrganizacion && (
+			<script type="application/ld+json" set:html={JSON.stringify(schemaOrganizacion)} />
+		)}
+		<slot name="head" />
 		<Posthog />
 		<Google />
 		<Pageview eventName="PageView" customData={pageviewData} />

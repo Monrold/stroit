@@ -14,12 +14,12 @@
 /posts/Motion%20Gray/            /posts/silestone-motion-gray/            301
 /posts/Raw%20A/                  /posts/silestone-raw-a/                  301
 /posts/Stellar%20Night/          /posts/silestone-stellar-night/          301
-/posts/Electic%20Pearl/          /posts/silestone-electic-pearl/          301
+/posts/Electic%20Pearl/          /posts/silestone-eclectic-pearl/          301
 /posts/Versailles%20Ivory/       /posts/silestone-versailles-ivory/       301
 /posts/Night%20Tebas%2018/       /posts/silestone-night-tebas-18/         301
 /posts/Snowy%20Ibiza/            /posts/silestone-snowy-ibiza/            301
 /posts/Et%20Calacatta%20Gold/    /posts/silestone-et-calacatta-gold/       301
-/posts/Cincel%20Gray/            /posts/silestone-cincel-gray/             301
+/posts/Cincel%20Gray/            /posts/silestone-cincel-grey/              301
 /posts/Desert%20Silver/          /posts/silestone-desert-silver/           301
 /posts/Poblenou/                 /posts/silestone-poblenou/                301
 /posts/Miami%20White%2017/       /posts/silestone-miami-white-17/          301
@@ -65,7 +65,7 @@
 /posts/Platino/              /posts/sensa-platino/              301
 /posts/Orinoco/              /posts/sensa-orinoco/              301
 /posts/Nilo/                 /posts/sensa-nilo/                 301
-/posts/Silver%20Gray/        /posts/sensa-silver-gray/          301
+/posts/Silver%20Gray/        /posts/sensa-silver-grey/           301
 /posts/Dakar/                /posts/sensa-dakar/                301
 /posts/White%20Macaubas/     /posts/sensa-white-macaubas/       301
 /posts/Indian%20Black/       /posts/sensa-indian-black/         301
@@ -146,4 +146,17 @@
 /posts/Nilium%2022%20KC/      /posts/dekton-nilium-22-kc/          301
 /posts/Soke/                 /posts/dekton-soke/                 301
 
-
+# URLs antiguas con espacio final o mal escritas (estaban en el sitemap viejo)
+/posts/Natura%20/                 /posts/dekton-natura/                301
+/posts/Kuro%20/                   /posts/dekton-kuro/                  301
+/posts/Eclectic%20Pearl/          /posts/silestone-eclectic-pearl/     301
+/posts/Cincel%20Grey/             /posts/silestone-cincel-grey/        301
+/posts/Silver%20Grey/             /posts/sensa-silver-grey/            301
+/posts/Taj%20Mahal/               /posts/sensa-taj-mahal/              301
+/posts/Arga/                      /posts/dekton-arga/                  301
+/posts/Nebbia%20KC/               /posts/dekton-nebbia-kc/             301
+/posts/silestone-electic-pearl/   /posts/silestone-eclectic-pearl/     301
+/posts/silestone-cincel-gray/     /posts/silestone-cincel-grey/        301
+/posts/sensa-silver-gray/         /posts/sensa-silver-grey/            301
+/servicios                        /showroom/                           301
+/servicios/                       /showroom/                           301

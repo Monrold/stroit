@@ -1,0 +1,264 @@
+---
+// Página de la plaza Bajío: showroom en Querétaro y cobertura en
+// Guanajuato, Aguascalientes y San Luis Potosí. Enfoque principal B2B
+// (arquitectos, interioristas, constructoras), sin dejar fuera al cliente final.
+import Layout from "../layouts/Layout.astro";
+import MoreProducts from "../components/Moreproducts.astro";
+import { sucursales, direccionCompleta } from "../data/sucursales";
+
+const bajio = sucursales.find((s) => s.id === "queretaro")!;
+const whatsapp = (texto: string) =>
+  `https://api.whatsapp.com/send?phone=${bajio.whatsapp}&text=${encodeURIComponent(texto)}`;
+
+const imagenPortada = "https://cdn.stroitsurfaces.com/new-web-images/silestone-et-noir.avif";
+const imagenShowroom = "https://cdn.stroitsurfaces.com/new-web-images/locations-mexio-showroom-2.jpg";
+
+const estados = [
+  {
+    nombre: "Querétaro",
+    ciudades: "Santiago de Querétaro, El Marqués, Corregidora y San Juan del Río",
+    texto: "Nuestro showroom está en TerraPark Centenario: ven a ver las placas completas con tu cliente o tu equipo de obra.",
+  },
+  {
+    nombre: "Guanajuato",
+    ciudades: "León, Celaya, Irapuato y San Miguel de Allende",
+    texto: "Cotiza por WhatsApp, pide muestras para tu despacho y visita el showroom de Querétaro para elegir la placa.",
+  },
+  {
+    nombre: "Aguascalientes",
+    ciudades: "Aguascalientes capital y zona metropolitana",
+    texto: "Te asesoramos a distancia, enviamos muestras y material, y te recibimos en Querétaro para ver las placas.",
+  },
+  {
+    nombre: "San Luis Potosí",
+    ciudades: "San Luis Potosí capital y zona metropolitana",
+    texto: "Te asesoramos a distancia, enviamos muestras y material, y te recibimos en Querétaro para ver las placas.",
+  },
+];
+
+const materiales = [
+  { marca: "Dekton", uso: "Fachadas, pisos de alto tráfico, cocinas exteriores, albercas y cubiertas", garantia: "25 años", url: "/dekton/" },
+  { marca: "Silestone", uso: "Cubiertas de cocina y baño con amplia gama de colores", garantia: "25 años", url: "/silestone/" },
+  { marca: "Sensa", uso: "Cubiertas de piedra natural con protección antimanchas", garantia: "15 años", url: "/sensa/" },
+];
+
+const horario = bajio.horarios.map((h) => `${h.etiqueta} de ${h.abre} a ${h.cierra}`).join("; ");
+
+const faqs = [
+  {
+    pregunta: "¿Dónde está el showroom de Stroit Surfaces en Querétaro?",
+    respuesta: `Está en ${direccionCompleta(bajio)}. Ahí puedes ver placas completas de Dekton, Silestone y Sensa y recibir asesoría.`,
+  },
+  {
+    pregunta: "¿Atienden León, Celaya, Aguascalientes y San Luis Potosí?",
+    respuesta:
+      "Sí. Desde el showroom de Querétaro atendemos todo el Bajío: Guanajuato, Aguascalientes y San Luis Potosí. Cotizamos por WhatsApp, enviamos muestras y material, y te recibimos en el showroom para elegir la placa.",
+  },
+  {
+    pregunta: "¿Puedo pedir muestras para mi despacho o para presentar un proyecto?",
+    respuesta:
+      "Sí. Arquitectos, interioristas y constructoras pueden pedir muestras de Dekton, Silestone y Sensa por WhatsApp y cotizar por proyecto (m², espesores y fechas de obra).",
+  },
+  horario && {
+    pregunta: "¿Qué horario tiene el showroom del Bajío?",
+    respuesta: `${horario}. Te recomendamos agendar tu visita por WhatsApp al ${bajio.telefono}.`,
+  },
+  {
+    pregunta: "¿Cuánto cuesta Dekton o Silestone en Querétaro?",
+    respuesta:
+      "Depende del color, el espesor y el formato de la placa; se vende por placa completa. Consulta las promociones vigentes en nuestro catálogo o escríbenos por WhatsApp para cotizar tu proyecto.",
+  },
+].filter(Boolean) as { pregunta: string; respuesta: string }[];
+
+const schemaFaq = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((f) => ({
+    "@type": "Question",
+    name: f.pregunta,
+    acceptedAnswer: { "@type": "Answer", text: f.respuesta },
+  })),
+};
+
+const pageviewData = { landing: "bajio" };
+---
+
+<Layout
+  title="Dekton, Silestone y Sensa en Querétaro y el Bajío | Stroit Surfaces"
+  description="Showroom de Dekton, Silestone y Sensa en Querétaro. Atendemos Guanajuato, Aguascalientes y San Luis Potosí: arquitectos, constructoras y casas. Cotiza."
+  ogImage={imagenShowroom}
+  pageviewData={pageviewData}
+  schemaNegocio
+>
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(schemaFaq)} />
+
+  <main class="text-white">
+    <!-- Portada -->
+    <section
+      class="bg-black bg-cover bg-center"
+      style={`background-image: linear-gradient(rgba(0,0,0,.65), rgba(0,0,0,.75)), url(${imagenPortada})`}
+    >
+      <div class="max-w-screen-xl mx-auto px-6 py-24 lg:py-36">
+        <p class="text-zinc-300 text-sm uppercase tracking-widest">Stroit Surfaces Bajío</p>
+        <h1 class="text-4xl lg:text-6xl font-semibold mt-3 max-w-4xl">
+          Dekton, Silestone y Sensa en Querétaro y todo el Bajío
+        </h1>
+        <p class="text-zinc-300 text-lg mt-6 max-w-2xl">
+          Showroom en TerraPark Centenario, Querétaro. Asesoría, muestras y material para Querétaro, Guanajuato,
+          Aguascalientes y San Luis Potosí.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 mt-10">
+          <a
+            href={whatsapp("Hola, vi su web y quiero cotizar un proyecto en el Bajío.")}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex justify-center px-8 py-4 text-black font-semibold"
+            style="background: linear-gradient(to right, #dbd6ca, #cbbfae, #bfa986);"
+          >
+            Cotizar por WhatsApp
+          </a>
+          <a
+            href={bajio.mapa}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex justify-center px-8 py-4 ring-1 ring-zinc-400 hover:bg-zinc-900 transition"
+          >
+            Cómo llegar al showroom
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Arquitectos y casas -->
+    <section class="max-w-screen-xl mx-auto px-6 py-16 grid gap-10 lg:grid-cols-2">
+      <div class="bg-black p-8">
+        <h2 class="text-2xl font-semibold">Para arquitectos, interioristas y constructoras</h2>
+        <ul class="mt-6 space-y-3 text-zinc-300 list-disc pl-5">
+          <li>Dekton para fachadas ventiladas, pisos de alto tráfico, albercas y cocinas exteriores.</li>
+          <li>Muestras para tu despacho y fichas técnicas para especificar.</li>
+          <li>Cotización por proyecto: m², espesores, formatos y fechas de obra.</li>
+          <li>Visita al showroom con tu cliente para elegir la placa completa.</li>
+        </ul>
+        <a
+          href={whatsapp("Hola, soy arquitecto/constructor y quiero cotizar un proyecto en el Bajío.")}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-block mt-8 underline"
+        >
+          Cotizar un proyecto →
+        </a>
+      </div>
+      <div class="bg-black p-8">
+        <h2 class="text-2xl font-semibold">Para tu casa</h2>
+        <ul class="mt-6 space-y-3 text-zinc-300 list-disc pl-5">
+          <li>Cubiertas de cocina y baño de Silestone, Dekton y Sensa.</li>
+          <li>Islas, barras y asadores para exterior con Dekton.</li>
+          <li>Pisos y muros de baño resistentes a manchas y humedad.</li>
+          <li>Promociones vigentes en colores seleccionados.</li>
+        </ul>
+        <a href="/catalogo-promos/" class="inline-block mt-8 underline">Ver promociones →</a>
+      </div>
+    </section>
+
+    <!-- Material por uso -->
+    <section class="max-w-screen-xl mx-auto px-6 pb-16">
+      <h2 class="text-3xl font-semibold mb-6">¿Qué material conviene para tu proyecto?</h2>
+      <div class="overflow-x-auto">
+        <table class="w-full text-left text-sm">
+          <thead class="text-zinc-400 border-b border-zinc-700">
+            <tr>
+              <th class="py-3 pr-4 font-medium">Material</th>
+              <th class="py-3 pr-4 font-medium">Ideal para</th>
+              <th class="py-3 font-medium">Garantía</th>
+            </tr>
+          </thead>
+          <tbody>
+            {materiales.map((m) => (
+              <tr class="border-b border-zinc-800">
+                <td class="py-4 pr-4 font-semibold"><a class="underline" href={m.url}>{m.marca}</a></td>
+                <td class="py-4 pr-4 text-zinc-300">{m.uso}</td>
+                <td class="py-4 text-zinc-300">{m.garantia}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="text-zinc-400 text-sm mt-4">
+        Dekton ya forma parte de obras emblemáticas de Querétaro, como la
+        <a
+          class="underline"
+          href="https://www.cosentino.com/blog/a-dekton-facade-for-the-courthouse-in-queretaro-mexico/"
+          target="_blank"
+          rel="noopener"
+        >fachada del Centro de Justicia</a> documentada por Cosentino.
+      </p>
+    </section>
+
+    <!-- Cobertura -->
+    <section class="bg-black">
+      <div class="max-w-screen-xl mx-auto px-6 py-16">
+        <h2 class="text-3xl font-semibold">Atendemos todo el Bajío</h2>
+        <p class="text-zinc-300 mt-3 max-w-3xl">
+          Desde nuestro showroom de Querétaro damos servicio a Querétaro, Guanajuato, Aguascalientes y San Luis Potosí.
+        </p>
+        <div class="grid gap-6 mt-10 sm:grid-cols-2 lg:grid-cols-4">
+          {estados.map((e) => (
+            <div class="border border-zinc-800 p-6">
+              <h3 class="text-xl font-semibold">Dekton y Silestone en {e.nombre}</h3>
+              <p class="text-zinc-400 text-sm mt-2">{e.ciudades}</p>
+              <p class="text-zinc-300 mt-4 text-sm leading-relaxed">{e.texto}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Showroom -->
+    <section class="max-w-screen-xl mx-auto px-6 py-16 lg:flex gap-10 items-center">
+      <div class="lg:w-1/2">
+        <h2 class="text-3xl font-semibold">Visita el showroom del Bajío</h2>
+        <p class="text-zinc-300 mt-4">{direccionCompleta(bajio)}</p>
+        {bajio.telefono && (
+          <p class="text-zinc-300 mt-2">
+            Tel. y WhatsApp: <a class="underline" href={`tel:${bajio.telefonoE164}`}>{bajio.telefono}</a>
+          </p>
+        )}
+        {bajio.horarios.map((h) => (
+          <p class="text-zinc-300 mt-2">{h.etiqueta}: {h.abre} a {h.cierra}</p>
+        ))}
+        <a
+          href={bajio.mapa}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-block mt-6 px-8 py-4 ring-1 ring-zinc-400 hover:bg-zinc-900 transition"
+        >
+          Abrir en Google Maps
+        </a>
+      </div>
+      <img
+        src={imagenShowroom}
+        alt="Showroom de Stroit Surfaces Bajío en Querétaro"
+        class="lg:w-1/2 w-full h-80 object-cover mt-10 lg:mt-0"
+        loading="lazy"
+      />
+    </section>
+
+    <!-- Preguntas frecuentes -->
+    <section class="max-w-screen-md mx-auto px-6 pb-16">
+      <h2 class="text-3xl font-semibold mb-6">Preguntas frecuentes</h2>
+      <div class="divide-y divide-zinc-700 border-y border-zinc-700">
+        {faqs.map((f) => (
+          <details class="group py-4">
+            <summary class="cursor-pointer list-none flex justify-between gap-4 font-medium">
+              <h3 class="text-base">{f.pregunta}</h3>
+              <span class="text-zinc-400 group-open:rotate-45 transition-transform">+</span>
+            </summary>
+            <p class="mt-3 text-zinc-300 text-sm leading-relaxed">{f.respuesta}</p>
+          </details>
+        ))}
+      </div>
+    </section>
+
+    <MoreProducts marca="dekton" titulo="Colores de Dekton disponibles en el Bajío" fondoNegro />
+  </main>
+</Layout>
