@@ -178,8 +178,7 @@ section{padding-block:72px}
 .env-front{top:0;height:100%;z-index:2;overflow:visible}
 .flap{top:0;height:62%;z-index:3;transform-origin:50% 0;transition:transform .8s cubic-bezier(.5,0,.2,1) .2s,z-index 0s .6s}
 .env svg path{vector-effect:non-scaling-stroke}
-.wax{left:50%!important;width:62px!important;height:62px;top:62%;transform:translate(-50%,-50%);z-index:4;border-radius:50%;background:radial-gradient(circle at 35% 30%,#f0d9a8,#c8a160 55%,#8f6a30);box-shadow:0 4px 12px rgba(0,0,0,.45),inset 0 0 0 3px rgba(255,255,255,.12);display:grid;place-items:center;transition:transform .4s ease,opacity .4s ease}
-.wax svg{width:26px!important;position:static}
+.wax{left:50%!important;width:86px!important;height:auto;max-width:none;top:62%;transform:translate(-50%,-50%);z-index:4;filter:drop-shadow(0 6px 10px rgba(0,0,0,.5));transition:transform .4s ease,opacity .4s ease}
 .env.open{animation:none}
 .env.open .wax{opacity:0;transform:translate(-50%,-50%) scale(.6)}
 .env.open .flap{transform:rotateX(180deg);z-index:0}
@@ -230,7 +229,7 @@ section{padding-block:72px}
       <div class="letter"><span>Equipo Stroit</span><b>Save the date</b><span>18 · 12 · 26</span></div>
       <svg class="env-front" viewBox="0 0 100 70" preserveAspectRatio="none" aria-hidden="true"><path d="M0 0L50 38L100 0V70H0Z" fill="#15342c" stroke="#c8a160" stroke-width="1"/><path d="M0 70L43 33M100 70L57 33" fill="none" stroke="#c8a160" stroke-width="1" opacity=".5"/></svg>
       <svg class="flap" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><path d="M0 0H100L50 100Z" fill="#18392f" stroke="#c8a160" stroke-width="1"/></svg>
-      <div class="wax" aria-hidden="true"><svg viewBox="0 0 24 24" width="26" height="26"><path d="M10 4.5H18.5V15M14.5 9H5.5V19.5H15" fill="none" stroke="#1d3a31" stroke-width="2.6" stroke-linecap="square"/></svg></div>
+      <img class="wax" src="/cena-navidena/sello.webp" alt="" width="258" height="260" aria-hidden="true">
     </button>
     <div class="hint">Toca el sobre para abrir</div>
   </div>
