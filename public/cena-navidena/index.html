@@ -156,10 +156,40 @@ section{padding-block:72px}
 .music:not(.on-once){animation:nudge 2.4s ease-in-out 2.5s 3}
 @keyframes nudge{0%,100%{transform:none}50%{transform:translateY(-4px)}}
 
+/* ---------- Sobre de entrada ---------- */
+.intro{display:none}
+.js:not(.opened) body{overflow:hidden}
+.js:not(.opened) main,.js:not(.opened) .music{visibility:hidden}
+.js:not(.opened) .load,.js:not(.opened) .draw,.js:not(.opened) .orn{animation-play-state:paused}
+.js .intro{position:fixed;inset:0;z-index:1;display:grid;place-items:center;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px));padding-block:calc(24px + env(safe-area-inset-top,0px)) calc(24px + env(safe-area-inset-bottom,0px));transition:opacity .9s ease,transform .9s ease}
+.js.opened .intro{opacity:0;transform:scale(1.06);pointer-events:none}
+.intro-in{display:grid;justify-items:center;gap:30px;text-align:center}
+.intro-t{font-family:var(--f-display);font-style:italic;font-weight:400;font-size:clamp(34px,10vw,46px);line-height:1.05;margin:0;text-wrap:balance}
+.intro .hint{font-size:11px;letter-spacing:.34em;text-transform:uppercase;color:var(--gold-hi);padding-left:.34em;animation:pulse 2.2s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:.45}50%{opacity:1}}
+.env{position:relative;width:min(84vw,340px);aspect-ratio:10/7;max-width:100%;padding:0;border:0;background:none;cursor:pointer;perspective:1100px;-webkit-tap-highlight-color:transparent;animation:float 4s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+.env:focus-visible{outline:2px solid var(--gold-hi);outline-offset:8px}
+.env>*{position:absolute;left:0;width:100%}
+.env-back{top:0;height:100%;background:#102a23;border:1px solid var(--gold);box-shadow:0 30px 60px -20px rgba(0,0,0,.7)}
+.letter{left:7%!important;width:86%!important;top:7%;height:86%;background:var(--cream);color:var(--ink);display:grid;place-content:center;gap:6px;z-index:1;transition:transform 1s cubic-bezier(.3,.7,.2,1) .75s}
+.letter b{font-family:var(--f-display);font-style:italic;font-weight:500;font-size:34px;line-height:1}
+.letter span{font-size:10px;letter-spacing:.34em;text-transform:uppercase;color:#7a5d2c;padding-left:.34em}
+.env-front{top:0;height:100%;z-index:2;overflow:visible}
+.flap{top:0;height:62%;z-index:3;transform-origin:50% 0;transition:transform .8s cubic-bezier(.5,0,.2,1) .2s,z-index 0s .6s}
+.env svg path{vector-effect:non-scaling-stroke}
+.wax{left:50%!important;width:62px!important;height:62px;top:62%;transform:translate(-50%,-50%);z-index:4;border-radius:50%;background:radial-gradient(circle at 35% 30%,#f0d9a8,#c8a160 55%,#8f6a30);box-shadow:0 4px 12px rgba(0,0,0,.45),inset 0 0 0 3px rgba(255,255,255,.12);display:grid;place-items:center;transition:transform .4s ease,opacity .4s ease}
+.wax svg{width:26px!important;position:static}
+.env.open{animation:none}
+.env.open .wax{opacity:0;transform:translate(-50%,-50%) scale(.6)}
+.env.open .flap{transform:rotateX(180deg);z-index:0}
+.env.open .letter{transform:translateY(-58%)}
+@media (min-width:820px) and (hover:hover) and (pointer:fine){.js .intro{display:none}}
+
 /* Aviso para escritorio: la invitación solo se muestra en celular */
 .gate{display:none}
 @media (min-width:820px) and (hover:hover) and (pointer:fine){
-  main,#dust,.music{display:none!important}
+  main,#dust,.music{display:none!important;visibility:visible}
   .gate{position:relative;z-index:1;min-height:100vh;display:grid;place-items:center;text-align:center;padding-block:48px;padding-left:max(24px,env(safe-area-inset-left,0px));padding-right:max(24px,env(safe-area-inset-right,0px))}
   .gate-in{display:grid;justify-items:center;gap:22px;max-width:520px}
   .gate .logo{width:200px}
@@ -173,6 +203,7 @@ section{padding-block:72px}
   .load{opacity:1;transform:none}
   .js .rv:not(.in),.js .tree:not(.grown) .tier{opacity:1;transform:none}
   .slab{transform:none}
+  .env.open .letter{transform:translateY(-58%)}
 }
 </style>
 
@@ -188,6 +219,20 @@ section{padding-block:72px}
     <h1>Invitación disponible solo en dispositivos móviles</h1>
     <p>Abre este enlace desde tu celular para ver la invitación.</p>
     <div class="url">stroitsurfaces.com/cena-navidena</div>
+  </div>
+</div>
+
+<div class="intro" id="intro">
+  <div class="intro-in">
+    <p class="intro-t">Tienes una invitación</p>
+    <button class="env" id="env" type="button" aria-label="Abrir la invitación">
+      <div class="env-back"></div>
+      <div class="letter"><span>Equipo Stroit</span><b>Save the date</b><span>18 · 12 · 26</span></div>
+      <svg class="env-front" viewBox="0 0 100 70" preserveAspectRatio="none" aria-hidden="true"><path d="M0 0L50 38L100 0V70H0Z" fill="#15342c" stroke="#c8a160" stroke-width="1"/><path d="M0 70L43 33M100 70L57 33" fill="none" stroke="#c8a160" stroke-width="1" opacity=".5"/></svg>
+      <svg class="flap" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><path d="M0 0H100L50 100Z" fill="#18392f" stroke="#c8a160" stroke-width="1"/></svg>
+      <div class="wax" aria-hidden="true"><svg viewBox="0 0 24 24" width="26" height="26"><path d="M10 4.5H18.5V15M14.5 9H5.5V19.5H15" fill="none" stroke="#1d3a31" stroke-width="2.6" stroke-linecap="square"/></svg></div>
+    </button>
+    <div class="hint">Toca el sobre para abrir</div>
   </div>
 </div>
 
@@ -471,6 +516,17 @@ section{padding-block:72px}
       if(probe.state==='running')ok();else if(probe.resume)probe.resume().then(ok,function(){try{probe.close()}catch(_){}});
       setTimeout(function(){if(probe.state!=='closed'){try{probe.close()}catch(_){}}},800)}}catch(_){}
   }
+  /* ---------- Abrir el sobre: arranca la música y la portada ---------- */
+  var env=document.getElementById('env'),opened=false;
+  function openEnv(){
+    if(opened)return;opened=true;removeG();if(!userPaused)play();
+    env.classList.add('open');
+    setTimeout(function(){root.classList.add('opened');scrollTo(0,0)},reduce?50:1900);
+    setTimeout(function(){var i=document.getElementById('intro');if(i)i.hidden=true},reduce?400:2900);
+  }
+  document.getElementById('intro').addEventListener('click',openEnv);
+  if(desk){root.classList.add('opened')}
+
   document.addEventListener('visibilitychange',function(){
     if(document.hidden){wasPlaying=playing;if(playing){stop();setUI(false)}}
     else if(wasPlaying&&!userPaused){play()}
