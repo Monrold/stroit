@@ -490,20 +490,26 @@ section{padding-block:72px}
     if(!AC){var C=window.AudioContext||window.webkitAudioContext;if(!C)return;AC=new C();
       master=AC.createGain();master.gain.value=0;var dry=AC.createGain();dry.gain.value=.8;var wet=AC.createGain();wet.gain.value=.45;var verb=makeVerb();
       master.connect(dry);dry.connect(AC.destination);master.connect(verb);verb.connect(wet);wet.connect(AC.destination)}
-    if(AC.state==='suspended')AC.resume();
+    unlock();
     master.gain.cancelScheduledValues(AC.currentTime);master.gain.setValueAtTime(master.gain.value,AC.currentTime);master.gain.linearRampToValueAtTime(.9,AC.currentTime+.8);
     nextT=AC.currentTime+.15;schedule();playing=true}
+  // iOS: el audio solo se desbloquea si resume() y un sonido se disparan dentro del mismo toque (touchend/click).
+  function unlock(){
+    try{if(navigator.audioSession)navigator.audioSession.type='playback'}catch(_){}
+    if(AC.state!=='running'){var r=AC.resume();if(r&&r.catch)r.catch(function(){})}
+    try{var sb=AC.createBuffer(1,1,22050),src=AC.createBufferSource();src.buffer=sb;src.connect(AC.destination);src.start(0)}catch(_){}
+  }
   function stop(){playing=false;clearTimeout(timer);if(AC){master.gain.cancelScheduledValues(AC.currentTime);master.gain.setValueAtTime(master.gain.value,AC.currentTime);master.gain.linearRampToValueAtTime(0,AC.currentTime+.6)}}
   var userPaused=false,wasPlaying=false;
   function setUI(on){btn.setAttribute('aria-pressed',on?'true':'false');btn.setAttribute('aria-label',on?'Pausar música':'Activar música navideña')}
-  function play(){if(!playing){start();setUI(true)}}
+  function play(){if(!playing){start();setUI(true)}else if(AC&&AC.state!=='running'){unlock()}}
   btn.addEventListener('click',function(){
     btn.classList.add('on-once');
-    if(playing){userPaused=true;stop();setUI(false)}else{userPaused=false;play()}
+    if(playing&&AC&&AC.state==='running'){userPaused=true;stop();setUI(false)}else{userPaused=false;play()}
   });
   // Arranque automático: el navegador solo deja sonar audio después de que la persona toca la pantalla,
   // así que la música empieza sola con el primer toque en cualquier parte (o de inmediato si el navegador ya lo permite).
-  var gestures=['pointerdown','touchend','keydown','click'];
+  var gestures=['touchend','click','keydown'];
   function onGesture(e){
     if(btn.contains(e.target))return removeG();
     removeG();if(!userPaused)play();
@@ -511,15 +517,11 @@ section{padding-block:72px}
   function removeG(){gestures.forEach(function(g){document.removeEventListener(g,onGesture,true)})}
   if(!desk){
     gestures.forEach(function(g){document.addEventListener(g,onGesture,true)});
-    try{var C0=window.AudioContext||window.webkitAudioContext;if(C0){var probe=new C0();
-      var ok=function(){if(probe.state==='running'){probe.close();removeG();play()}else{probe.close()}};
-      if(probe.state==='running')ok();else if(probe.resume)probe.resume().then(ok,function(){try{probe.close()}catch(_){}});
-      setTimeout(function(){if(probe.state!=='closed'){try{probe.close()}catch(_){}}},800)}}catch(_){}
   }
   /* ---------- Abrir el sobre: arranca la música y la portada ---------- */
   var env=document.getElementById('env'),opened=false;
   function openEnv(){
-    if(opened)return;opened=true;removeG();if(!userPaused)play();
+    if(opened){if(AC&&AC.state!=='running')unlock();return}opened=true;removeG();if(!userPaused)play();
     env.classList.add('open');
     setTimeout(function(){root.classList.add('opened');scrollTo(0,0)},reduce?50:1900);
     setTimeout(function(){var i=document.getElementById('intro');if(i)i.hidden=true},reduce?400:2900);
