@@ -8,7 +8,19 @@
 <title>Cena Navideña Stroit</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <meta name="robots" content="noindex, nofollow">
-<meta name="description" content="Save the date: cena de fin de año del equipo Stroit. 18 de diciembre, 6:00 pm, Pachuca.">
+<meta name="description" content="Save the date: cena de fin de año del equipo Stroit. Viernes 18 de diciembre, 6:00 pm, Pachuca.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_MX">
+<meta property="og:site_name" content="Stroit Surfaces">
+<meta property="og:title" content="Cena de fin de año · Equipo Stroit">
+<meta property="og:description" content="Save the date: viernes 18 de diciembre, 6:00 pm. Lugar sorpresa en Pachuca.">
+<meta property="og:url" content="https://stroitsurfaces.com/cena-navidena/">
+<meta property="og:image" content="https://stroitsurfaces.com/cena-navidena/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Cena de fin de año del equipo Stroit, 18 de diciembre">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://stroitsurfaces.com/cena-navidena/og-image.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Figtree:wght@300;400;500;600&display=swap">
@@ -437,12 +449,32 @@ section{padding-block:72px}
     master.gain.cancelScheduledValues(AC.currentTime);master.gain.setValueAtTime(master.gain.value,AC.currentTime);master.gain.linearRampToValueAtTime(.9,AC.currentTime+.8);
     nextT=AC.currentTime+.15;schedule();playing=true}
   function stop(){playing=false;clearTimeout(timer);if(AC){master.gain.cancelScheduledValues(AC.currentTime);master.gain.setValueAtTime(master.gain.value,AC.currentTime);master.gain.linearRampToValueAtTime(0,AC.currentTime+.6)}}
+  var userPaused=false,wasPlaying=false;
+  function setUI(on){btn.setAttribute('aria-pressed',on?'true':'false');btn.setAttribute('aria-label',on?'Pausar música':'Activar música navideña')}
+  function play(){if(!playing){start();setUI(true)}}
   btn.addEventListener('click',function(){
     btn.classList.add('on-once');
-    if(playing){stop();btn.setAttribute('aria-pressed','false');btn.setAttribute('aria-label','Activar música navideña')}
-    else{start();btn.setAttribute('aria-pressed','true');btn.setAttribute('aria-label','Pausar música')}
+    if(playing){userPaused=true;stop();setUI(false)}else{userPaused=false;play()}
   });
-  document.addEventListener('visibilitychange',function(){if(document.hidden&&playing){stop();btn.setAttribute('aria-pressed','false')}});
+  // Arranque automático: el navegador solo deja sonar audio después de que la persona toca la pantalla,
+  // así que la música empieza sola con el primer toque en cualquier parte (o de inmediato si el navegador ya lo permite).
+  var gestures=['pointerdown','touchend','keydown','click'];
+  function onGesture(e){
+    if(btn.contains(e.target))return removeG();
+    removeG();if(!userPaused)play();
+  }
+  function removeG(){gestures.forEach(function(g){document.removeEventListener(g,onGesture,true)})}
+  if(!desk){
+    gestures.forEach(function(g){document.addEventListener(g,onGesture,true)});
+    try{var C0=window.AudioContext||window.webkitAudioContext;if(C0){var probe=new C0();
+      var ok=function(){if(probe.state==='running'){probe.close();removeG();play()}else{probe.close()}};
+      if(probe.state==='running')ok();else if(probe.resume)probe.resume().then(ok,function(){try{probe.close()}catch(_){}});
+      setTimeout(function(){if(probe.state!=='closed'){try{probe.close()}catch(_){}}},800)}}catch(_){}
+  }
+  document.addEventListener('visibilitychange',function(){
+    if(document.hidden){wasPlaying=playing;if(playing){stop();setUI(false)}}
+    else if(wasPlaying&&!userPaused){play()}
+  });
 
   /* ---------- Cuenta regresiva (18 dic 2026, 6:00 pm hora de Pachuca, UTC-6) ---------- */
   var target=Date.UTC(2026,11,19,0,0,0);
