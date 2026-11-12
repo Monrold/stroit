@@ -1,0 +1,400 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0d1d18">
+<style>body{margin:0}img{max-width:100%}</style>
+<title>Cena Navideña Stroit</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="Save the date: cena de fin de año del equipo Stroit. 18 de diciembre, 6:00 pm, Pachuca.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Figtree:wght@300;400;500;600&display=swap">
+<style>
+/* Layout: una sola columna tipo tarjeta sobre la losa, que se recorre de arriba abajo como abrir una invitación */
+:root{
+  --ink:#0d1d18;
+  --veil:rgba(9,24,19,.46);
+  --cream:#f4efe4;
+  --mist:rgba(244,239,228,.72);
+  --gold:#c8a160;
+  --gold-hi:#ead1a0;
+  --pine:#1f8a4b;
+  --pine-deep:#126237;
+  --berry:#b9352f;
+  --line:rgba(200,161,96,.38);
+  --f-display:"Cormorant Garamond","Cormorant",Georgia,"Times New Roman",serif;
+  --f-body:"Figtree","Avenir Next","Segoe UI",system-ui,sans-serif;
+  color-scheme:dark;
+}
+html{background:var(--ink)}
+body{background:var(--ink);color:var(--cream);font-family:var(--f-body);font-size:16px;line-height:1.55;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+*{box-sizing:border-box}
+main{position:relative;z-index:1}
+
+/* Losa de fondo fija */
+.slab{position:fixed;inset:0;z-index:0;background:var(--ink) url("/cena-navidena/textura-vertical.webp") center/cover no-repeat;transform:scale(1.08);will-change:transform}
+@media (min-width:760px){.slab{background-image:url("/cena-navidena/textura.webp")}}
+.slab::after{content:"";position:absolute;inset:0;background:
+  radial-gradient(120% 70% at 50% 35%, rgba(9,24,19,.30), rgba(9,24,19,.78) 100%),
+  var(--veil)}
+#dust{position:fixed;inset:0;z-index:0;pointer-events:none;width:100%;height:100%}
+
+.wrap{max-width:560px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+
+/* ---------- Portada ---------- */
+.hero{position:relative;min-height:clamp(780px,100svh,920px);display:flex;flex-direction:column;justify-content:flex-end;padding-block:0 56px;overflow:hidden}
+.hang{position:absolute;inset:0 0 auto 0;height:58%;pointer-events:none}
+.orn{position:absolute;top:-2px;transform-origin:50% 0;animation:swing 6s ease-in-out infinite alternate}
+.orn svg{display:block;overflow:visible}
+.orn path,.orn line,.orn circle,.orn ellipse,.orn rect{fill:none;stroke:var(--gold);stroke-width:1.1;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke}
+.draw{stroke-dasharray:1;stroke-dashoffset:1;animation:draw 2.6s cubic-bezier(.6,.1,.2,1) forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+@keyframes swing{from{transform:rotate(var(--a,1.6deg))}to{transform:rotate(calc(var(--a,1.6deg) * -1))}}
+
+.hero-copy{position:relative;text-align:center;display:grid;gap:18px;justify-items:center}
+.eyebrow{font-size:12px;letter-spacing:.42em;text-transform:uppercase;color:var(--gold-hi);font-weight:500;padding-left:.42em}
+.std{font-family:var(--f-display);font-style:italic;font-weight:400;font-size:clamp(64px,19vw,112px);line-height:.86;letter-spacing:-.01em;color:var(--cream);margin:0;text-wrap:balance}
+.std span{display:block;color:var(--gold-hi);font-size:.52em;letter-spacing:.02em;margin:.12em 0 .06em}
+.date-line{display:flex;align-items:center;gap:14px;font-size:13px;letter-spacing:.36em;text-transform:uppercase;color:var(--mist);padding-left:.36em}
+.date-line i{display:block;width:36px;height:1px;background:var(--gold)}
+.cue{margin-top:28px;display:grid;justify-items:center;gap:8px;font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--mist);padding-left:.3em}
+.cue b{display:block;width:1px;height:42px;background:linear-gradient(var(--gold),transparent);animation:cue 2.2s ease-in-out infinite}
+@keyframes cue{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+
+.load{opacity:0;transform:translateY(14px);animation:rise 1.2s cubic-bezier(.2,.7,.2,1) forwards}
+@keyframes rise{to{opacity:1;transform:none}}
+
+/* ---------- Secciones ---------- */
+section{padding-block:72px}
+.rv{transition:opacity 1.1s cubic-bezier(.2,.7,.2,1),transform 1.1s cubic-bezier(.2,.7,.2,1)}
+.js .rv:not(.in){opacity:0;transform:translateY(28px)}
+
+/* Árbol */
+.tree-sec{text-align:center;display:grid;justify-items:center;gap:30px}
+.tree{width:min(86vw,380px);height:auto;overflow:visible}
+.tree .tier{transform-box:fill-box;transform-origin:50% 0;transition:opacity .9s ease,transform .9s cubic-bezier(.2,.8,.2,1)}
+.js .tree:not(.grown) .tier{opacity:0;transform:scale(.55,.2)}
+.tree .light{animation:twinkle 2.4s ease-in-out infinite alternate}
+@keyframes twinkle{from{opacity:.25}to{opacity:1}}
+.tree .star{transform-box:fill-box;transform-origin:center;animation:glint 3.2s ease-in-out infinite}
+@keyframes glint{0%,100%{transform:scale(.85) rotate(0);opacity:.75}50%{transform:scale(1.15) rotate(45deg);opacity:1}}
+.quote{font-family:var(--f-body);font-weight:400;font-size:clamp(20px,5.4vw,25px);line-height:1.38;max-width:24ch;margin:0;text-wrap:balance}
+.quote em{font-family:var(--f-display);font-style:italic;font-size:1.22em;color:var(--gold-hi);font-weight:500}
+
+/* Detalles */
+.label{font-size:11px;letter-spacing:.38em;text-transform:uppercase;color:var(--gold);font-weight:600;padding-left:.38em}
+.details{display:grid;gap:0;text-align:center}
+.details h2{font-family:var(--f-display);font-weight:400;font-style:italic;font-size:clamp(38px,10vw,52px);line-height:1;margin:14px 0 40px;text-wrap:balance}
+.cal{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:18px;margin-bottom:44px}
+.cal .side{font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:var(--mist);border-block:1px solid var(--line);padding-block:12px}
+.cal .day{display:grid;justify-items:center;line-height:1}
+.cal .num{font-family:var(--f-display);font-size:clamp(96px,28vw,140px);font-weight:500;color:var(--cream);letter-spacing:-.03em;font-variant-numeric:lining-nums}
+.cal .mon{font-size:12px;letter-spacing:.4em;text-transform:uppercase;color:var(--gold-hi);margin-top:6px;padding-left:.4em}
+.facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.fact{padding:22px 6px;display:grid;gap:8px;align-content:start;min-width:0}
+.fact+.fact{border-left:1px solid var(--line)}
+.fact .v{font-size:clamp(17px,4.6vw,21px);font-weight:500;line-height:1.2}
+.fact .s{font-size:12.5px;color:var(--mist);line-height:1.35}
+
+/* Lugar sorpresa */
+.secret{text-align:center;display:grid;justify-items:center;gap:22px}
+.seal{position:relative;width:min(78vw,300px);aspect-ratio:3/4;max-width:100%;border:1px solid var(--line);display:grid;place-items:center;overflow:hidden;background:rgba(9,24,19,.35);backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px)}
+.seal::before,.seal::after{content:"";position:absolute;inset:10px;border:1px solid var(--line)}
+.seal::after{inset:auto;width:140%;height:1px;background:linear-gradient(90deg,transparent,var(--gold-hi),transparent);border:0;top:0;left:-20%;animation:scan 4.5s ease-in-out infinite}
+@keyframes scan{0%{top:8%;opacity:0}20%{opacity:.8}80%{opacity:.8}100%{top:92%;opacity:0}}
+.seal-in{position:relative;display:grid;justify-items:center;gap:16px;padding:24px}
+.qm{font-family:var(--f-display);font-style:italic;font-size:120px;line-height:.8;color:var(--gold-hi)}
+.seal-in .v{font-size:13px;letter-spacing:.34em;text-transform:uppercase;padding-left:.34em}
+.seal-in .s{font-size:13px;color:var(--mist);max-width:20ch}
+.secret p{margin:0;color:var(--mist);max-width:32ch}
+
+/* Cuenta regresiva */
+.count{text-align:center;display:grid;justify-items:center;gap:26px}
+.clock{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));width:100%;max-width:440px}
+.unit{display:grid;gap:6px;padding:4px 2px;min-width:0}
+.unit+.unit{border-left:1px solid var(--line)}
+.unit b{font-family:var(--f-display);font-weight:500;font-size:clamp(40px,12vw,58px);line-height:1;font-variant-numeric:tabular-nums lining-nums}
+.unit span{font-size:10.5px;letter-spacing:.28em;text-transform:uppercase;color:var(--mist);padding-left:.28em}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:15px 26px;border:1px solid var(--gold);color:var(--cream);text-decoration:none;font-size:12px;letter-spacing:.3em;text-transform:uppercase;font-weight:500;transition:background .3s,color .3s}
+.btn:hover,.btn:focus-visible{background:var(--gold);color:var(--ink)}
+.btn:focus-visible{outline:2px solid var(--gold-hi);outline-offset:3px}
+
+/* Cierre */
+.close{text-align:center;display:grid;justify-items:center;gap:26px;padding-block:72px 64px}
+.close .sign{font-family:var(--f-display);font-style:italic;font-size:clamp(30px,8vw,40px);line-height:1.15;margin:0;text-wrap:balance}
+.logo{width:min(62vw,250px);height:auto;opacity:.95}
+.fine{font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--mist);padding-left:.24em;line-height:1.9}
+.rule{width:1px;height:56px;background:linear-gradient(transparent,var(--gold),transparent)}
+.hero .logo{width:min(48vw,190px);margin-bottom:10px}
+
+/* Aviso para escritorio: la invitación solo se muestra en celular */
+.gate{display:none}
+@media (min-width:820px) and (hover:hover) and (pointer:fine){
+  main,#dust{display:none!important}
+  .gate{position:relative;z-index:1;min-height:100vh;display:grid;place-items:center;text-align:center;padding-block:48px;padding-left:max(24px,env(safe-area-inset-left,0px));padding-right:max(24px,env(safe-area-inset-right,0px))}
+  .gate-in{display:grid;justify-items:center;gap:22px;max-width:520px}
+  .gate .logo{width:200px}
+  .gate h1{font-family:var(--f-display);font-style:italic;font-weight:400;font-size:46px;line-height:1.05;margin:6px 0 0;text-wrap:balance}
+  .gate p{margin:0;color:var(--mist);max-width:36ch}
+  .qr{background:var(--cream);padding:14px;width:184px;height:184px;margin-top:8px}
+  .qr img{display:block;width:100%;height:100%;image-rendering:pixelated}
+  .gate .url{font-size:12px;letter-spacing:.2em;color:var(--gold-hi);user-select:all}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .draw{stroke-dashoffset:0}
+  .load{opacity:1;transform:none}
+  .js .rv:not(.in),.js .tree:not(.grown) .tier{opacity:1;transform:none}
+  .slab{transform:none}
+}
+</style>
+
+</head>
+<body>
+<div class="slab" aria-hidden="true"></div>
+<canvas id="dust" aria-hidden="true"></canvas>
+
+<div class="gate" role="dialog" aria-label="Invitación solo para celular">
+  <div class="gate-in">
+    <img class="logo" src="/cena-navidena/logo-stroit.svg" alt="Stroit Superficies Arquitectónicas" width="782" height="198">
+    <div class="label">Cena de fin de año · 2026</div>
+    <h1>Invitación disponible solo en dispositivos móviles</h1>
+    <p>Abre este enlace desde tu celular o escanea el código con la cámara.</p>
+    <div class="qr"><img src="/cena-navidena/qr.svg" alt="Código QR de la invitación" width="29" height="29"></div>
+    <div class="url">stroitsurfaces.com/cena-navidena</div>
+  </div>
+</div>
+
+<main>
+  <header class="hero">
+    <div class="hang" id="hang" aria-hidden="true"></div>
+    <div class="wrap hero-copy">
+      <img class="logo load" style="animation-delay:.2s" src="/cena-navidena/logo-stroit.svg" alt="Stroit Superficies Arquitectónicas" width="782" height="198">
+      <div class="eyebrow load" style="animation-delay:.5s">Cena de fin de año · 2026</div>
+      <h1 class="std load" style="animation-delay:.75s">Save <span>the</span> date</h1>
+      <div class="date-line load" style="animation-delay:1s"><i></i>18 · 12 · 26<i></i></div>
+      <div class="cue load" style="animation-delay:1.6s">Desliza<b></b></div>
+    </div>
+  </header>
+
+  <section class="wrap tree-sec">
+    <svg class="tree" id="tree" viewBox="0 0 400 500" role="img" aria-label="Árbol de Navidad"></svg>
+    <p class="quote rv">Lo que está hecho para durar se construye con <em>las personas correctas.</em> Este año lo celebramos juntos.</p>
+  </section>
+
+  <section class="wrap details">
+    <div class="label rv">Te esperamos</div>
+    <h2 class="rv">Cena navideña del equipo Stroit</h2>
+    <div class="cal rv" aria-label="Viernes 18 de diciembre de 2026">
+      <div class="side">Viernes</div>
+      <div class="day"><span class="num">18</span><span class="mon">Diciembre</span></div>
+      <div class="side">2026</div>
+    </div>
+    <div class="facts rv">
+      <div class="fact"><span class="label">Hora</span><span class="v">6:00 pm</span><span class="s">Llega a tiempo</span></div>
+      <div class="fact"><span class="label">Ciudad</span><span class="v">Pachuca</span><span class="s">Hidalgo</span></div>
+      <div class="fact"><span class="label">Lugar</span><span class="v">Sorpresa</span><span class="s">Lo revelamos pronto</span></div>
+    </div>
+  </section>
+
+  <section class="wrap secret">
+    <div class="label rv">El lugar</div>
+    <div class="seal rv">
+      <div class="seal-in">
+        <span class="qm" aria-hidden="true">?</span>
+        <span class="v">Por revelar</span>
+        <span class="s">Te compartiremos la ubicación unos días antes.</span>
+      </div>
+    </div>
+    <p class="rv">Por ahora solo aparta la fecha. Lo demás corre por nuestra cuenta.</p>
+  </section>
+
+  <section class="wrap count">
+    <div class="label rv">Faltan</div>
+    <div class="clock rv" id="clock" aria-live="off">
+      <div class="unit"><b id="cd-d">--</b><span>Días</span></div>
+      <div class="unit"><b id="cd-h">--</b><span>Horas</span></div>
+      <div class="unit"><b id="cd-m">--</b><span>Min</span></div>
+      <div class="unit"><b id="cd-s">--</b><span>Seg</span></div>
+    </div>
+    <a class="btn rv" id="gcal" target="_blank" rel="noopener" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Cena%20navide%C3%B1a%20Stroit&amp;dates=20261219T000000Z%2F20261219T050000Z&amp;details=Cena%20de%20fin%20de%20a%C3%B1o%20del%20equipo%20Stroit.%20Lugar%20sorpresa%3A%20te%20compartiremos%20la%20ubicaci%C3%B3n%20unos%20d%C3%ADas%20antes.&amp;location=Pachuca%2C%20Hidalgo">Agregar a mi calendario</a>
+  </section>
+
+  <footer class="wrap close">
+    <div class="rule rv" aria-hidden="true"></div>
+    <p class="sign rv">Gracias por ser parte de este año.</p>
+    <img class="logo rv" src="/cena-navidena/logo-stroit.svg" alt="Stroit Superficies Arquitectónicas" width="782" height="198">
+    <div class="fine rv">Exclusivo para colaboradores Stroit<br>Invitación personal</div>
+  </footer>
+</main>
+
+<script>
+(function(){
+  var root=document.documentElement;
+  var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+  root.classList.add('js');
+  var NS='http://www.w3.org/2000/svg';
+  function el(tag,attrs,parent){var e=document.createElementNS(NS,tag);for(var k in attrs)e.setAttribute(k,attrs[k]);if(parent)parent.appendChild(e);return e}
+  function rnd(a,b){return a+Math.random()*(b-a)}
+  // generador pseudoaleatorio estable para que el árbol se vea igual siempre
+  var seed=7;function sr(){seed=(seed*16807)%2147483647;return (seed-1)/2147483646}
+
+  /* ---------- Adornos colgantes de línea dorada ---------- */
+  var hang=document.getElementById('hang');
+  function makeOrn(kind,leftPct,len,scale,amp,delay){
+    var w=120,h=len+170;
+    var box=document.createElement('div');box.className='orn';
+    box.style.left='calc('+leftPct+'% - '+(w*scale/2)+'px)';
+    box.style.setProperty('--a',amp+'deg');
+    box.style.animationDelay=(-Math.random()*6)+'s';
+    var s=el('svg',{width:w*scale,height:h*scale,viewBox:'0 0 '+w+' '+h});
+    box.appendChild(s);
+    var g=el('g',{},s);var cx=w/2;
+    function P(d){var p=el('path',{d:d,pathLength:1,'class':'draw'},g);p.style.animationDelay=(delay+Math.random()*.6)+'s';return p}
+    if(kind!=='fir'&&kind!=='leaf')P('M'+cx+' 0V'+len);
+    var y=len;
+    if(kind==='cone'){
+      // piña: cuerpo ovalado con retícula
+      var rx=26,ry=44,cy=y+10+ry;
+      P('M'+(cx-7)+' '+y+'h14v10h-14z');
+      P('M'+cx+' '+(y+10)+'C'+(cx+rx*1.35)+' '+(y+14)+' '+(cx+rx*1.1)+' '+(cy+ry*.8)+' '+cx+' '+(cy+ry)+'C'+(cx-rx*1.1)+' '+(cy+ry*.8)+' '+(cx-rx*1.35)+' '+(y+14)+' '+cx+' '+(y+10)+'Z');
+      var clip=el('clipPath',{id:'c'+Math.random().toString(36).slice(2)},s);
+      el('path',{d:'M'+cx+' '+(y+10)+'C'+(cx+rx*1.35)+' '+(y+14)+' '+(cx+rx*1.1)+' '+(cy+ry*.8)+' '+cx+' '+(cy+ry)+'C'+(cx-rx*1.1)+' '+(cy+ry*.8)+' '+(cx-rx*1.35)+' '+(y+14)+' '+cx+' '+(y+10)+'Z'},clip);
+      var gg=el('g',{'clip-path':'url(#'+clip.id+')'},g);
+      for(var i=-6;i<=6;i++){
+        var a=el('path',{d:'M'+(cx+i*9-40)+' '+(y+4)+'L'+(cx+i*9+40)+' '+(cy+ry+10),pathLength:1,'class':'draw'},gg);a.style.animationDelay=(delay+.5)+'s';
+        var b=el('path',{d:'M'+(cx+i*9+40)+' '+(y+4)+'L'+(cx+i*9-40)+' '+(cy+ry+10),pathLength:1,'class':'draw'},gg);b.style.animationDelay=(delay+.7)+'s';
+      }
+    }else if(kind==='ball'){
+      var r=30,cy2=y+10+r;
+      P('M'+(cx-6)+' '+y+'h12v10h-12z');
+      P('M'+cx+' '+(cy2-r)+'a'+r+' '+r+' 0 1 1 -.01 0Z');
+      P('M'+(cx-r)+' '+cy2+'h'+(2*r));
+      P('M'+cx+' '+(cy2-r)+'C'+(cx+r*.55)+' '+(cy2-r*.4)+' '+(cx+r*.55)+' '+(cy2+r*.4)+' '+cx+' '+(cy2+r));
+      P('M'+cx+' '+(cy2-r)+'C'+(cx-r*.55)+' '+(cy2-r*.4)+' '+(cx-r*.55)+' '+(cy2+r*.4)+' '+cx+' '+(cy2+r));
+      P('M'+(cx-r*.86)+' '+(cy2-r*.5)+'Q'+cx+' '+(cy2-r*.25)+' '+(cx+r*.86)+' '+(cy2-r*.5));
+      P('M'+(cx-r*.86)+' '+(cy2+r*.5)+'Q'+cx+' '+(cy2+r*.75)+' '+(cx+r*.86)+' '+(cy2+r*.5));
+    }else if(kind==='drop'){
+      var cy3=y+8;
+      P('M'+(cx-5)+' '+y+'h10v8h-10z');
+      P('M'+cx+' '+cy3+'C'+(cx+22)+' '+(cy3+30)+' '+(cx+24)+' '+(cy3+66)+' '+cx+' '+(cy3+92)+'C'+(cx-24)+' '+(cy3+66)+' '+(cx-22)+' '+(cy3+30)+' '+cx+' '+cy3+'Z');
+      for(var k=1;k<5;k++){var yy=cy3+k*18,ww=[0,13,19,19,12][k];P('M'+(cx-ww)+' '+yy+'Q'+cx+' '+(yy+6)+' '+(cx+ww)+' '+yy)}
+    }else if(kind==='leaf'){
+      // rama con hojas
+      var L=len+150;P('M'+cx+' 0C'+(cx+4)+' '+(L*.4)+' '+(cx-4)+' '+(L*.7)+' '+cx+' '+L);
+      for(var j=0;j<9;j++){
+        var ly=30+j*(L-40)/9,side=j%2?1:-1,lw=16+j*1.5,lh=7+j*.4;
+        P('M'+cx+' '+ly+'q'+(side*lw*.5)+' '+(-lh)+' '+(side*lw)+' '+(lh*.6)+'q'+(-side*lw*.5)+' '+(lh*1.1)+' '+(-side*lw)+' '+(-lh*.6)+'z');
+        P('M'+cx+' '+ly+'l'+(side*lw*.85)+' '+(lh*.25));
+      }
+    }else if(kind==='fir'){
+      // rama de pino colgante
+      var L2=len+165;P('M'+cx+' 0Q'+(cx+6)+' '+(L2*.5)+' '+cx+' '+L2);
+      for(var n=0;n<34;n++){
+        var ny=12+n*(L2-18)/34,nl=10+Math.sin(n/34*Math.PI)*24;
+        P('M'+cx+' '+ny+'q'+(nl*.5)+' '+(nl*.35)+' '+nl+' '+(nl*.9));
+        P('M'+cx+' '+ny+'q'+(-nl*.5)+' '+(nl*.35)+' '+(-nl)+' '+(nl*.9));
+      }
+    }
+    hang.appendChild(box);
+  }
+  var narrow=window.innerWidth<560;
+  var sc=narrow?1.12:1.55;
+  var set=[
+    ['fir',3,60,sc*1.15,1.1],['leaf',15,30,sc*1,1.7],['cone',27,110,sc*.8,2.2],
+    ['fir',38,0,sc*.8,1.3],['drop',47,60,sc*.75,2.6],['ball',59,140,sc*.75,2],['leaf',70,20,sc*.95,1.6],
+    ['cone',83,60,sc*.8,2.4],['fir',96,20,sc*1.2,1.1]
+  ];
+  if(narrow){set=set.filter(function(o,i){return i!==3&&i!==4})}
+  set.forEach(function(o,i){makeOrn(o[0],o[1],o[2],o[3],o[4],.1+i*.12)});
+
+  /* ---------- Árbol de ramas verdes ---------- */
+  var tree=document.getElementById('tree');
+  var greens=['#1f8a4b','#26a058','#167040','#2bb262','#13623a'];
+  var tiers=18,top=46,base=468,cx=200;
+  var lights=el('g',{},null);
+  for(var t=0;t<tiers;t++){
+    var f=t/(tiers-1);
+    var y0=top+f*(base-top-40);
+    var hw=14+Math.pow(f,1.05)*168;
+    var drop=12+f*16;
+    var g=el('g',{'class':'tier'},tree);
+    g.style.transitionDelay=(t*.07)+'s';
+    var d='';
+    // cada frondas: arco que cae hacia los lados, con agujas
+    [-1,1].forEach(function(side){
+      var steps=Math.round(10+f*26);
+      for(var i=0;i<steps;i++){
+        var u=i/steps, x=cx+side*hw*u, y=y0+drop*u*u+sr()*3;
+        var nl=7+sr()*9*(0.6+f*.6);
+        d+='M'+x.toFixed(1)+' '+y.toFixed(1)+'l'+(side*nl*.55).toFixed(1)+' '+(nl).toFixed(1);
+        d+='M'+x.toFixed(1)+' '+y.toFixed(1)+'l'+(side*nl*.9).toFixed(1)+' '+(nl*.55).toFixed(1);
+      }
+      d+='M'+cx+' '+y0+'Q'+(cx+side*hw*.55)+' '+(y0+drop*.15)+' '+(cx+side*hw)+' '+(y0+drop);
+    });
+    el('path',{d:d,stroke:greens[t%greens.length],'stroke-width':1.5,'stroke-linecap':'round',fill:'none'},g);
+    // luces sobre la fronda
+    var nL=Math.round(2+f*7);
+    for(var l=0;l<nL;l++){
+      var side2=sr()<.5?-1:1,u2=.15+sr()*.85;
+      var lx=cx+side2*hw*u2,ly=y0+drop*u2*u2+6+sr()*6;
+      var c=el('circle',{cx:lx.toFixed(1),cy:ly.toFixed(1),r:(1.6+sr()*1.4).toFixed(1),fill:sr()<.55?'#d0443a':'#e9c983','class':'light'},g);
+      c.style.animationDelay=(-sr()*2.4).toFixed(2)+'s';
+      c.style.animationDuration=(1.6+sr()*2).toFixed(2)+'s';
+    }
+  }
+  el('path',{d:'M'+cx+' '+(top-8)+'V'+(base-6),stroke:'#0f5230','stroke-width':2.2,fill:'none'},tree).parentNode.insertBefore(tree.lastChild,tree.firstChild);
+  var st=el('g',{'class':'star'},tree);
+  el('path',{d:'M200 14l3.2 12.8L216 30l-12.8 3.2L200 46l-3.2-12.8L184 30l12.8-3.2z',fill:'#ead1a0'},st);
+
+  /* ---------- Aparición al hacer scroll ---------- */
+  var rv=[].slice.call(document.querySelectorAll('.rv'));
+  if('IntersectionObserver' in window && !reduce){
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){
+      if(e.isIntersecting){e.target.classList.add(e.target===tree?'grown':'in');io.unobserve(e.target)}
+    })},{threshold:.18,rootMargin:'0px 0px -6% 0px'});
+    rv.forEach(function(x){io.observe(x)});io.observe(tree);
+  }else{rv.forEach(function(x){x.classList.add('in')});tree.classList.add('grown')}
+
+  /* ---------- Parallax suave de la losa ---------- */
+  var slab=document.querySelector('.slab');
+  if(!reduce){var tick=false;window.addEventListener('scroll',function(){if(tick)return;tick=true;requestAnimationFrame(function(){
+    var p=Math.min(1,scrollY/(document.body.scrollHeight-innerHeight||1));
+    slab.style.transform='scale(1.08) translateY('+(-p*3)+'%)';tick=false})},{passive:true})}
+
+  /* ---------- Polvo dorado ---------- */
+  var cv=document.getElementById('dust'),cx2=cv.getContext('2d'),W,H,dpr=Math.min(2,window.devicePixelRatio||1),parts=[];
+  function size(){W=cv.width=innerWidth*dpr;H=cv.height=innerHeight*dpr}
+  size();addEventListener('resize',size);
+  var N=(reduce||matchMedia('(min-width:820px) and (hover:hover) and (pointer:fine)').matches)?0:(innerWidth<560?38:70);
+  for(var q=0;q<N;q++)parts.push({x:Math.random(),y:Math.random(),r:rnd(.4,1.6),v:rnd(.00012,.0005),w:rnd(0,6.28),a:rnd(.25,.8)});
+  function frame(ts){
+    cx2.clearRect(0,0,W,H);
+    for(var i=0;i<parts.length;i++){var p=parts[i];
+      p.y+=p.v;p.w+=.01;if(p.y>1.02){p.y=-.02;p.x=Math.random()}
+      var x=(p.x+Math.sin(p.w)*.01)*W,y=p.y*H,al=p.a*(.6+.4*Math.sin(ts/900+p.w*3));
+      cx2.beginPath();cx2.fillStyle='rgba(234,209,160,'+al.toFixed(2)+')';cx2.arc(x,y,p.r*dpr,0,6.283);cx2.fill()}
+    requestAnimationFrame(frame)}
+  if(N)requestAnimationFrame(frame);
+
+  /* ---------- Cuenta regresiva (18 dic 2026, 6:00 pm hora de Pachuca, UTC-6) ---------- */
+  var target=Date.UTC(2026,11,19,0,0,0);
+  var ids=['cd-d','cd-h','cd-m','cd-s'].map(function(i){return document.getElementById(i)});
+  function pad(n){return n<10?'0'+n:''+n}
+  function cd(){
+    var ms=target-Date.now();
+    if(ms<=0){ids.forEach(function(e){e.textContent='00'});document.querySelector('.count .label').textContent='Es hoy. ¡Nos vemos!';return}
+    var s=Math.floor(ms/1000);
+    ids[0].textContent=pad(Math.floor(s/86400));ids[1].textContent=pad(Math.floor(s%86400/3600));
+    ids[2].textContent=pad(Math.floor(s%3600/60));ids[3].textContent=pad(s%60);
+    setTimeout(cd,1000-(Date.now()%1000));
+  }
+  cd();
+})();
+</script>
+
+</body>
+</html>
